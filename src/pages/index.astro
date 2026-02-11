@@ -1,7 +1,29 @@
 ---
 import DefaultLayout from '../layouts/DefaultLayout.astro';
+
+import Link from '../components/Link.astro';
 ---
 
-<DefaultLayout title="Home">
-	<h1>Hello, world!</h1>
+<DefaultLayout title="Portfolio">
+	<h1>Welcome to Leo's Portfolio</h1>
+
+	<h2>Front End Developer and</h2>
+	<h2>UX Designer</h2>
+
+	<div class="flex mt-32 gap-12 text-2xl">
+		<Link href="/projects">Projects</Link>
+		<Link href="/about">About</Link>
+		<Link href="/contact">Contact</Link>
+	</div>
 </DefaultLayout>
+
+<style>
+h1 {
+	font-size: 7rem;
+	font-weight: 700;
+}
+
+h2 {
+	font-size: 5rem;
+}
+</style>
