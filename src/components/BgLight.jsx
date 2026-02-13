@@ -1,6 +1,6 @@
 export default function BgLight({ children }) {
 	return (
-		<div className="min-h-screen w-full bg-white relative text-gray-800">
+		<div className="min-h-svh w-full bg-amber-50 relative text-gray-800 flex flex-col">
 			{/* Concentric Squares - Light Pattern */}
 			<div
 				className="absolute inset-0 z-0 pointer-events-none"
