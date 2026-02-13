@@ -1,6 +1,6 @@
 ---
 import "@fontsource/outfit";
-import Link from '../components/Link.astro';
+import NavLink from '../components/NavLink.astro';
 import BgLight from '../components/BgLight.jsx';
 import '../styles/global.css';
 
@@ -16,19 +16,20 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>Leo Zhou - {title}</title>
 	</head>
+
 	<body>
 		<BgLight client:load>
 			<nav class="flex justify-between items-center p-4">
-				<div class="text-2xl font-bold">
-					<Link href="/" class="text-2xl font-bold">Leo Zhou</Link>
+				<div class="font-bold">
+					<NavLink href="/">Leo Zhou</NavLink>
 				</div>
-				<div class="flex gap-12 text-2xl">
-					<Link href="/projects">Projects</Link>
-					<Link href="/about">About</Link>
-					<Link href="/contact">Contact</Link>
+				<div class="flex gap-12">
+					<NavLink href="/projects">Projects</NavLink>
+					<NavLink href="/about">About</NavLink>
+					<NavLink href="/contact">Contact</NavLink>
 				</div>
 			</nav>
-			<main>
+			<main class="flex-1 flex">
 				<slot />
 			</main>
 		</BgLight>

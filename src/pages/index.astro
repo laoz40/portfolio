@@ -2,28 +2,53 @@
 import DefaultLayout from '../layouts/DefaultLayout.astro';
 
 import Link from '../components/Link.astro';
+import ImperfectButton from '../components/ImperfectButton.astro';
 ---
 
 <DefaultLayout title="Portfolio">
-	<h1>Welcome to Leo's Portfolio</h1>
+	<section class="hero">
+		<h1>Welcome to Leo's Portfolio!</h1>
 
-	<h2>Front End Developer and</h2>
-	<h2>UX Designer</h2>
+		<div class="flex flex-col">
+			<h2>Front End Developer</h2>
+			<h2>UX Designer</h2>
+		</div>
 
-	<div class="flex mt-32 gap-12 text-2xl">
-		<Link href="/projects">Projects</Link>
-		<Link href="/about">About</Link>
-		<Link href="/contact">Contact</Link>
-	</div>
+		<div class="flex mt-20 gap-12 text-2xl">
+			<Link href="/about">
+				<ImperfectButton fill="rgb(255 255 0 / 0.75)" hoverFill="rgb(250 249 54 / 1)">
+					About
+				</ImperfectButton>
+			</Link>
+
+			<Link href="/projects">
+				<ImperfectButton fill="rgb(0 197 255 / 0.65)" hoverFill="rgb(83 210 242 / 1)">
+					Projects
+				</ImperfectButton>
+			</Link>
+		</div>
+	</section>
 </DefaultLayout>
 
 <style>
-h1 {
-	font-size: 7rem;
-	font-weight: 700;
-}
+	.hero {
+		flex: 1;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		transform: translateY(-8vh);
+	}
 
-h2 {
-	font-size: 5rem;
-}
+	h1 {
+		font-size: 6rem;
+		font-weight: 700;
+		letter-spacing: -0.04em;
+	}
+
+	h2 {
+		font-size: 5rem;
+		line-height: 1;
+		letter-spacing: -0.02em;
+	}
 </style>
