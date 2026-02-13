@@ -14,7 +14,8 @@
   font-family:
     "Leo Handwriting", Outfit, sans-serif, Helvetica, Arial
     sans-serif;
-  color: rgb(35, 35, 90);
+  color: rgb(35, 35, 120);
+  letter-spacing: -0.02em;
 }
 
 main {
@@ -22,5 +23,5 @@ main {
 }
 
 nav {
-  padding: 2rem 4rem;
+  padding: 2rem 8rem;
 }
