@@ -3,11 +3,10 @@ import DefaultLayout from '../layouts/DefaultLayout.astro';
 
 import Link from '../components/Link.astro';
 import ImperfectButton from '../components/ImperfectButton.astro';
-import NavLink from '../components/NavLink.astro';
 import ScrollDownArrow from '../components/ScrollDownArrow.astro';
 ---
 
-<DefaultLayout title="Portfolio">
+<DefaultLayout title="Portfolio" home>
 	<section id="hero">
 			<h1>Welcome to Leo's Portfolio!</h1>
 
@@ -36,12 +35,6 @@ import ScrollDownArrow from '../components/ScrollDownArrow.astro';
 		<h2>Featured Work</h2>
 	</section>
 
-		<footer id="contact" aria-label="Hero links">
-			<NavLink href="mailto:hello@example.com" hlColour="rgb(50 255 50 / 0.7)">Email</NavLink>
-			<NavLink href="https://www.linkedin.com" hlColour="rgb(50 255 50 / 0.7)">LinkedIn</NavLink>
-			<NavLink href="https://github.com" hlColour="rgb(50 255 50 / 0.7)">Github</NavLink>
-			<NavLink href="/resume" hlColour="rgb(50 255 50 / 0.7)">Resume</NavLink>
-		</footer>
 </DefaultLayout>
 
 <style>
@@ -58,6 +51,7 @@ import ScrollDownArrow from '../components/ScrollDownArrow.astro';
 
 	#featured {
 		min-height: 100svh;
+		padding-top: 6rem;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -84,12 +78,4 @@ import ScrollDownArrow from '../components/ScrollDownArrow.astro';
 		text-align: center;
 	}
 
-	footer {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 0.5rem;
-		margin-top: 5rem;
-		flex-wrap: wrap;
-	}
 </style>
