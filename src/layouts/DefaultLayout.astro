@@ -18,14 +18,14 @@ const { title } = Astro.props;
 
 	<body>
 		<BgLight client:load>
-			<nav class="flex justify-between items-center p-4">
+			<nav class="sticky top-0 z-50 flex justify-between items-center p-4">
 				<div class="font-bold">
 					<NavLink href="/" hlColour="rgb(50 255 50 / 0.7)">Leo Zhou</NavLink>
 				</div>
 				<div class="flex gap-12">
-					<NavLink href="/projects" hlColour="rgb(0 197 255 / 0.7)">Projects</NavLink>
-					<NavLink href="/about" hlColour="rgb(255 230 0 / 0.7)">About</NavLink>
-					<NavLink href="/contact" hlColour="rgb(50 255 50 / 0.7)">Contact</NavLink>
+					<NavLink href="/#projects" hlColour="rgb(0 197 255 / 0.7)">Projects</NavLink>
+					<NavLink href="/#about" hlColour="rgb(255 230 0 / 0.7)">About</NavLink>
+					<NavLink href="/#contact" hlColour="rgb(50 255 50 / 0.7)">Contact</NavLink>
 				</div>
 			</nav>
 			<main class="flex-1 flex flex-col">
