@@ -17,12 +17,12 @@ import NavLink from '../components/NavLink.astro';
 
 			<div class="flex mt-20 gap-12 text-2xl">
 				<Link href="#projects">
-					<ImperfectButton fill="rgb(0 197 255 / 0.7)" hoverFill="rgb(83 210 242 / 1)">
+					<ImperfectButton fill="rgb(255 230 0 / 0.7)" hoverFill="rgb(250 230 54 / 1)">
 						Projects
 					</ImperfectButton>
 				</Link>
 				<Link href="#about">
-					<ImperfectButton fill="rgb(255 230 0 / 0.7)" hoverFill="rgb(250 230 54 / 1)">
+					<ImperfectButton fill="rgb(0 197 255 / 0.7)" hoverFill="rgb(83 210 242 / 1)">
 						About
 					</ImperfectButton>
 				</Link>
@@ -47,19 +47,14 @@ import NavLink from '../components/NavLink.astro';
 </DefaultLayout>
 
 <style>
-	:global(html) {
-		scroll-behavior: smooth;
-	}
-
 	#hero {
 		min-height: 100svh;
 		width: 100%;
-		place-items: center;
 		box-sizing: border-box;
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
 		align-items: center;
+		justify-content: center;
 	}
 
 	#projects {
