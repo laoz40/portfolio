@@ -4,6 +4,7 @@ import DefaultLayout from '../layouts/DefaultLayout.astro';
 import Link from '../components/Link.astro';
 import ImperfectButton from '../components/ImperfectButton.astro';
 import NavLink from '../components/NavLink.astro';
+import ScrollDownArrow from '../components/ScrollDownArrow.astro';
 ---
 
 <DefaultLayout title="Portfolio">
@@ -16,27 +17,24 @@ import NavLink from '../components/NavLink.astro';
 			</div>
 
 			<div class="flex mt-32 gap-12 text-2xl">
-				<Link href="#projects">
+			<Link href="/projects">
 					<ImperfectButton fill="rgb(255 230 0 / 0.7)" hoverFill="rgb(250 230 54 / 1)">
 						Projects
 					</ImperfectButton>
 				</Link>
-				<Link href="#about">
+			<Link href="/about">
 					<ImperfectButton fill="rgb(0 197 255 / 0.7)" hoverFill="rgb(83 210 242 / 1)">
 						About
 					</ImperfectButton>
 				</Link>
 		</div>
+
+		<ScrollDownArrow href="#featured" />
 	</section>
 
-	<section id="projects">
-		<h1>Projects</h1>
-		</section>
-
-
-	<section id="about">
-		<h1>About</h1>
-		</section>
+	<section id="featured">
+		<h2>Featured Work</h2>
+	</section>
 
 		<footer id="contact" aria-label="Hero links">
 			<NavLink href="mailto:hello@example.com" hlColour="rgb(50 255 50 / 0.7)">Email</NavLink>
@@ -51,26 +49,18 @@ import NavLink from '../components/NavLink.astro';
 		min-height: 100svh;
 		width: 100%;
 		box-sizing: border-box;
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 	}
 
-	#projects {
+	#featured {
 		min-height: 100svh;
 		display: flex;
 		flex-direction: column;
-		align-items: start;
-		scroll-margin-top: 5rem;
-	}
-
-	#about {
-		min-height: 100svh;
-		display: flex;
-		flex-direction: column;
-		align-items: start;
-		scroll-margin-top: 5rem;
+		align-items: center;
 	}
 
 	h1 {
@@ -86,6 +76,11 @@ import NavLink from '../components/NavLink.astro';
 		font-size: 4rem;
 		line-height: 1;
 		letter-spacing: -0.02em;
+		text-align: center;
+	}
+
+	span {
+		font-size: 2rem;
 		text-align: center;
 	}
 
