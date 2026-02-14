@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-
 @font-face {
   font-family: "Leo Handwriting";
   src: url("/fonts/LeoHandwriting-Regular.woff2") format("woff2");
@@ -24,7 +23,7 @@
 	letter-spacing: -0.02em;
 }
 
-:global(html) {
+html {
 	scroll-behavior: smooth;
 }
 
