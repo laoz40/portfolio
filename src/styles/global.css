@@ -24,6 +24,10 @@
 	letter-spacing: -0.02em;
 }
 
+:global(html) {
+	scroll-behavior: smooth;
+}
+
 main {
   margin: 0 8rem;
 }
