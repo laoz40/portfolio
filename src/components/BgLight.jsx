@@ -4,14 +4,21 @@ export default function BgLight({ children }) {
 			{/* Concentric Squares - Light Pattern */}
 			<div
 				className="absolute inset-0 z-0 pointer-events-none"
-				style={{
-					backgroundImage: `
-repeating-linear-gradient(0deg, transparent, transparent 5px, rgba(75, 85, 99, 0.06) 5px, rgba(75, 85, 99, 0.06) 6px, transparent 6px, transparent 15px),
-repeating-linear-gradient(90deg, transparent, transparent 5px, rgba(75, 85, 99, 0.06) 5px, rgba(75, 85, 99, 0.06) 6px, transparent 6px, transparent 15px),
-repeating-linear-gradient(0deg, transparent, transparent 10px, rgba(107, 114, 128, 0.04) 10px, rgba(107, 114, 128, 0.04) 11px, transparent 11px, transparent 30px),
-repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(107, 114, 128, 0.04) 10px, rgba(107, 114, 128, 0.04) 11px, transparent 11px, transparent 30px)
-`,
-				}}
+style={{
+      backgroundImage: `
+        linear-gradient(rgba(59, 130, 246, 0.10) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.10) 1px, transparent 1px),
+        linear-gradient(rgba(96, 165, 250, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(96, 165, 250, 0.06) 1px, transparent 1px)
+      `,
+      backgroundSize: `
+        15px 15px,
+        15px 15px,
+        30px 30px,
+        30px 30px
+      `,
+      backgroundPosition: `0 0, 0 0, 0 0, 0 0`,
+    }}
 			/>
 			{/* Your Content/Components */}
 			{children}
