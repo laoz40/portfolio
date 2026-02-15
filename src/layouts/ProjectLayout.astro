@@ -1,0 +1,64 @@
+---
+import DefaultLayout from "./DefaultLayout.astro";
+
+const { frontmatter } = Astro.props;
+const title = frontmatter?.title ?? "Project";
+---
+
+<DefaultLayout title={title}>
+	<article class="project-content mt-4">
+		<slot />
+	</article>
+</DefaultLayout>
+
+<style>
+  .project-content :global(h1) {
+		font-family: "Leo Handwriting";
+    font-size: 8rem;
+		font-weight: 700;
+    line-height: 1;
+		margin: 0 0 1rem 0;
+  }
+
+  .project-content :global(h2) {
+		font-family: "Leo Handwriting";
+    font-size: 3rem;
+		font-weight: 700;
+    line-height: 0.75;
+		margin: 0 0 0 0;
+  }
+
+  .project-content :global(h3) {
+		font-family: "Leo Handwriting";
+    font-size: 1.75rem;
+		margin: 2rem 0 0 0;
+    letter-spacing: 0.01em;
+  }
+
+  .project-content :global(h4) {
+		font-family: "Leo Handwriting";
+    font-size: 1.5rem;
+		font-weight: 700;
+		margin: 1rem 0 0 0;
+		margin-bottom: 0rem;
+    letter-spacing: 0.01em;
+  }
+
+  .project-content :global(p) {
+		font-family: "Outfit Variable";
+    font-size: 1rem;
+		font-weight: 400;
+		color: rgb(50, 50, 50);
+		margin: 0 0 0 0;
+		margin-bottom: 1rem;
+  }
+
+  .project-content :global(li) {
+		font-family: "Outfit Variable";
+    font-size: 1rem;
+		font-weight: 400;
+		color: rgb(50, 50, 50);
+		margin: 0 0 0 0;
+		margin-bottom: 1rem;
+  }
+</style>
