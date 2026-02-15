@@ -1,7 +1,6 @@
 ---
 import DefaultLayout from "../layouts/DefaultLayout.astro";
 
-import Link from "../components/Link.astro";
 import ImperfectButton from "../components/ImperfectButton.astro";
 import ScrollDownArrow from "../components/ScrollDownArrow.astro";
 ---
@@ -18,20 +17,18 @@ import ScrollDownArrow from "../components/ScrollDownArrow.astro";
 		</div>
 
 		<div class="flex mt-32 gap-12 text-2xl">
-			<Link href="/projects">
-				<ImperfectButton
-					fill="rgb(255 230 0 / 0.7)"
-					hoverFill="rgb(250 230 54 / 1)">
-					Projects
-				</ImperfectButton>
-			</Link>
-			<Link href="/about">
-				<ImperfectButton
-					fill="rgb(0 197 255 / 0.7)"
-					hoverFill="rgb(83 210 242 / 1)">
-					About
-				</ImperfectButton>
-			</Link>
+			<ImperfectButton
+				href="/projects"
+				fill="rgb(255 230 0 / 0.7)"
+				hoverFill="rgb(250 230 54 / 1)">
+				Projects
+			</ImperfectButton>
+			<ImperfectButton
+				href="/about"
+				fill="rgb(0 197 255 / 0.7)"
+				hoverFill="rgb(83 210 242 / 1)">
+				About
+			</ImperfectButton>
 		</div>
 
 		<ScrollDownArrow href="#featured" />

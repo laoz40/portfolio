@@ -1,37 +1,65 @@
 ---
-const { fill, hoverFill } = Astro.props;
+const { fill, hoverFill, href } = Astro.props;
 ---
 
-<button
-	type="button"
-	style=`--fill: ${fill}; --hoverFill: ${hoverFill};`
->
-	<span>
-		<slot />
-	</span>
+{href ? (
+	<a href={href} class="imperfect-button" style={`--fill: ${fill}; --hoverFill: ${hoverFill};`}>
+		<span>
+			<slot />
+		</span>
 
-	<svg viewBox="0 0 220 70" preserveAspectRatio="none" aria-hidden="true">
-		<path
-			d="M12,10
-			C28,4 62,6 86,8
-			C120,11 156,6 190,9
-			C208,12 214,20 214,26
-			C215,34 214,46 212,52
-			C210,60 200,64 190,62
-			C160,58 120,64 92,62
-			C60,60 30,66 16,60
-			C6,56 6,46 7,38
-			C8,30 6,18 12,10 Z"
-			stroke="none"
-			stroke-width="3"
-			stroke-linecap="round"
-			stroke-linejoin="round"
-		/>
-	</svg>
-</button>
+		<svg viewBox="0 0 220 70" preserveAspectRatio="none" aria-hidden="true">
+			<path
+				d="M12,10
+				C28,4 62,6 86,8
+				C120,11 156,6 190,9
+				C208,12 214,20 214,26
+				C215,34 214,46 212,52
+				C210,60 200,64 190,62
+				C160,58 120,64 92,62
+				C60,60 30,66 16,60
+				C6,56 6,46 7,38
+				C8,30 6,18 12,10 Z"
+				stroke="none"
+				stroke-width="3"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+			/>
+		</svg>
+	</a>
+) : (
+	<button
+		type="button"
+		class="imperfect-button"
+		style={`--fill: ${fill}; --hoverFill: ${hoverFill};`}
+	>
+		<span>
+			<slot />
+		</span>
+
+		<svg viewBox="0 0 220 70" preserveAspectRatio="none" aria-hidden="true">
+			<path
+				d="M12,10
+				C28,4 62,6 86,8
+				C120,11 156,6 190,9
+				C208,12 214,20 214,26
+				C215,34 214,46 212,52
+				C210,60 200,64 190,62
+				C160,58 120,64 92,62
+				C60,60 30,66 16,60
+				C6,56 6,46 7,38
+				C8,30 6,18 12,10 Z"
+				stroke="none"
+				stroke-width="3"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+			/>
+		</svg>
+	</button>
+)}
 
 <style>
-	button {
+	.imperfect-button {
 		position: relative;
 		display: inline-grid;
 		place-items: center;
@@ -41,6 +69,7 @@ const { fill, hoverFill } = Astro.props;
 		user-select: none;
 		font-size: 2rem;
 		font-weight: 700;
+		text-decoration: none;
 	}
 
 	span {
@@ -63,13 +92,13 @@ const { fill, hoverFill } = Astro.props;
 	}
 
 
-	button:hover svg {
+	.imperfect-button:hover svg {
 		transform: translateY(-1px) rotate(-2deg);
 		filter: drop-shadow(2px 4px 0 rgba(0,0,0,0.5));
 		fill: var(--hoverFill);
 	}
 
-	button:active svg {
+	.imperfect-button:active svg {
 		scale: 0.9
 	}
 </style>
