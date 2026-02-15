@@ -1,40 +1,45 @@
 ---
-import DefaultLayout from '../layouts/DefaultLayout.astro';
+import DefaultLayout from "../layouts/DefaultLayout.astro";
 
-import Link from '../components/Link.astro';
-import ImperfectButton from '../components/ImperfectButton.astro';
-import ScrollDownArrow from '../components/ScrollDownArrow.astro';
+import Link from "../components/Link.astro";
+import ImperfectButton from "../components/ImperfectButton.astro";
+import ScrollDownArrow from "../components/ScrollDownArrow.astro";
 ---
 
-<DefaultLayout title="Portfolio" home>
+<DefaultLayout
+	title="Portfolio"
+	home>
 	<section id="hero">
-			<h1>Welcome to Leo's Portfolio!</h1>
+		<h1>Welcome to Leo's Portfolio!</h1>
 
-			<div class="flex flex-col">
-				<h2>Front End Developer</h2>
-				<h2>UX Designer</h2>
-			</div>
+		<div class="flex flex-col">
+			<h2>Front End Developer</h2>
+			<h2>UX Designer</h2>
+		</div>
 
-			<div class="flex mt-32 gap-12 text-2xl">
+		<div class="flex mt-32 gap-12 text-2xl">
 			<Link href="/projects">
-					<ImperfectButton fill="rgb(255 230 0 / 0.7)" hoverFill="rgb(250 230 54 / 1)">
-						Projects
-					</ImperfectButton>
-				</Link>
+				<ImperfectButton
+					fill="rgb(255 230 0 / 0.7)"
+					hoverFill="rgb(250 230 54 / 1)">
+					Projects
+				</ImperfectButton>
+			</Link>
 			<Link href="/about">
-					<ImperfectButton fill="rgb(0 197 255 / 0.7)" hoverFill="rgb(83 210 242 / 1)">
-						About
-					</ImperfectButton>
-				</Link>
+				<ImperfectButton
+					fill="rgb(0 197 255 / 0.7)"
+					hoverFill="rgb(83 210 242 / 1)">
+					About
+				</ImperfectButton>
+			</Link>
 		</div>
 
 		<ScrollDownArrow href="#featured" />
 	</section>
 
 	<section id="featured">
-		<h2>Featured Work</h2>
+		<h3>Featured Work</h3>
 	</section>
-
 </DefaultLayout>
 
 <style>
@@ -73,9 +78,17 @@ import ScrollDownArrow from '../components/ScrollDownArrow.astro';
 		text-align: center;
 	}
 
+	h3 {
+		margin: 0;
+		font-size: 2.5rem;
+		font-weight: 700;
+		line-height: 1;
+		letter-spacing: -0.02em;
+		text-align: center;
+	}
+
 	span {
 		font-size: 2rem;
 		text-align: center;
 	}
-
 </style>
