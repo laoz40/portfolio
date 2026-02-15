@@ -1,0 +1,75 @@
+---
+import DefaultLayout from "../../layouts/DefaultLayout.astro";
+import IntroContent, { frontmatter } from "../../content/sprout/00-intro.md";
+import ProjectOverviewContent from "../../content/sprout/01-project-overview.md";
+import ProjectShowcaseContent from "../../content/sprout/03-project-showcase.md";
+import ProblemAreaContent from "../../content/sprout/04-problem-area.md";
+import OurGoalContent from "../../content/sprout/05-our-goal.md";
+import CompetitorAnalysisContent from "../../content/sprout/06-competitor-analysis.md";
+import UserResearchMethodsContent from "../../content/sprout/07-user-research-methods.md";
+import UserResearchBarriersContent from "../../content/sprout/08-user-research-barriers.md";
+import PrototypingContent from "../../content/sprout/09-prototyping.md";
+import UserTestingInsightsContent from "../../content/sprout/10-user-testing-insights.md";
+import DesignSystemContent from "../../content/sprout/11-design-system.md";
+import ReflectionContent from "../../content/sprout/12-reflection.md";
+---
+
+<DefaultLayout title={frontmatter.title}>
+	<article class="project-content mt-4 flex flex-col gap-12">
+		<section><IntroContent /></section>
+		<section><ProjectOverviewContent /></section>
+		<section><ProjectShowcaseContent /></section>
+		<section><ProblemAreaContent /></section>
+		<section><OurGoalContent /></section>
+		<section><CompetitorAnalysisContent /></section>
+		<section><UserResearchMethodsContent /></section>
+		<section><UserResearchBarriersContent /></section>
+		<section><PrototypingContent /></section>
+		<section><UserTestingInsightsContent /></section>
+		<section><DesignSystemContent /></section>
+		<section><ReflectionContent /></section>
+	</article>
+</DefaultLayout>
+
+<style>
+	.project-content :global(h1) {
+		font-family: "Leo Handwriting";
+		font-size: 8rem;
+		font-weight: 700;
+		line-height: 1;
+		margin: 0 0 1rem 0;
+	}
+
+	.project-content :global(h2) {
+		font-family: "Leo Handwriting";
+		font-size: 3rem;
+		font-weight: 700;
+		line-height: 0.75;
+		margin: 2rem 0 2rem 0;
+	}
+
+	.project-content :global(h3) {
+		font-family: "Leo Handwriting";
+		font-size: 3rem;
+		margin: 0 0 0 0;
+		letter-spacing: 0.01em;
+	}
+
+	.project-content :global(h4) {
+		font-family: "Leo Handwriting";
+		font-size: 1.5rem;
+		font-weight: 700;
+		margin: 1rem 0 0 0;
+		margin-bottom: 0;
+		letter-spacing: 0.01em;
+	}
+
+	.project-content :global(p),
+	.project-content :global(li) {
+		font-family: "Outfit Variable";
+		font-size: 1rem;
+		font-weight: 400;
+		color: rgb(50, 50, 50);
+		margin: 0 0 1rem 0;
+	}
+</style>
