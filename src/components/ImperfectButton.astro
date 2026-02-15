@@ -86,7 +86,7 @@ const { fill, hoverFill, href } = Astro.props;
 		height: 100%;
 		z-index: 0;
 		pointer-events: none;
-		transition: all 0.25s ease-in-out;
+		transition: transform 0.25s ease-in-out, filter 0.25s ease-in-out, fill 0.25s ease-in-out;
 		filter: drop-shadow(3px 3px 0 rgba(0,0,0,0.1));
 		fill: var(--fill);
 	}

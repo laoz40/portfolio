@@ -63,4 +63,14 @@ const { href = '#featured', label = 'Scroll to featured section' } = Astro.props
 			transform: translateX(-50%) translateY(0.35rem);
 		}
 	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.scroll-down {
+			animation: none;
+		}
+
+		.scroll-down:hover {
+			transform: translateX(-50%);
+		}
+	}
 </style>
