@@ -1,8 +1,12 @@
 ---
-const { href, hlColour = "rgb(255 230 0 / 0.75)" } = Astro.props;
+const {
+	href,
+	hlColour = "rgb(255 230 0 / 0.75)",
+	selectable = false,
+} = Astro.props;
 ---
 <a href={href} style={`--hl-colour: ${hlColour}`}>
-	<div>
+	<div class:list={{ selectable }}>
 		<slot />
 	</div>
 </a>
@@ -22,6 +26,10 @@ const { href, hlColour = "rgb(255 230 0 / 0.75)" } = Astro.props;
 		user-select: none;
 		z-index: 0;
 		transition: transform 120ms ease;
+	}
+
+	a > div.selectable {
+		user-select: text;
 	}
 
 	a > div::before {

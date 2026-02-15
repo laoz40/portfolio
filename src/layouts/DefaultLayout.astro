@@ -1,44 +1,97 @@
 ---
-import NavLink from '../components/NavLink.astro';
-import BgLight from '../components/BgLight.jsx';
-import '../styles/global.css';
+import NavLink from "../components/NavLink.astro";
+import BgLight from "../components/BgLight.jsx";
+import "../styles/global.css";
 
 const { title, home } = Astro.props;
-const navPosition = home ? 'fixed' : 'sticky';
+const navPosition = home ? "fixed" : "sticky";
+
+const projectsHlColour = "rgb(255 230 0 / 0.7)";
+const aboutHlColour = "rgb(0 197 255 / 0.7)";
+const contactHlColour = "rgb(50 255 50 / 0.7)";
 ---
 
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
+		<link
+			rel="icon"
+			type="image/svg+xml"
+			href="/favicon.svg"
+		/>
+		<link
+			rel="icon"
+			href="/favicon.ico"
+		/>
+		<meta
+			name="viewport"
+			content="width=device-width"
+		/>
+		<meta
+			name="generator"
+			content={Astro.generator}
+		/>
 		<title>Leo Zhou - {title}</title>
 	</head>
 
 	<body>
 		<BgLight client:load>
-			<nav style={`position: ${navPosition}`}>
+			<nav class:list={[navPosition]}>
 				<div class="font-bold">
-					<NavLink href="/" hlColour="rgb(50 255 50 / 0.7)">Leo Zhou</NavLink>
+					<NavLink
+						href="/"
+						hlColour={contactHlColour}
+						selectable>
+						Leo Zhou
+					</NavLink>
 				</div>
+
 				<div class="flex gap-12">
-					<NavLink href="/projects" hlColour="rgb(255 230 0 / 0.7)">Projects</NavLink>
-					<NavLink href="/about" hlColour="rgb(0 197 255 / 0.7)">About</NavLink>
-					<NavLink href="/contact" hlColour="rgb(50 255 50 / 0.7)">Contact</NavLink>
+					<NavLink
+						href="/projects"
+						hlColour={projectsHlColour}>
+						Projects
+					</NavLink>
+					<NavLink
+						href="/about"
+						hlColour={aboutHlColour}>
+						About
+					</NavLink>
+					<NavLink
+						href="/contact"
+						hlColour={contactHlColour}>
+						Contact
+					</NavLink>
 				</div>
 			</nav>
 			<main>
 				<slot />
 			</main>
 
-		<footer id="contact" aria-label="Hero links">
-			<NavLink href="mailto:hello@example.com" hlColour="rgb(50 255 50 / 0.7)">Email</NavLink>
-			<NavLink href="https://www.linkedin.com" hlColour="rgb(50 255 50 / 0.7)">LinkedIn</NavLink>
-			<NavLink href="https://github.com" hlColour="rgb(50 255 50 / 0.7)">Github</NavLink>
-			<NavLink href="/resume" hlColour="rgb(50 255 50 / 0.7)">Resume</NavLink>
-		</footer>
+			<footer
+				id="contact"
+				aria-label="Hero links">
+				<NavLink
+					href="mailto:hello@example.com"
+					hlColour={contactHlColour}>
+					Email
+				</NavLink>
+				<NavLink
+					href="https://www.linkedin.com"
+					hlColour={contactHlColour}>
+					LinkedIn
+				</NavLink>
+				<NavLink
+					href="https://github.com"
+					hlColour={contactHlColour}>
+					Github
+				</NavLink>
+				<NavLink
+					href="/resume"
+					hlColour={contactHlColour}>
+					Resume
+				</NavLink>
+			</footer>
 		</BgLight>
 	</body>
 </html>
@@ -56,6 +109,14 @@ const navPosition = home ? 'fixed' : 'sticky';
 		justify-content: space-between;
 		align-items: center;
 		padding: 0 8rem;
+	}
+
+	nav.fixed {
+		position: fixed;
+	}
+
+	nav.sticky {
+		position: sticky;
 	}
 
 	main {
