@@ -5,27 +5,30 @@ import DefaultLayout from "../layouts/DefaultLayout.astro";
 <DefaultLayout title="Projects">
 	<h1>These are my projects</h1>
 	<div class="projects-layout">
-		<section class="project-card project-big">
+		<a
+			class="project-card project-big"
+			href="/projects/horus"
+			aria-label="Open Horus project page">
 			<div class="preview preview-big"></div>
-			<a href="/projects/horus">
-				<h2>Horus</h2>
-			</a>
+			<h2>Horus</h2>
 			<span>Full Stack Web App</span>
-		</section>
-		<section class="project-card project-small">
+		</a>
+		<a
+			class="project-card project-small"
+			href="/projects/sprout"
+			aria-label="Open Sprout project page">
 			<div class="preview preview-small"></div>
-			<a href="/projects/sprout">
-				<h2>Sprout</h2>
-			</a>
+			<h2>Sprout</h2>
 			<span>App UX Design</span>
-		</section>
-		<section class="project-card project-small">
+		</a>
+		<a
+			class="project-card project-small"
+			href="/projects/checkit"
+			aria-label="Open Check It project page">
 			<div class="preview preview-small"></div>
-			<a href="/projects/checkit">
-				<h2>Check It</h2>
-			</a>
+			<h2>Check It</h2>
 			<span>App UX Design</span>
-		</section>
+		</a>
 	</div>
 </DefaultLayout>
 
@@ -51,6 +54,8 @@ import DefaultLayout from "../layouts/DefaultLayout.astro";
 		flex-direction: column;
 		gap: 0.6rem;
 		padding: clamp(0.9rem, 2vw, 1.25rem);
+		color: var(--project-text);
+		text-decoration: none;
 	}
 
 	.project-card:nth-of-type(odd) {
@@ -67,11 +72,6 @@ import DefaultLayout from "../layouts/DefaultLayout.astro";
 
 	.project-small {
 		grid-column: span 6;
-	}
-
-	.project-card a {
-		color: var(--project-text);
-		text-decoration: none;
 	}
 
 	.project-card h2 {
