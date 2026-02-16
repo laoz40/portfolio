@@ -100,56 +100,45 @@ const contactHlColour = "rgb(50 255 50 / 0.7)";
 				</NavLink>
 			</footer>
 		</BgLight>
+
 		<script is:inline>
-			const routeOrder = ["/", "/projects", "/projects/sprout", "/about", "/contact"];
-			const routeIndex = new Map(routeOrder.map((path, index) => [path, index]));
-
-			const normalizePathname = (pathLike) => {
-				if (!pathLike) {
-					return "/";
-				}
-
-				let pathname = pathLike;
-				try {
-					pathname = new URL(pathLike, window.location.origin).pathname;
-				} catch {
-					pathname = String(pathLike);
-				}
-
-				if (pathname.length > 1 && pathname.endsWith("/")) {
-					pathname = pathname.slice(0, -1);
-				}
-
-				return pathname || "/";
+			const routeOrderByPath = {
+				"/": 0,
+				"/projects": 1,
+				"/projects/sprout": 2,
+				"/about": 3,
+				"/contact": 4,
 			};
 
-			const getPathIndex = (pathname) => {
-				if (routeIndex.has(pathname)) {
-					return routeIndex.get(pathname);
-				}
-
-				if (pathname.startsWith("/projects/")) {
-					return routeIndex.get("/projects/sprout");
-				}
-
-				return undefined;
+			const getRouteOrderIndex = (pathnameOrUrl) => {
+				const pathValue = pathnameOrUrl ? String(pathnameOrUrl) : "/";
+				const normalizedPathname =
+					pathValue.length > 1 && pathValue.endsWith("/") ? pathValue.slice(0, -1) : pathValue;
+				const matchedPath =
+					normalizedPathname.startsWith("/projects/") ? "/projects/sprout" : normalizedPathname;
+				return routeOrderByPath[matchedPath];
 			};
 
 			if (!window.__siteOrderTransitionsReady) {
 				window.__siteOrderTransitionsReady = true;
 
 				document.addEventListener("astro:before-preparation", (event) => {
-					const fromPath = normalizePathname(event.from?.url?.pathname ?? event.from?.pathname);
-					const toPath = normalizePathname(event.to?.url?.pathname ?? event.to?.pathname);
+					const fromRouteOrderIndex = getRouteOrderIndex(
+						event.from?.url?.pathname ?? event.from?.pathname
+					);
+					const toRouteOrderIndex = getRouteOrderIndex(
+						event.to?.url?.pathname ?? event.to?.pathname
+					);
 
-					const fromIndex = getPathIndex(fromPath);
-					const toIndex = getPathIndex(toPath);
-
-					if (fromIndex === undefined || toIndex === undefined || fromIndex === toIndex) {
+					if (
+						fromRouteOrderIndex === undefined ||
+						toRouteOrderIndex === undefined ||
+						fromRouteOrderIndex === toRouteOrderIndex
+					) {
 						return;
 					}
 
-					event.direction = toIndex > fromIndex ? "forward" : "back";
+					event.direction = toRouteOrderIndex > fromRouteOrderIndex ? "forward" : "back";
 				});
 			}
 		</script>
