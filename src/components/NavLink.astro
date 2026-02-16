@@ -20,9 +20,9 @@ const {
 	a > div {
 		position: relative;
 		display: inline-block;
-		font-size: 1.75rem;
+		font-size: clamp(1rem, 1.8vw, 1.75rem);
 		line-height: 1.1;
-		padding: 1.5rem 1rem;
+		padding: clamp(0.6rem, 1.4vw, 1.5rem) clamp(0.45rem, 1vw, 1rem);
 		user-select: none;
 		z-index: 0;
 		transition: transform 120ms ease;

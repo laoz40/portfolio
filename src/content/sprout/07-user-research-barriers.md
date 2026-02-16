@@ -1,4 +1,4 @@
-## User Research
+## User Research Insights
 
 ### What's stopping people from doing anything?
 
@@ -20,7 +20,7 @@
 
 #### Preferring Direct Involvement
 
-- "It goes back to the tangible aspect; you can physically see a tree that you plant rather than you don't know where your moneys going."
+- "It goes back to the tangible aspect, you can physically see a tree that you plant rather than you don't know where your moneys going."
 - "I would rather use my time than money!"
 - "I think it's always better to see a tangible outcome rather than something theoretical."
 - "I don't like donating money to charities because I don't know how the money is being used, and I can't see the effects of the donations."
@@ -30,6 +30,6 @@
 - "I guess it's something like maybe just the social culture. I guess it's not considered like a thing that you just actively participate."
 - "Seeing more and more people caring about the environment and taking action really pumps me up."
 - "Tree planting would be fun if I could do it with friends."
-- "definitely doing it with a group of people. Having to do it with others definitely provides a lot more motivation and incentive."
+- "Definitely doing it with a group of people. Having to do it with others definitely provides a lot more motivation and incentive."
 
 image placeholder

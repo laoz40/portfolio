@@ -63,11 +63,11 @@ const { fill, hoverFill, href } = Astro.props;
 		position: relative;
 		display: inline-grid;
 		place-items: center;
-		padding: 1rem 2rem;
+		padding: clamp(0.75rem, 1.8vw, 1rem) clamp(1.2rem, 3.5vw, 2rem);
 		border: 0;
 		cursor: pointer;
 		user-select: none;
-		font-size: 2rem;
+		font-size: clamp(1.1rem, 3.7vw, 2rem);
 		font-weight: 700;
 		text-decoration: none;
 	}

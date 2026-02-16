@@ -37,7 +37,7 @@ const contactHlColour = "rgb(50 255 50 / 0.7)";
 	<body>
 		<BgLight client:load>
 			<nav class:list={[navPosition]}>
-				<div class="font-bold">
+				<div class="nav-brand font-bold">
 					<NavLink
 						href="/"
 						hlColour={contactHlColour}
@@ -46,7 +46,7 @@ const contactHlColour = "rgb(50 255 50 / 0.7)";
 					</NavLink>
 				</div>
 
-				<div class="flex gap-12">
+				<div class="nav-links">
 					<NavLink
 						href="/projects"
 						hlColour={projectsHlColour}>
@@ -97,6 +97,10 @@ const contactHlColour = "rgb(50 255 50 / 0.7)";
 </html>
 
 <style>
+	:root {
+		--page-gutter: clamp(1rem, 4vw, 8rem);
+	}
+
 	nav {
 		top: 0;
 		left: 0;
@@ -108,7 +112,17 @@ const contactHlColour = "rgb(50 255 50 / 0.7)";
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
-		padding: 0 8rem;
+		gap: 1rem;
+		padding-inline: var(--page-gutter);
+	}
+
+	.nav-links {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		align-items: center;
+		gap: clamp(0.25rem, 1.2vw, 2.5rem);
+		min-width: 0;
 	}
 
 	nav.fixed {
@@ -124,7 +138,8 @@ const contactHlColour = "rgb(50 255 50 / 0.7)";
 		display: flex;
 		flex-direction: column;
 		min-height: 100svh;
-		margin: 0 8rem;
+		margin-inline: var(--page-gutter);
+		min-width: 0;
 	}
 
 	footer {
@@ -134,6 +149,31 @@ const contactHlColour = "rgb(50 255 50 / 0.7)";
 		gap: 0.5rem;
 		margin-top: 5rem;
 		flex-wrap: wrap;
+	}
+
+	@media (max-width: 820px) {
+		nav {
+			padding-top: 0.25rem;
+			padding-bottom: 0.25rem;
+		}
+
+		.nav-brand {
+			flex: 1 1 auto;
+		}
+
+		.nav-links {
+			flex: 1 1 auto;
+		}
+	}
+
+	@media (max-width: 580px) {
+		nav {
+			align-items: flex-start;
+		}
+
+		.nav-links {
+			justify-content: flex-start;
+		}
 	}
 
 </style>
