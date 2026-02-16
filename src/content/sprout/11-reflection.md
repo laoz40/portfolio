@@ -14,8 +14,3 @@
 - The prototype should integrate the AR experience more smoothly into the app screens, to make it feel more like one seamless app experience.
 - Expand the concept for AR/VR headsets, creating new ways for users to engage across different platforms.
 
-#### Achievements
-
-- One of five projects shortlisted to present at the ADP Open Jury Industry Crit
-- Project featured in the ADP Graduate Catalogue 2024
-- Project featured on display at the ADP Graduate Show 2024

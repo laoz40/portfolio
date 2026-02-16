@@ -2,7 +2,7 @@
 
 ### What's stopping people from doing anything?
 
-**Most people would face personal barriers that discouraged them from participating in forest conservation activities, even if they had an interest in helping environmental issues.**
+Most people would face personal barriers that discouraged them from participating in forest conservation activities, even if they had an interest in helping environmental issues.
 
 #### Not seeing the impact of their actions
 
@@ -16,7 +16,11 @@
 - "Like you would have to go out of your way (to do it)."
 - "(Theres a) lack of awareness around it, and there's not much promotion going around."
 
-**Most people had some interest in helping the environment. Many said they would be more willing to participate in forest conservation if they had the right motivation.**
+<br>
+<br>
+<br>
+
+Most people had some interest in helping the environment. Many said they would be more willing to participate in forest conservation if they had the right motivation.
 
 #### Preferring Direct Involvement
 
