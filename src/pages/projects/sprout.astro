@@ -107,6 +107,14 @@ import ReflectionContent from "../../content/sprout/11-reflection.md";
 		min-width: 0;
 	}
 
+	.section:nth-of-type(odd) {
+		--section-media-tilt: -0.4deg;
+	}
+
+	.section:nth-of-type(even) {
+		--section-media-tilt: 0.4deg;
+	}
+
 	.section-media {
 		position: sticky;
 		top: clamp(8rem, 22vh, 12.5rem);
@@ -115,6 +123,7 @@ import ReflectionContent from "../../content/sprout/11-reflection.md";
 		background: rgb(190 242 100);
 		border: 8px solid rgb(255 255 255 / 1);
 		box-shadow: 2px 4px 6px rgb(15 23 42 / 0.2);
+		transform: rotate(var(--section-media-tilt, 0deg));
 	}
 
 	.section-media-featured {
@@ -131,6 +140,7 @@ import ReflectionContent from "../../content/sprout/11-reflection.md";
 		width: 100%;
 		gap: 0.75rem;
 		align-self: start;
+		transform: rotate(var(--section-media-tilt, 0deg));
 	}
 
 	.section-media-tile {
