@@ -1,17 +1,19 @@
 ---
 import NavLink from "../components/NavLink.astro";
 import BgLight from "../components/BgLight.jsx";
+import { ClientRouter, slide } from "astro:transitions";
 import "../styles/global.css";
 
-const { title, home } = Astro.props;
-const navPosition = home ? "fixed" : "sticky";
+const { title, home = false } = Astro.props;
 
 const projectsHlColour = "rgb(255 230 0 / 0.7)";
 const aboutHlColour = "rgb(0 197 255 / 0.7)";
 const contactHlColour = "rgb(50 255 50 / 0.7)";
 ---
 
-<html lang="en">
+<html
+	lang="en"
+	transition:animate="none">
 	<head>
 		<meta charset="utf-8" />
 		<link
@@ -32,11 +34,13 @@ const contactHlColour = "rgb(50 255 50 / 0.7)";
 			content={Astro.generator}
 		/>
 		<title>Leo Zhou - {title}</title>
+		<ClientRouter />
 	</head>
 
 	<body>
 		<BgLight client:load>
-			<nav class:list={[navPosition]}>
+			<nav
+				transition:animate="none">
 				<div class="nav-brand font-bold">
 					<NavLink
 						href="/"
@@ -64,13 +68,16 @@ const contactHlColour = "rgb(50 255 50 / 0.7)";
 					</NavLink>
 				</div>
 			</nav>
-			<main>
+			<main
+				class:list={{ home }}
+				transition:animate={slide({ duration: "0.35s" })}>
 				<slot />
 			</main>
 
 			<footer
 				id="contact"
-				aria-label="Social and contact links">
+				aria-label="Social and contact links"
+				transition:animate="none">
 				<NavLink
 					href="mailto:hello@example.com"
 					hlColour={contactHlColour}>
@@ -93,12 +100,66 @@ const contactHlColour = "rgb(50 255 50 / 0.7)";
 				</NavLink>
 			</footer>
 		</BgLight>
+		<script is:inline>
+			const routeOrder = ["/", "/projects", "/projects/sprout", "/about", "/contact"];
+			const routeIndex = new Map(routeOrder.map((path, index) => [path, index]));
+
+			const normalizePathname = (pathLike) => {
+				if (!pathLike) {
+					return "/";
+				}
+
+				let pathname = pathLike;
+				try {
+					pathname = new URL(pathLike, window.location.origin).pathname;
+				} catch {
+					pathname = String(pathLike);
+				}
+
+				if (pathname.length > 1 && pathname.endsWith("/")) {
+					pathname = pathname.slice(0, -1);
+				}
+
+				return pathname || "/";
+			};
+
+			const getPathIndex = (pathname) => {
+				if (routeIndex.has(pathname)) {
+					return routeIndex.get(pathname);
+				}
+
+				if (pathname.startsWith("/projects/")) {
+					return routeIndex.get("/projects/sprout");
+				}
+
+				return undefined;
+			};
+
+			if (!window.__siteOrderTransitionsReady) {
+				window.__siteOrderTransitionsReady = true;
+
+				document.addEventListener("astro:before-preparation", (event) => {
+					const fromPath = normalizePathname(event.from?.url?.pathname ?? event.from?.pathname);
+					const toPath = normalizePathname(event.to?.url?.pathname ?? event.to?.pathname);
+
+					const fromIndex = getPathIndex(fromPath);
+					const toIndex = getPathIndex(toPath);
+
+					if (fromIndex === undefined || toIndex === undefined || fromIndex === toIndex) {
+						return;
+					}
+
+					event.direction = toIndex > fromIndex ? "forward" : "back";
+				});
+			}
+		</script>
 	</body>
 </html>
 
 <style>
 	:root {
 		--page-gutter: clamp(1rem, 4vw, 8rem);
+		--nav-offset: clamp(4.25rem, 8vw, 6rem);
 	}
 
 	nav {
@@ -125,12 +186,8 @@ const contactHlColour = "rgb(50 255 50 / 0.7)";
 		min-width: 0;
 	}
 
-	nav.fixed {
+	nav {
 		position: fixed;
-	}
-
-	nav.sticky {
-		position: sticky;
 	}
 
 	main {
@@ -139,7 +196,12 @@ const contactHlColour = "rgb(50 255 50 / 0.7)";
 		flex-direction: column;
 		min-height: 100svh;
 		margin-inline: var(--page-gutter);
+		padding-top: var(--nav-offset);
 		min-width: 0;
+	}
+
+	main.home {
+		padding-top: 0;
 	}
 
 	footer {
