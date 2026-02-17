@@ -1,5 +1,6 @@
 ---
 import DefaultLayout from "../../layouts/DefaultLayout.astro";
+import ScrollSpySidebar from "../../components/ScrollSpySidebar.astro";
 import IntroContent, { frontmatter } from "../../content/sprout/00-intro.md";
 import ProjectOverviewContent from "../../content/sprout/01-project-overview.md";
 import ProjectShowcaseContent from "../../content/sprout/02-project-showcase.md";
@@ -15,87 +16,101 @@ import ReflectionContent from "../../content/sprout/11-reflection.md";
 ---
 
 <DefaultLayout title={frontmatter.title}>
-	<article class="project-content mt-4 flex flex-col gap-12">
-		<section class="section">
-			<div class="section-copy"><IntroContent /></div>
-			<div
-				class="section-media section-media-featured"
-				aria-hidden="true">
-			</div>
-		</section>
-		<section class="section">
-			<div class="section-copy"><ProjectOverviewContent /></div>
-			<div
-				class="section-media"
-				aria-hidden="true">
-			</div>
-		</section>
-		<section class="section">
-			<div class="section-copy"><ProjectShowcaseContent /></div>
-			<div
-				class="section-media section-media-featured"
-				aria-hidden="true">
-			</div>
-		</section>
-		<section class="section">
-			<div class="section-copy"><ProblemAreaContent /></div>
-			<div
-				class="section-media section-media-featured"
-				aria-hidden="true">
-			</div>
-		</section>
-		<section><OurGoalContent /></section>
-		<section class="section">
-			<div class="section-copy"><CompetitorAnalysisContent /></div>
-			<div
-				class="section-media"
-				aria-hidden="true">
-			</div>
-		</section>
-		<section class="section">
-			<div class="section-copy"><UserResearchMethodsContent /></div>
-			<div
-				class="section-media"
-				aria-hidden="true">
-			</div>
-		</section>
-		<section class="section section-handwriting-list">
-			<div class="section-copy"><UserResearchBarriersContent /></div>
-			<div
-				class="section-media"
-				aria-hidden="true">
-			</div>
-		</section>
-		<section class="section">
-			<div class="section-copy"><PrototypingContent /></div>
-			<div
-				class="section-media-gallery"
-				aria-hidden="true">
-				<div class="section-media-tile"></div>
-				<div class="section-media-tile"></div>
-				<div class="section-media-tile"></div>
-				<div class="section-media-tile"></div>
-			</div>
-		</section>
-		<section class="section">
-			<div class="section-copy"><UserTestingInsightsContent /></div>
-			<div
-				class="section-media section-media-featured"
-				aria-hidden="true">
-			</div>
-		</section>
-		<section class="section">
-			<div class="section-copy"><DesignSystemContent /></div>
-			<div
-				class="section-media"
-				aria-hidden="true">
-			</div>
-		</section>
-		<section><ReflectionContent /></section>
-	</article>
+	<div class="project-shell mt-4">
+		<ScrollSpySidebar headingSelector="h2" />
+		<article
+			class="project-content flex flex-col gap-12"
+			data-scrollspy-root>
+			<section class="section">
+				<div class="section-copy"><IntroContent /></div>
+				<div
+					class="section-media section-media-featured"
+					aria-hidden="true">
+				</div>
+			</section>
+			<section class="section">
+				<div class="section-copy"><ProjectOverviewContent /></div>
+				<div
+					class="section-media"
+					aria-hidden="true">
+				</div>
+			</section>
+			<section class="section">
+				<div class="section-copy"><ProjectShowcaseContent /></div>
+				<div
+					class="section-media section-media-featured"
+					aria-hidden="true">
+				</div>
+			</section>
+			<section class="section">
+				<div class="section-copy"><ProblemAreaContent /></div>
+				<div
+					class="section-media section-media-featured"
+					aria-hidden="true">
+				</div>
+			</section>
+			<section><OurGoalContent /></section>
+			<section class="section">
+				<div class="section-copy"><CompetitorAnalysisContent /></div>
+				<div
+					class="section-media"
+					aria-hidden="true">
+				</div>
+			</section>
+			<section class="section">
+				<div class="section-copy"><UserResearchMethodsContent /></div>
+				<div
+					class="section-media"
+					aria-hidden="true">
+				</div>
+			</section>
+			<section class="section section-handwriting-list">
+				<div class="section-copy"><UserResearchBarriersContent /></div>
+				<div
+					class="section-media"
+					aria-hidden="true">
+				</div>
+			</section>
+			<section class="section">
+				<div class="section-copy"><PrototypingContent /></div>
+				<div
+					class="section-media-gallery"
+					aria-hidden="true">
+					<div class="section-media-tile"></div>
+					<div class="section-media-tile"></div>
+					<div class="section-media-tile"></div>
+					<div class="section-media-tile"></div>
+				</div>
+			</section>
+			<section class="section">
+				<div class="section-copy"><UserTestingInsightsContent /></div>
+				<div
+					class="section-media section-media-featured"
+					aria-hidden="true">
+				</div>
+			</section>
+			<section class="section">
+				<div class="section-copy"><DesignSystemContent /></div>
+				<div
+					class="section-media"
+					aria-hidden="true">
+				</div>
+			</section>
+			<section><ReflectionContent /></section>
+		</article>
+	</div>
 </DefaultLayout>
 
 <style>
+	.project-shell {
+		display: grid;
+		grid-template-columns: clamp(10.5rem, 16vw, 14rem) minmax(0, 1fr);
+		gap: clamp(1.5rem, 4vw, 5rem);
+		align-items: start;
+		width: 100%;
+		margin-inline: auto;
+	}
+
 	.section {
 		display: grid;
 		grid-template-columns: minmax(0, 1fr) clamp(16rem, 28vw, 24rem);
@@ -152,9 +167,13 @@ import ReflectionContent from "../../content/sprout/11-reflection.md";
 
 	.project-content {
 		--text-measure: 65ch;
-		width: min(100%, 78rem);
-		margin-inline: auto;
+		width: 100%;
+		margin-inline: 0;
 		padding-inline: clamp(0.25rem, 1.5vw, 1rem);
+	}
+
+	.project-content :global(h2) {
+		scroll-margin-top: calc(var(--nav-offset) + 1rem);
 	}
 
 	.project-content :global(h1) {
@@ -245,7 +264,7 @@ import ReflectionContent from "../../content/sprout/11-reflection.md";
 		color: inherit;
 	}
 
-	@media (max-width: 980px) {
+	@media (max-width: 1240px) {
 		.section {
 			grid-template-columns: 1fr;
 			gap: 1rem;
@@ -260,6 +279,12 @@ import ReflectionContent from "../../content/sprout/11-reflection.md";
 		.section-media-gallery {
 			position: static;
 			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	@media (max-width: 1142px) {
+		.project-shell {
+			grid-template-columns: 1fr;
 		}
 	}
 
