@@ -1,6 +1,6 @@
 ---
-title: Sprout
-project: Environmental AR App Design
+title: Check It
+project: Productivity Mobile App Design
 description: I led a team to design an AR app that inspires people to take meaningful environmental action. We ran multiple rounds of user testing, iterating from early concepts to make a final experience that was smooth and engaging.
 cover-image: image
 alt-text: Sprout Cover Image (Credit @josephgvideo)
