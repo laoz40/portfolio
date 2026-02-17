@@ -1,5 +1,8 @@
 ---
 import DefaultLayout from "../layouts/DefaultLayout.astro";
+import { frontmatter as horus } from "../content/horus/00-intro.md";
+import { frontmatter as sprout } from "../content/sprout/00-intro.md";
+import { frontmatter as checkit } from "../content/checkit/00-intro.md";
 ---
 
 <DefaultLayout title="Projects">
@@ -8,26 +11,26 @@ import DefaultLayout from "../layouts/DefaultLayout.astro";
 		<a
 			class="project-card project-big"
 			href="/projects/horus"
-			aria-label="Open Horus project page">
+			aria-label={`Open ${horus.title} project page`}>
 			<div class="preview preview-big"></div>
-			<h2>Horus</h2>
-			<span>Full Stack Web App</span>
+			<h2>{horus.title}</h2>
+			<span>{horus.project}</span>
 		</a>
 		<a
 			class="project-card project-small"
 			href="/projects/sprout"
-			aria-label="Open Sprout project page">
+			aria-label={`Open ${sprout.title} project page`}>
 			<div class="preview preview-small"></div>
-			<h2>Sprout</h2>
-			<span>App UX Design</span>
+			<h2>{sprout.title}</h2>
+			<span>{sprout.project}</span>
 		</a>
 		<a
 			class="project-card project-small"
 			href="/projects/checkit"
-			aria-label="Open Check It project page">
+			aria-label={`Open ${checkit.title} project page`}>
 			<div class="preview preview-small"></div>
-			<h2>Check It</h2>
-			<span>App UX Design</span>
+			<h2>{checkit.title}</h2>
+			<span>{checkit.project}</span>
 		</a>
 	</div>
 </DefaultLayout>
@@ -91,7 +94,9 @@ import DefaultLayout from "../layouts/DefaultLayout.astro";
 		background: rgb(190 242 100);
 		box-shadow: 0 8px 20px rgb(15 23 42 / 0.15);
 		transform: rotate(var(--preview-tilt, 0deg));
-		transition: box-shadow 180ms ease, transform 180ms ease;
+		transition:
+			box-shadow 180ms ease,
+			transform 180ms ease;
 	}
 
 	.project-card:hover .preview,
