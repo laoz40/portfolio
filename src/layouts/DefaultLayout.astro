@@ -1,6 +1,6 @@
 ---
 import NavLink from "../components/NavLink.astro";
-import BgLight from "../components/BgLight.jsx";
+import BgLight from "../components/BgLight.astro";
 import { ClientRouter, slide } from "astro:transitions";
 import "../styles/global.css";
 
@@ -38,7 +38,7 @@ const contactHlColour = "rgb(50 255 50 / 0.7)";
 	</head>
 
 	<body>
-		<BgLight client:load>
+		<BgLight>
 			<nav transition:animate="none">
 				<div class="nav-brand font-bold">
 					<NavLink
