@@ -116,9 +116,11 @@ import AboutContent from "../content/about/about.md";
 	}
 
 	[data-about-content] :global(p) {
-		font-family: "Outfit Variable";
-		font-size: clamp(1.08rem, 0.3vw + 1rem, 1.2rem);
-		font-weight: 300;
+		/* font-family: var(--font-sans); */
+		/* font-size: clamp(1.08rem, 0.3vw + 1rem, 1.2rem); */
+		/* font-weight: 300; */
+		font-family: var(--font-handwriting);
+		font-size: clamp(1.25rem, 2vw, 1.5rem);
 		color: rgb(50, 50, 50);
 		margin: 0 0 1rem 0;
 		line-height: 1.72;
@@ -133,12 +135,13 @@ import AboutContent from "../content/about/about.md";
 	}
 
 	[data-about-content] :global(li) {
-		font-family: "Outfit Variable";
-		font-size: clamp(1.08rem, 0.3vw + 1rem, 1.2rem);
-		font-weight: 300;
+		/* font-family: var(--font-sans); */
+		/* font-size: clamp(1.08rem, 0.3vw + 1rem, 1.2rem); */
+		/* font-weight: 300; */
+		font-family: var(--font-handwriting);
+		font-size: clamp(1.25rem, 2vw, 1.5rem);
 		color: rgb(50, 50, 50);
-		margin: 0 0 0.35rem 0;
-		line-height: 1.55;
+		line-height: 1.25;
 		max-width: var(--text-measure);
 		text-wrap: pretty;
 	}
@@ -151,8 +154,15 @@ import AboutContent from "../content/about/about.md";
 				"media";
 		}
 
+		[data-about-content] :global(.about-section:nth-of-type(even)) {
+			grid-template-columns: 1fr;
+			grid-template-areas:
+				"copy"
+				"media";
+		}
+
 		[data-about-content] :global(.about-section-media) {
-			width: min(100%, 14rem);
+			width: 100%;
 		}
 	}
 </style>
