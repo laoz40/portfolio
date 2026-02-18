@@ -13,39 +13,48 @@ import { frontmatter as checkit } from "../content/checkit/00-intro.md";
 			href="/projects/horus"
 			aria-label={`Open ${horus.title} project page`}>
 			<div class="preview preview-big"></div>
-			<h2>{horus.title}</h2>
-			<span>{horus.project}</span>
 			<div class="project-title">
 				<h2>{horus.title}</h2>
 				<span>{horus.project}</span>
 			</div>
 			<p>{horus.description}</p>
+			<ul class="tool-badges" aria-label={`${horus.title} tools used`}>
+				{(horus.tools ?? []).map((tool) => (
+					<li class="tool-badge">{tool}</li>
+				))}
+			</ul>
 		</a>
 		<a
 			class="project-card project-small"
 			href="/projects/sprout"
 			aria-label={`Open ${sprout.title} project page`}>
 			<div class="preview preview-small"></div>
-			<h2>{sprout.title}</h2>
-			<span>{sprout.project}</span>
 			<div class="project-title">
 				<h2>{sprout.title}</h2>
 				<span>{sprout.project}</span>
 			</div>
 			<p>{sprout.description}</p>
+			<ul class="tool-badges" aria-label={`${sprout.title} tools used`}>
+				{(sprout.tools ?? []).map((tool) => (
+					<li class="tool-badge">{tool}</li>
+				))}
+			</ul>
 		</a>
 		<a
 			class="project-card project-small"
 			href="/projects/checkit"
 			aria-label={`Open ${checkit.title} project page`}>
 			<div class="preview preview-small"></div>
-			<h2>{checkit.title}</h2>
-			<span>{checkit.project}</span>
 			<div class="project-title">
 				<h2>{checkit.title}</h2>
 				<span>{checkit.project}</span>
 			</div>
 			<p>{checkit.description}</p>
+			<ul class="tool-badges" aria-label={`${checkit.title} tools used`}>
+				{(checkit.tools ?? []).map((tool) => (
+					<li class="tool-badge">{tool}</li>
+				))}
+			</ul>
 		</a>
 	</div>
 </DefaultLayout>
@@ -80,7 +89,7 @@ import { frontmatter as checkit } from "../content/checkit/00-intro.md";
 		display: flex;
 		justify-content: space-between;
 		align-items: baseline;
-		gap: 0.75rem;
+		margin-bottom: 0.5rem;
 	}
 
 	.project-card:nth-of-type(odd) {
@@ -102,7 +111,6 @@ import { frontmatter as checkit } from "../content/checkit/00-intro.md";
 	.project-card h2 {
 		font-size: clamp(1.25rem, 2.5vw, 2rem);
 		font-weight: 700;
-		line-height: 1.1;
 	}
 
 	.project-card span {
@@ -116,6 +124,27 @@ import { frontmatter as checkit } from "../content/checkit/00-intro.md";
 		line-height: 1.25;
 		color: rgb(15 23 42 / 0.82);
 	}
+
+	.tool-badges {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.tool-badge {
+		padding: 0.1rem 0.65rem;
+		border: 1px solid rgb(15 23 42 / 0.2);
+		font-size: clamp(0.75rem, 1vw, 1.25rem);
+		font-weight: 700;
+		letter-spacing: 0.02em;
+		color: rgb(15 23 42 / 0.85);
+		background: rgb(255 255 255 / 0.45);
+		box-shadow: 0 1px 3px rgb(15 23 42 / 0.12);
+	}
+
 	.preview {
 		width: 100%;
 		border: 8px solid rgb(255 255 255 / 1);

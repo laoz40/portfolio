@@ -1,7 +1,13 @@
 ---
 title: Check It
-project: Productivity Mobile App Design
-description: I led a team to design an AR app that inspires people to take meaningful environmental action. We ran multiple rounds of user testing, iterating from early concepts to make a final experience that was smooth and engaging.
+project: Mobile app design to reduce social media usage
+description: I led a team to design an app that helps people reduce social media use. We ran user research, then tested and refined prototypes to create a clear user experience that improved productivity.
+tools:
+- Figma
+- User Research
+- Prototyping
+- User Testing
+- UI Design
 cover-image: image
 alt-text: Sprout Cover Image (Credit @josephgvideo)
 notes: One of five projects shortlisted for the ADP Open Jury Industry Crit, Featured in the ADP Graduate Show and Graduate Catalogue, Photo Credit @josephgvideo
