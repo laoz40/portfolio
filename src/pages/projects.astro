@@ -15,6 +15,11 @@ import { frontmatter as checkit } from "../content/checkit/00-intro.md";
 			<div class="preview preview-big"></div>
 			<h2>{horus.title}</h2>
 			<span>{horus.project}</span>
+			<div class="project-title">
+				<h2>{horus.title}</h2>
+				<span>{horus.project}</span>
+			</div>
+			<p>{horus.description}</p>
 		</a>
 		<a
 			class="project-card project-small"
@@ -23,6 +28,11 @@ import { frontmatter as checkit } from "../content/checkit/00-intro.md";
 			<div class="preview preview-small"></div>
 			<h2>{sprout.title}</h2>
 			<span>{sprout.project}</span>
+			<div class="project-title">
+				<h2>{sprout.title}</h2>
+				<span>{sprout.project}</span>
+			</div>
+			<p>{sprout.description}</p>
 		</a>
 		<a
 			class="project-card project-small"
@@ -31,6 +41,11 @@ import { frontmatter as checkit } from "../content/checkit/00-intro.md";
 			<div class="preview preview-small"></div>
 			<h2>{checkit.title}</h2>
 			<span>{checkit.project}</span>
+			<div class="project-title">
+				<h2>{checkit.title}</h2>
+				<span>{checkit.project}</span>
+			</div>
+			<p>{checkit.description}</p>
 		</a>
 	</div>
 </DefaultLayout>
@@ -61,6 +76,13 @@ import { frontmatter as checkit } from "../content/checkit/00-intro.md";
 		text-decoration: none;
 	}
 
+	.project-title {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		gap: 0.75rem;
+	}
+
 	.project-card:nth-of-type(odd) {
 		--preview-tilt: -0.45deg;
 	}
@@ -79,15 +101,21 @@ import { frontmatter as checkit } from "../content/checkit/00-intro.md";
 
 	.project-card h2 {
 		font-size: clamp(1.25rem, 2.5vw, 2rem);
+		font-weight: 700;
 		line-height: 1.1;
 	}
 
 	.project-card span {
-		font-size: 0.92rem;
+		font-size: clamp(1rem, 2vw, 1.5rem);
 		letter-spacing: 0.04em;
-		color: rgb(15 23 42 / 0.72);
 	}
 
+	.project-card p {
+		margin: 0;
+		font-size: clamp(1rem, 2vw, 1.5rem);
+		line-height: 1.25;
+		color: rgb(15 23 42 / 0.82);
+	}
 	.preview {
 		width: 100%;
 		border: 8px solid rgb(255 255 255 / 1);
