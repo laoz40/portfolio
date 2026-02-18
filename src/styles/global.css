@@ -34,14 +34,18 @@
 		U+2215, U+FEFF, U+FFFD;
 }
 
+:root {
+	--font-handwriting: "Leo Handwriting", "Playpen Sans Variable", cursive;
+	--font-sans:
+		"Outfit Variable", system-ui, -apple-system, "Segoe UI", Roboto,
+		"Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+}
+
 *,
 *::before,
 *::after {
 	box-sizing: border-box;
-
-	font-family:
-		"Leo Handwriting", "Playpen Sans Variable", "Outfit Variable", sans-serif,
-		Helvetica, Arial;
+	font-family: var(--font-handwriting);
 	color: rgb(35, 35, 120);
 	letter-spacing: -0.02em;
 }
