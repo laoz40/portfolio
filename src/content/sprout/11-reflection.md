@@ -13,4 +13,3 @@
 - Conduct more testing on the high-fidelity prototype to understand areas of weakness and refine the design further. More quantitative usability testing should be incorporated to give clearer insights into how users interact with the app and where it can be improved.
 - The prototype should integrate the AR experience more smoothly into the app screens, to make it feel more like one seamless app experience.
 - Expand the concept for AR/VR headsets, creating new ways for users to engage across different platforms.
-

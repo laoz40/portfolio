@@ -18,10 +18,10 @@ import { frontmatter as checkit } from "../content/checkit/00-intro.md";
 				<span>{horus.project}</span>
 			</div>
 			<p>{horus.description}</p>
-			<ul class="tool-badges" aria-label={`${horus.title} tools used`}>
-				{(horus.tools ?? []).map((tool) => (
-					<li class="tool-badge">{tool}</li>
-				))}
+			<ul
+				class="tool-badges"
+				aria-label={`${horus.title} tools used`}>
+				{(horus.tools ?? []).map((tool) => <li class="tool-badge">{tool}</li>)}
 			</ul>
 		</a>
 		<a
@@ -34,10 +34,10 @@ import { frontmatter as checkit } from "../content/checkit/00-intro.md";
 				<span>{sprout.project}</span>
 			</div>
 			<p>{sprout.description}</p>
-			<ul class="tool-badges" aria-label={`${sprout.title} tools used`}>
-				{(sprout.tools ?? []).map((tool) => (
-					<li class="tool-badge">{tool}</li>
-				))}
+			<ul
+				class="tool-badges"
+				aria-label={`${sprout.title} tools used`}>
+				{(sprout.tools ?? []).map((tool) => <li class="tool-badge">{tool}</li>)}
 			</ul>
 		</a>
 		<a
@@ -50,10 +50,14 @@ import { frontmatter as checkit } from "../content/checkit/00-intro.md";
 				<span>{checkit.project}</span>
 			</div>
 			<p>{checkit.description}</p>
-			<ul class="tool-badges" aria-label={`${checkit.title} tools used`}>
-				{(checkit.tools ?? []).map((tool) => (
-					<li class="tool-badge">{tool}</li>
-				))}
+			<ul
+				class="tool-badges"
+				aria-label={`${checkit.title} tools used`}>
+				{
+					(checkit.tools ?? []).map((tool) => (
+						<li class="tool-badge">{tool}</li>
+					))
+				}
 			</ul>
 		</a>
 	</div>
