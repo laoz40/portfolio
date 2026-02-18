@@ -2,15 +2,22 @@
 const { fill, hoverFill, href } = Astro.props;
 ---
 
-{href ? (
-	<a href={href} class="imperfect-button" style={`--fill: ${fill}; --hoverFill: ${hoverFill};`}>
-		<span>
-			<slot />
-		</span>
+{
+	href ? (
+		<a
+			href={href}
+			class="imperfect-button"
+			style={`--fill: ${fill}; --hoverFill: ${hoverFill};`}>
+			<span>
+				<slot />
+			</span>
 
-		<svg viewBox="0 0 220 70" preserveAspectRatio="none" aria-hidden="true">
-			<path
-				d="M12,10
+			<svg
+				viewBox="0 0 220 70"
+				preserveAspectRatio="none"
+				aria-hidden="true">
+				<path
+					d="M12,10
 				C28,4 62,6 86,8
 				C120,11 156,6 190,9
 				C208,12 214,20 214,26
@@ -20,26 +27,28 @@ const { fill, hoverFill, href } = Astro.props;
 				C60,60 30,66 16,60
 				C6,56 6,46 7,38
 				C8,30 6,18 12,10 Z"
-				stroke="none"
-				stroke-width="3"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-			/>
-		</svg>
-	</a>
-) : (
-	<button
-		type="button"
-		class="imperfect-button"
-		style={`--fill: ${fill}; --hoverFill: ${hoverFill};`}
-	>
-		<span>
-			<slot />
-		</span>
+					stroke="none"
+					stroke-width="3"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				/>
+			</svg>
+		</a>
+	) : (
+		<button
+			type="button"
+			class="imperfect-button"
+			style={`--fill: ${fill}; --hoverFill: ${hoverFill};`}>
+			<span>
+				<slot />
+			</span>
 
-		<svg viewBox="0 0 220 70" preserveAspectRatio="none" aria-hidden="true">
-			<path
-				d="M12,10
+			<svg
+				viewBox="0 0 220 70"
+				preserveAspectRatio="none"
+				aria-hidden="true">
+				<path
+					d="M12,10
 				C28,4 62,6 86,8
 				C120,11 156,6 190,9
 				C208,12 214,20 214,26
@@ -49,14 +58,15 @@ const { fill, hoverFill, href } = Astro.props;
 				C60,60 30,66 16,60
 				C6,56 6,46 7,38
 				C8,30 6,18 12,10 Z"
-				stroke="none"
-				stroke-width="3"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-			/>
-		</svg>
-	</button>
-)}
+					stroke="none"
+					stroke-width="3"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				/>
+			</svg>
+		</button>
+	)
+}
 
 <style>
 	.imperfect-button {
@@ -86,19 +96,21 @@ const { fill, hoverFill, href } = Astro.props;
 		height: 100%;
 		z-index: 0;
 		pointer-events: none;
-		transition: transform 0.25s ease-in-out, filter 0.25s ease-in-out, fill 0.25s ease-in-out;
-		filter: drop-shadow(3px 3px 0 rgba(0,0,0,0.1));
+		transition:
+			transform 0.25s ease-in-out,
+			filter 0.25s ease-in-out,
+			fill 0.25s ease-in-out;
+		filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.1));
 		fill: var(--fill);
 	}
 
-
 	.imperfect-button:hover svg {
 		transform: translateY(-1px) rotate(-2deg);
-		filter: drop-shadow(2px 4px 0 rgba(0,0,0,0.5));
+		filter: drop-shadow(2px 4px 0 rgba(0, 0, 0, 0.5));
 		fill: var(--hoverFill);
 	}
 
 	.imperfect-button:active svg {
-		scale: 0.9
+		scale: 0.9;
 	}
 </style>
