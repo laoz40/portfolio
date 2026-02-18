@@ -1,14 +1,158 @@
 ---
 import DefaultLayout from "../layouts/DefaultLayout.astro";
+import AboutContent from "../content/about/about.md";
 ---
 
 <DefaultLayout title="About">
 	<h1>A little bit about me</h1>
+	<article data-about-content>
+		<AboutContent />
+	</article>
 </DefaultLayout>
+
+<script>
+	const sectionAboutContent = () => {
+		const aboutContentRoot = document.querySelector("[data-about-content]");
+		if (
+			!(aboutContentRoot instanceof HTMLElement) ||
+			aboutContentRoot.dataset.sectioned === "true"
+		) {
+			return;
+		}
+
+		const childNodes = Array.from(aboutContentRoot.childNodes);
+		if (childNodes.length === 0) {
+			return;
+		}
+
+		const fragment = document.createDocumentFragment();
+		let currentSectionCopy = null;
+
+		for (const node of childNodes) {
+			const isHeading =
+				node instanceof HTMLHeadingElement && node.tagName === "H2";
+
+			if (isHeading) {
+				const section = document.createElement("section");
+				section.className = "about-section";
+
+				const sectionCopy = document.createElement("div");
+				sectionCopy.className = "about-section-copy";
+				sectionCopy.append(node);
+
+				const sectionMedia = document.createElement("div");
+				sectionMedia.className = "about-section-media";
+
+				section.append(sectionCopy, sectionMedia);
+				fragment.append(section);
+				currentSectionCopy = sectionCopy;
+				continue;
+			}
+
+			if (currentSectionCopy) {
+				currentSectionCopy.append(node);
+				continue;
+			}
+
+			fragment.append(node);
+		}
+
+		aboutContentRoot.replaceChildren(fragment);
+		aboutContentRoot.dataset.sectioned = "true";
+	};
+
+	sectionAboutContent();
+	document.addEventListener("astro:page-load", sectionAboutContent);
+</script>
 
 <style>
 	h1 {
 		font-size: clamp(2.25rem, 9vw, 5rem);
 		font-weight: 700;
+	}
+
+	[data-about-content] {
+		--text-measure: 65ch;
+		display: grid;
+		gap: clamp(2rem, 3vw, 3rem);
+		margin-top: clamp(1rem, 3vw, 2rem);
+	}
+
+	[data-about-content] :global(.about-section) {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: clamp(2rem, 3vw, 3rem);
+		align-items: start;
+		grid-template-areas: "copy media";
+	}
+
+	[data-about-content] :global(.about-section:nth-of-type(even)) {
+		grid-template-areas: "media copy";
+	}
+
+	[data-about-content] :global(.about-section-copy) {
+		min-width: 0;
+		grid-area: copy;
+	}
+
+	[data-about-content] :global(.about-section-media) {
+		display: block;
+		grid-area: media;
+		width: 100%;
+		min-height: clamp(6rem, 14vw, 9.5rem);
+		border: 2px dashed rgb(15 23 42 / 0.3);
+		background: rgb(190 242 100 / 0.45);
+		border-radius: 0.5rem;
+	}
+
+	[data-about-content] :global(h2) {
+		font-family: var(--font-handwriting);
+		font-size: clamp(1.5rem, 3vw, 2.5rem);
+		font-weight: 400;
+		letter-spacing: 0.01em;
+		line-height: 1;
+		margin: 0 0 1rem 0;
+		max-width: 18ch;
+	}
+
+	[data-about-content] :global(p) {
+		font-family: "Outfit Variable";
+		font-size: clamp(1.08rem, 0.3vw + 1rem, 1.2rem);
+		font-weight: 300;
+		color: rgb(50, 50, 50);
+		margin: 0 0 1rem 0;
+		line-height: 1.72;
+		max-width: var(--text-measure);
+		text-wrap: pretty;
+	}
+
+	[data-about-content] :global(ul) {
+		padding-left: 1.25rem;
+		margin: 0 0 1rem 0;
+		list-style-type: disc;
+	}
+
+	[data-about-content] :global(li) {
+		font-family: "Outfit Variable";
+		font-size: clamp(1.08rem, 0.3vw + 1rem, 1.2rem);
+		font-weight: 300;
+		color: rgb(50, 50, 50);
+		margin: 0 0 0.35rem 0;
+		line-height: 1.55;
+		max-width: var(--text-measure);
+		text-wrap: pretty;
+	}
+
+	@media (max-width: 760px) {
+		[data-about-content] :global(.about-section) {
+			grid-template-columns: 1fr;
+			grid-template-areas:
+				"copy"
+				"media";
+		}
+
+		[data-about-content] :global(.about-section-media) {
+			width: min(100%, 14rem);
+		}
 	}
 </style>
