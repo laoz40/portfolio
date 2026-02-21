@@ -1,0 +1,166 @@
+---
+import NavLink from "./NavLink.astro";
+---
+
+<footer
+	id="contact"
+	aria-label="Social and contact links"
+	data-footer-root
+	transition:animate="none">
+	<div class="footer-cta">
+		<a
+			class="footer-cta-link"
+			href="/contact">
+			If you've scrolled this far, you probably wanted these:
+		</a>
+	</div>
+
+	<div class="footer-links">
+		<NavLink
+			href="mailto:hello@example.com"
+			variant="lime">
+			Email
+		</NavLink>
+		<NavLink
+			href="https://www.linkedin.com"
+			variant="lime">
+			LinkedIn
+		</NavLink>
+		<NavLink
+			href="https://github.com"
+			variant="lime">
+			Github
+		</NavLink>
+		<NavLink
+			href="/resume"
+			variant="lime">
+			Resume
+		</NavLink>
+	</div>
+
+	<div class="footer-copyright-row">
+		<p class="footer-copyright">
+			<span aria-hidden="true">&copy;</span>
+			<span data-current-year>0000</span>
+			<span>Leo Zhou</span>
+		</p>
+		-
+		<p class="footer-note">
+			Handwriting typeface created by me. Please don't steal my identity.
+		</p>
+	</div>
+</footer>
+
+<script is:inline>
+	const initFooterUi = () => {
+		const currentYearTargets = document.querySelectorAll("[data-current-year]");
+		if (currentYearTargets.length > 0) {
+			const currentYear = new Date().toLocaleDateString(undefined, {
+				year: "numeric",
+			});
+
+			currentYearTargets.forEach((target) => {
+				target.textContent = currentYear;
+			});
+		}
+
+		const footerRoot = document.querySelector("[data-footer-root]");
+		if (!footerRoot || footerRoot.dataset.animReady === "true") {
+			return;
+		}
+
+		footerRoot.dataset.animReady = "true";
+
+		if (!("IntersectionObserver" in window)) {
+			footerRoot.classList.add("is-visible");
+			return;
+		}
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					if (!entry.isIntersecting) {
+						continue;
+					}
+					footerRoot.classList.add("is-visible");
+					observer.disconnect();
+				}
+			},
+			{
+				threshold: 0.25,
+				rootMargin: "0px 0px -8% 0px",
+			},
+		);
+
+		observer.observe(footerRoot);
+	};
+
+	initFooterUi();
+	document.addEventListener("astro:page-load", initFooterUi);
+</script>
+
+<style>
+	footer {
+		display: grid;
+		grid-template-columns: 1fr;
+		align-items: start;
+		justify-items: center;
+		gap: 0.85rem;
+		margin-top: 10rem;
+		padding-bottom: 1.25rem;
+		opacity: 0;
+		transform: translateY(1rem);
+		transition:
+			opacity 420ms ease,
+			transform 420ms cubic-bezier(0.2, 0.9, 0.2, 1);
+	}
+
+	footer.is-visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	.footer-cta {
+		display: grid;
+		justify-items: center;
+		gap: 0.2rem;
+	}
+
+	.footer-cta-link {
+		font-family: var(--font-handwriting);
+		font-size: clamp(1.5rem, 3.2vw, 2.35rem);
+		font-weight: 700;
+		line-height: 1;
+		text-align: center;
+		text-decoration: none;
+	}
+
+	.footer-links {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+	}
+
+	.footer-copyright-row {
+		display: flex;
+		width: 100%;
+		align-items: baseline;
+		justify-content: center;
+		gap: 1rem;
+	}
+
+	.footer-copyright {
+		margin: 0;
+	}
+
+	.footer-copyright:first-child {
+		margin-left: 1rem;
+	}
+
+	.footer-note {
+		margin: 0 1rem 0 0;
+		text-align: right;
+	}
+</style>
