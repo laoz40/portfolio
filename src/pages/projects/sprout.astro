@@ -1,6 +1,6 @@
 ---
 import DefaultLayout from "../../layouts/DefaultLayout.astro";
-import ScrollSpySidebar from "../../components/ScrollSpySidebar.astro";
+import ProjectCaseStudy from "../../components/ProjectCaseStudy.astro";
 import IntroContent, { frontmatter } from "../../content/sprout/00-intro.md";
 import ProjectOverviewContent from "../../content/sprout/01-project-overview.md";
 import ProjectShowcaseContent from "../../content/sprout/02-project-showcase.md";
@@ -13,292 +13,27 @@ import PrototypingContent from "../../content/sprout/08-prototyping.md";
 import UserTestingInsightsContent from "../../content/sprout/09-user-testing-insights.md";
 import DesignSystemContent from "../../content/sprout/10-design-system.md";
 import ReflectionContent from "../../content/sprout/11-reflection.md";
+
+const sections = [
+	{ Component: IntroContent, variant: "featured" },
+	{ Component: ProjectOverviewContent, variant: "media" },
+	{ Component: ProjectShowcaseContent, variant: "featured" },
+	{ Component: ProblemAreaContent, variant: "featured" },
+	{ Component: OurGoalContent, variant: "contentOnly" },
+	{ Component: CompetitorAnalysisContent, variant: "media" },
+	{ Component: UserResearchMethodsContent, variant: "media" },
+	{
+		Component: UserResearchBarriersContent,
+		variant: "media",
+		extraClass: "section-handwriting-list",
+	},
+	{ Component: PrototypingContent, variant: "gallery" },
+	{ Component: UserTestingInsightsContent, variant: "featured" },
+	{ Component: DesignSystemContent, variant: "media" },
+	{ Component: ReflectionContent, variant: "contentOnly" },
+];
 ---
 
 <DefaultLayout title={frontmatter.title}>
-	<div class="project-shell mt-4">
-		<ScrollSpySidebar headingSelector="h2" />
-		<article
-			class="project-content flex flex-col gap-12"
-			data-scrollspy-root>
-			<section class="section">
-				<div class="section-copy"><IntroContent /></div>
-				<div
-					class="section-media section-media-featured"
-					aria-hidden="true">
-				</div>
-			</section>
-			<section class="section">
-				<div class="section-copy"><ProjectOverviewContent /></div>
-				<div
-					class="section-media"
-					aria-hidden="true">
-				</div>
-			</section>
-			<section class="section">
-				<div class="section-copy"><ProjectShowcaseContent /></div>
-				<div
-					class="section-media section-media-featured"
-					aria-hidden="true">
-				</div>
-			</section>
-			<section class="section">
-				<div class="section-copy"><ProblemAreaContent /></div>
-				<div
-					class="section-media section-media-featured"
-					aria-hidden="true">
-				</div>
-			</section>
-			<section><OurGoalContent /></section>
-			<section class="section">
-				<div class="section-copy"><CompetitorAnalysisContent /></div>
-				<div
-					class="section-media"
-					aria-hidden="true">
-				</div>
-			</section>
-			<section class="section">
-				<div class="section-copy"><UserResearchMethodsContent /></div>
-				<div
-					class="section-media"
-					aria-hidden="true">
-				</div>
-			</section>
-			<section class="section section-handwriting-list">
-				<div class="section-copy"><UserResearchBarriersContent /></div>
-				<div
-					class="section-media"
-					aria-hidden="true">
-				</div>
-			</section>
-			<section class="section">
-				<div class="section-copy"><PrototypingContent /></div>
-				<div
-					class="section-media-gallery"
-					aria-hidden="true">
-					<div class="section-media-tile"></div>
-					<div class="section-media-tile"></div>
-					<div class="section-media-tile"></div>
-					<div class="section-media-tile"></div>
-				</div>
-			</section>
-			<section class="section">
-				<div class="section-copy"><UserTestingInsightsContent /></div>
-				<div
-					class="section-media section-media-featured"
-					aria-hidden="true">
-				</div>
-			</section>
-			<section class="section">
-				<div class="section-copy"><DesignSystemContent /></div>
-				<div
-					class="section-media"
-					aria-hidden="true">
-				</div>
-			</section>
-			<section><ReflectionContent /></section>
-		</article>
-	</div>
+	<ProjectCaseStudy sections={sections} />
 </DefaultLayout>
-
-<style>
-	.project-shell {
-		display: grid;
-		grid-template-columns: clamp(10.5rem, 16vw, 14rem) minmax(0, 1fr);
-		gap: clamp(1.5rem, 4vw, 5rem);
-		align-items: start;
-		width: 100%;
-		margin-inline: auto;
-	}
-
-	.section {
-		display: grid;
-		grid-template-columns: minmax(0, 1fr) clamp(16rem, 28vw, 24rem);
-		gap: clamp(1.25rem, 3vw, 2.5rem);
-		align-items: start;
-	}
-
-	.section-copy {
-		min-width: 0;
-	}
-
-	.section:nth-of-type(odd) {
-		--section-media-tilt: -0.4deg;
-	}
-
-	.section:nth-of-type(even) {
-		--section-media-tilt: 0.4deg;
-	}
-
-	.section-media {
-		position: sticky;
-		top: clamp(8rem, 22vh, 12.5rem);
-		width: 100%;
-		min-height: clamp(12rem, 36vh, 22rem);
-		background: var(--color-accent-lime);
-		border: 8px solid var(--color-surface-paper);
-		box-shadow: 2px 4px 6px var(--color-border-soft);
-		transform: rotate(var(--section-media-tilt, 0deg));
-	}
-
-	.section-media-featured {
-		position: static;
-		grid-column: 1 / -1;
-		min-height: clamp(18rem, 52vh, 34rem);
-	}
-
-	.section-media-gallery {
-		position: sticky;
-		top: clamp(8rem, 22vh, 12.5rem);
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		width: 100%;
-		gap: 0.75rem;
-		align-self: start;
-		transform: rotate(var(--section-media-tilt, 0deg));
-	}
-
-	.section-media-tile {
-		min-height: clamp(7rem, 16vh, 10rem);
-		background: var(--color-accent-lime);
-		border: 8px solid var(--color-surface-paper);
-		box-shadow: 2px 4px 6px var(--color-border-soft);
-	}
-
-	.project-content {
-		--text-measure: 65ch;
-		width: 100%;
-		margin-inline: 0;
-		padding-inline: clamp(0.25rem, 1.5vw, 1rem);
-	}
-
-	.project-content :global(h2) {
-		scroll-margin-top: calc(var(--nav-offset) + 1rem);
-	}
-
-	.project-content :global(h1) {
-		font-family: var(--font-handwriting);
-		font-size: clamp(2.25rem, 9vw, 5rem);
-		font-weight: 700;
-		line-height: 0.95;
-		margin: 0 0 1rem 0;
-		max-width: 12ch;
-	}
-
-	.project-content :global(h2) {
-		font-family: var(--font-handwriting);
-		font-size: clamp(1.5rem, 3vw, 2.5rem);
-		font-weight: 400;
-		letter-spacing: 0.01em;
-		line-height: 1;
-		margin: 2rem 0 1rem 0;
-		max-width: 18ch;
-	}
-
-	.project-content :global(h3) {
-		font-family: var(--font-handwriting);
-		font-size: clamp(3rem, 4vw, 4.5rem);
-		font-weight: 700;
-		line-height: 0.95;
-		max-width: 32ch;
-		text-wrap: balance;
-	}
-
-	.project-content :global(h4) {
-		font-family: var(--font-sans);
-		font-size: var(--type-sans-size-body);
-		font-weight: var(--type-sans-weight-emphasis);
-		color: var(--color-text-body);
-		margin: 2rem 0 0.5rem 0;
-		letter-spacing: 0.01em;
-		line-height: var(--type-sans-leading-tight);
-		max-width: 32ch;
-	}
-
-	.project-content :global(p) {
-		font-family: var(--font-sans);
-		font-size: var(--type-sans-size-body);
-		font-weight: var(--type-sans-weight-regular);
-		color: var(--color-text-body);
-		margin: 0 0 1rem 0;
-		line-height: var(--type-sans-leading-reading);
-		max-width: var(--text-measure);
-		text-wrap: pretty;
-	}
-
-	.project-content :global(li) {
-		font-family: var(--font-sans);
-		font-size: var(--type-sans-size-body);
-		font-weight: var(--type-sans-weight-regular);
-		color: var(--color-text-body);
-		margin: 0 0 0.35rem 0;
-		line-height: var(--type-sans-leading-relaxed);
-		max-width: var(--text-measure);
-		text-wrap: pretty;
-	}
-
-	.project-content :global(strong),
-	.project-content :global(b) {
-		font-family: var(--font-sans);
-		font-weight: var(--type-sans-weight-emphasis);
-		color: var(--color-text-body);
-	}
-
-	.project-content :global(ul),
-	.project-content :global(ol) {
-		padding-left: 1.25rem;
-		margin: 0 0 1rem 0;
-	}
-
-	.project-content :global(ul) {
-		list-style-type: disc;
-	}
-
-	.project-content :global(ol) {
-		list-style-type: decimal;
-	}
-
-	.section-handwriting-list :global(li) {
-		font-family: var(--font-handwriting);
-		font-size: clamp(1.25rem, 0.5vw + 1rem, 1.5rem);
-		color: inherit;
-	}
-
-	@media (max-width: 1240px) {
-		.section {
-			grid-template-columns: 1fr;
-			gap: 1rem;
-		}
-
-		.section-media {
-			position: static;
-			min-height: clamp(10rem, 45vw, 14rem);
-			width: min(100%, 42rem);
-		}
-
-		.section-media-gallery {
-			position: static;
-			grid-template-columns: 1fr 1fr;
-		}
-	}
-
-	@media (max-width: 1142px) {
-		.project-shell {
-			grid-template-columns: 1fr;
-		}
-	}
-
-	@media (max-width: 640px) {
-		.project-content {
-			padding-inline: 0;
-		}
-
-		.section-media {
-			min-height: 9rem;
-		}
-
-		.section-media-gallery {
-			grid-template-columns: 1fr;
-		}
-	}
-</style>
