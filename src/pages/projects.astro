@@ -4,78 +4,71 @@ import HighlightText from "../components/HighlightText.astro";
 import { frontmatter as horus } from "../content/horus/00-intro.md";
 import { frontmatter as sprout } from "../content/sprout/00-intro.md";
 import { frontmatter as checkit } from "../content/checkit/00-intro.md";
+
+type ProjectFrontmatter = {
+	title: string;
+	project: string;
+	description: string;
+	tools?: string[];
+};
+
+const projects: Array<{
+	slug: string;
+	layoutClass: "project-big" | "project-small";
+	frontmatter: ProjectFrontmatter;
+}> = [
+	{
+		slug: "horus",
+		layoutClass: "project-big",
+		frontmatter: horus as ProjectFrontmatter,
+	},
+	{
+		slug: "sprout",
+		layoutClass: "project-small",
+		frontmatter: sprout as ProjectFrontmatter,
+	},
+	{
+		slug: "checkit",
+		layoutClass: "project-small",
+		frontmatter: checkit as ProjectFrontmatter,
+	},
+];
 ---
 
 <DefaultLayout title="Projects">
 	<h1>These are my projects</h1>
 	<div class="projects-layout">
-		<a
-			class="project-card project-big"
-			href="/projects/horus"
-			aria-label={`Open ${horus.title} project page`}>
-			<div class="preview preview-big"></div>
-			<ul
-				class="tool-badges"
-				aria-label={`${horus.title} tools used`}>
-				{(horus.tools ?? []).map((tool) => <li class="tool-badge">{tool}</li>)}
-			</ul>
-			<div class="project-title">
-				<HighlightText
-					tag="h2"
-					variant="yellow"
-					class="project-title-highlight">
-					{horus.title}
-				</HighlightText>
-				<span>{horus.project}</span>
-			</div>
-			<p>{horus.description}</p>
-		</a>
-		<a
-			class="project-card project-small"
-			href="/projects/sprout"
-			aria-label={`Open ${sprout.title} project page`}>
-			<div class="preview preview-small"></div>
-			<ul
-				class="tool-badges"
-				aria-label={`${sprout.title} tools used`}>
-				{(sprout.tools ?? []).map((tool) => <li class="tool-badge">{tool}</li>)}
-			</ul>
-			<div class="project-title">
-				<HighlightText
-					tag="h2"
-					variant="yellow"
-					class="project-title-highlight">
-					{sprout.title}
-				</HighlightText>
-				<span>{sprout.project}</span>
-			</div>
-			<p>{sprout.description}</p>
-		</a>
-		<a
-			class="project-card project-small"
-			href="/projects/checkit"
-			aria-label={`Open ${checkit.title} project page`}>
-			<div class="preview preview-small"></div>
-			<ul
-				class="tool-badges"
-				aria-label={`${checkit.title} tools used`}>
-				{
-					(checkit.tools ?? []).map((tool) => (
-						<li class="tool-badge">{tool}</li>
-					))
-				}
-			</ul>
-			<div class="project-title">
-				<HighlightText
-					tag="h2"
-					variant="yellow"
-					class="project-title-highlight">
-					{checkit.title}
-				</HighlightText>
-				<span>{checkit.project}</span>
-			</div>
-			<p>{checkit.description}</p>
-		</a>
+		{
+			projects.map(({ slug, layoutClass, frontmatter }) => (
+				<a
+					class:list={["project-card", layoutClass]}
+					href={`/projects/${slug}`}
+					aria-label={`Open ${frontmatter.title} project page`}>
+					<div
+						class:list={[
+							"preview",
+							layoutClass === "project-big" ? "preview-big" : "preview-small",
+						]}></div>
+					<ul
+						class="tool-badges"
+						aria-label={`${frontmatter.title} tools used`}>
+						{(frontmatter.tools ?? []).map((tool) => (
+							<li class="tool-badge">{tool}</li>
+						))}
+					</ul>
+					<div class="project-title">
+						<HighlightText
+							tag="h2"
+							variant="yellow"
+							class="project-title-highlight">
+							{frontmatter.title}
+						</HighlightText>
+						<span>{frontmatter.project}</span>
+					</div>
+					<p>{frontmatter.description}</p>
+				</a>
+			))
+		}
 	</div>
 </DefaultLayout>
 
