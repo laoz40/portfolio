@@ -152,9 +152,16 @@ const { rootSelector = "[data-scrollspy-root]", headingSelector = "h2" } =
 			for (const item of items) {
 				const listItem = document.createElement("li");
 				const linkElement = document.createElement("a");
+				const linkLabelElement = document.createElement("span");
 				linkElement.className = "scrollspy-link";
 				linkElement.href = `#${item.id}`;
-				linkElement.textContent = item.label;
+				linkLabelElement.className = "scrollspy-link-text highlight-text";
+				linkLabelElement.style.setProperty(
+					"--highlight-colour",
+					"rgb(255 230 0 / 0.75)",
+				);
+				linkLabelElement.textContent = item.label;
+				linkElement.append(linkLabelElement);
 				listItem.append(linkElement);
 				listElement.append(listItem);
 				linksById.set(item.id, linkElement);
@@ -261,6 +268,22 @@ const { rootSelector = "[data-scrollspy-root]", headingSelector = "h2" } =
 
 	.scrollspy :global(.scrollspy-link.is-active) {
 		font-weight: 700;
+	}
+
+	.scrollspy :global(.scrollspy-link-text) {
+		--highlight-top: 0.1em;
+		--highlight-bottom: 0.1em;
+	}
+
+	.scrollspy :global(.scrollspy-link:hover .scrollspy-link-text)::before,
+	.scrollspy
+		:global(.scrollspy-link:focus-visible .scrollspy-link-text)::before,
+	.scrollspy :global(.scrollspy-link.is-active .scrollspy-link-text)::before {
+		transform: var(
+			--highlight-transform-active,
+			scaleX(1) skewX(-4deg) rotate(-1.2deg)
+		);
+		opacity: 1;
 	}
 
 	@media (max-width: 1142px) {

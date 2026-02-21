@@ -1,80 +1,51 @@
 ---
-const {
-	href,
-	hlColour = "rgb(255 230 0 / 0.75)",
-	selectable = false,
-} = Astro.props;
+import HighlightText from "./HighlightText.astro";
+
+const { href, variant = "yellow", selectable = false } = Astro.props;
 ---
 
 <a
-	href={href}
-	style={`--hl-colour: ${hlColour}`}>
-	<div class:list={{ selectable }}>
+	class="nav-link"
+	href={href}>
+	<HighlightText
+		class="nav-link-text"
+		variant={variant}
+		selectable={selectable}>
 		<slot />
-	</div>
+	</HighlightText>
 </a>
 
 <style>
-	a {
+	.nav-link {
 		display: inline-block;
 		text-decoration: none;
 	}
 
-	a > div {
-		position: relative;
-		display: inline-block;
+	.nav-link :global(.nav-link-text) {
 		font-size: clamp(1rem, 1.8vw, 1.75rem);
 		line-height: 1.1;
 		padding: clamp(0.6rem, 1.4vw, 1.5rem) clamp(0.45rem, 1vw, 1rem);
-		user-select: none;
-		z-index: 0;
 		transition: transform 120ms ease;
 	}
 
-	a > div.selectable {
+	.nav-link :global(.nav-link-text:not(.selectable)) {
+		user-select: none;
+	}
+
+	.nav-link :global(.nav-link-text.selectable) {
 		user-select: text;
 	}
 
-	a > div::before {
-		content: "";
-		position: absolute;
-		left: -0.18em;
-		right: -0.16em;
-		top: 0.4em;
-		bottom: 0.5em;
-		background: var(--hl-colour);
-		clip-path: polygon(
-			2% 22%,
-			8% 8%,
-			35% 5%,
-			48% 14%,
-			78% 18%,
-			98% 24%,
-			96% 82%,
-			88% 95%,
-			57% 94%,
-			42% 86%,
-			28% 93%,
-			13% 85%,
-			4% 91%
+	.nav-link:hover :global(.nav-link-text)::before,
+	.nav-link:focus-visible :global(.nav-link-text)::before {
+		transform: var(
+			--highlight-transform-active,
+			scaleX(1) skewX(-4deg) rotate(-1.2deg)
 		);
-		transform-origin: left;
-		transform: scaleX(0.2) skewX(-4deg) rotate(-1.2deg);
-		opacity: 0;
-		transition:
-			transform 220ms ease,
-			opacity 100ms ease;
-		z-index: -1;
-		pointer-events: none;
-	}
-
-	a:hover > div::before,
-	a:focus-visible > div::before {
-		transform: scaleX(1) skewX(-4deg) rotate(-1.2deg);
 		opacity: 1;
 	}
 
-	a:active > div {
+	.nav-link:active :global(.nav-link-text) {
 		transform: scale(0.95);
 	}
 </style>

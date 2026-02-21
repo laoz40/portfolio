@@ -1,0 +1,80 @@
+---
+const {
+	tag = "span",
+	variant = "yellow",
+	selectable = false,
+	class: className,
+} = Astro.props;
+
+const variantByName = {
+	yellow: "rgb(255 230 0 / 0.7)",
+	lime: "rgb(50 255 50 / 0.7)",
+	sky: "rgb(0 197 255 / 0.7)",
+};
+
+const highlightColour = variantByName[variant] ?? variantByName.yellow;
+const Tag = tag;
+---
+
+<Tag
+	class:list={["highlight-text", className, { selectable }]}
+	style={`--highlight-colour: ${highlightColour};`}>
+	<slot />
+</Tag>
+
+<style>
+	:global(.highlight-text) {
+		position: relative;
+		display: inline-block;
+		z-index: 0;
+	}
+
+	:global(.highlight-text.selectable) {
+		user-select: text;
+	}
+
+	:global(.highlight-text)::before {
+		content: "";
+		position: absolute;
+		left: var(--highlight-left, -0.18em);
+		right: var(--highlight-right, -0.16em);
+		top: var(--highlight-top, 0.4em);
+		bottom: var(--highlight-bottom, 0.5em);
+		background: var(--highlight-colour);
+		clip-path: polygon(
+			2% 22%,
+			8% 8%,
+			35% 5%,
+			48% 14%,
+			78% 18%,
+			98% 24%,
+			96% 82%,
+			88% 95%,
+			57% 94%,
+			42% 86%,
+			28% 93%,
+			13% 85%,
+			4% 91%
+		);
+		transform-origin: left;
+		transform: var(
+			--highlight-transform-base,
+			scaleX(0.2) skewX(-4deg) rotate(-1.2deg)
+		);
+		opacity: 0;
+		transition:
+			transform 220ms ease,
+			opacity 100ms ease;
+		z-index: -1;
+		pointer-events: none;
+	}
+
+	:global(.highlight-text:hover)::before,
+	:global(.highlight-text:focus-visible)::before {
+		transform: var(
+			--highlight-transform-active,
+			scaleX(1) skewX(-4deg) rotate(-1.2deg)
+		);
+		opacity: 1;
+	}
+</style>
