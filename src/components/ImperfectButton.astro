@@ -100,13 +100,13 @@ const { fill, hoverFill, href } = Astro.props;
 			transform 0.25s ease-in-out,
 			filter 0.25s ease-in-out,
 			fill 0.25s ease-in-out;
-		filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.1));
+		filter: drop-shadow(3px 3px 0 var(--color-shadow-ink-soft));
 		fill: var(--fill);
 	}
 
 	.imperfect-button:hover svg {
 		transform: translateY(-1px) rotate(-2deg);
-		filter: drop-shadow(2px 4px 0 rgba(0, 0, 0, 0.5));
+		filter: drop-shadow(2px 4px 0 var(--color-shadow-ink-strong));
 		fill: var(--hoverFill);
 	}
 

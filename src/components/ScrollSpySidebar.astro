@@ -158,7 +158,7 @@ const { rootSelector = "[data-scrollspy-root]", headingSelector = "h2" } =
 				linkLabelElement.className = "scrollspy-link-text highlight-text";
 				linkLabelElement.style.setProperty(
 					"--highlight-colour",
-					"rgb(255 230 0 / 0.75)",
+					"var(--color-highlight-yellow-strong)",
 				);
 				linkLabelElement.textContent = item.label;
 				linkElement.append(linkLabelElement);

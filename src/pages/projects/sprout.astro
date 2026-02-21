@@ -135,9 +135,9 @@ import ReflectionContent from "../../content/sprout/11-reflection.md";
 		top: clamp(8rem, 22vh, 12.5rem);
 		width: 100%;
 		min-height: clamp(12rem, 36vh, 22rem);
-		background: rgb(190 242 100);
-		border: 8px solid rgb(255 255 255 / 1);
-		box-shadow: 2px 4px 6px rgb(15 23 42 / 0.2);
+		background: var(--color-accent-lime);
+		border: 8px solid var(--color-surface-paper);
+		box-shadow: 2px 4px 6px var(--color-border-soft);
 		transform: rotate(var(--section-media-tilt, 0deg));
 	}
 
@@ -160,9 +160,9 @@ import ReflectionContent from "../../content/sprout/11-reflection.md";
 
 	.section-media-tile {
 		min-height: clamp(7rem, 16vh, 10rem);
-		background: rgb(190 242 100);
-		border: 8px solid rgb(255 255 255 / 1);
-		box-shadow: 2px 4px 6px rgb(15 23 42 / 0.2);
+		background: var(--color-accent-lime);
+		border: 8px solid var(--color-surface-paper);
+		box-shadow: 2px 4px 6px var(--color-border-soft);
 	}
 
 	.project-content {
@@ -205,43 +205,43 @@ import ReflectionContent from "../../content/sprout/11-reflection.md";
 	}
 
 	.project-content :global(h4) {
-		font-family: "Outfit Variable";
-		font-size: clamp(1.08rem, 0.3vw + 1rem, 1.2rem);
-		font-weight: 500;
-		color: rgb(50, 50, 50);
+		font-family: var(--font-sans);
+		font-size: var(--type-sans-size-body);
+		font-weight: var(--type-sans-weight-emphasis);
+		color: var(--color-text-body);
 		margin: 2rem 0 0.5rem 0;
 		letter-spacing: 0.01em;
-		line-height: 1.1;
+		line-height: var(--type-sans-leading-tight);
 		max-width: 32ch;
 	}
 
 	.project-content :global(p) {
-		font-family: "Outfit Variable";
-		font-size: clamp(1.08rem, 0.3vw + 1rem, 1.2rem);
-		font-weight: 300;
-		color: rgb(50, 50, 50);
+		font-family: var(--font-sans);
+		font-size: var(--type-sans-size-body);
+		font-weight: var(--type-sans-weight-regular);
+		color: var(--color-text-body);
 		margin: 0 0 1rem 0;
-		line-height: 1.72;
+		line-height: var(--type-sans-leading-reading);
 		max-width: var(--text-measure);
 		text-wrap: pretty;
 	}
 
 	.project-content :global(li) {
-		font-family: "Outfit Variable";
-		font-size: clamp(1.08rem, 0.3vw + 1rem, 1.2rem);
-		font-weight: 300;
-		color: rgb(50, 50, 50);
+		font-family: var(--font-sans);
+		font-size: var(--type-sans-size-body);
+		font-weight: var(--type-sans-weight-regular);
+		color: var(--color-text-body);
 		margin: 0 0 0.35rem 0;
-		line-height: 1.55;
+		line-height: var(--type-sans-leading-relaxed);
 		max-width: var(--text-measure);
 		text-wrap: pretty;
 	}
 
 	.project-content :global(strong),
 	.project-content :global(b) {
-		font-family: "Outfit Variable";
-		font-weight: 500;
-		color: rgb(50, 50, 50);
+		font-family: var(--font-sans);
+		font-weight: var(--type-sans-weight-emphasis);
+		color: var(--color-text-body);
 	}
 
 	.project-content :global(ul),

@@ -39,6 +39,40 @@
 	--font-sans:
 		"Outfit Variable", system-ui, -apple-system, "Segoe UI", Roboto,
 		"Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+
+	--type-sans-size-body: clamp(1.08rem, 0.3vw + 1rem, 1.2rem);
+	--type-sans-weight-regular: 300;
+	--type-sans-weight-emphasis: 500;
+	--type-sans-leading-tight: 1.1;
+	--type-sans-leading-compact: 1.25;
+	--type-sans-leading-relaxed: 1.55;
+	--type-sans-leading-reading: 1.72;
+
+	--color-text-handwriting: rgb(35 35 120);
+	--color-text-default: rgb(31 41 55);
+	--color-text-body: rgb(50 50 50);
+	--color-text-strong: rgb(15 23 42 / 0.85);
+	--color-text-muted: rgb(15 23 42 / 0.82);
+	--color-surface-page: rgb(255 251 235);
+	--color-surface-paper: rgb(255 255 255);
+	--color-surface-paper-soft: rgb(255 255 255 / 0.45);
+	--color-accent-lime: rgb(190 242 100);
+	--color-accent-lime-soft: rgb(190 242 100 / 0.45);
+	--color-highlight-yellow: rgb(255 230 0 / 0.7);
+	--color-highlight-yellow-strong: rgb(255 230 0 / 0.75);
+	--color-highlight-yellow-hover: rgb(250 230 54);
+	--color-highlight-lime: rgb(50 255 50 / 0.7);
+	--color-highlight-sky: rgb(0 197 255 / 0.7);
+	--color-highlight-sky-hover: rgb(83 210 242);
+	--color-border-soft: rgb(15 23 42 / 0.2);
+	--color-border-medium: rgb(15 23 42 / 0.3);
+	--color-shadow-soft: rgb(15 23 42 / 0.12);
+	--color-shadow-medium: rgb(15 23 42 / 0.15);
+	--color-shadow-strong: rgb(15 23 42 / 0.3);
+	--color-shadow-ink-soft: rgb(0 0 0 / 0.1);
+	--color-shadow-ink-strong: rgb(0 0 0 / 0.5);
+	--color-grid-line: rgb(59 130 246 / 0.06);
+	--color-grid-line-alt: rgb(96 165 250 / 0.06);
 }
 
 *,
@@ -46,7 +80,7 @@
 *::after {
 	box-sizing: border-box;
 	font-family: var(--font-handwriting);
-	color: rgb(35, 35, 120);
+	color: var(--color-text-handwriting);
 	letter-spacing: -0.02em;
 }
 

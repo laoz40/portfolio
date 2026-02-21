@@ -7,9 +7,9 @@ const {
 } = Astro.props;
 
 const variantByName = {
-	yellow: "rgb(255 230 0 / 0.7)",
-	lime: "rgb(50 255 50 / 0.7)",
-	sky: "rgb(0 197 255 / 0.7)",
+	yellow: "var(--color-highlight-yellow)",
+	lime: "var(--color-highlight-lime)",
+	sky: "var(--color-highlight-sky)",
 };
 
 const highlightColour = variantByName[variant] ?? variantByName.yellow;
