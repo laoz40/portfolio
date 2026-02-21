@@ -1,7 +1,7 @@
 ---
 title: Sprout
 project: AR app design to encourage tree planting
-description: I directed a team to design an AR app that inspires people to take meaningful environmental action. We ran multiple rounds of user testing, iterating from early concepts to make a final experience that was smooth and engaging.
+description: I directed a team to design an AR app that inspires people to start planting trees. We ran multiple rounds of user testing, iterating many concepts to make a final protoype that was user-friendly and engaging.
 tools:
   - Figma
   - User Research

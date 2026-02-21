@@ -1,7 +1,7 @@
 ---
 title: Check It
 project: Mobile app design to reduce social media usage
-description: I led a team to design an app that helps people reduce social media use. We ran user research, then tested and refined prototypes to create a clear user experience that improved productivity.
+description: I led a team to design an app that aims to improve people's productivity. We conducted user research, then tested and iterated on our prototypes to build an app with a clear user experience that improved productivity.
 tools:
   - Figma
   - User Research
