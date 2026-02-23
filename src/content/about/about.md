@@ -1,26 +1,40 @@
-## Who am I?
+## Why I got into web development
 
-I was born and raised in Sydney, but my family’s from China. Living between cultures has shown me that everyone has a different perspective of the world. One day, I’d love to hop around more countries and experience life in many other different cultures.
+I first started “coding” at 11 by editing Team Fortress 2 HUDs. I loved to
+tweak the colours and animations, editing something that was similar to CSS. I've
+always enjoyed editing aesthetics and making things I use look nice (ricing).
+It's why I love using Android and Linux.
+
+Years later, this is probably what made me choose to study UX design an uni. I
+enjoyed learning to design and building simple sites using HTML and CSS.
+
+## Learning to code
+
+At university, I'd actually convinced myself I didn't enjoy coding, and focused more on
+UX design. I expected the classes to teach me everything and babysit my learning,
+and when that did not happen I lost interest. Towards the end of my degree, I
+realised how passionate and productive I was when learning by myself and not
+relying on learning in class.
+
+So I started teaching myself to code, and learnt so much more than I ever did
+in uni. After graduating, I saw how quickly
+the industry moves. Much of what we were taught already felt dated. So I
+rebuilt my foundation. I learned React, Next.js, and Svelte while building
+personal projects and have enjoyed every step of it
 
 ## UX Design
 
-I studied Design Computing (renamed to Interaction Design) at The University of Sydney, where I spent three years honing my skills in areas like:
+- bachelor of design computing
+- skills: user research, prototyping, usability testing, figma
 
-- UX Design
-- User Research
-- Prototyping
-- Usability Testing
-- Figma
-- HTML
-- CSS
-- JavaScript
-- Graphic Design
-- Video Editing
+## Hobbies
 
-I hope I can add more to this list. Whether it’s picking up new techniques or keeping up with the latest tech, I enjoy the process of learning.
+- football
+- tabbletennis
 
-## Football
+## I use Arch btw
 
-I’m a big football fan and support Tottenham Hotspur (biggest mistake of my life). I’ve always loved the mix of competition and teamwork, whether I’m playing or just watching. Seeing the best teams pull it off has shown me how important communication and strong connections are for success.
+- vim
+- linux
 
-Thanks for reading this, and check out my projects if you haven't already!
+Thanks if you actually read this. You should check out my projects if you haven't already.
