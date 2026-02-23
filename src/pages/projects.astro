@@ -1,6 +1,6 @@
 ---
 import DefaultLayout from "../layouts/DefaultLayout.astro";
-import HighlightText from "../components/HighlightText.astro";
+import HighlightText from "../components/ui/HighlightText.astro";
 import { frontmatter as horus } from "../content/horus/00-intro.md";
 import { frontmatter as sprout } from "../content/sprout/00-intro.md";
 import { frontmatter as checkit } from "../content/checkit/00-intro.md";
@@ -48,7 +48,8 @@ const projects: Array<{
 						class:list={[
 							"preview",
 							layoutClass === "project-big" ? "preview-big" : "preview-small",
-						]}></div>
+						]}
+					/>
 					<ul
 						class="tool-badges"
 						aria-label={`${frontmatter.title} tools used`}>
