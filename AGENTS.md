@@ -2,15 +2,6 @@
 
 Practical instructions for coding agents operating in this repository.
 
-## Project Snapshot
-
-- Framework: Astro 5 (`astro`)
-- UI runtime: Astro components (`.astro`)
-- Styling: Tailwind CSS v4 (`@tailwindcss/vite`) + component-local CSS
-- TypeScript baseline: `astro/tsconfigs/strict`
-- Package manager: pnpm (`pnpm-lock.yaml` present)
-- Primary references: `package.json`, `astro.config.mjs`, `tsconfig.json`, `.prettierrc`, `src/`
-
 ## Build/Lint/Test Commands
 
 Run all commands from repository root.
@@ -47,14 +38,6 @@ Run all commands from repository root.
 - Check formatting: `pnpm prettier --check .`
 - Fix formatting: `pnpm prettier --write .`
 
-## Repository Structure
-
-- Pages: `src/pages/`
-- Layouts: `src/layouts/`
-- Components: `src/components/`
-- Global styles: `src/styles/global.css`
-- Long-form content: `src/content/**` markdown files
-
 Naming patterns used now:
 
 - Astro components: `PascalCase.astro`
@@ -64,26 +47,9 @@ Naming patterns used now:
 
 ## Code Style Guidelines
 
-### Formatting (authoritative)
-
-Use `.prettierrc` as source of truth:
-
-- `useTabs: true`
-- `tabWidth: 2`
-- `printWidth: 80`
-- `semi: true`
-- `trailingComma: all`
-- `singleQuote: false`
-- `singleAttributePerLine: true`
-- Astro parser via `prettier-plugin-astro`
-
-Do not hand-format against these rules; run Prettier.
-
 ### Imports
 
-- Keep imports at top of `.astro` frontmatter (`---`)
 - Prefer explicit imports; avoid wildcard imports
-- Use relative import style consistent with neighboring files
 - Remove unused imports
 - Preserve local quote style
 
@@ -94,18 +60,12 @@ Do not hand-format against these rules; run Prettier.
 - Avoid `any` unless unavoidable and justified inline
 - Keep types and prop shapes narrow and predictable
 
-### Naming
-
-- `PascalCase` for components and component files
-- `camelCase` for variables and functions
-- Lowercase route filenames for URL clarity
-- Use descriptive constants (avoid vague names)
-- Keep markdown frontmatter keys consistent with existing content files
-
 ### Components and pages
 
 - Prefer reusable components over duplicating complex markup
+- Organise components in `src/components/` into subdirectories
 - Co-locate component-specific CSS in the same `.astro` file when reasonable
+- Tailwind CSS v4 (`@tailwindcss/vite`) for divs + component-local CSS for specific elements
 - Use `src/styles/global.css` only for truly global concerns
 - Preserve existing responsive behavior and breakpoints
 
