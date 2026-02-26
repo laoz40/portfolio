@@ -5,47 +5,14 @@ Practical instructions for coding agents operating in this repository.
 ## Build/Lint/Test Commands
 
 Run all commands from repository root.
+Use pnpm.
 
-### Install
-
-- `pnpm install`
-
-### Develop
-
-- `pnpm dev`
-- Starts Astro dev server at `http://localhost:4321`
-
-### Build + Preview
-
-- `pnpm build`
-- Output directory: `dist/`
-- `pnpm preview`
-
-### Astro CLI
-
-- `pnpm astro -- --help`
-- `pnpm astro <command>`
-
-### Typecheck / diagnostics
-
-- `pnpm astro check`
-- Run before commits touching `.astro`, `.jsx`, `.ts`, or config files
-
-### Formatting / linting
-
-- ESLint is not configured in this repository right now
-- Formatting uses Prettier + `prettier-plugin-astro`
-- Check formatting: `pnpm prettier --check .`
-- Fix formatting: `pnpm prettier --write .`
+## Code Style Guidelines
 
 Naming patterns used now:
 
-- Astro components: `PascalCase.astro`
 - Components: `PascalCase.astro`
 - Route pages: lowercase names (example: `about.astro`, `projects.astro`)
-- Nested routes by folder (example: `src/pages/projects/sprout.astro`)
-
-## Code Style Guidelines
 
 ### Imports
 
@@ -91,12 +58,10 @@ For browser scripts and UI logic:
 
 When implementing changes:
 
-1. Read nearby files first and follow local patterns
-2. Make the smallest coherent change that solves the task
-3. Run relevant checks:
+1. Make the smallest coherent change that solves the task
+2. Run relevant checks:
    - `pnpm prettier --check .`
    - `pnpm astro check` for Astro/TS-impacting edits
    - `pnpm build` for integration confidence
-4. If checks fail, fix before finishing
-5. If you add tests/tooling scripts, update this file
-6. Do not invent commands not configured in this repository
+3. If checks fail, fix before finishing
+4. If you add tests/tooling scripts, update this file
