@@ -4,6 +4,13 @@
 
 **We began with low-fidelity prototyping, to quickly test the concept and enable easy refinements.**
 
+<div class="inline-gallery" aria-hidden="true">
+	<div class="inline-gallery__tile"></div>
+	<div class="inline-gallery__tile"></div>
+	<div class="inline-gallery__tile"></div>
+	<div class="inline-gallery__tile"></div>
+</div>
+
 #### Paper Prototype
 
 To test the concept, we created a paper prototype to simulate the experience of viewing a fully grown tree in augmented reality.
@@ -13,6 +20,13 @@ To test the concept, we created a paper prototype to simulate the experience of 
 We began by creating low-fidelity sketches to plan the core features and screen layouts of our app. This allowed us to map out how users would navigate through key functions, ensuring a smooth and intuitive user flow throughout the app.
 
 **After receiving feedback on the functionality of our concept, I developed the mid-fidelity prototype. The aim was to have a more realistic design and basic interactivity, allowing us to test user interactions more effectively.**
+
+<div class="inline-gallery" aria-hidden="true">
+	<div class="inline-gallery__tile"></div>
+	<div class="inline-gallery__tile"></div>
+	<div class="inline-gallery__tile"></div>
+	<div class="inline-gallery__tile"></div>
+</div>
 
 #### Wireframes
 

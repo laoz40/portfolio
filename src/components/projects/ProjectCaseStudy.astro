@@ -265,6 +265,36 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 		list-style-type: decimal;
 	}
 
+	.project-content :global(.inline-gallery) {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1.35rem;
+		margin: 0 0 1.5rem 0;
+	}
+
+	.project-content :global(.inline-gallery__tile) {
+		min-height: clamp(7rem, 16vh, 10rem);
+		background: var(--color-accent-lime);
+		border: 8px solid var(--color-surface-paper);
+		box-shadow: 0.5rem 0.75rem 1.25rem var(--color-border-soft);
+	}
+
+	.project-content :global(.inline-gallery__tile:nth-child(4n + 1)) {
+		transform: rotate(-0.2deg) translateY(-1px);
+	}
+
+	.project-content :global(.inline-gallery__tile:nth-child(4n + 2)) {
+		transform: rotate(-0.3deg) translateY(1px);
+	}
+
+	.project-content :global(.inline-gallery__tile:nth-child(4n + 3)) {
+		transform: rotate(0.2deg) translateY(-1px);
+	}
+
+	.project-content :global(.inline-gallery__tile:nth-child(4n + 4)) {
+		transform: rotate(-0.2deg) translateY(1px);
+	}
+
 	.section-handwriting-list :global(li) {
 		font-family: var(--font-handwriting);
 		font-size: clamp(1.25rem, 0.5vw + 1rem, 1.5rem);
@@ -287,6 +317,10 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 	@media (max-width: 640px) {
 		.project-content {
 			padding-inline: 0;
+		}
+
+		.project-content :global(.inline-gallery) {
+			grid-template-columns: 1fr;
 		}
 	}
 </style>
