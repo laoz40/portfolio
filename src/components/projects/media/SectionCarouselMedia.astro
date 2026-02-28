@@ -1,0 +1,246 @@
+---
+type CarouselItem = {
+	title?: string;
+	description?: string;
+};
+
+const { items = [{}, {}, {}, {}] } = Astro.props as {
+	items?: CarouselItem[];
+};
+---
+
+<div
+	class="section-carousel"
+	data-carousel>
+	<div class="section-carousel-viewport">
+		<div
+			class="section-carousel-track"
+			data-carousel-track>
+			{
+				items.map((item, index) => (
+					<div
+						class="section-carousel-slide"
+						role="group"
+						aria-label={`Slide ${index + 1} of ${items.length}`}>
+						<div class="section-carousel-content">
+							<h4 class="section-carousel-title">
+								{item.title ?? `Slide ${index + 1}`}
+							</h4>
+							{item.description ? (
+								<p class="section-carousel-description">{item.description}</p>
+							) : null}
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</div>
+	<div class="section-carousel-controls">
+		<button
+			type="button"
+			class="section-carousel-button"
+			data-carousel-prev
+			aria-label="Previous slide">
+			Prev
+		</button>
+		<button
+			type="button"
+			class="section-carousel-button"
+			data-carousel-next
+			aria-label="Next slide">
+			Next
+		</button>
+	</div>
+</div>
+
+<style>
+	.section-carousel {
+		position: sticky;
+		top: clamp(8rem, 22vh, 12.5rem);
+		width: 100%;
+		align-self: start;
+		display: grid;
+		gap: 0.75rem;
+	}
+
+	.section-carousel-track {
+		display: flex;
+		width: 100%;
+		transform: translateX(calc(var(--carousel-index, 0) * -100%));
+		transition: transform 260ms ease;
+	}
+
+	.section-carousel-viewport {
+		overflow: hidden;
+		border: 8px solid var(--color-surface-paper);
+		box-shadow: 0.5rem 0.75rem 1.25rem var(--color-border-soft);
+		transform: rotate(var(--section-media-tilt, 0deg));
+	}
+
+	.section-carousel-slide {
+		min-height: clamp(12rem, 36vh, 22rem);
+		min-width: 100%;
+		display: flex;
+		align-items: flex-end;
+		position: relative;
+		overflow: hidden;
+		background: var(--color-accent-lime);
+	}
+
+	.section-carousel-slide::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			to top,
+			rgba(0, 0, 0, 0.5) 0%,
+			rgba(0, 0, 0, 0.3) 20%,
+			rgba(0, 0, 0, 0.15) 35%,
+			rgba(0, 0, 0, 0) 60%
+		);
+		pointer-events: none;
+	}
+
+	.section-carousel-content {
+		position: relative;
+		z-index: 1;
+		width: 100%;
+		padding: 1rem 2rem;
+	}
+
+	.section-carousel-title {
+		font-family: var(--font-sans);
+		font-size: clamp(1rem, 0.5vw + 0.9rem, 1.2rem);
+		font-weight: var(--type-sans-weight-emphasis);
+		line-height: var(--type-sans-leading-tight);
+		margin: 0 0 0.5rem 0;
+		color: #ffffff !important;
+		text-wrap: balance;
+	}
+
+	.section-carousel-description {
+		font-family: var(--font-sans);
+		font-size: clamp(0.9rem, 0.35vw + 0.8rem, 1rem);
+		font-weight: var(--type-sans-weight-regular);
+		line-height: var(--type-sans-leading-reading);
+		margin: 0;
+		color: #ffffff !important;
+		text-wrap: pretty;
+	}
+
+	.section-carousel-controls {
+		display: flex;
+		justify-content: space-around;
+		margin-top: 1rem;
+	}
+
+	.section-carousel-button {
+		font-family: var(--font-handwriting);
+		font-size: 2rem;
+		text-transform: uppercase;
+		padding: 0.3rem 0.6rem;
+		border: 2px solid var(--color-border-soft);
+		background: var(--color-surface-paper);
+		cursor: pointer;
+		box-shadow: 0.1rem 0.2rem 0.5rem var(--color-shadow-soft);
+	}
+
+	.section-carousel-button[data-carousel-prev] {
+		transform: rotate(-1.5deg);
+	}
+
+	.section-carousel-button[data-carousel-next] {
+		transform: rotate(1.5deg);
+	}
+
+	.section-carousel-button[data-carousel-prev]:hover,
+	.section-carousel-button[data-carousel-prev]:focus-visible {
+		transform: translateY(-2px) rotate(-1.5deg);
+	}
+
+	.section-carousel-button[data-carousel-next]:hover,
+	.section-carousel-button[data-carousel-next]:focus-visible {
+		transform: translateY(-2px) rotate(1.5deg);
+	}
+
+	.section-carousel-button:disabled {
+		opacity: 0.4;
+		cursor: not-allowed;
+	}
+
+	@media (max-width: 1240px) {
+		.section-carousel {
+			position: static;
+			width: min(100%, 42rem);
+		}
+	}
+
+	@media (max-width: 640px) {
+		.section-carousel-viewport {
+			transform: none;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.section-carousel-track {
+			transition: none;
+		}
+	}
+</style>
+
+<script>
+	const initCarousels = () => {
+		document.querySelectorAll("[data-carousel]").forEach((carousel) => {
+			if (!(carousel instanceof HTMLElement)) return;
+			if (carousel.dataset.carouselReady === "true") return;
+
+			const track = carousel.querySelector("[data-carousel-track]");
+			const prevButton = carousel.querySelector("[data-carousel-prev]");
+			const nextButton = carousel.querySelector("[data-carousel-next]");
+			if (!(track instanceof HTMLElement)) return;
+			if (!(prevButton instanceof HTMLButtonElement)) return;
+			if (!(nextButton instanceof HTMLButtonElement)) return;
+
+			const slideCount = track.children.length;
+			if (slideCount <= 1) {
+				prevButton.disabled = true;
+				nextButton.disabled = true;
+				carousel.dataset.carouselReady = "true";
+				return;
+			}
+
+			let currentIndex = 0;
+
+			const update = () => {
+				track.style.setProperty("--carousel-index", String(currentIndex));
+				prevButton.disabled = currentIndex === 0;
+				nextButton.disabled = currentIndex === slideCount - 1;
+			};
+
+			prevButton.addEventListener("click", () => {
+				if (currentIndex === 0) return;
+				currentIndex -= 1;
+				update();
+			});
+
+			nextButton.addEventListener("click", () => {
+				if (currentIndex >= slideCount - 1) return;
+				currentIndex += 1;
+				update();
+			});
+
+			update();
+			carousel.dataset.carouselReady = "true";
+		});
+	};
+
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", initCarousels, {
+			once: true,
+		});
+	} else {
+		initCarousels();
+	}
+
+	document.addEventListener("astro:page-load", initCarousels);
+</script>

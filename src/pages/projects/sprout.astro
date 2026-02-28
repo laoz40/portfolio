@@ -3,21 +3,29 @@ import DefaultLayout from "../../layouts/DefaultLayout.astro";
 import ProjectCaseStudy from "../../components/projects/ProjectCaseStudy.astro";
 import IntroContent, { frontmatter } from "../../content/sprout/00-intro.md";
 import ProjectOverviewContent from "../../content/sprout/01-project-overview.md";
-import ProjectShowcaseContent from "../../content/sprout/02-project-showcase.md";
+import ProjectShowcaseContent, {
+	frontmatter as projectShowcaseFrontmatter,
+} from "../../content/sprout/02-project-showcase.md";
 import ProblemAreaContent from "../../content/sprout/03-problem-area.md";
 import OurGoalContent from "../../content/sprout/04-our-goal.md";
 import CompetitorAnalysisContent from "../../content/sprout/05-competitor-analysis.md";
 import UserResearchMethodsContent from "../../content/sprout/06-user-research-methods.md";
 import UserResearchBarriersContent from "../../content/sprout/07-user-research-barriers.md";
 import PrototypingContent from "../../content/sprout/08-prototyping.md";
-import UserTestingInsightsContent from "../../content/sprout/09-user-testing-insights.md";
+import UserTestingInsightsContent, {
+	frontmatter as userTestingInsightsFrontmatter,
+} from "../../content/sprout/09-user-testing-insights.md";
 import DesignSystemContent from "../../content/sprout/10-design-system.md";
 import ReflectionContent from "../../content/sprout/11-reflection.md";
 
 const sections = [
 	{ Component: IntroContent, variant: "featured" },
 	{ Component: ProjectOverviewContent, variant: "media" },
-	{ Component: ProjectShowcaseContent, variant: "featured" },
+	{
+		Component: ProjectShowcaseContent,
+		variant: "carousel",
+		carouselItems: projectShowcaseFrontmatter.carouselItems,
+	},
 	{
 		Component: ProblemAreaContent,
 		variant: "featured",
@@ -36,7 +44,11 @@ const sections = [
 		extraClass: "section-handwriting-list",
 	},
 	{ Component: PrototypingContent, variant: "gallery" },
-	{ Component: UserTestingInsightsContent, variant: "featured" },
+	{
+		Component: UserTestingInsightsContent,
+		variant: "carousel",
+		carouselItems: userTestingInsightsFrontmatter.carouselItems,
+	},
 	{ Component: DesignSystemContent, variant: "media" },
 	{ Component: ReflectionContent, variant: "contentOnly" },
 ];

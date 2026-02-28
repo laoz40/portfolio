@@ -4,16 +4,20 @@
 
 #### Duration
 
-12 weeks
+<ul class="project-badges" role="list">
+  <li>12 weeks</li>
+</ul>
 
 #### Responsibilities
 
-- Research
-- Testing
-- Visual Design
-- Prototyping
-- Iterating
-- Promotional Video
+<ul class="project-badges" role="list">
+  <li>Research</li>
+  <li>Testing</li>
+  <li>Visual Design</li>
+  <li>Prototyping</li>
+  <li>Iterating</li>
+  <li>Promotional Video</li>
+</ul>
 
 #### Achievements
 

@@ -1,8 +1,17 @@
 ---
 import type { AstroComponentFactory } from "astro/runtime/server/index.js";
 import ScrollSpySidebar from "./ScrollSpySidebar.astro";
+import SectionCarouselMedia from "./media/SectionCarouselMedia.astro";
+import SectionGalleryMedia from "./media/SectionGalleryMedia.astro";
+import SectionPlaceholderMedia from "./media/SectionPlaceholderMedia.astro";
+import SectionVideoMedia from "./media/SectionVideoMedia.astro";
 
-type SectionVariant = "featured" | "media" | "gallery" | "contentOnly";
+type SectionVariant =
+	| "featured"
+	| "media"
+	| "gallery"
+	| "carousel"
+	| "contentOnly";
 
 type SectionMedia = {
 	type: "youtube";
@@ -15,6 +24,10 @@ type CaseStudySection = {
 	variant: SectionVariant;
 	extraClass?: string;
 	media?: SectionMedia;
+	carouselItems?: Array<{
+		title?: string;
+		description?: string;
+	}>;
 };
 
 const { sections, headingSelector = "h2" } = Astro.props as {
@@ -32,11 +45,13 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 			sections.map((section) => {
 				const SectionComponent = section.Component;
 				const isGallery = section.variant === "gallery";
+				const isCarousel = section.variant === "carousel";
 				const isContentOnly = section.variant === "contentOnly";
 				const isYouTubeMedia = section.media?.type === "youtube";
-				const embedUrl = isYouTubeMedia
-					? `https://www.youtube.com/embed/${section.media.videoId}`
-					: undefined;
+				const carouselItems =
+					section.carouselItems && section.carouselItems.length > 0
+						? section.carouselItems
+						: [{}, {}, {}, {}];
 
 				return (
 					<section
@@ -49,31 +64,16 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 							<SectionComponent />
 						</div>
 						{isContentOnly ? null : isGallery ? (
-							<div
-								class="section-media-gallery"
-								aria-hidden="true">
-								<div class="section-media-tile" />
-								<div class="section-media-tile" />
-								<div class="section-media-tile" />
-								<div class="section-media-tile" />
-							</div>
+							<SectionGalleryMedia />
+						) : isCarousel ? (
+							<SectionCarouselMedia items={carouselItems} />
 						) : isYouTubeMedia ? (
-							<div class="section-media section-media--embed">
-								<iframe
-									class="section-media-embed"
-									src={embedUrl}
-									title={section.media.title ?? "YouTube video"}
-									loading="lazy"
-									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-									referrerpolicy="strict-origin-when-cross-origin"
-									allowfullscreen
-								/>
-							</div>
-						) : (
-							<div
-								class="section-media"
-								aria-hidden="true"
+							<SectionVideoMedia
+								videoId={section.media.videoId}
+								title={section.media.title}
 							/>
+						) : (
+							<SectionPlaceholderMedia />
 						)}
 					</section>
 				);
@@ -115,57 +115,25 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 		grid-template-columns: 1fr;
 	}
 
-	.section-media {
-		position: sticky;
-		top: clamp(8rem, 22vh, 12.5rem);
-		width: 100%;
-		min-height: clamp(12rem, 36vh, 22rem);
-		background: var(--color-accent-lime);
-		border: 8px solid var(--color-surface-paper);
-		box-shadow: 0.5rem 0.5rem 1.5rem var(--color-shadow-ink-strong);
-		transform: rotate(var(--section-media-tilt, 0deg));
-	}
-
-	.section-media--embed {
-		aspect-ratio: 16 / 10;
-		min-height: 0;
-		overflow: hidden;
-		transform: none;
-	}
-
-	.section-media-embed {
-		display: block;
-		width: 100%;
-		height: 100%;
-		border: 0;
-	}
-
-	.section--featured .section-media {
+	.section--featured :global(.section-media) {
 		position: static;
 		grid-column: 1 / -1;
 		min-height: clamp(18rem, 52vh, 34rem);
 	}
 
-	.section--featured .section-media--embed {
+	.section--featured :global(.section-media--embed) {
 		min-height: 0;
 	}
 
-	.section-media-gallery {
-		position: sticky;
-		top: clamp(8rem, 22vh, 12.5rem);
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
+	.section--carousel :global(.section-carousel) {
+		position: static;
+		grid-column: 1 / -1;
 		width: 100%;
-		gap: 0.75rem;
-		align-self: start;
-		transform: rotate(var(--section-media-tilt, 0deg));
+		max-width: none;
 	}
 
-	.section-media-tile {
-		min-height: clamp(7rem, 16vh, 10rem);
-		background: var(--color-accent-lime);
-		border: 8px solid var(--color-surface-paper);
-		box-shadow: 0.5rem 0.75rem 1.25rem var(--color-border-soft);
+	.section--carousel :global(.section-carousel-slide) {
+		min-height: clamp(18rem, 52vh, 34rem);
 	}
 
 	.project-content {
@@ -257,6 +225,26 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 		list-style-type: disc;
 	}
 
+	.project-content :global(.project-badges) {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		padding-left: 0;
+		margin: 0 0 1rem 0;
+		list-style: none;
+	}
+
+	.project-content :global(.project-badges li) {
+		margin: 0;
+		max-width: none;
+		padding: 0.25rem 0.75rem;
+		border: 2px solid var(--color-border-soft);
+		background: var(--color-surface-paper);
+		box-shadow: 0.1rem 0.2rem 0.5rem var(--color-shadow-soft);
+		font-size: clamp(0.8rem, 0.2vw + 0.75rem, 0.9rem);
+		line-height: 1.2;
+	}
+
 	.project-content :global(ol) {
 		list-style-type: decimal;
 	}
@@ -272,21 +260,6 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 			grid-template-columns: 1fr;
 			gap: 1rem;
 		}
-
-		.section-media {
-			position: static;
-			min-height: clamp(10rem, 45vw, 14rem);
-			width: min(100%, 42rem);
-		}
-
-		.section-media--embed {
-			min-height: 0;
-		}
-
-		.section-media-gallery {
-			position: static;
-			grid-template-columns: 1fr 1fr;
-		}
 	}
 
 	@media (max-width: 1142px) {
@@ -298,18 +271,6 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 	@media (max-width: 640px) {
 		.project-content {
 			padding-inline: 0;
-		}
-
-		.section-media {
-			min-height: 9rem;
-		}
-
-		.section-media--embed {
-			min-height: 0;
-		}
-
-		.section-media-gallery {
-			grid-template-columns: 1fr;
 		}
 	}
 </style>

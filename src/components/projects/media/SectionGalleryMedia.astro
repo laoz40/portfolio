@@ -1,0 +1,41 @@
+<div
+	class="section-media-gallery"
+	aria-hidden="true">
+	<div class="section-media-tile"></div>
+	<div class="section-media-tile"></div>
+	<div class="section-media-tile"></div>
+	<div class="section-media-tile"></div>
+</div>
+
+<style>
+	.section-media-gallery {
+		position: sticky;
+		top: clamp(8rem, 22vh, 12.5rem);
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		width: 100%;
+		gap: 0.75rem;
+		align-self: start;
+		transform: rotate(var(--section-media-tilt, 0deg));
+	}
+
+	.section-media-tile {
+		min-height: clamp(7rem, 16vh, 10rem);
+		background: var(--color-accent-lime);
+		border: 8px solid var(--color-surface-paper);
+		box-shadow: 0.5rem 0.75rem 1.25rem var(--color-border-soft);
+	}
+
+	@media (max-width: 1240px) {
+		.section-media-gallery {
+			position: static;
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.section-media-gallery {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
