@@ -1,33 +1,33 @@
 ---
 import DefaultLayout from "../../layouts/DefaultLayout.astro";
 import ProjectCaseStudy from "../../components/projects/ProjectCaseStudy.astro";
-import IntroContent, { frontmatter } from "../../content/sprout/00-intro.md";
-import ProjectOverviewContent from "../../content/sprout/01-project-overview.md";
-import ProjectShowcaseContent, {
+import Intro, { frontmatter } from "../../content/sprout/00-intro.md";
+import ProjectOverview from "../../content/sprout/01-project-overview.md";
+import ProjectShowcase, {
 	frontmatter as projectShowcaseFrontmatter,
 } from "../../content/sprout/02-project-showcase.md";
-import ProblemAreaContent from "../../content/sprout/03-problem-area.md";
-import OurGoalContent from "../../content/sprout/04-our-goal.md";
-import CompetitorAnalysisContent from "../../content/sprout/05-competitor-analysis.md";
-import UserResearchMethodsContent from "../../content/sprout/06-user-research-methods.md";
-import UserResearchBarriersContent from "../../content/sprout/07-user-research-barriers.md";
-import PrototypingContent from "../../content/sprout/08-prototyping.md";
-import UserTestingInsightsContent, {
+import ProblemArea from "../../content/sprout/03-problem-area.md";
+import OurGoal from "../../content/sprout/04-our-goal.md";
+import CompetitorAnalysis from "../../content/sprout/05-competitor-analysis.md";
+import UserResearchMethods from "../../content/sprout/06-user-research-methods.md";
+import UserResearchInsights from "../../content/sprout/07-user-research-barriers.md";
+import Prototyping from "../../content/sprout/08-prototyping.md";
+import UserTestingInsights, {
 	frontmatter as userTestingInsightsFrontmatter,
 } from "../../content/sprout/09-user-testing-insights.md";
-import DesignSystemContent from "../../content/sprout/10-design-system.md";
-import ReflectionContent from "../../content/sprout/11-reflection.md";
+import DesignSystem from "../../content/sprout/10-design-system.md";
+import Reflection from "../../content/sprout/11-reflection.md";
 
 const sections = [
-	{ Component: IntroContent, variant: "featured" },
-	{ Component: ProjectOverviewContent, variant: "media" },
+	{ Component: Intro, variant: "featured" },
+	{ Component: ProjectOverview, variant: "contentOnly" },
 	{
-		Component: ProjectShowcaseContent,
+		Component: ProjectShowcase,
 		variant: "carousel",
 		carouselItems: projectShowcaseFrontmatter.carouselItems,
 	},
 	{
-		Component: ProblemAreaContent,
+		Component: ProblemArea,
 		variant: "featured",
 		media: {
 			type: "youtube",
@@ -35,22 +35,22 @@ const sections = [
 			title: "Sprout Pitch",
 		},
 	},
-	{ Component: OurGoalContent, variant: "contentOnly" },
-	{ Component: CompetitorAnalysisContent, variant: "media" },
-	{ Component: UserResearchMethodsContent, variant: "media" },
+	{ Component: OurGoal, variant: "contentOnly" },
+	{ Component: CompetitorAnalysis, variant: "media" },
+	{ Component: UserResearchMethods, variant: "media" },
 	{
-		Component: UserResearchBarriersContent,
+		Component: UserResearchInsights,
 		variant: "media",
 		extraClass: "section-handwriting-list",
 	},
-	{ Component: PrototypingContent, variant: "contentOnly" },
+	{ Component: Prototyping, variant: "contentOnly" },
 	{
-		Component: UserTestingInsightsContent,
+		Component: UserTestingInsights,
 		variant: "carousel",
 		carouselItems: userTestingInsightsFrontmatter.carouselItems,
 	},
-	{ Component: DesignSystemContent, variant: "media" },
-	{ Component: ReflectionContent, variant: "contentOnly" },
+	{ Component: DesignSystem, variant: "media" },
+	{ Component: Reflection, variant: "contentOnly" },
 ];
 ---
 

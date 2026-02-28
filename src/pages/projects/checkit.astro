@@ -1,0 +1,65 @@
+---
+import DefaultLayout from "../../layouts/DefaultLayout.astro";
+import ProjectCaseStudy from "../../components/projects/ProjectCaseStudy.astro";
+import Intro, { frontmatter } from "../../content/checkit/00-intro.md";
+import ProjectOverview from "../../content/checkit/01-project-overview.md";
+import ProjectShowcase, {
+	frontmatter as projectShowcaseFrontmatter,
+} from "../../content/checkit/02-project-showcase.md";
+import ProblemArea from "../../content/checkit/03-problem-area.md";
+import OurGoal from "../../content/checkit/04-our-goal.md";
+import CompetitorAnalysis from "../../content/checkit/05-competitor-analysis.md";
+import UserResearchMethods from "../../content/checkit/06-user-research-methods.md";
+import UserResearchInsights, {
+	frontmatter as userResearchInsightsFrontmatter,
+} from "../../content/checkit/07-user-research-insights.md";
+import IdeationProcess from "../../content/checkit/08-ideation-process.md";
+import FirstIteration from "../../content/checkit/09-first-iteration.md";
+import SecondThirdIteration from "../../content/checkit/10-second-third-iteration.md";
+import NotableChanges, {
+	frontmatter as notableChangesFrontmatter,
+} from "../../content/checkit/11-notable-changes.md";
+import FinalIteration, {
+	frontmatter as finalIterationFrontmatter,
+} from "../../content/checkit/12-final-iteration.md";
+import DesignSystem from "../../content/checkit/13-design-system.md";
+import Reflection from "../../content/checkit/14-reflection.md";
+
+const sections = [
+	{ Component: Intro, variant: "featured" },
+	{ Component: ProjectOverview, variant: "contentOnly" },
+	{
+		Component: ProjectShowcase,
+		variant: "carousel",
+		carouselItems: projectShowcaseFrontmatter.carouselItems,
+	},
+	{ Component: ProblemArea, variant: "media" },
+	{ Component: OurGoal, variant: "media" },
+	{ Component: CompetitorAnalysis, variant: "media" },
+	{ Component: UserResearchMethods, variant: "media" },
+	{
+		Component: UserResearchInsights,
+		variant: "carousel",
+		carouselItems: userResearchInsightsFrontmatter.carouselItems,
+	},
+	{ Component: IdeationProcess, variant: "contentOnly" },
+	{ Component: FirstIteration, variant: "contentOnly" },
+	{ Component: SecondThirdIteration, variant: "contentOnly" },
+	{
+		Component: NotableChanges,
+		variant: "carousel",
+		carouselItems: notableChangesFrontmatter.carouselItems,
+	},
+	{
+		Component: FinalIteration,
+		variant: "carousel",
+		carouselItems: finalIterationFrontmatter.carouselItems,
+	},
+	{ Component: DesignSystem, variant: "media" },
+	{ Component: Reflection, variant: "contentOnly" },
+];
+---
+
+<DefaultLayout title={frontmatter.title}>
+	<ProjectCaseStudy sections={sections} />
+</DefaultLayout>
