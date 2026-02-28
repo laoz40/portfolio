@@ -4,10 +4,17 @@ import ScrollSpySidebar from "./ScrollSpySidebar.astro";
 
 type SectionVariant = "featured" | "media" | "gallery" | "contentOnly";
 
+type SectionMedia = {
+	type: "youtube";
+	videoId: string;
+	title?: string;
+};
+
 type CaseStudySection = {
 	Component: AstroComponentFactory;
 	variant: SectionVariant;
 	extraClass?: string;
+	media?: SectionMedia;
 };
 
 const { sections, headingSelector = "h2" } = Astro.props as {
@@ -26,6 +33,10 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 				const SectionComponent = section.Component;
 				const isGallery = section.variant === "gallery";
 				const isContentOnly = section.variant === "contentOnly";
+				const isYouTubeMedia = section.media?.type === "youtube";
+				const embedUrl = isYouTubeMedia
+					? `https://www.youtube.com/embed/${section.media.videoId}`
+					: undefined;
 
 				return (
 					<section
@@ -45,6 +56,18 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 								<div class="section-media-tile" />
 								<div class="section-media-tile" />
 								<div class="section-media-tile" />
+							</div>
+						) : isYouTubeMedia ? (
+							<div class="section-media section-media--embed">
+								<iframe
+									class="section-media-embed"
+									src={embedUrl}
+									title={section.media.title ?? "YouTube video"}
+									loading="lazy"
+									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+									referrerpolicy="strict-origin-when-cross-origin"
+									allowfullscreen
+								/>
 							</div>
 						) : (
 							<div
@@ -99,14 +122,32 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 		min-height: clamp(12rem, 36vh, 22rem);
 		background: var(--color-accent-lime);
 		border: 8px solid var(--color-surface-paper);
-		box-shadow: 2px 4px 6px var(--color-border-soft);
+		box-shadow: 0.5rem 0.5rem 1.5rem var(--color-shadow-ink-strong);
 		transform: rotate(var(--section-media-tilt, 0deg));
+	}
+
+	.section-media--embed {
+		aspect-ratio: 16 / 10;
+		min-height: 0;
+		overflow: hidden;
+		transform: none;
+	}
+
+	.section-media-embed {
+		display: block;
+		width: 100%;
+		height: 100%;
+		border: 0;
 	}
 
 	.section--featured .section-media {
 		position: static;
 		grid-column: 1 / -1;
 		min-height: clamp(18rem, 52vh, 34rem);
+	}
+
+	.section--featured .section-media--embed {
+		min-height: 0;
 	}
 
 	.section-media-gallery {
@@ -124,7 +165,7 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 		min-height: clamp(7rem, 16vh, 10rem);
 		background: var(--color-accent-lime);
 		border: 8px solid var(--color-surface-paper);
-		box-shadow: 2px 4px 6px var(--color-border-soft);
+		box-shadow: 0.5rem 0.75rem 1.25rem var(--color-border-soft);
 	}
 
 	.project-content {
@@ -238,6 +279,10 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 			width: min(100%, 42rem);
 		}
 
+		.section-media--embed {
+			min-height: 0;
+		}
+
 		.section-media-gallery {
 			position: static;
 			grid-template-columns: 1fr 1fr;
@@ -257,6 +302,10 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 
 		.section-media {
 			min-height: 9rem;
+		}
+
+		.section-media--embed {
+			min-height: 0;
 		}
 
 		.section-media-gallery {
