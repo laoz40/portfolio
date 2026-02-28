@@ -2,6 +2,7 @@
 import BgLight from "../components/layout/BgLight.astro";
 import SiteNav from "../components/navigation/SiteNav.astro";
 import SiteFooter from "../components/footer/SiteFooter.astro";
+import ScrollUpButton from "../components/ui/ScrollUpButton.astro";
 import { ClientRouter, slide } from "astro:transitions";
 import "../styles/global.css";
 
@@ -42,6 +43,7 @@ const { title, home = false } = Astro.props;
 				transition:animate={slide({ duration: "0.35s" })}>
 				<slot />
 			</main>
+			<ScrollUpButton />
 			<SiteFooter />
 		</BgLight>
 

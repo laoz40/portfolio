@@ -1,0 +1,130 @@
+<button
+	type="button"
+	class="scroll-up"
+	data-scroll-up
+	aria-label="Scroll back to top">
+	SCROLL UP
+</button>
+
+<script is:inline>
+	const initScrollUpButton = () => {
+		const scrollUpButton = document.querySelector("[data-scroll-up]");
+		if (!scrollUpButton) {
+			return;
+		}
+
+		const syncScrollUpState = () => {
+			const shouldShow = window.scrollY > window.innerHeight;
+			scrollUpButton.classList.toggle("is-visible", shouldShow);
+		};
+
+		if (scrollUpButton.dataset.scrollUpReady !== "true") {
+			scrollUpButton.dataset.scrollUpReady = "true";
+			scrollUpButton.addEventListener("click", () => {
+				const prefersReducedMotion = window.matchMedia(
+					"(prefers-reduced-motion: reduce)",
+				).matches;
+				window.scrollTo({
+					top: 0,
+					behavior: prefersReducedMotion ? "auto" : "smooth",
+				});
+			});
+
+			window.addEventListener("scroll", syncScrollUpState, {
+				passive: true,
+			});
+			window.addEventListener("resize", syncScrollUpState, {
+				passive: true,
+			});
+		}
+
+		syncScrollUpState();
+	};
+
+	if (!window.__scrollUpButtonReady) {
+		window.__scrollUpButtonReady = true;
+		document.addEventListener("astro:page-load", initScrollUpButton);
+	}
+
+	initScrollUpButton();
+</script>
+
+<style>
+	.scroll-up {
+		position: fixed;
+		right: 1rem;
+		bottom: 3rem;
+		z-index: 30;
+		padding: 0.4rem 0.85rem;
+		border: 1px solid var(--color-border-medium);
+		background: linear-gradient(
+			162deg,
+			var(--color-surface-paper) 0%,
+			rgb(255 253 245) 52%,
+			var(--color-surface-paper) 100%
+		);
+		color: var(--color-text-handwriting);
+		font-family: var(--font-handwriting);
+		font-size: clamp(1rem, 1.2vw, 1.35rem);
+		letter-spacing: 0.02em;
+		line-height: 1;
+		overflow: hidden;
+		box-shadow:
+			0 2px 4px var(--color-shadow-soft),
+			0 8px 18px var(--color-shadow-medium);
+		cursor: pointer;
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(0.75rem) rotate(-0.6deg);
+		transition:
+			opacity 180ms ease,
+			transform 180ms ease,
+			visibility 180ms ease;
+	}
+
+	.scroll-up::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		background: repeating-linear-gradient(
+			-12deg,
+			transparent 0,
+			transparent 6px,
+			rgb(15 23 42 / 0.025) 6px,
+			rgb(15 23 42 / 0.025) 7px
+		);
+	}
+
+	.scroll-up.is-visible {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0) rotate(-0.6deg);
+	}
+
+	.scroll-up:hover,
+	.scroll-up:focus-visible {
+		box-shadow:
+			0 3px 6px var(--color-shadow-soft),
+			0 10px 20px var(--color-shadow-medium);
+		transform: translateY(-1px) rotate(-0.6deg);
+	}
+
+	.scroll-up:focus-visible {
+		outline: 2px solid var(--color-text-handwriting);
+		outline-offset: 2px;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.scroll-up {
+			transition: opacity 0ms;
+			transform: none;
+		}
+
+		.scroll-up.is-visible,
+		.scroll-up:hover,
+		.scroll-up:focus-visible {
+			transform: none;
+		}
+	}
+</style>
