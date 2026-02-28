@@ -14,12 +14,8 @@ tools:
 cover-image: image
 ---
 
-# Sprout
+# Horus
 
-I led a team of four to design an AR app that helps people take simple actions
-for the environment. We ran user research to learn what motivates sustainable
-behaviour, then built and tested prototypes to see how people used the app.
-Through many rounds of user testing, we refined the design to make it easy to
-use and visually polished.
+## WIP
 
-image placeholder
+[Github Link](https://github.com/laoz40/Horus)

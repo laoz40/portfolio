@@ -1,0 +1,13 @@
+---
+import DefaultLayout from "../../layouts/DefaultLayout.astro";
+import ProjectCaseStudy from "../../components/projects/ProjectCaseStudy.astro";
+import Intro, { frontmatter } from "../../content/horus/00-intro.md";
+
+const sections = [
+	{ Component: Intro, variant: "featured" },
+];
+---
+
+<DefaultLayout title={frontmatter.title}>
+	<ProjectCaseStudy sections={sections} />
+</DefaultLayout>
