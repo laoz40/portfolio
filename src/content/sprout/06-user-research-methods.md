@@ -4,12 +4,14 @@
 
 #### Methods
 
-- Interviews
-- Focus Groups
-- Questionnaires
-- Affinity Diagramming
-- Online Ethnography
-- User Personas
+<ul class="project-badges" role="list">
+  <li>Interviews</li>
+  <li>Focus Groups</li>
+  <li>Questionnaires</li>
+  <li>Affinity Diagramming</li>
+  <li>Online Ethnography</li>
+  <li>User Personas</li>
+</ul>
 
 #### Key Interview Questions
 

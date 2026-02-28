@@ -18,9 +18,11 @@ carouselItems:
 
 #### Methods
 
-- Think Aloud
-- Observation
-- Interviews
-- Heuristic Evaluation
-- A/B Testing
-- SUS Form
+<ul class="project-badges" role="list">
+  <li>Think Aloud</li>
+  <li>Observation</li>
+  <li>Interviews</li>
+  <li>Heuristic Evaluation</li>
+  <li>A/B Testing</li>
+  <li>SUS Form</li>
+</ul>
