@@ -12,8 +12,6 @@ tools:
   - React Hook Form
   - Tailwind
 cover-image: image
-alt-text: Sprout Cover Image (Credit @josephgvideo)
-notes: One of five projects shortlisted for the ADP Open Jury Industry Crit, Featured in the ADP Graduate Show and Graduate Catalogue, Photo Credit @josephgvideo
 ---
 
 # Sprout

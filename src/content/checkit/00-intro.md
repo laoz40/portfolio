@@ -9,16 +9,13 @@ tools:
   - User Testing
   - UI Design
 cover-image: image
-alt-text: Sprout Cover Image (Credit @josephgvideo)
-notes: One of five projects shortlisted for the ADP Open Jury Industry Crit, Featured in the ADP Graduate Show and Graduate Catalogue, Photo Credit @josephgvideo
 ---
 
-# Sprout
+# Check It
 
-I led a team of four to design an AR app that helps people take simple actions
-for the environment. We ran user research to learn what motivates sustainable
-behaviour, then built and tested prototypes to see how people used the app.
-Through many rounds of user testing, we refined the design to make it easy to
-use and visually polished.
+I led a team of three to design an app that helps people reduce social media
+use and stay productive. We began with user research to understand user
+behaviour, then turned our findings into targeted features. Through several
+rounds of user testing, we refined the flows and polished the UI to create an
+experience that improved users' productivity.
 
-image placeholder

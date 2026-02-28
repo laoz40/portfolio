@@ -2,8 +2,6 @@
 
 ### Creating style guidelines
 
-image placeholder
-
 #### Colours
 
 I used a green monochromatic colour scheme to symbolise growth and connect with nature. Green evokes inspiration, grounding users as they nurture their virtual tree.

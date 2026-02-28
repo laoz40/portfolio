@@ -36,4 +36,3 @@ Most people had some interest in helping the environment. Many said they would b
 - "Tree planting would be fun if I could do it with friends."
 - "Definitely doing it with a group of people. Having to do it with others definitely provides a lot more motivation and incentive."
 
-image placeholder
