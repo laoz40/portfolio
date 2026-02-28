@@ -1,6 +1,7 @@
 ---
 import DefaultLayout from "../layouts/DefaultLayout.astro";
 import HighlightText from "../components/ui/HighlightText.astro";
+import ToolBadges from "../components/ui/ToolBadges.astro";
 import { frontmatter as horus } from "../content/horus/00-intro.md";
 import { frontmatter as sprout } from "../content/sprout/00-intro.md";
 import { frontmatter as checkit } from "../content/checkit/00-intro.md";
@@ -50,13 +51,10 @@ const projects: Array<{
 							layoutClass === "project-big" ? "preview-big" : "preview-small",
 						]}
 					/>
-					<ul
-						class="tool-badges"
-						aria-label={`${frontmatter.title} tools used`}>
-						{(frontmatter.tools ?? []).map((tool) => (
-							<li class="tool-badge">{tool}</li>
-						))}
-					</ul>
+					<ToolBadges
+						tools={frontmatter.tools ?? []}
+						projectTitle={frontmatter.title}
+					/>
 					<div class="project-title">
 						<HighlightText
 							tag="h2"
@@ -147,26 +145,6 @@ const projects: Array<{
 		font-weight: var(--type-sans-weight-regular);
 		line-height: var(--type-sans-leading-compact);
 		color: var(--color-text-muted);
-	}
-
-	.tool-badges {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-		margin: 1.5rem 0 0 0;
-		padding: 0;
-		list-style: none;
-	}
-
-	.tool-badge {
-		padding: 0.1rem 0.65rem;
-		border: 1px solid var(--color-border-soft);
-		font-size: clamp(0.75rem, 1vw, 1.25rem);
-		font-weight: 700;
-		letter-spacing: 0.02em;
-		color: var(--color-text-handwriting);
-		background: var(--color-surface-paper-soft);
-		box-shadow: 0 1px 3px var(--color-shadow-soft);
 	}
 
 	.preview {
