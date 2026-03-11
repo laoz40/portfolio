@@ -27,7 +27,7 @@ const { fill, hoverFill, href } = Astro.props;
 				C60,60 30,66 16,60
 				C6,56 6,46 7,38
 				C8,30 6,18 12,10 Z"
-					stroke="none"
+					stroke="var(--hoverFill)"
 					stroke-width="3"
 					stroke-linecap="round"
 					stroke-linejoin="round"
@@ -58,7 +58,7 @@ const { fill, hoverFill, href } = Astro.props;
 				C60,60 30,66 16,60
 				C6,56 6,46 7,38
 				C8,30 6,18 12,10 Z"
-					stroke="none"
+					stroke="var(--hoverFill)"
 					stroke-width="3"
 					stroke-linecap="round"
 					stroke-linejoin="round"
@@ -73,6 +73,9 @@ const { fill, hoverFill, href } = Astro.props;
 		position: relative;
 		display: inline-grid;
 		place-items: center;
+		--paper-fill: color-mix(in srgb, var(--hoverFill) 18%, #f5f0df 82%);
+		--button-shadow-rest: 3px 3px 0 var(--color-shadow-ink-soft);
+		--button-shadow-hover: 6px 7px 0 var(--color-shadow-ink-strong);
 		padding: clamp(0.75rem, 1.8vw, 1rem) clamp(1.2rem, 3.5vw, 2rem);
 		border: 0;
 		cursor: pointer;
@@ -100,17 +103,33 @@ const { fill, hoverFill, href } = Astro.props;
 			transform 0.25s ease-in-out,
 			filter 0.25s ease-in-out,
 			fill 0.25s ease-in-out;
-		filter: drop-shadow(3px 3px 0 var(--color-shadow-ink-soft));
-		fill: var(--fill);
+		filter: drop-shadow(var(--button-shadow-rest));
+		fill: var(--paper-fill);
+	}
+
+	path {
+		stroke-width: 3.2;
 	}
 
 	.imperfect-button:hover svg {
-		transform: translateY(-1px) rotate(-2deg);
-		filter: drop-shadow(2px 4px 0 var(--color-shadow-ink-strong));
-		fill: var(--hoverFill);
+		transform: translate(-2px, -3px) rotate(-0.9deg);
+		filter: drop-shadow(var(--button-shadow-hover));
+		fill: color-mix(in srgb, var(--paper-fill) 90%, #fff 10%);
 	}
 
 	.imperfect-button:active svg {
-		scale: 0.9;
+		transform: translate(1px, 1px) rotate(-0.15deg);
+		filter: drop-shadow(2px 2px 0 var(--color-shadow-ink-strong));
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		svg {
+			transition: none;
+		}
+
+		.imperfect-button:hover svg,
+		.imperfect-button:active svg {
+			transform: none;
+		}
 	}
 </style>
