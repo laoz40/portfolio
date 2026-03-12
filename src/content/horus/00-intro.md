@@ -6,10 +6,9 @@ tools:
   - Next.js
   - React
   - TypeScript
-  - SQLite
-  - Prisma
+  - Convex
+  - Better Auth
   - Zod
-  - React Hook Form
   - Tailwind
 cover-image: image
 ---

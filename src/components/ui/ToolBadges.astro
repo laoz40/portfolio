@@ -23,8 +23,8 @@ const { tools, projectTitle } = Astro.props as Props;
 
 <style>
 	.tool-badges-shell {
-		margin: 1.5rem 0 0 0;
-		padding: 0.45rem 0.55rem;
+		margin: 0;
+		padding: 0;
 	}
 
 	.tool-badges {
@@ -55,14 +55,13 @@ const { tools, projectTitle } = Astro.props as Props;
 	.tool-badge-shape {
 		position: relative;
 		display: inline-block;
-		padding: 0.1rem 0.65rem;
+		padding: 0.16rem 0.7rem;
 		border: 1px solid var(--color-border-soft);
-		font-size: clamp(0.75rem, 1vw, 1.25rem);
+		font-size: clamp(0.9rem, 1.1vw, 1.35rem);
 		font-weight: 700;
 		letter-spacing: 0.02em;
 		color: var(--color-text-handwriting);
 		background: var(--color-surface-paper);
 		box-shadow: 1px 2px 3px var(--color-shadow-soft);
 	}
-
 </style>

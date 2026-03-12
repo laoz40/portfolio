@@ -41,21 +41,28 @@ const projects: Array<{
 					class="project-card"
 					href={`/projects/${slug}`}
 					aria-label={`Open ${frontmatter.title} project page`}>
-					<div class="preview" />
-					<ToolBadges
-						tools={frontmatter.tools ?? []}
-						projectTitle={frontmatter.title}
-					/>
-					<div class="project-title">
-						<HighlightText
-							tag="h2"
-							variant="yellow"
-							class="project-title-highlight">
-							{frontmatter.title}
-						</HighlightText>
-						<span>{frontmatter.project}</span>
+					<div class="project-frame">
+						<div
+							class="preview"
+							aria-hidden="true"
+						/>
+						<div class="project-meta">
+							<ToolBadges
+								tools={frontmatter.tools ?? []}
+								projectTitle={frontmatter.title}
+							/>
+							<div class="project-title">
+								<HighlightText
+									tag="h2"
+									variant="yellow"
+									class="project-title-highlight">
+									{frontmatter.title}
+								</HighlightText>
+								<span>{frontmatter.project}</span>
+							</div>
+							<p>{frontmatter.description}</p>
+						</div>
 					</div>
-					<p>{frontmatter.description}</p>
 				</a>
 			))
 		}
@@ -79,17 +86,26 @@ const projects: Array<{
 		display: flex;
 		flex-direction: column;
 		grid-column: span 6;
-		padding: clamp(0.9rem, 2vw, 1.25rem);
 		color: var(--color-text-body);
 		text-decoration: none;
 	}
 
-	.project-title {
+	.project-frame {
 		display: flex;
-		justify-content: start;
-		gap: 1rem;
-		align-items: baseline;
-		margin: 1rem 0 0 0;
+		flex-direction: column;
+		height: 100%;
+		padding: clamp(0.95rem, 2vw, 1.3rem);
+		border: 0.18rem solid rgba(31, 30, 25, 0.08);
+		background: linear-gradient(
+			180deg,
+			rgba(255, 255, 255, 0.96),
+			rgba(247, 242, 231, 0.96)
+		);
+		box-shadow: 6px 7px 3px rgba(54, 43, 21, 0.2);
+		transform: rotate(var(--preview-tilt, 0deg));
+		transition:
+			box-shadow 200ms ease,
+			transform 200ms ease;
 	}
 
 	.project-card:nth-of-type(odd) {
@@ -100,12 +116,10 @@ const projects: Array<{
 		--preview-tilt: 0.45deg;
 	}
 
-	:global(.project-title-highlight) {
-		font-size: clamp(1.5rem, 2.5vw, 2.5rem);
-		font-weight: 700;
-		--highlight-colour: var(--color-highlight-yellow-strong);
-		--highlight-top: 0.3em;
-		--highlight-bottom: 0.32em;
+	.project-card:hover .project-frame,
+	.project-card:focus-within .project-frame {
+		box-shadow: 8px 10px 4px rgba(54, 43, 21, 0.24);
+		transform: translateY(-4px) rotate(var(--preview-tilt, 0deg));
 	}
 
 	.project-card:hover :global(.project-title-highlight)::before,
@@ -117,12 +131,49 @@ const projects: Array<{
 		opacity: 1;
 	}
 
-	.project-card span {
-		font-size: clamp(1rem, 2vw, 1.5rem);
-		letter-spacing: 0.02em;
+	.preview {
+		width: 100%;
+		min-height: clamp(15rem, 38vh, 22rem);
+		background: var(--color-accent-lime);
+		overflow: hidden;
 	}
 
-	.project-card p {
+	.project-meta {
+		display: flex;
+		flex-direction: column;
+		gap: 0.85rem;
+		padding: clamp(1rem, 2.2vw, 1.35rem) 0 0.15rem;
+	}
+
+	.project-title {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.35rem;
+	}
+
+	:global(.project-title-highlight) {
+		margin: 0;
+		font-size: clamp(1.7rem, 2.7vw, 2.7rem);
+		font-weight: 700;
+		line-height: 0.95;
+		color: var(--color-text-heading);
+		--highlight-colour: var(--color-highlight-yellow-strong);
+		--highlight-top: 0.18em;
+		--highlight-bottom: 0.06em;
+		--highlight-left: -0.04em;
+		--highlight-right: -0.03em;
+	}
+
+	.project-title span {
+		font-family: var(--font-handwriting);
+		font-size: clamp(1.1rem, 1.2vw + 0.8rem, 1.45rem);
+		font-weight: 700;
+		letter-spacing: 0.02em;
+		color: var(--color-text-muted);
+	}
+
+	.project-meta p {
 		margin: 0;
 		font-family: var(--font-sans);
 		font-size: var(--type-sans-size-body);
@@ -131,27 +182,38 @@ const projects: Array<{
 		color: var(--color-text-muted);
 	}
 
-	.preview {
-		width: 100%;
-		min-height: clamp(12rem, 36vh, 22rem);
-		border: 8px solid var(--color-surface-paper);
-		background: var(--color-accent-lime);
-		box-shadow: 0 8px 20px var(--color-shadow-medium);
-		transform: rotate(var(--preview-tilt, 0deg));
-		transition:
-			box-shadow 180ms ease,
-			transform 180ms ease;
+	.project-meta :global(.tool-badges) {
+		gap: 0.45rem;
 	}
 
-	.project-card:hover .preview,
-	.project-card:focus-within .preview {
-		box-shadow: 0 10px 22px var(--color-shadow-strong);
-		transform: translateY(-2px) rotate(var(--preview-tilt, 0deg));
+	.project-meta :global(.tool-badge-shape) {
+		background: rgba(255, 255, 255, 0.9);
+		box-shadow: 0 3px 6px rgba(54, 43, 21, 0.08);
 	}
 
 	@media (max-width: 900px) {
 		.project-card {
 			grid-column: 1 / -1;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.preview {
+			min-height: auto;
+			aspect-ratio: 16 / 9;
+		}
+
+		.project-meta p {
+			font-size: 0.95rem;
+		}
+
+		.project-frame {
+			transform: none;
+		}
+
+		.project-card:hover .project-frame,
+		.project-card:focus-within .project-frame {
+			transform: translateY(-4px);
 		}
 	}
 </style>
