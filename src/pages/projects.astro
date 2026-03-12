@@ -15,22 +15,18 @@ type ProjectFrontmatter = {
 
 const projects: Array<{
 	slug: string;
-	layoutClass: "project-big" | "project-small";
 	frontmatter: ProjectFrontmatter;
 }> = [
 	{
 		slug: "horus",
-		layoutClass: "project-big",
 		frontmatter: horus as ProjectFrontmatter,
 	},
 	{
 		slug: "sprout",
-		layoutClass: "project-small",
 		frontmatter: sprout as ProjectFrontmatter,
 	},
 	{
 		slug: "checkit",
-		layoutClass: "project-small",
 		frontmatter: checkit as ProjectFrontmatter,
 	},
 ];
@@ -40,17 +36,12 @@ const projects: Array<{
 	<h1>These are my projects</h1>
 	<div class="projects-layout">
 		{
-			projects.map(({ slug, layoutClass, frontmatter }) => (
+			projects.map(({ slug, frontmatter }) => (
 				<a
-					class:list={["project-card", layoutClass]}
+					class="project-card"
 					href={`/projects/${slug}`}
 					aria-label={`Open ${frontmatter.title} project page`}>
-					<div
-						class:list={[
-							"preview",
-							layoutClass === "project-big" ? "preview-big" : "preview-small",
-						]}
-					/>
+					<div class="preview" />
 					<ToolBadges
 						tools={frontmatter.tools ?? []}
 						projectTitle={frontmatter.title}
@@ -87,6 +78,7 @@ const projects: Array<{
 	.project-card {
 		display: flex;
 		flex-direction: column;
+		grid-column: span 6;
 		padding: clamp(0.9rem, 2vw, 1.25rem);
 		color: var(--color-text-body);
 		text-decoration: none;
@@ -106,14 +98,6 @@ const projects: Array<{
 
 	.project-card:nth-of-type(even) {
 		--preview-tilt: 0.45deg;
-	}
-
-	.project-big {
-		grid-column: 1 / -1;
-	}
-
-	.project-small {
-		grid-column: span 6;
 	}
 
 	:global(.project-title-highlight) {
@@ -149,6 +133,7 @@ const projects: Array<{
 
 	.preview {
 		width: 100%;
+		min-height: clamp(12rem, 36vh, 22rem);
 		border: 8px solid var(--color-surface-paper);
 		background: var(--color-accent-lime);
 		box-shadow: 0 8px 20px var(--color-shadow-medium);
@@ -164,16 +149,8 @@ const projects: Array<{
 		transform: translateY(-2px) rotate(var(--preview-tilt, 0deg));
 	}
 
-	.preview-big {
-		min-height: clamp(16rem, 46vh, 30rem);
-	}
-
-	.preview-small {
-		min-height: clamp(12rem, 36vh, 22rem);
-	}
-
 	@media (max-width: 900px) {
-		.project-small {
+		.project-card {
 			grid-column: 1 / -1;
 		}
 	}
