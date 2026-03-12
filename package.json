@@ -9,16 +9,19 @@
 		"astro": "astro"
 	},
 	"dependencies": {
+		"@astrojs/svelte": "^7.2.5",
 		"@fontsource-variable/outfit": "^5.2.8",
 		"@fontsource-variable/playpen-sans": "^5.2.9",
 		"astro": "^5.17.1",
 		"prettier": "^3.8.1",
-		"prettier-plugin-astro": "^0.14.1"
+		"prettier-plugin-astro": "^0.14.1",
+		"svelte": "^5.53.10"
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.6",
-		"@tailwindcss/vite": "^4.1.18",
+		"@tailwindcss/vite": "^4.2.1",
 		"tailwindcss": "^4.1.18",
-		"typescript": "^5.9.3"
+		"typescript": "^5.9.3",
+		"vite": "6.4.1"
 	}
 }
