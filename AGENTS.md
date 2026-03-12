@@ -11,7 +11,7 @@ Use pnpm.
 
 Naming patterns used now:
 
-- Components: `PascalCase.astro`
+- Components: `PascalCase`
 - Route pages: lowercase names (example: `about.astro`, `projects.astro`)
 
 ### Imports
@@ -32,7 +32,7 @@ Naming patterns used now:
 - Prefer reusable components over duplicating complex markup
 - Organise components in `src/components/` into subdirectories
 - Co-locate component-specific CSS in the same `.astro` file when reasonable
-- Use Tailwind CSS v4 (`@tailwindcss/vite`) for general divs & component-local CSS for specific elements
+- Use Tailwind CSS v4 (`@tailwindcss/vite`) for general divs & component-local CSS for main/important elements
 - Use `src/styles/global.css` only for truly global concerns
 - Preserve existing responsive behavior and breakpoints
 
