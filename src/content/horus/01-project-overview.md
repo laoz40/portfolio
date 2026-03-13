@@ -13,7 +13,9 @@ tools:
 cover-image: image
 ---
 
-# Horus
+## WIP
+
+### Project Overview
 
 [Github Link](https://github.com/laoz40/Horus)
 

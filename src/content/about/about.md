@@ -1,7 +1,7 @@
 ## Why I got into web development
 
 I first started “coding” at 11 by editing Team Fortress 2 HUDs. I loved to
-tweak the colours and animations, editing something that was similar to CSS. I've
+tweak the colours and animations, editing files that were similar to CSS. I've
 always enjoyed editing aesthetics and making things I use look nice (ricing).
 It's why I love using Android and Linux.
 
