@@ -16,7 +16,3 @@ cover-image: image
 ## WIP
 
 ### Project Overview
-
-[Github Link](https://github.com/laoz40/Horus)
-
-[Website Link](https://horus-workout.vercel.app)

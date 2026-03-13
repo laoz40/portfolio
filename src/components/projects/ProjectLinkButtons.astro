@@ -1,0 +1,89 @@
+---
+import ImperfectButton from "../home/ImperfectButton.astro";
+
+type ProjectLink = {
+	href: string;
+	label: string;
+	fill: string;
+};
+
+const { links, ariaLabel = "Project links" } = Astro.props as {
+	links: ProjectLink[];
+	ariaLabel?: string;
+};
+---
+
+<nav
+	class="project-link-buttons"
+	aria-label={ariaLabel}>
+	{
+		links.map((link, index) => (
+			<div
+				class:list={[
+					"project-link-buttons__item",
+					`project-link-buttons__item--${index + 1}`,
+				]}>
+				<ImperfectButton
+					href={link.href}
+					fill={link.fill}>
+					{link.label}
+				</ImperfectButton>
+			</div>
+		))
+	}
+</nav>
+
+<style>
+	.project-link-buttons {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: clamp(0.9rem, 2vw, 1.4rem);
+		width: min(100%, 44rem);
+		align-items: stretch;
+	}
+
+	.project-link-buttons__item {
+		min-width: 0;
+	}
+
+	.project-link-buttons__item--1 {
+		transform: rotate(-0.65deg);
+	}
+
+	.project-link-buttons__item--2 {
+		transform: rotate(0.7deg) translateY(0.15rem);
+	}
+
+	.project-link-buttons__item :global(.imperfect-button) {
+		width: 100%;
+		min-height: clamp(5rem, 11vw, 6.8rem);
+		padding: clamp(1rem, 2vw, 1.45rem) clamp(1rem, 2vw, 1.6rem);
+		font-size: clamp(1.25rem, 1.5vw + 0.95rem, 1.9rem);
+		line-height: 1.05;
+		text-align: center;
+	}
+
+	.project-link-buttons__item :global(.imperfect-button span) {
+		display: inline-block;
+		max-width: 10ch;
+		text-wrap: balance;
+	}
+
+	@media (max-width: 520px) {
+		.project-link-buttons {
+			grid-template-columns: 1fr;
+		}
+
+		.project-link-buttons__item--1,
+		.project-link-buttons__item--2 {
+			transform: none;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.project-link-buttons__item--1,
+		.project-link-buttons__item--2 {
+			transform: none;
+		}
+	}
+</style>

@@ -10,11 +10,9 @@ tools:
   - Better Auth
   - Zod
   - Tailwind
+githubUrl: https://github.com/laoz40/Horus
+websiteUrl: https://horus-workout.vercel.app
 cover-image: image
 ---
 
 # Horus
-
-[Github Link](https://github.com/laoz40/Horus)
-
-[Website Link](https://horus-workout.vercel.app)

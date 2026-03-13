@@ -23,6 +23,7 @@ type CaseStudySection = {
 	Component: AstroComponentFactory;
 	variant: SectionVariant;
 	extraClass?: string;
+	props?: Record<string, string>;
 	media?: SectionMedia;
 	carouselItems?: Array<{
 		title?: string;
@@ -48,6 +49,7 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 				const isCarousel = section.variant === "carousel";
 				const isContentOnly = section.variant === "contentOnly";
 				const isYouTubeMedia = section.media?.type === "youtube";
+				const sectionProps = section.props ?? {};
 				const carouselItems =
 					section.carouselItems && section.carouselItems.length > 0
 						? section.carouselItems
@@ -61,7 +63,7 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 							section.extraClass,
 						]}>
 						<div class="section-copy">
-							<SectionComponent />
+							<SectionComponent {...sectionProps} />
 						</div>
 						{isContentOnly ? null : isGallery ? (
 							<SectionGalleryMedia />

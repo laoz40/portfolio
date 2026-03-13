@@ -1,0 +1,44 @@
+---
+import ProjectLinkButtons from "./ProjectLinkButtons.astro";
+
+const { githubUrl, websiteUrl } = Astro.props as {
+	githubUrl?: string;
+	websiteUrl?: string;
+};
+
+const horusLinks = [
+	githubUrl
+		? {
+				label: "GitHub",
+				href: githubUrl,
+				fill: "var(--color-home-button-yellow)",
+			}
+		: null,
+	websiteUrl
+		? {
+				label: "Website",
+				href: websiteUrl,
+				fill: "var(--color-home-button-sky)",
+			}
+		: null,
+].filter((link) => link !== null);
+---
+
+{
+	horusLinks.length > 0 ? (
+		<div class="horus-project-links-section">
+			<ProjectLinkButtons
+				links={horusLinks}
+				ariaLabel="Horus project links"
+			/>
+		</div>
+	) : null
+}
+
+<style>
+	.horus-project-links-section {
+		display: flex;
+		justify-content: center;
+		margin-top: clamp(-0.25rem, 1vw, 0.4rem);
+	}
+</style>

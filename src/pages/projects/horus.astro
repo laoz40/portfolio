@@ -1,11 +1,20 @@
 ---
 import DefaultLayout from "../../layouts/DefaultLayout.astro";
+import HorusProjectLinksSection from "../../components/projects/HorusProjectLinksSection.astro";
 import ProjectCaseStudy from "../../components/projects/ProjectCaseStudy.astro";
 import Intro, { frontmatter } from "../../content/horus/00-intro.md";
 import ProjectOverview from "../../content/horus/01-project-overview.md";
 
 const sections = [
 	{ Component: Intro, variant: "featured" },
+	{
+		Component: HorusProjectLinksSection,
+		variant: "contentOnly",
+		props: {
+			githubUrl: frontmatter.githubUrl,
+			websiteUrl: frontmatter.websiteUrl,
+		},
+	},
 	{ Component: ProjectOverview, variant: "contentOnly" },
 ];
 ---
