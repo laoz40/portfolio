@@ -12,27 +12,29 @@ const { items = [{}, {}, {}, {}] } = Astro.props as {
 <div
 	class="section-carousel"
 	data-carousel>
-	<div class="section-carousel-viewport">
-		<div
-			class="section-carousel-track"
-			data-carousel-track>
-			{
-				items.map((item, index) => (
-					<div
-						class="section-carousel-slide"
-						role="group"
-						aria-label={`Slide ${index + 1} of ${items.length}`}>
-						<div class="section-carousel-content">
-							<h4 class="section-carousel-title">
-								{item.title ?? `Slide ${index + 1}`}
-							</h4>
-							{item.description ? (
-								<p class="section-carousel-description">{item.description}</p>
-							) : null}
+	<div class="section-carousel-frame">
+		<div class="section-carousel-viewport">
+			<div
+				class="section-carousel-track"
+				data-carousel-track>
+				{
+					items.map((item, index) => (
+						<div
+							class="section-carousel-slide"
+							role="group"
+							aria-label={`Slide ${index + 1} of ${items.length}`}>
+							<div class="section-carousel-content">
+								<h4 class="section-carousel-title">
+									{item.title ?? `Slide ${index + 1}`}
+								</h4>
+								{item.description ? (
+									<p class="section-carousel-description">{item.description}</p>
+								) : null}
+							</div>
 						</div>
-					</div>
-				))
-			}
+					))
+				}
+			</div>
 		</div>
 	</div>
 	<div class="section-carousel-controls">
@@ -55,12 +57,29 @@ const { items = [{}, {}, {}, {}] } = Astro.props as {
 
 <style>
 	.section-carousel {
-		position: sticky;
-		top: clamp(8rem, 22vh, 12.5rem);
 		width: 100%;
-		align-self: start;
+		align-self: center;
 		display: grid;
 		gap: 0.75rem;
+	}
+
+	.section-carousel-frame {
+		position: relative;
+		padding-top: calc(var(--size-project-tape-height) * 0.5);
+	}
+
+	.section-carousel-frame::before {
+		content: "";
+		position: absolute;
+		top: calc(var(--size-project-tape-height) * 0.5);
+		left: 50%;
+		width: var(--size-project-tape-width);
+		height: var(--size-project-tape-height);
+		transform: translate(-50%, -50%)
+			rotate(calc(var(--section-media-tilt, 0deg) + 1.2deg));
+		background: var(--color-tape);
+		pointer-events: none;
+		z-index: 2;
 	}
 
 	.section-carousel-track {
@@ -73,7 +92,7 @@ const { items = [{}, {}, {}, {}] } = Astro.props as {
 	.section-carousel-viewport {
 		overflow: hidden;
 		border: 8px solid var(--color-surface-paper);
-		box-shadow: 0.5rem 0.75rem 1.25rem var(--color-border-soft);
+		box-shadow: var(--shadow-paper-rest);
 		transform: rotate(var(--section-media-tilt, 0deg));
 	}
 
@@ -170,7 +189,6 @@ const { items = [{}, {}, {}, {}] } = Astro.props as {
 
 	@media (max-width: 1240px) {
 		.section-carousel {
-			position: static;
 			width: min(100%, 42rem);
 		}
 	}

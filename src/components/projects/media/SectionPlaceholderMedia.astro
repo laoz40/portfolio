@@ -5,19 +5,30 @@
 
 <style>
 	.section-media {
-		position: sticky;
-		top: clamp(8rem, 22vh, 12.5rem);
+		position: relative;
 		width: 100%;
+		align-self: center;
 		min-height: clamp(12rem, 36vh, 22rem);
 		background: var(--color-accent-lime);
 		border: 8px solid var(--color-surface-paper);
-		box-shadow: 0.5rem 0.5rem 1.5rem var(--color-shadow-ink-strong);
+		box-shadow: var(--shadow-paper-rest);
 		transform: rotate(var(--section-media-tilt, 0deg));
+	}
+
+	.section-media::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 50%;
+		width: var(--size-project-tape-width);
+		height: var(--size-project-tape-height);
+		transform: translate(-50%, -50%) rotate(1.2deg);
+		background: var(--color-tape);
+		pointer-events: none;
 	}
 
 	@media (max-width: 1240px) {
 		.section-media {
-			position: static;
 			min-height: clamp(10rem, 45vw, 14rem);
 			width: min(100%, 42rem);
 		}

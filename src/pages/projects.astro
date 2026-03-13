@@ -101,7 +101,7 @@ const projects: Array<{
 			rgba(255, 255, 255, 0.96),
 			rgba(247, 242, 231, 0.96)
 		);
-		box-shadow: 6px 7px 3px rgba(54, 43, 21, 0.14);
+		box-shadow: var(--shadow-paper-rest);
 		transform: rotate(var(--preview-tilt, 0deg));
 		transition:
 			box-shadow 200ms ease,
@@ -118,7 +118,7 @@ const projects: Array<{
 
 	.project-card:hover .project-frame,
 	.project-card:focus-within .project-frame {
-		box-shadow: 8px 10px 4px rgba(54, 43, 21, 0.24);
+		box-shadow: var(--shadow-paper-hover);
 		transform: translateY(-4px) rotate(var(--preview-tilt, 0deg));
 	}
 
