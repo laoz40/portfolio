@@ -154,6 +154,8 @@ const { items = [{}, {}, {}, {}] } = Astro.props as {
 	}
 
 	.section-carousel-button {
+		--carousel-button-shadow-rest: 3px 4px 3px rgb(54 43 21 / 0.14);
+		--carousel-button-shadow-hover: 4px 5px 4px rgb(54 43 21 / 0.24);
 		font-family: var(--font-handwriting);
 		font-size: 2rem;
 		text-transform: uppercase;
@@ -161,7 +163,11 @@ const { items = [{}, {}, {}, {}] } = Astro.props as {
 		border: 2px solid var(--color-border-soft);
 		background: var(--color-surface-paper);
 		cursor: pointer;
-		box-shadow: 0.1rem 0.2rem 0.5rem var(--color-shadow-soft);
+		box-shadow: var(--carousel-button-shadow-rest);
+		transition:
+			box-shadow 200ms ease,
+			transform 200ms ease,
+			opacity 200ms ease;
 	}
 
 	.section-carousel-button[data-carousel-prev] {
@@ -174,12 +180,14 @@ const { items = [{}, {}, {}, {}] } = Astro.props as {
 
 	.section-carousel-button[data-carousel-prev]:hover,
 	.section-carousel-button[data-carousel-prev]:focus-visible {
-		transform: translateY(-2px) rotate(-1.5deg);
+		box-shadow: var(--carousel-button-shadow-hover);
+		transform: translateY(-4px) rotate(-1.5deg);
 	}
 
 	.section-carousel-button[data-carousel-next]:hover,
 	.section-carousel-button[data-carousel-next]:focus-visible {
-		transform: translateY(-2px) rotate(1.5deg);
+		box-shadow: var(--carousel-button-shadow-hover);
+		transform: translateY(-4px) rotate(1.5deg);
 	}
 
 	.section-carousel-button:disabled {

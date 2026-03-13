@@ -51,6 +51,8 @@
 
 <style>
 	.scroll-up {
+		--scroll-up-shadow-rest: 3px 4px 3px rgb(54 43 21 / 0.14);
+		--scroll-up-shadow-hover: 4px 5px 4px rgb(54 43 21 / 0.24);
 		position: fixed;
 		right: 1rem;
 		bottom: 3rem;
@@ -69,16 +71,15 @@
 		letter-spacing: 0.02em;
 		line-height: 1;
 		overflow: hidden;
-		box-shadow:
-			0 2px 4px var(--color-shadow-soft),
-			0 8px 18px var(--color-shadow-medium);
+		box-shadow: var(--scroll-up-shadow-rest);
 		cursor: pointer;
 		opacity: 0;
 		visibility: hidden;
 		transform: translateY(0.75rem) rotate(-0.6deg);
 		transition:
 			opacity 180ms ease,
-			transform 180ms ease,
+			transform 200ms ease,
+			box-shadow 200ms ease,
 			visibility 180ms ease;
 	}
 
@@ -104,10 +105,8 @@
 
 	.scroll-up:hover,
 	.scroll-up:focus-visible {
-		box-shadow:
-			0 3px 6px var(--color-shadow-soft),
-			0 10px 20px var(--color-shadow-medium);
-		transform: translateY(-1px) rotate(-0.6deg);
+		box-shadow: var(--scroll-up-shadow-hover);
+		transform: translateY(-4px) rotate(-0.6deg);
 	}
 
 	.scroll-up:focus-visible {
