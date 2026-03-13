@@ -46,7 +46,7 @@ const { href = "#featured", label = "Scroll to featured section" } =
 		justify-content: center;
 		line-height: 1;
 		text-decoration: none;
-		animation: bob 1.8s ease-in-out infinite;
+		transition: transform 180ms ease;
 	}
 
 	.scroll-down svg {
@@ -55,28 +55,18 @@ const { href = "#featured", label = "Scroll to featured section" } =
 		filter: drop-shadow(1px 2px 0 var(--color-shadow-medium));
 	}
 
-	.scroll-down:hover {
-		animation-play-state: paused;
-		transform: translateX(-50%) translateY(0.25rem) rotate(-2deg);
-	}
-
-	@keyframes bob {
-		0%,
-		100% {
-			transform: translateX(-50%) translateY(0);
-		}
-
-		50% {
-			transform: translateX(-50%) translateY(0.35rem);
-		}
+	.scroll-down:hover,
+	.scroll-down:focus-visible {
+		transform: translateX(-50%) translateY(-0.25rem);
 	}
 
 	@media (prefers-reduced-motion: reduce) {
 		.scroll-down {
-			animation: none;
+			transition: none;
 		}
 
-		.scroll-down:hover {
+		.scroll-down:hover,
+		.scroll-down:focus-visible {
 			transform: translateX(-50%);
 		}
 	}
