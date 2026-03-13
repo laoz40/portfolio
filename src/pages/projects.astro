@@ -91,6 +91,7 @@ const projects: Array<{
 	}
 
 	.project-frame {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		height: 100%;
@@ -106,6 +107,19 @@ const projects: Array<{
 		transition:
 			box-shadow 200ms ease,
 			transform 200ms ease;
+	}
+
+	.project-frame::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 50%;
+		width: var(--size-project-tape-width);
+		height: var(--size-project-tape-height);
+		transform: translate(-50%, -50%) rotate(1.2deg);
+		background: var(--color-tape);
+		pointer-events: none;
+		z-index: 1;
 	}
 
 	.project-card:nth-of-type(odd) {
@@ -198,6 +212,10 @@ const projects: Array<{
 	}
 
 	@media (max-width: 640px) {
+		.projects-layout {
+			gap: 1.75rem;
+		}
+
 		.preview {
 			min-height: auto;
 			aspect-ratio: 16 / 9;
