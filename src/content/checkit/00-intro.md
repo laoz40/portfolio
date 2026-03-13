@@ -18,4 +18,3 @@ use and stay productive. We began with user research to understand user
 behaviour, then turned our findings into targeted features. Through several
 rounds of user testing, we refined the flows and polished the UI to create an
 experience that improved users' productivity.
-
