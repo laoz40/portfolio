@@ -4,6 +4,8 @@ import HorusProjectLinksSection from "../../components/projects/HorusProjectLink
 import ProjectCaseStudy from "../../components/projects/ProjectCaseStudy.astro";
 import Intro, { frontmatter } from "../../content/horus/00-intro.md";
 import ProjectOverview from "../../content/horus/01-project-overview.md";
+import ProjectFeatures from "../../content/horus/02-project-features.md";
+import TechStack from "../../content/horus/03-tech-stack.md";
 
 const sections = [
 	{ Component: Intro, variant: "featured" },
@@ -16,6 +18,8 @@ const sections = [
 		},
 	},
 	{ Component: ProjectOverview, variant: "contentOnly" },
+	{ Component: ProjectFeatures, variant: "contentOnly" },
+	{ Component: TechStack, variant: "contentOnly" },
 ];
 ---
 

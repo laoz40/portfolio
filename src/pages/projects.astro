@@ -5,6 +5,7 @@ import ToolBadges from "../components/ui/ToolBadges.astro";
 import { frontmatter as horus } from "../content/horus/00-intro.md";
 import { frontmatter as sprout } from "../content/sprout/00-intro.md";
 import { frontmatter as checkit } from "../content/checkit/00-intro.md";
+import { frontmatter as vvstudios } from "../content/vvstudios/00-intro.md";
 
 type ProjectFrontmatter = {
 	title: string;
@@ -28,6 +29,10 @@ const projects: Array<{
 	{
 		slug: "checkit",
 		frontmatter: checkit as ProjectFrontmatter,
+	},
+	{
+		slug: "vvstudios",
+		frontmatter: vvstudios as ProjectFrontmatter,
 	},
 ];
 ---

@@ -1,18 +1,7 @@
----
-title: Horus
-project: Full Stack Workout Tracker Web App
-description: I built a full stack mobile web app to help people track their workouts. I used Next.js, React, and SQLite.
-tools:
-  - Next.js
-  - React
-  - TypeScript
-  - Convex
-  - Better Auth
-  - Zod
-  - Tailwind
-cover-image: image
----
+## Project Overview
 
-## WIP
+### What is Horus?
 
-### Project Overview
+I built a web app to track my gym workouts. I decided to create my own because
+I don't enjoy the existing solutions and my previous method of tracking
+workouts (excel sheet) was extremely inefficient and didn't scale well.
