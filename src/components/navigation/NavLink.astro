@@ -24,6 +24,10 @@ const { href, variant = "yellow", selectable = false } = Astro.props;
 	.nav-link :global(.nav-link-text) {
 		font-size: 1.9rem;
 		line-height: 1.1;
+		--highlight-top: 0.8em;
+		--highlight-bottom: 0.8em;
+		--highlight-left: -0.04em;
+		--highlight-right: -0.03em;
 		padding: clamp(0.6rem, 1.4vw, 1.5rem) clamp(0.45rem, 1vw, 1rem);
 		transition: transform 120ms ease;
 	}

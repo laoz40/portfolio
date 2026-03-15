@@ -78,9 +78,9 @@
 		aria-controls="site-nav-links"
 		aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}>
 		<span class="menu-toggle-icon" aria-hidden="true">
-			<span class="menu-toggle-bar bar-1" />
-			<span class="menu-toggle-bar bar-2" />
-			<span class="menu-toggle-bar bar-3" />
+			<span class="menu-toggle-bar bar-1" ></span>
+			<span class="menu-toggle-bar bar-2" ></span>
+			<span class="menu-toggle-bar bar-3" ></span>
 		</span>
 	</button>
 
@@ -300,6 +300,10 @@
 		display: inline-block;
 		font-size: 1.9rem;
 		line-height: 1.1;
+		--highlight-top: 0.8em;
+		--highlight-bottom: 0.8em;
+		--highlight-left: -0.04em;
+		--highlight-right: -0.03em;
 		padding: clamp(0.6rem, 1.4vw, 1.5rem) clamp(0.45rem, 1vw, 1rem);
 		transition: transform 120ms ease;
 		z-index: 0;
