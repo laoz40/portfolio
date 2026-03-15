@@ -1,8 +1,26 @@
 ---
 import DefaultLayout from "../layouts/DefaultLayout.astro";
-
 import ImperfectButton from "../components/home/ImperfectButton.astro";
 import ScrollDownArrow from "../components/home/ScrollDownArrow.astro";
+import HighlightText from "../components/ui/HighlightText.astro";
+import ToolBadges from "../components/ui/ToolBadges.astro";
+import { getEntry } from "astro:content";
+
+type ProjectFrontmatter = {
+	title: string;
+	project: string;
+	description: string;
+	tools?: string[];
+	coverImage?: { src: string };
+};
+
+const horusEntry = await getEntry("horus", "00-intro");
+
+if (!horusEntry) {
+	throw new Error("Missing intro entry for: horus");
+}
+
+const horus = horusEntry.data as ProjectFrontmatter;
 ---
 
 <DefaultLayout
@@ -34,6 +52,46 @@ import ScrollDownArrow from "../components/home/ScrollDownArrow.astro";
 
 	<section id="featured">
 		<h3>Featured Work</h3>
+		<a
+			class="project-card"
+			href="/projects/horus"
+			aria-label={`Open ${horus.title} project page`}>
+			<div class="project-frame">
+				<div
+					class="preview"
+					aria-hidden="true">
+					{
+						horus.coverImage ? (
+							<img
+								class="preview-image"
+								src={horus.coverImage.src}
+								alt=""
+								loading="lazy"
+								decoding="async"
+							/>
+						) : null
+					}
+				</div>
+				<div class="project-meta">
+					<div class="project-copy">
+						<div class="project-title">
+							<HighlightText
+								tag="h4"
+								variant="yellow"
+								class="project-title-highlight">
+								{horus.title}
+							</HighlightText>
+							<span>{horus.project}</span>
+						</div>
+						<p>{horus.description}</p>
+					</div>
+					<ToolBadges
+						tools={horus.tools ?? []}
+						projectTitle={horus.title}
+					/>
+				</div>
+			</div>
+		</a>
 	</section>
 </DefaultLayout>
 
@@ -55,6 +113,7 @@ import ScrollDownArrow from "../components/home/ScrollDownArrow.astro";
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		gap: clamp(1.5rem, 3vw, 2.5rem);
 	}
 
 	h1 {
@@ -75,11 +134,138 @@ import ScrollDownArrow from "../components/home/ScrollDownArrow.astro";
 
 	h3 {
 		margin: 0;
-		font-size: 2.5rem;
+		font-size: clamp(1.9rem, 5vw, 3.5rem);
 		font-weight: 700;
 		line-height: 1;
-		letter-spacing: -0.02em;
 		text-align: center;
+	}
+
+	.project-card {
+		display: flex;
+		width: min(100%, 37.25rem);
+		color: var(--color-text-body);
+		text-decoration: none;
+		margin-top: 2rem;
+	}
+
+	.project-frame {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		min-height: clamp(33rem, 38vw, 36rem);
+		padding: clamp(0.75rem, 1.1vw, 0.95rem);
+		border: 0.18rem solid rgba(31, 30, 25, 0.08);
+		background: rgba(250, 247, 239, 0.98);
+		box-shadow: var(--shadow-paper-rest);
+		transform: rotate(-0.35deg);
+		transition:
+			box-shadow 200ms ease,
+			transform 200ms ease;
+	}
+
+	.project-frame::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 50%;
+		width: var(--size-project-tape-width);
+		height: var(--size-project-tape-height);
+		transform: translate(-50%, -50%) rotate(1.2deg);
+		background: var(--color-tape);
+		pointer-events: none;
+		z-index: 1;
+	}
+
+	.project-card:hover .project-frame,
+	.project-card:focus-within .project-frame {
+		box-shadow: var(--shadow-paper-hover);
+		transform: translateY(-4px) rotate(-0.35deg);
+	}
+
+	.project-card:hover :global(.project-title-highlight)::before,
+	.project-card:focus-within :global(.project-title-highlight)::before {
+		transform: var(
+			--highlight-transform-active,
+			scaleX(1) skewX(-4deg) rotate(-1.2deg)
+		);
+		opacity: 1;
+	}
+
+	.preview {
+		width: 100%;
+		aspect-ratio: 16 / 9;
+		min-height: clamp(16.25rem, 21vw, 18.25rem);
+		background: var(--color-accent-lime);
+		overflow: hidden;
+	}
+
+	.preview-image {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.project-meta {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		justify-content: space-between;
+		padding: clamp(0.75rem, 1.15vw, 0.95rem) 0 0.1rem;
+	}
+
+	.project-copy {
+		display: flex;
+		flex-direction: column;
+		gap: 0.7rem;
+	}
+
+	.project-title {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.35rem;
+	}
+
+	:global(.project-title-highlight) {
+		margin: 0;
+		font-size: clamp(1.55rem, 1.2vw + 1.1rem, 2.15rem);
+		font-weight: 700;
+		line-height: 0.95;
+		color: var(--color-text-heading);
+		--highlight-colour: var(--color-highlight-yellow-strong);
+		--highlight-top: 0.18em;
+		--highlight-bottom: 0.06em;
+		--highlight-left: -0.04em;
+		--highlight-right: -0.03em;
+	}
+
+	.project-title span {
+		font-family: var(--font-handwriting);
+		font-size: clamp(1rem, 0.7vw + 0.85rem, 1.25rem);
+		font-weight: 700;
+		letter-spacing: 0.02em;
+		color: var(--color-text-muted);
+	}
+
+	.project-meta p {
+		margin: 0;
+		font-family: var(--font-sans);
+		font-size: clamp(0.92rem, 0.35vw + 0.82rem, 0.99rem);
+		font-weight: var(--type-sans-weight-regular);
+		line-height: 1.45;
+		color: var(--color-text-muted);
+	}
+
+	.project-meta :global(.tool-badges) {
+		gap: 0.45rem;
+		padding-top: clamp(0.9rem, 1.8vw, 1.5rem);
+	}
+
+	.project-meta :global(.tool-badge-shape) {
+		background: rgba(255, 255, 255, 0.9);
+		box-shadow: 0 3px 6px rgba(54, 43, 21, 0.08);
 	}
 
 	span {
@@ -97,6 +283,20 @@ import ScrollDownArrow from "../components/home/ScrollDownArrow.astro";
 	@media (max-width: 640px) {
 		#hero {
 			padding-top: 4.5rem;
+		}
+
+		#featured {
+			padding-top: 4rem;
+		}
+
+		.project-frame {
+			min-height: auto;
+			transform: none;
+		}
+
+		.project-card:hover .project-frame,
+		.project-card:focus-within .project-frame {
+			transform: translateY(-4px);
 		}
 	}
 </style>

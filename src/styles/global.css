@@ -76,7 +76,7 @@
 	--color-tape: rgb(223 214 170 / 0.42);
 	--size-project-tape-width: clamp(3.8rem, 26%, 5.6rem);
 	--size-project-tape-height: 2rem;
-	--shadow-paper-rest: 6px 7px 3px rgb(54 43 21 / 0.14);
+	--shadow-paper-rest: 3px 4px 3px rgb(54 43 21 / 0.08);
 	--shadow-paper-hover: 8px 10px 4px rgb(54 43 21 / 0.24);
 }
 
