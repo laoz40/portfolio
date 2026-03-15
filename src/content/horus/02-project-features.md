@@ -1,6 +1,6 @@
 ## App Features
 
-###  What does this app do?
+### What does this app do?
 
 #### Features
 
