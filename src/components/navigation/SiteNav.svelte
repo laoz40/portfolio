@@ -52,6 +52,10 @@
 </script>
 
 <nav class:is-scrolled={isScrolled}>
+	<div
+		class="nav-grain"
+		aria-hidden="true"></div>
+
 	<div class="nav-brand font-bold">
 		<a
 			class="nav-link"
@@ -163,7 +167,49 @@
 		transform: translateY(0);
 	}
 
-	nav > * {
+	.nav-grain {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0.55rem;
+		clip-path: polygon(
+			0 0,
+			100% 0,
+			100% 94%,
+			96% 98%,
+			91% 95%,
+			86% 99%,
+			74% 98%,
+			61% 99%,
+			54% 95%,
+			47% 98%,
+			33% 98%,
+			26% 95%,
+			18% 99%,
+			10% 95%,
+			4% 98%,
+			0 94%
+		);
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23grain)'/%3E%3C/svg%3E");
+		background-repeat: repeat;
+		background-size: 160px 160px;
+		mix-blend-mode: multiply;
+		opacity: 0;
+		transform: translateY(-0.4rem);
+		transition:
+			opacity 220ms ease,
+			transform 220ms ease;
+		pointer-events: none;
+		z-index: 0;
+	}
+
+	nav.is-scrolled .nav-grain {
+		opacity: 0.3;
+		transform: translateY(0);
+	}
+
+	nav > :not(.nav-grain) {
 		position: relative;
 		z-index: 1;
 	}
