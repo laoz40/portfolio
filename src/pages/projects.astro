@@ -63,16 +63,18 @@ const projects: Array<{
 								) : null}
 							</div>
 							<div class="project-meta">
-								<div class="project-title">
-									<HighlightText
-										tag="h2"
-										variant="yellow"
-										class="project-title-highlight">
-										{frontmatter.title}
-									</HighlightText>
-									<span>{frontmatter.project}</span>
+								<div class="project-copy">
+									<div class="project-title">
+										<HighlightText
+											tag="h2"
+											variant="yellow"
+											class="project-title-highlight">
+											{frontmatter.title}
+										</HighlightText>
+										<span>{frontmatter.project}</span>
+									</div>
+									<p>{frontmatter.description}</p>
 								</div>
-								<p>{frontmatter.description}</p>
 								<ToolBadges
 									tools={frontmatter.tools ?? []}
 									projectTitle={frontmatter.title}
@@ -118,11 +120,7 @@ const projects: Array<{
 		min-height: clamp(33rem, 38vw, 36rem);
 		padding: clamp(0.75rem, 1.1vw, 0.95rem);
 		border: 0.18rem solid rgba(31, 30, 25, 0.08);
-		background: linear-gradient(
-			180deg,
-			rgba(255, 255, 255, 0.96),
-			rgba(247, 242, 231, 0.96)
-		);
+		background: rgba(250, 247, 239, 0.98);
 		box-shadow: var(--shadow-paper-rest);
 		transform: rotate(var(--preview-tilt, 0deg));
 		transition:
@@ -184,8 +182,15 @@ const projects: Array<{
 	.project-meta {
 		display: flex;
 		flex-direction: column;
-		gap: 0.7rem;
+		flex: 1;
+		justify-content: space-between;
 		padding: clamp(0.75rem, 1.15vw, 0.95rem) 0 0.1rem;
+	}
+
+	.project-copy {
+		display: flex;
+		flex-direction: column;
+		gap: 0.7rem;
 	}
 
 	.project-title {
@@ -227,6 +232,7 @@ const projects: Array<{
 
 	.project-meta :global(.tool-badges) {
 		gap: 0.45rem;
+		padding-top: clamp(0.9rem, 1.8vw, 1.5rem);
 	}
 
 	.project-meta :global(.tool-badge-shape) {
