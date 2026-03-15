@@ -9,7 +9,7 @@ tools:
   - User Testing
   - UI Design
   - Video Editing
-cover-image: image
+coverImage: ../../assets/sprout/cover.webp
 alt-text: Sprout Cover Image (Credit @josephgvideo)
 notes:
   - One of five projects shortlisted for the ADP Open Jury Industry Crit

@@ -8,7 +8,7 @@ tools:
   - Prototyping
   - User Testing
   - UI Design
-cover-image: image
+coverImage: ../../assets/checkit/cover.webp
 ---
 
 # Check It
