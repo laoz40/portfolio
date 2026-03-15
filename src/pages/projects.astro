@@ -2,74 +2,86 @@
 import DefaultLayout from "../layouts/DefaultLayout.astro";
 import HighlightText from "../components/ui/HighlightText.astro";
 import ToolBadges from "../components/ui/ToolBadges.astro";
-import { frontmatter as horus } from "../content/horus/00-intro.md";
-import { frontmatter as sprout } from "../content/sprout/00-intro.md";
-import { frontmatter as checkit } from "../content/checkit/00-intro.md";
-import { frontmatter as vvstudios } from "../content/vvstudios/00-intro.md";
+import { getEntry } from "astro:content";
 
 type ProjectFrontmatter = {
 	title: string;
 	project: string;
 	description: string;
 	tools?: string[];
+	coverImage?: { src: string };
 };
 
+const projectSlugs = ["horus", "sprout", "checkit", "vvstudios"] as const;
+
+const projectEntries = await Promise.all(
+	projectSlugs.map(async (slug) => ({
+		slug,
+		entry: await getEntry(slug, "00-intro"),
+	})),
+);
+
+const missingProjects = projectEntries
+	.filter(({ entry }) => !entry)
+	.map(({ slug }) => slug);
+
+if (missingProjects.length > 0) {
+	throw new Error(`Missing intro entry for: ${missingProjects.join(", ")}`);
+}
+
 const projects: Array<{
-	slug: string;
+	slug: (typeof projectSlugs)[number];
 	frontmatter: ProjectFrontmatter;
-}> = [
-	{
-		slug: "horus",
-		frontmatter: horus as ProjectFrontmatter,
-	},
-	{
-		slug: "sprout",
-		frontmatter: sprout as ProjectFrontmatter,
-	},
-	{
-		slug: "checkit",
-		frontmatter: checkit as ProjectFrontmatter,
-	},
-	{
-		slug: "vvstudios",
-		frontmatter: vvstudios as ProjectFrontmatter,
-	},
-];
+}> = projectEntries.map(({ slug, entry }) => ({
+	slug,
+	frontmatter: entry!.data as ProjectFrontmatter,
+}));
 ---
 
 <DefaultLayout title="Projects">
 	<h1>These are my projects</h1>
 	<div class="projects-layout">
 		{
-			projects.map(({ slug, frontmatter }) => (
-				<a
-					class="project-card"
-					href={`/projects/${slug}`}
-					aria-label={`Open ${frontmatter.title} project page`}>
-					<div class="project-frame">
-						<div
-							class="preview"
-							aria-hidden="true"
-						/>
-						<div class="project-meta">
-							<ToolBadges
-								tools={frontmatter.tools ?? []}
-								projectTitle={frontmatter.title}
-							/>
-							<div class="project-title">
-								<HighlightText
-									tag="h2"
-									variant="yellow"
-									class="project-title-highlight">
-									{frontmatter.title}
-								</HighlightText>
-								<span>{frontmatter.project}</span>
+			projects.map(({ slug, frontmatter }) => {
+				return (
+					<a
+						class="project-card"
+						href={`/projects/${slug}`}
+						aria-label={`Open ${frontmatter.title} project page`}>
+						<div class="project-frame">
+							<div
+								class="preview"
+								aria-hidden="true">
+								{frontmatter.coverImage ? (
+									<img
+										class="preview-image"
+										src={frontmatter.coverImage.src}
+										alt=""
+										loading="lazy"
+										decoding="async"
+									/>
+								) : null}
 							</div>
-							<p>{frontmatter.description}</p>
+							<div class="project-meta">
+								<ToolBadges
+									tools={frontmatter.tools ?? []}
+									projectTitle={frontmatter.title}
+								/>
+								<div class="project-title">
+									<HighlightText
+										tag="h2"
+										variant="yellow"
+										class="project-title-highlight">
+										{frontmatter.title}
+									</HighlightText>
+									<span>{frontmatter.project}</span>
+								</div>
+								<p>{frontmatter.description}</p>
+							</div>
 						</div>
-					</div>
-				</a>
-			))
+					</a>
+				);
+			})
 		}
 	</div>
 </DefaultLayout>
@@ -155,6 +167,13 @@ const projects: Array<{
 		aspect-ratio: 8 / 5;
 		background: var(--color-accent-lime);
 		overflow: hidden;
+	}
+
+	.preview-image {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
 	}
 
 	.project-meta {

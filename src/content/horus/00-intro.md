@@ -12,7 +12,7 @@ tools:
   - Tailwind
 githubUrl: https://github.com/laoz40/Horus
 websiteUrl: https://horus-workout.vercel.app
-cover-image: image
+coverImage: ../../assets/horus/main.webp
 ---
 
 # Horus
