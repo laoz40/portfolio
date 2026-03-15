@@ -2,7 +2,7 @@
 
 ###  What does this app do?
 
-####  Features
+#### Features
 
 - Full workout management including creating, viewing, editing, and deleting workouts
 - Structured data models for workouts, exercises, sets, and historical performance tracking
