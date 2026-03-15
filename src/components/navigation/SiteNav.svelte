@@ -298,7 +298,7 @@
 	.nav-link-text {
 		position: relative;
 		display: inline-block;
-		font-size: clamp(1rem, 1.8vw, 1.75rem);
+		font-size: 1.9rem;
 		line-height: 1.1;
 		padding: clamp(0.6rem, 1.4vw, 1.5rem) clamp(0.45rem, 1vw, 1rem);
 		transition: transform 120ms ease;
@@ -409,12 +409,12 @@
 
 		.nav-links .nav-link-text {
 			width: 100%;
-			font-size: clamp(1.56rem, 6.4vw, 2.25rem);
+			font-size: 2.05rem;
 			padding: 0.82rem 0.75rem;
 		}
 
 		.nav-brand .nav-link-text {
-			font-size: clamp(1.62rem, 6.2vw, 2.2rem);
+			font-size: 1.75rem;
 		}
 	}
 
