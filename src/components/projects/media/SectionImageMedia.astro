@@ -7,7 +7,9 @@ const { image, alt } = Astro.props as {
 };
 ---
 
-<div class="section-media">
+<div
+	class="section-media"
+	style={`--section-media-max-width: ${image.width}px; --section-media-aspect-ratio: ${image.width} / ${image.height};`}>
 	<img
 		class="section-media-image"
 		src={image.src}
@@ -22,9 +24,9 @@ const { image, alt } = Astro.props as {
 <style>
 	.section-media {
 		position: relative;
-		width: 100%;
+		width: min(100%, var(--section-media-max-width));
 		align-self: center;
-		min-height: clamp(12rem, 36vh, 22rem);
+		aspect-ratio: var(--section-media-aspect-ratio);
 		background: var(--color-accent-lime);
 		border: 8px solid var(--color-surface-paper);
 		box-shadow: var(--shadow-paper-rest);
@@ -49,20 +51,12 @@ const { image, alt } = Astro.props as {
 		display: block;
 		width: 100%;
 		height: 100%;
-		min-height: inherit;
 		object-fit: cover;
 	}
 
 	@media (max-width: 1240px) {
 		.section-media {
-			min-height: clamp(10rem, 45vw, 14rem);
-			width: min(100%, 42rem);
-		}
-	}
-
-	@media (max-width: 640px) {
-		.section-media {
-			min-height: 9rem;
+			width: min(100%, 42rem, var(--section-media-max-width));
 		}
 	}
 </style>

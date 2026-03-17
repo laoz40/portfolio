@@ -172,7 +172,7 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 
 	.section {
 		display: grid;
-		grid-template-columns: minmax(0, 1fr) clamp(16rem, 28vw, 24rem);
+		grid-template-columns: minmax(0, 1fr) clamp(20rem, 34vw, 30rem);
 		gap: clamp(1.25rem, 3vw, 2.5rem);
 		align-items: start;
 	}
@@ -196,7 +196,6 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 	.section--featured :global(.section-media) {
 		position: static;
 		grid-column: 1 / -1;
-		min-height: clamp(18rem, 52vh, 34rem);
 	}
 
 	.section--featured :global(.section-media--embed) {

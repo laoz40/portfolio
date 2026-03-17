@@ -11,10 +11,14 @@ type CarouselItem = {
 const { items = [] } = Astro.props as {
 	items?: CarouselItem[];
 };
+
+const carouselMaxWidth =
+	items.length > 0 ? Math.max(...items.map((item) => item.image.width)) : 704;
 ---
 
 <div
 	class="section-carousel"
+	style={`--section-carousel-max-width: ${carouselMaxWidth}px;`}
 	data-carousel>
 	<div class="section-carousel-frame">
 		<div class="section-carousel-viewport">
@@ -49,28 +53,28 @@ const { items = [] } = Astro.props as {
 				}
 			</div>
 		</div>
-	</div>
-	<div class="section-carousel-controls">
-		<button
-			type="button"
-			class="section-carousel-button"
-			data-carousel-prev
-			aria-label="Previous slide">
-			Prev
-		</button>
-		<button
-			type="button"
-			class="section-carousel-button"
-			data-carousel-next
-			aria-label="Next slide">
-			Next
-		</button>
+		<div class="section-carousel-controls">
+			<button
+				type="button"
+				class="section-carousel-button"
+				data-carousel-prev
+				aria-label="Previous slide">
+				Prev
+			</button>
+			<button
+				type="button"
+				class="section-carousel-button"
+				data-carousel-next
+				aria-label="Next slide">
+				Next
+			</button>
+		</div>
 	</div>
 </div>
 
 <style>
 	.section-carousel {
-		width: min(100%, 44rem);
+		width: min(100%, var(--section-carousel-max-width));
 		align-self: center;
 		display: grid;
 		gap: 0.75rem;
@@ -171,20 +175,24 @@ const { items = [] } = Astro.props as {
 	}
 
 	.section-carousel-controls {
-		display: flex;
-		justify-content: space-around;
-		margin-top: 1rem;
+		position: absolute;
+		inset: calc(var(--size-project-tape-height) * 0.5) 0 0;
+		z-index: 3;
+		pointer-events: none;
 	}
 
 	.section-carousel-button {
 		--carousel-button-shadow-rest: 3px 4px 3px rgb(54 43 21 / 0.14);
 		--carousel-button-shadow-hover: 4px 5px 4px rgb(54 43 21 / 0.24);
+		position: absolute;
+		top: 50%;
 		font-family: var(--font-handwriting);
 		font-size: 2rem;
 		text-transform: uppercase;
 		padding: 0.3rem 0.6rem;
 		border: 2px solid var(--color-border-soft);
 		background: var(--color-surface-paper);
+		pointer-events: auto;
 		cursor: pointer;
 		box-shadow: var(--carousel-button-shadow-rest);
 		transition:
@@ -194,23 +202,25 @@ const { items = [] } = Astro.props as {
 	}
 
 	.section-carousel-button[data-carousel-prev] {
-		transform: rotate(-1.5deg);
+		left: clamp(0.5rem, 1vw, 0.9rem);
+		transform: translateY(-50%) rotate(-1.5deg);
 	}
 
 	.section-carousel-button[data-carousel-next] {
-		transform: rotate(1.5deg);
+		right: clamp(0.5rem, 1vw, 0.9rem);
+		transform: translateY(-50%) rotate(1.5deg);
 	}
 
 	.section-carousel-button[data-carousel-prev]:hover,
 	.section-carousel-button[data-carousel-prev]:focus-visible {
 		box-shadow: var(--carousel-button-shadow-hover);
-		transform: translateY(-4px) rotate(-1.5deg);
+		transform: translateY(calc(-50% - 4px)) rotate(-1.5deg);
 	}
 
 	.section-carousel-button[data-carousel-next]:hover,
 	.section-carousel-button[data-carousel-next]:focus-visible {
 		box-shadow: var(--carousel-button-shadow-hover);
-		transform: translateY(-4px) rotate(1.5deg);
+		transform: translateY(calc(-50% - 4px)) rotate(1.5deg);
 	}
 
 	.section-carousel-button:disabled {
@@ -220,7 +230,7 @@ const { items = [] } = Astro.props as {
 
 	@media (max-width: 1240px) {
 		.section-carousel {
-			width: min(100%, 38rem);
+			width: min(100%, 42rem, var(--section-carousel-max-width));
 		}
 	}
 
@@ -235,6 +245,11 @@ const { items = [] } = Astro.props as {
 
 		.section-carousel-content {
 			padding: 1rem 1.25rem;
+		}
+
+		.section-carousel-button {
+			font-size: 1.5rem;
+			padding: 0.2rem 0.45rem;
 		}
 	}
 

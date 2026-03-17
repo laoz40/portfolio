@@ -15,7 +15,7 @@ section:
   variant: featured
   media:
     type: image
-    image: ../../assets/sprout/cover.webp
+    image: ../../assets/sprout/featured.webp
     alt: Sprout project showcase photography
 notes:
   - One of five projects shortlisted for the ADP Open Jury Industry Crit

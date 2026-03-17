@@ -1,6 +1,7 @@
 ---
 section:
   variant: media
+  extraClass: section-handwriting-list
 ---
 
 ## User Research Insights
