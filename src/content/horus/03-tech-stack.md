@@ -1,6 +1,10 @@
 ---
 section:
-  variant: contentOnly
+  variant: media
+  media:
+    type: image
+    image: ../../assets/horus/history.webp
+    alt: Workout history screen mockup
 ---
 
 ## Technologies Used

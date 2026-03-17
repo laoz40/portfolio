@@ -13,6 +13,7 @@
 		border: 8px solid var(--color-surface-page);
 		box-shadow: var(--shadow-paper-medium);
 		transform: rotate(var(--section-media-tilt, 0deg));
+		min-width: 0;
 	}
 
 	.section-media::before {
@@ -37,6 +38,7 @@
 	@media (max-width: 640px) {
 		.section-media {
 			min-height: 9rem;
+			transform: none;
 		}
 	}
 </style>

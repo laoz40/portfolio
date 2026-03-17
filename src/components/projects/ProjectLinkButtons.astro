@@ -58,7 +58,8 @@ const { links, ariaLabel = "Project links" } = Astro.props as {
 		width: 100%;
 		min-height: clamp(5rem, 11vw, 6.8rem);
 		padding: clamp(1rem, 2vw, 1.45rem) clamp(1rem, 2vw, 1.6rem);
-		font-size: clamp(1.25rem, 1.5vw + 0.95rem, 1.9rem);
+		font-size: clamp(1.25rem, 1.5vw + 1.2rem, 2.5rem);
+		font-weight: 700;
 		line-height: 1.05;
 		text-align: center;
 	}
@@ -72,6 +73,13 @@ const { links, ariaLabel = "Project links" } = Astro.props as {
 	@media (max-width: 520px) {
 		.project-link-buttons {
 			grid-template-columns: 1fr;
+			gap: 0.5rem;
+		}
+
+		.project-link-buttons__item :global(.imperfect-button) {
+			min-height: 4.25rem;
+			padding: 0.85rem 1rem;
+			font-size: 1.8rem;
 		}
 
 		.project-link-buttons__item--1,

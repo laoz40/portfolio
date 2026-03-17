@@ -1,6 +1,10 @@
 ---
 section:
-  variant: contentOnly
+  variant: media
+  media:
+    type: image
+    image: ../../assets/horus/light.webp
+    alt: Workout form screen mockup
 ---
 
 ## App Features

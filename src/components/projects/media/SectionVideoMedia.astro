@@ -27,6 +27,7 @@ const embedUrl = `https://www.youtube.com/embed/${videoId}`;
 		width: 100%;
 		align-self: center;
 		padding-top: calc(var(--size-project-tape-height) * 0.5);
+		min-width: 0;
 	}
 
 	.section-media-frame::before {
@@ -50,6 +51,7 @@ const embedUrl = `https://www.youtube.com/embed/${videoId}`;
 		border: 8px solid var(--color-surface-page);
 		box-shadow: var(--shadow-paper-medium);
 		transform: rotate(var(--section-media-tilt, 0deg));
+		min-width: 0;
 	}
 
 	.section-media--embed {

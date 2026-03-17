@@ -25,4 +25,10 @@ const { links, ariaLabel = "Project links" } = Astro.props as {
 		justify-content: flex-start;
 		margin-top: clamp(1rem, 2vw, 1.5rem);
 	}
+
+	@media (max-width: 640px) {
+		.section-link-buttons {
+			margin-top: 0.5rem;
+		}
+	}
 </style>

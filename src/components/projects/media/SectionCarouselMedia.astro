@@ -78,11 +78,13 @@ const carouselMaxWidth =
 		align-self: center;
 		display: grid;
 		gap: 0.75rem;
+		min-width: 0;
 	}
 
 	.section-carousel-frame {
 		position: relative;
 		padding-top: calc(var(--size-project-tape-height) * 0.5);
+		min-width: 0;
 	}
 
 	.section-carousel-frame::before {
@@ -104,6 +106,7 @@ const carouselMaxWidth =
 		width: 100%;
 		transform: translateX(calc(var(--carousel-index, 0) * -100%));
 		transition: transform 260ms ease;
+		min-width: 0;
 	}
 
 	.section-carousel-viewport {
@@ -111,6 +114,8 @@ const carouselMaxWidth =
 		border: 8px solid var(--color-surface-page);
 		box-shadow: var(--shadow-paper-medium);
 		transform: rotate(var(--section-media-tilt, 0deg));
+		min-width: 0;
+		max-width: 100%;
 	}
 
 	.section-carousel-slide {
