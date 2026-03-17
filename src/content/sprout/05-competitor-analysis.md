@@ -4,7 +4,7 @@ section:
   media:
     type: image
     image: ../../assets/sprout/competitor-analysis.webp
-    alt: test
+    alt: Competitor analysis table
 ---
 
 ## Competitor Analysis

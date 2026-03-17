@@ -2,7 +2,6 @@
 import type { CaseStudySection, SectionMedia } from "./caseStudySections";
 import ScrollSpySidebar from "./ScrollSpySidebar.astro";
 import SectionCarouselMedia from "./media/SectionCarouselMedia.astro";
-import SectionGalleryMedia from "./media/SectionGalleryMedia.astro";
 import SectionImageMedia from "./media/SectionImageMedia.astro";
 import SectionLinkButtons from "./SectionLinkButtons.astro";
 import SectionPlaceholderMedia from "./media/SectionPlaceholderMedia.astro";
@@ -101,7 +100,6 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 					section.media,
 					frontmatterSection?.media,
 				);
-				const isGallery = variant === "gallery";
 				const isCarousel = variant === "carousel";
 				const isContentOnly = variant === "contentOnly";
 				const videoMedia =
@@ -136,9 +134,7 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 								/>
 							) : null}
 						</div>
-						{isContentOnly ? null : isGallery ? (
-							<SectionGalleryMedia />
-						) : isCarousel ? (
+						{isContentOnly ? null : isCarousel ? (
 							<SectionCarouselMedia items={carouselItems} />
 						) : videoMedia ? (
 							<SectionVideoMedia
@@ -193,8 +189,7 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 		grid-template-columns: 1fr;
 	}
 
-	.section--featured :global(.section-media) {
-		position: static;
+	.section--featured :global(.section-media-frame) {
 		grid-column: 1 / -1;
 	}
 
@@ -349,10 +344,24 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 	}
 
 	.project-content :global(.inline-gallery__tile) {
+		position: relative;
 		min-height: clamp(7rem, 16vh, 10rem);
 		background: var(--color-accent-lime);
-		border: 8px solid var(--color-surface-paper);
-		box-shadow: 0.5rem 0.75rem 1.25rem var(--color-border-soft);
+		border: 8px solid var(--color-surface-page);
+		box-shadow: var(--shadow-paper-medium);
+	}
+
+	.project-content :global(.inline-gallery__tile::before) {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 50%;
+		width: var(--size-project-tape-width);
+		height: var(--size-project-tape-height);
+		transform: translate(-50%, -50%) rotate(1deg);
+		background: var(--color-tape);
+		pointer-events: none;
+		z-index: 2;
 	}
 
 	.project-content :global(.inline-gallery__tile:nth-child(4n + 1)) {
