@@ -37,10 +37,6 @@ const { href = "#featured", label = "Scroll to featured section" } =
 
 <style>
 	.scroll-down {
-		position: absolute;
-		bottom: 2rem;
-		left: 50%;
-		transform: translateX(-50%);
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
@@ -57,7 +53,7 @@ const { href = "#featured", label = "Scroll to featured section" } =
 
 	.scroll-down:hover,
 	.scroll-down:focus-visible {
-		transform: translateX(-50%) translateY(-0.25rem);
+		transform: translateY(-0.25rem);
 	}
 
 	@media (prefers-reduced-motion: reduce) {
@@ -67,7 +63,7 @@ const { href = "#featured", label = "Scroll to featured section" } =
 
 		.scroll-down:hover,
 		.scroll-down:focus-visible {
-			transform: translateX(-50%);
+			transform: none;
 		}
 	}
 </style>
