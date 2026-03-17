@@ -31,15 +31,17 @@ const carouselMaxWidth =
 							class="section-carousel-slide"
 							role="group"
 							aria-label={`Slide ${index + 1} of ${items.length}`}>
-							<img
-								class="section-carousel-image"
-								src={item.image.src}
-								alt={item.alt}
-								width={item.image.width}
-								height={item.image.height}
-								loading="lazy"
-								decoding="async"
-							/>
+							<div class="section-carousel-media">
+								<img
+									class="section-carousel-image"
+									src={item.image.src}
+									alt={item.alt}
+									width={item.image.width}
+									height={item.image.height}
+									loading="lazy"
+									decoding="async"
+								/>
+							</div>
 							<div class="section-carousel-content">
 								<h4 class="section-carousel-title">
 									{item.title ?? `Slide ${index + 1}`}
@@ -128,16 +130,20 @@ const carouselMaxWidth =
 		background: var(--color-accent-lime);
 	}
 
-	.section-carousel-image {
+	.section-carousel-media {
 		position: absolute;
 		inset: 0;
 		z-index: 0;
+	}
+
+	.section-carousel-image {
+		display: block;
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
 	}
 
-	.section-carousel-slide::before {
+	.section-carousel-media::before {
 		content: "";
 		position: absolute;
 		inset: 0;
@@ -249,13 +255,62 @@ const carouselMaxWidth =
 			transform: none;
 		}
 
+		.section-carousel-slide {
+			aspect-ratio: auto;
+			display: grid;
+			align-items: stretch;
+			background: var(--color-surface-paper);
+		}
+
+		.section-carousel-media {
+			position: relative;
+			inset: auto;
+			aspect-ratio: 4 / 3;
+		}
+
+		.section-carousel-media::before {
+			display: none;
+		}
+
 		.section-carousel-content {
-			padding: 1rem 1.25rem;
+			padding: 1rem 1.25rem 0;
+			background: var(--color-surface-paper);
+		}
+
+		.section-carousel-title,
+		.section-carousel-description {
+			color: var(--color-text-body) !important;
+		}
+
+		.section-carousel-controls {
+			position: static;
+			inset: auto;
+			margin-top: 0.75rem;
+			display: flex;
+			justify-content: space-between;
+			gap: 0.75rem;
+			pointer-events: auto;
 		}
 
 		.section-carousel-button {
+			position: static;
 			font-size: 1.5rem;
 			padding: 0.2rem 0.45rem;
+			transform: none;
+		}
+
+		.section-carousel-button[data-carousel-prev],
+		.section-carousel-button[data-carousel-next] {
+			left: auto;
+			right: auto;
+			transform: none;
+		}
+
+		.section-carousel-button[data-carousel-prev]:hover,
+		.section-carousel-button[data-carousel-prev]:focus-visible,
+		.section-carousel-button[data-carousel-next]:hover,
+		.section-carousel-button[data-carousel-next]:focus-visible {
+			transform: translateY(-2px);
 		}
 	}
 
