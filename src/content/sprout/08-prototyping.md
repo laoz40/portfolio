@@ -24,6 +24,10 @@ To test the concept, we created a paper prototype to simulate the experience of 
 
 We began by creating low-fidelity sketches to plan the core features and screen layouts of our app. This allowed us to map out how users would navigate through key functions, ensuring a smooth and intuitive user flow throughout the app.
 
+<br>
+<br>
+<br>
+
 **After receiving feedback on the functionality of our concept, I developed the mid-fidelity prototype. The aim was to have a more realistic design and basic interactivity, allowing us to test user interactions more effectively.**
 
 <div class="inline-gallery" aria-hidden="true">
