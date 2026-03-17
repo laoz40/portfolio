@@ -240,7 +240,7 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 
 	.project-content :global(h3) {
 		font-family: var(--font-handwriting);
-		font-size: clamp(3rem, 4vw, 4.5rem);
+		font-size: clamp(2.4rem, 3.2vw, 3.6rem);
 		font-weight: 700;
 		line-height: 0.95;
 		max-width: 32ch;
@@ -408,6 +408,10 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 		.project-content :global(h1) {
 			font-size: clamp(3rem, 14vw, 4rem);
 			margin-bottom: 0.5rem;
+		}
+
+		.project-content :global(h3) {
+			font-size: clamp(2.1rem, 9vw, 2.8rem);
 		}
 
 		.project-content :global(.inline-gallery) {
