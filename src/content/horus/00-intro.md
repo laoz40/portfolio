@@ -10,12 +10,18 @@ tools:
   - Better Auth
   - Zod
   - Tailwind
-githubUrl: https://github.com/laoz40/Horus
-websiteUrl: https://horus-workout.vercel.app
 coverImage: ../../assets/horus/cover.webp
 altText: Horus Cover Image
 section:
   variant: featured
+  links:
+    - label: GitHub
+      href: https://github.com/laoz40/Horus
+      fill: var(--color-home-button-yellow)
+    - label: Website
+      href: https://horus-workout.vercel.app
+      fill: var(--color-home-button-sky)
+  ariaLabel: Horus project links
   media:
     type: image
     image: ../../assets/horus/cover.webp

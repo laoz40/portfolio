@@ -21,6 +21,12 @@ export type CarouselItem = {
 	caption?: string;
 };
 
+export type SectionLink = {
+	label: string;
+	href: string;
+	fill: string;
+};
+
 export type SectionMedia =
 	| {
 			type: "youtube";
@@ -52,6 +58,8 @@ export type SectionFrontmatter = {
 		variant?: SectionVariant;
 		extraClass?: string;
 		media?: SectionMedia;
+		links?: SectionLink[];
+		ariaLabel?: string;
 	};
 };
 

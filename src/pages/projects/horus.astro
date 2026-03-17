@@ -1,7 +1,6 @@
 ---
 import { createContentSection } from "../../components/projects/caseStudySections";
 import DefaultLayout from "../../layouts/DefaultLayout.astro";
-import HorusProjectLinksSection from "../../components/projects/HorusProjectLinksSection.astro";
 import ProjectCaseStudy from "../../components/projects/ProjectCaseStudy.astro";
 import Intro from "../../content/horus/00-intro.md";
 import ProjectOverview from "../../content/horus/01-project-overview.md";
@@ -43,14 +42,6 @@ const { section: techStackSection } = techStackResult;
 
 const sections = [
 	introSection,
-	{
-		Component: HorusProjectLinksSection,
-		variant: "contentOnly",
-		props: {
-			githubUrl: introFrontmatter.githubUrl,
-			websiteUrl: introFrontmatter.websiteUrl,
-		},
-	},
 	projectOverviewSection,
 	projectFeaturesSection,
 	techStackSection,

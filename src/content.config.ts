@@ -53,14 +53,22 @@ const sharedSchema = ({ image }) =>
 			project: z.string().optional(),
 			description: z.string().optional(),
 			tools: z.array(z.string()).optional(),
-			githubUrl: z.string().url().optional(),
-			websiteUrl: z.string().url().optional(),
 			coverImage: image().optional(),
 			section: z
 				.object({
 					variant: sectionVariantSchema.optional(),
 					extraClass: z.string().optional(),
 					media: sectionMediaSchema({ image }).optional(),
+					links: z
+						.array(
+							z.object({
+								label: z.string(),
+								href: z.string().url(),
+								fill: z.string(),
+							}),
+						)
+						.optional(),
+					ariaLabel: z.string().optional(),
 				})
 				.optional(),
 			notes: z.array(z.string()).optional(),

@@ -1,0 +1,28 @@
+---
+import ProjectLinkButtons from "./ProjectLinkButtons.astro";
+import type { SectionLink } from "./caseStudySections";
+
+const { links, ariaLabel = "Project links" } = Astro.props as {
+	links: SectionLink[];
+	ariaLabel?: string;
+};
+---
+
+{
+	links.length > 0 ? (
+		<div class="section-link-buttons">
+			<ProjectLinkButtons
+				links={links}
+				ariaLabel={ariaLabel}
+			/>
+		</div>
+	) : null
+}
+
+<style>
+	.section-link-buttons {
+		display: flex;
+		justify-content: flex-start;
+		margin-top: clamp(1rem, 2vw, 1.5rem);
+	}
+</style>

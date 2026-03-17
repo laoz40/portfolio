@@ -4,6 +4,7 @@ import ScrollSpySidebar from "./ScrollSpySidebar.astro";
 import SectionCarouselMedia from "./media/SectionCarouselMedia.astro";
 import SectionGalleryMedia from "./media/SectionGalleryMedia.astro";
 import SectionImageMedia from "./media/SectionImageMedia.astro";
+import SectionLinkButtons from "./SectionLinkButtons.astro";
 import SectionPlaceholderMedia from "./media/SectionPlaceholderMedia.astro";
 import SectionVideoMedia from "./media/SectionVideoMedia.astro";
 
@@ -73,6 +74,12 @@ const resolveCarouselItems = (
 	return [];
 };
 
+type SectionLinks = Array<{
+	label: string;
+	href: string;
+	fill: string;
+}>;
+
 const { sections, headingSelector = "h2" } = Astro.props as {
 	sections: CaseStudySection[];
 	headingSelector?: string;
@@ -106,6 +113,12 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 					section.carouselItems,
 					resolvedMedia,
 				);
+				const sectionLinks =
+					(frontmatterSection as { links?: SectionLinks } | undefined)?.links ??
+					[];
+				const linksAriaLabel = (
+					frontmatterSection as { ariaLabel?: string } | undefined
+				)?.ariaLabel;
 
 				return (
 					<section
@@ -116,6 +129,12 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 						]}>
 						<div class="section-copy">
 							<SectionComponent {...sectionProps} />
+							{sectionLinks.length > 0 ? (
+								<SectionLinkButtons
+									links={sectionLinks}
+									ariaLabel={linksAriaLabel}
+								/>
+							) : null}
 						</div>
 						{isContentOnly ? null : isGallery ? (
 							<SectionGalleryMedia />
