@@ -1,3 +1,8 @@
+---
+section:
+  variant: media
+---
+
 ## Competitor Analysis
 
 ### Why social media limiters don't work

@@ -1,3 +1,8 @@
+---
+section:
+  variant: contentOnly
+---
+
 ## Our Goal
 
 ### We want people to care, because right now they don't

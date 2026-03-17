@@ -1,3 +1,12 @@
+---
+section:
+  variant: featured
+  media:
+    type: youtube
+    url: https://youtu.be/oPx-KKh4q6k
+    title: Sprout Pitch
+---
+
 ## Problem Area
 
 ### Deforestation is ruining our planet

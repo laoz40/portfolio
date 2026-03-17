@@ -1,3 +1,8 @@
+---
+section:
+  variant: media
+---
+
 ## User Research Insights
 
 ### What's stopping people from doing anything?

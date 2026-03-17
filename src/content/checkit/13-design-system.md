@@ -1,3 +1,8 @@
+---
+section:
+  variant: media
+---
+
 ## Design System
 
 ### Creating the visual identity

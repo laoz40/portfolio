@@ -1,3 +1,8 @@
+---
+section:
+  variant: contentOnly
+---
+
 ## Ideation Process
 
 ### Creating the concept

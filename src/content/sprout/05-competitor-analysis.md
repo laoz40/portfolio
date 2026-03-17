@@ -1,3 +1,12 @@
+---
+section:
+  variant: media
+  media:
+    type: image
+    image: ../../assets/sprout/cover.webp
+    alt: test
+---
+
 ## Competitor Analysis
 
 ### Existing solutions won't solve the problem

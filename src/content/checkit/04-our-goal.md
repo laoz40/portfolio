@@ -1,3 +1,8 @@
+---
+section:
+  variant: media
+---
+
 ## Our Goal
 
 ### We want to inspire people to change

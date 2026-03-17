@@ -1,10 +1,14 @@
 ---
+import type { ImageMetadata } from "astro";
+
 type CarouselItem = {
+	image: ImageMetadata;
+	alt: string;
 	title?: string;
 	description?: string;
 };
 
-const { items = [{}, {}, {}, {}] } = Astro.props as {
+const { items = [] } = Astro.props as {
 	items?: CarouselItem[];
 };
 ---
@@ -23,6 +27,15 @@ const { items = [{}, {}, {}, {}] } = Astro.props as {
 							class="section-carousel-slide"
 							role="group"
 							aria-label={`Slide ${index + 1} of ${items.length}`}>
+							<img
+								class="section-carousel-image"
+								src={item.image.src}
+								alt={item.alt}
+								width={item.image.width}
+								height={item.image.height}
+								loading="lazy"
+								decoding="async"
+							/>
 							<div class="section-carousel-content">
 								<h4 class="section-carousel-title">
 									{item.title ?? `Slide ${index + 1}`}
@@ -57,7 +70,7 @@ const { items = [{}, {}, {}, {}] } = Astro.props as {
 
 <style>
 	.section-carousel {
-		width: 100%;
+		width: min(100%, 44rem);
 		align-self: center;
 		display: grid;
 		gap: 0.75rem;
@@ -97,7 +110,7 @@ const { items = [{}, {}, {}, {}] } = Astro.props as {
 	}
 
 	.section-carousel-slide {
-		min-height: clamp(12rem, 36vh, 22rem);
+		aspect-ratio: 4 / 3;
 		min-width: 100%;
 		display: flex;
 		align-items: flex-end;
@@ -106,23 +119,33 @@ const { items = [{}, {}, {}, {}] } = Astro.props as {
 		background: var(--color-accent-lime);
 	}
 
+	.section-carousel-image {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
 	.section-carousel-slide::before {
 		content: "";
 		position: absolute;
 		inset: 0;
+		z-index: 1;
 		background: linear-gradient(
 			to top,
-			rgba(0, 0, 0, 0.5) 0%,
-			rgba(0, 0, 0, 0.3) 20%,
-			rgba(0, 0, 0, 0.15) 35%,
-			rgba(0, 0, 0, 0) 60%
+			rgba(15, 12, 5, 0.82) 0%,
+			rgba(15, 12, 5, 0.56) 24%,
+			rgba(15, 12, 5, 0.2) 46%,
+			rgba(15, 12, 5, 0) 68%
 		);
 		pointer-events: none;
 	}
 
 	.section-carousel-content {
 		position: relative;
-		z-index: 1;
+		z-index: 2;
 		width: 100%;
 		padding: 1rem 2rem;
 	}
@@ -197,13 +220,21 @@ const { items = [{}, {}, {}, {}] } = Astro.props as {
 
 	@media (max-width: 1240px) {
 		.section-carousel {
-			width: min(100%, 42rem);
+			width: min(100%, 38rem);
 		}
 	}
 
 	@media (max-width: 640px) {
+		.section-carousel {
+			width: 100%;
+		}
+
 		.section-carousel-viewport {
 			transform: none;
+		}
+
+		.section-carousel-content {
+			padding: 1rem 1.25rem;
 		}
 	}
 

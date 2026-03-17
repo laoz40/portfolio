@@ -10,6 +10,7 @@ type ProjectFrontmatter = {
 	description: string;
 	tools?: string[];
 	coverImage?: { src: string };
+	altText?: string;
 };
 
 const projectSlugs = ["horus", "sprout", "checkit", "vvstudios"] as const;
@@ -56,7 +57,7 @@ const projects: Array<{
 									<img
 										class="preview-image"
 										src={frontmatter.coverImage.src}
-										alt=""
+										alt={frontmatter.altText}
 										loading="lazy"
 										decoding="async"
 									/>

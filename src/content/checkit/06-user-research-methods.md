@@ -1,3 +1,8 @@
+---
+section:
+  variant: media
+---
+
 ## User Research
 
 ### Understanding user behaviour

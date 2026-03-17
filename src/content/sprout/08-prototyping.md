@@ -1,3 +1,8 @@
+---
+section:
+  variant: contentOnly
+---
+
 ## Prototyping
 
 ### Developing our solution

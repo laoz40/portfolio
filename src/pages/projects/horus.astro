@@ -1,28 +1,62 @@
 ---
+import { createContentSection } from "../../components/projects/caseStudySections";
 import DefaultLayout from "../../layouts/DefaultLayout.astro";
 import HorusProjectLinksSection from "../../components/projects/HorusProjectLinksSection.astro";
 import ProjectCaseStudy from "../../components/projects/ProjectCaseStudy.astro";
-import Intro, { frontmatter } from "../../content/horus/00-intro.md";
+import Intro from "../../content/horus/00-intro.md";
 import ProjectOverview from "../../content/horus/01-project-overview.md";
 import ProjectFeatures from "../../content/horus/02-project-features.md";
 import TechStack from "../../content/horus/03-tech-stack.md";
 
+const [
+	introResult,
+	projectOverviewResult,
+	projectFeaturesResult,
+	techStackResult,
+] = await Promise.all([
+	createContentSection({
+		collection: "horus",
+		entryId: "00-intro",
+		Component: Intro,
+	}),
+	createContentSection({
+		collection: "horus",
+		entryId: "01-project-overview",
+		Component: ProjectOverview,
+	}),
+	createContentSection({
+		collection: "horus",
+		entryId: "02-project-features",
+		Component: ProjectFeatures,
+	}),
+	createContentSection({
+		collection: "horus",
+		entryId: "03-tech-stack",
+		Component: TechStack,
+	}),
+]);
+
+const { frontmatter: introFrontmatter, section: introSection } = introResult;
+const { section: projectOverviewSection } = projectOverviewResult;
+const { section: projectFeaturesSection } = projectFeaturesResult;
+const { section: techStackSection } = techStackResult;
+
 const sections = [
-	{ Component: Intro, variant: "featured" },
+	introSection,
 	{
 		Component: HorusProjectLinksSection,
 		variant: "contentOnly",
 		props: {
-			githubUrl: frontmatter.githubUrl,
-			websiteUrl: frontmatter.websiteUrl,
+			githubUrl: introFrontmatter.githubUrl,
+			websiteUrl: introFrontmatter.websiteUrl,
 		},
 	},
-	{ Component: ProjectOverview, variant: "contentOnly" },
-	{ Component: ProjectFeatures, variant: "contentOnly" },
-	{ Component: TechStack, variant: "contentOnly" },
+	projectOverviewSection,
+	projectFeaturesSection,
+	techStackSection,
 ];
 ---
 
-<DefaultLayout title={frontmatter.title}>
+<DefaultLayout title={introFrontmatter.title}>
 	<ProjectCaseStudy sections={sections} />
 </DefaultLayout>

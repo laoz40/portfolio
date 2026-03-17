@@ -1,3 +1,8 @@
+---
+section:
+  variant: contentOnly
+---
+
 ## Second and Third Iterations
 
 ### Refining the experience with user feedback

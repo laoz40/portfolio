@@ -1,3 +1,8 @@
+---
+section:
+  variant: contentOnly
+---
+
 ## App Features
 
 ### What does this app do?

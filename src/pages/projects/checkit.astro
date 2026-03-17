@@ -1,65 +1,152 @@
 ---
 import DefaultLayout from "../../layouts/DefaultLayout.astro";
+import { createContentSection } from "../../components/projects/caseStudySections";
 import ProjectCaseStudy from "../../components/projects/ProjectCaseStudy.astro";
-import Intro, { frontmatter } from "../../content/checkit/00-intro.md";
+import Intro from "../../content/checkit/00-intro.md";
 import ProjectOverview from "../../content/checkit/01-project-overview.md";
-import ProjectShowcase, {
-	frontmatter as projectShowcaseFrontmatter,
-} from "../../content/checkit/02-project-showcase.md";
+import ProjectShowcase from "../../content/checkit/02-project-showcase.md";
 import ProblemArea from "../../content/checkit/03-problem-area.md";
 import OurGoal from "../../content/checkit/04-our-goal.md";
 import CompetitorAnalysis from "../../content/checkit/05-competitor-analysis.md";
 import UserResearchMethods from "../../content/checkit/06-user-research-methods.md";
-import UserResearchInsights, {
-	frontmatter as userResearchInsightsFrontmatter,
-} from "../../content/checkit/07-user-research-insights.md";
+import UserResearchInsights from "../../content/checkit/07-user-research-insights.md";
 import IdeationProcess from "../../content/checkit/08-ideation-process.md";
 import FirstIteration from "../../content/checkit/09-first-iteration.md";
 import SecondThirdIteration from "../../content/checkit/10-second-third-iteration.md";
-import NotableChanges, {
-	frontmatter as notableChangesFrontmatter,
-} from "../../content/checkit/11-notable-changes.md";
-import FinalIteration, {
-	frontmatter as finalIterationFrontmatter,
-} from "../../content/checkit/12-final-iteration.md";
+import NotableChanges from "../../content/checkit/11-notable-changes.md";
+import FinalIteration from "../../content/checkit/12-final-iteration.md";
 import DesignSystem from "../../content/checkit/13-design-system.md";
 import Reflection from "../../content/checkit/14-reflection.md";
 
-const sections = [
-	{ Component: Intro, variant: "featured" },
-	{ Component: ProjectOverview, variant: "contentOnly" },
-	{
+const [
+	introResult,
+	projectOverviewResult,
+	projectShowcaseResult,
+	problemAreaResult,
+	ourGoalResult,
+	competitorAnalysisResult,
+	userResearchMethodsResult,
+	userResearchInsightsResult,
+	ideationProcessResult,
+	firstIterationResult,
+	secondThirdIterationResult,
+	notableChangesResult,
+	finalIterationResult,
+	designSystemResult,
+	reflectionResult,
+] = await Promise.all([
+	createContentSection({
+		collection: "checkit",
+		entryId: "00-intro",
+		Component: Intro,
+	}),
+	createContentSection({
+		collection: "checkit",
+		entryId: "01-project-overview",
+		Component: ProjectOverview,
+	}),
+	createContentSection({
+		collection: "checkit",
+		entryId: "02-project-showcase",
 		Component: ProjectShowcase,
-		variant: "carousel",
-		carouselItems: projectShowcaseFrontmatter.carouselItems,
-	},
-	{ Component: ProblemArea, variant: "media" },
-	{ Component: OurGoal, variant: "media" },
-	{ Component: CompetitorAnalysis, variant: "media" },
-	{ Component: UserResearchMethods, variant: "media" },
-	{
+	}),
+	createContentSection({
+		collection: "checkit",
+		entryId: "03-problem-area",
+		Component: ProblemArea,
+	}),
+	createContentSection({
+		collection: "checkit",
+		entryId: "04-our-goal",
+		Component: OurGoal,
+	}),
+	createContentSection({
+		collection: "checkit",
+		entryId: "05-competitor-analysis",
+		Component: CompetitorAnalysis,
+	}),
+	createContentSection({
+		collection: "checkit",
+		entryId: "06-user-research-methods",
+		Component: UserResearchMethods,
+	}),
+	createContentSection({
+		collection: "checkit",
+		entryId: "07-user-research-insights",
 		Component: UserResearchInsights,
-		variant: "carousel",
-		carouselItems: userResearchInsightsFrontmatter.carouselItems,
-	},
-	{ Component: IdeationProcess, variant: "contentOnly" },
-	{ Component: FirstIteration, variant: "contentOnly" },
-	{ Component: SecondThirdIteration, variant: "contentOnly" },
-	{
+	}),
+	createContentSection({
+		collection: "checkit",
+		entryId: "08-ideation-process",
+		Component: IdeationProcess,
+	}),
+	createContentSection({
+		collection: "checkit",
+		entryId: "09-first-iteration",
+		Component: FirstIteration,
+	}),
+	createContentSection({
+		collection: "checkit",
+		entryId: "10-second-third-iteration",
+		Component: SecondThirdIteration,
+	}),
+	createContentSection({
+		collection: "checkit",
+		entryId: "11-notable-changes",
 		Component: NotableChanges,
-		variant: "carousel",
-		carouselItems: notableChangesFrontmatter.carouselItems,
-	},
-	{
+	}),
+	createContentSection({
+		collection: "checkit",
+		entryId: "12-final-iteration",
 		Component: FinalIteration,
-		variant: "carousel",
-		carouselItems: finalIterationFrontmatter.carouselItems,
-	},
-	{ Component: DesignSystem, variant: "media" },
-	{ Component: Reflection, variant: "contentOnly" },
+	}),
+	createContentSection({
+		collection: "checkit",
+		entryId: "13-design-system",
+		Component: DesignSystem,
+	}),
+	createContentSection({
+		collection: "checkit",
+		entryId: "14-reflection",
+		Component: Reflection,
+	}),
+]);
+
+const { frontmatter: introFrontmatter, section: introSection } = introResult;
+const { section: projectOverviewSection } = projectOverviewResult;
+const { section: projectShowcaseSection } = projectShowcaseResult;
+const { section: problemAreaSection } = problemAreaResult;
+const { section: ourGoalSection } = ourGoalResult;
+const { section: competitorAnalysisSection } = competitorAnalysisResult;
+const { section: userResearchMethodsSection } = userResearchMethodsResult;
+const { section: userResearchInsightsSection } = userResearchInsightsResult;
+const { section: ideationProcessSection } = ideationProcessResult;
+const { section: firstIterationSection } = firstIterationResult;
+const { section: secondThirdIterationSection } = secondThirdIterationResult;
+const { section: notableChangesSection } = notableChangesResult;
+const { section: finalIterationSection } = finalIterationResult;
+const { section: designSystemSection } = designSystemResult;
+const { section: reflectionSection } = reflectionResult;
+
+const sections = [
+	introSection,
+	projectOverviewSection,
+	projectShowcaseSection,
+	problemAreaSection,
+	ourGoalSection,
+	competitorAnalysisSection,
+	userResearchMethodsSection,
+	userResearchInsightsSection,
+	ideationProcessSection,
+	firstIterationSection,
+	secondThirdIterationSection,
+	notableChangesSection,
+	finalIterationSection,
+	designSystemSection,
+	reflectionSection,
 ];
 ---
 
-<DefaultLayout title={frontmatter.title}>
+<DefaultLayout title={introFrontmatter.title}>
 	<ProjectCaseStudy sections={sections} />
 </DefaultLayout>

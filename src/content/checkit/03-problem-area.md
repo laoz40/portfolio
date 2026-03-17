@@ -1,3 +1,8 @@
+---
+section:
+  variant: media
+---
+
 ## Problem Area
 
 ### People spend too much time on social media

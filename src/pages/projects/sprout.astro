@@ -1,59 +1,126 @@
 ---
 import DefaultLayout from "../../layouts/DefaultLayout.astro";
+import { createContentSection } from "../../components/projects/caseStudySections";
 import ProjectCaseStudy from "../../components/projects/ProjectCaseStudy.astro";
-import Intro, { frontmatter } from "../../content/sprout/00-intro.md";
+import Intro from "../../content/sprout/00-intro.md";
 import ProjectOverview from "../../content/sprout/01-project-overview.md";
-import ProjectShowcase, {
-	frontmatter as projectShowcaseFrontmatter,
-} from "../../content/sprout/02-project-showcase.md";
+import ProjectShowcase from "../../content/sprout/02-project-showcase.md";
 import ProblemArea from "../../content/sprout/03-problem-area.md";
 import OurGoal from "../../content/sprout/04-our-goal.md";
 import CompetitorAnalysis from "../../content/sprout/05-competitor-analysis.md";
 import UserResearchMethods from "../../content/sprout/06-user-research-methods.md";
 import UserResearchInsights from "../../content/sprout/07-user-research-barriers.md";
 import Prototyping from "../../content/sprout/08-prototyping.md";
-import UserTestingInsights, {
-	frontmatter as userTestingInsightsFrontmatter,
-} from "../../content/sprout/09-user-testing-insights.md";
+import UserTestingInsights from "../../content/sprout/09-user-testing-insights.md";
 import DesignSystem from "../../content/sprout/10-design-system.md";
 import Reflection from "../../content/sprout/11-reflection.md";
 
-const sections = [
-	{ Component: Intro, variant: "featured" },
-	{ Component: ProjectOverview, variant: "contentOnly" },
-	{
+const [
+	introResult,
+	projectOverviewResult,
+	projectShowcaseResult,
+	problemAreaResult,
+	ourGoalResult,
+	competitorAnalysisResult,
+	userResearchMethodsResult,
+	userResearchInsightsResult,
+	prototypingResult,
+	userTestingInsightsResult,
+	designSystemResult,
+	reflectionResult,
+] = await Promise.all([
+	createContentSection({
+		collection: "sprout",
+		entryId: "00-intro",
+		Component: Intro,
+	}),
+	createContentSection({
+		collection: "sprout",
+		entryId: "01-project-overview",
+		Component: ProjectOverview,
+	}),
+	createContentSection({
+		collection: "sprout",
+		entryId: "02-project-showcase",
 		Component: ProjectShowcase,
-		variant: "carousel",
-		carouselItems: projectShowcaseFrontmatter.carouselItems,
-	},
-	{
+	}),
+	createContentSection({
+		collection: "sprout",
+		entryId: "03-problem-area",
 		Component: ProblemArea,
-		variant: "featured",
-		media: {
-			type: "youtube",
-			videoId: "oPx-KKh4q6k",
-			title: "Sprout Pitch",
-		},
-	},
-	{ Component: OurGoal, variant: "contentOnly" },
-	{ Component: CompetitorAnalysis, variant: "media" },
-	{ Component: UserResearchMethods, variant: "media" },
-	{
+	}),
+	createContentSection({
+		collection: "sprout",
+		entryId: "04-our-goal",
+		Component: OurGoal,
+	}),
+	createContentSection({
+		collection: "sprout",
+		entryId: "05-competitor-analysis",
+		Component: CompetitorAnalysis,
+	}),
+	createContentSection({
+		collection: "sprout",
+		entryId: "06-user-research-methods",
+		Component: UserResearchMethods,
+	}),
+	createContentSection({
+		collection: "sprout",
+		entryId: "07-user-research-barriers",
 		Component: UserResearchInsights,
-		variant: "media",
 		extraClass: "section-handwriting-list",
-	},
-	{ Component: Prototyping, variant: "contentOnly" },
-	{
+	}),
+	createContentSection({
+		collection: "sprout",
+		entryId: "08-prototyping",
+		Component: Prototyping,
+	}),
+	createContentSection({
+		collection: "sprout",
+		entryId: "09-user-testing-insights",
 		Component: UserTestingInsights,
-		variant: "carousel",
-		carouselItems: userTestingInsightsFrontmatter.carouselItems,
-	},
-	{ Component: DesignSystem, variant: "media" },
-	{ Component: Reflection, variant: "contentOnly" },
+	}),
+	createContentSection({
+		collection: "sprout",
+		entryId: "10-design-system",
+		Component: DesignSystem,
+	}),
+	createContentSection({
+		collection: "sprout",
+		entryId: "11-reflection",
+		Component: Reflection,
+	}),
+]);
+
+const { frontmatter: introFrontmatter, section: introSection } = introResult;
+const { section: projectOverviewSection } = projectOverviewResult;
+const { section: projectShowcaseSection } = projectShowcaseResult;
+const { section: problemAreaSection } = problemAreaResult;
+const { section: ourGoalSection } = ourGoalResult;
+const { section: competitorAnalysisSection } = competitorAnalysisResult;
+const { section: userResearchMethodsSection } = userResearchMethodsResult;
+const { section: userResearchInsightsSection } = userResearchInsightsResult;
+const { section: prototypingSection } = prototypingResult;
+const { section: userTestingInsightsSection } = userTestingInsightsResult;
+const { section: designSystemSection } = designSystemResult;
+const { section: reflectionSection } = reflectionResult;
+
+const sections = [
+	introSection,
+	projectOverviewSection,
+	projectShowcaseSection,
+	problemAreaSection,
+	ourGoalSection,
+	competitorAnalysisSection,
+	userResearchMethodsSection,
+	userResearchInsightsSection,
+	prototypingSection,
+	userTestingInsightsSection,
+	designSystemSection,
+	reflectionSection,
 ];
 ---
 
-<DefaultLayout title={frontmatter.title}>
+<DefaultLayout title={introFrontmatter.title}>
 	<ProjectCaseStudy sections={sections} />
 </DefaultLayout>

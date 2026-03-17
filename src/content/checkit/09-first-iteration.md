@@ -1,3 +1,8 @@
+---
+section:
+  variant: contentOnly
+---
+
 ## First Iteration
 
 ### Prototyping and testing the experience

@@ -10,11 +10,16 @@ tools:
   - UI Design
   - Video Editing
 coverImage: ../../assets/sprout/cover.webp
-alt-text: Sprout Cover Image (Credit @josephgvideo)
+altText: Sprout Cover Image (Photography Credit @josephgvideo)
+section:
+  variant: featured
+  media:
+    type: image
+    image: ../../assets/sprout/cover.webp
+    alt: Sprout project showcase photography
 notes:
   - One of five projects shortlisted for the ADP Open Jury Industry Crit
   - Featured in the ADP Graduate Show and Graduate Catalogue
-  - Photo Credit @josephgvideo
 ---
 
 # Sprout

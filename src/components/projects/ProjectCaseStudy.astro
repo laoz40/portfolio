@@ -1,34 +1,76 @@
 ---
-import type { AstroComponentFactory } from "astro/runtime/server/index.js";
+import type { CaseStudySection, SectionMedia } from "./caseStudySections";
 import ScrollSpySidebar from "./ScrollSpySidebar.astro";
 import SectionCarouselMedia from "./media/SectionCarouselMedia.astro";
 import SectionGalleryMedia from "./media/SectionGalleryMedia.astro";
+import SectionImageMedia from "./media/SectionImageMedia.astro";
 import SectionPlaceholderMedia from "./media/SectionPlaceholderMedia.astro";
 import SectionVideoMedia from "./media/SectionVideoMedia.astro";
 
-type SectionVariant =
-	| "featured"
-	| "media"
-	| "gallery"
-	| "carousel"
-	| "contentOnly";
+const getYouTubeVideoId = (url: string) => {
+	try {
+		const parsedUrl = new URL(url);
+		const shortCode =
+			parsedUrl.hostname === "youtu.be"
+				? parsedUrl.pathname.slice(1)
+				: undefined;
 
-type SectionMedia = {
-	type: "youtube";
-	videoId: string;
-	title?: string;
+		if (shortCode) {
+			return shortCode;
+		}
+
+		const embedCode = parsedUrl.pathname.match(/^\/embed\/([^/?#]+)/)?.[1];
+
+		if (embedCode) {
+			return embedCode;
+		}
+
+		return parsedUrl.searchParams.get("v") ?? undefined;
+	} catch {
+		return undefined;
+	}
 };
 
-type CaseStudySection = {
-	Component: AstroComponentFactory;
-	variant: SectionVariant;
-	extraClass?: string;
-	props?: Record<string, string>;
-	media?: SectionMedia;
-	carouselItems?: Array<{
-		title?: string;
-		description?: string;
-	}>;
+const resolveSectionMedia = (
+	explicitMedia?: SectionMedia,
+	frontmatterMedia?: SectionMedia,
+) => {
+	const media = explicitMedia ?? frontmatterMedia;
+
+	if (!media) {
+		return undefined;
+	}
+
+	if (media.type === "youtube") {
+		const videoId =
+			media.videoId ?? (media.url ? getYouTubeVideoId(media.url) : undefined);
+
+		if (!videoId) {
+			return undefined;
+		}
+
+		return {
+			...media,
+			videoId,
+		};
+	}
+
+	return media;
+};
+
+const resolveCarouselItems = (
+	explicitItems?: CaseStudySection["carouselItems"],
+	resolvedMedia?: SectionMedia,
+): NonNullable<CaseStudySection["carouselItems"]> => {
+	if (explicitItems && explicitItems.length > 0) {
+		return explicitItems;
+	}
+
+	if (resolvedMedia?.type === "carousel" && resolvedMedia.items.length > 0) {
+		return resolvedMedia.items;
+	}
+
+	return [];
 };
 
 const { sections, headingSelector = "h2" } = Astro.props as {
@@ -45,22 +87,32 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 		{
 			sections.map((section) => {
 				const SectionComponent = section.Component;
-				const isGallery = section.variant === "gallery";
-				const isCarousel = section.variant === "carousel";
-				const isContentOnly = section.variant === "contentOnly";
-				const isYouTubeMedia = section.media?.type === "youtube";
+				const frontmatterSection = section.frontmatter?.section;
+				const variant =
+					section.variant ?? frontmatterSection?.variant ?? "contentOnly";
+				const resolvedMedia = resolveSectionMedia(
+					section.media,
+					frontmatterSection?.media,
+				);
+				const isGallery = variant === "gallery";
+				const isCarousel = variant === "carousel";
+				const isContentOnly = variant === "contentOnly";
+				const videoMedia =
+					resolvedMedia?.type === "youtube" ? resolvedMedia : undefined;
+				const imageMedia =
+					resolvedMedia?.type === "image" ? resolvedMedia : undefined;
 				const sectionProps = section.props ?? {};
-				const carouselItems =
-					section.carouselItems && section.carouselItems.length > 0
-						? section.carouselItems
-						: [{}, {}, {}, {}];
+				const carouselItems = resolveCarouselItems(
+					section.carouselItems,
+					resolvedMedia,
+				);
 
 				return (
 					<section
 						class:list={[
 							"section",
-							`section--${section.variant}`,
-							section.extraClass,
+							`section--${variant}`,
+							section.extraClass ?? frontmatterSection?.extraClass,
 						]}>
 						<div class="section-copy">
 							<SectionComponent {...sectionProps} />
@@ -69,10 +121,15 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 							<SectionGalleryMedia />
 						) : isCarousel ? (
 							<SectionCarouselMedia items={carouselItems} />
-						) : isYouTubeMedia ? (
+						) : videoMedia ? (
 							<SectionVideoMedia
-								videoId={section.media.videoId}
-								title={section.media.title}
+								videoId={videoMedia.videoId}
+								title={videoMedia.title}
+							/>
+						) : imageMedia ? (
+							<SectionImageMedia
+								image={imageMedia.image}
+								alt={imageMedia.alt}
 							/>
 						) : (
 							<SectionPlaceholderMedia />
@@ -130,12 +187,10 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 	.section--carousel :global(.section-carousel) {
 		position: static;
 		grid-column: 1 / -1;
-		width: 100%;
-		max-width: none;
 	}
 
 	.section--carousel :global(.section-carousel-slide) {
-		min-height: clamp(18rem, 52vh, 34rem);
+		min-height: 0;
 	}
 
 	.project-content {

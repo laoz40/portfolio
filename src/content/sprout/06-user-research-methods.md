@@ -1,3 +1,8 @@
+---
+section:
+  variant: media
+---
+
 ## User Research
 
 ### Understanding what drives environmental action

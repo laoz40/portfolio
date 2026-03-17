@@ -1,3 +1,8 @@
+---
+section:
+  variant: contentOnly
+---
+
 ## Reflection
 
 ### What I learned from this project

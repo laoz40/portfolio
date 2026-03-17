@@ -1,3 +1,8 @@
+---
+section:
+  variant: contentOnly
+---
+
 ## Technologies Used
 
 ### How I built this app

@@ -1,6 +1,51 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
+const sectionVariantSchema = z.enum([
+	"featured",
+	"media",
+	"gallery",
+	"carousel",
+	"contentOnly",
+]);
+
+const sectionMediaSchema = ({ image }) =>
+	z.discriminatedUnion("type", [
+		z.object({
+			type: z.literal("image"),
+			image: image(),
+			alt: z.string(),
+			caption: z.string().optional(),
+		}),
+		z.object({
+			type: z.literal("youtube"),
+			url: z.string().url(),
+			title: z.string().optional(),
+		}),
+		z.object({
+			type: z.literal("gallery"),
+			items: z.array(
+				z.object({
+					image: image(),
+					alt: z.string(),
+					caption: z.string().optional(),
+				}),
+			),
+		}),
+		z.object({
+			type: z.literal("carousel"),
+			items: z.array(
+				z.object({
+					image: image(),
+					alt: z.string(),
+					title: z.string().optional(),
+					description: z.string().optional(),
+					caption: z.string().optional(),
+				}),
+			),
+		}),
+	]);
+
 const sharedSchema = ({ image }) =>
 	z
 		.object({
@@ -11,6 +56,13 @@ const sharedSchema = ({ image }) =>
 			githubUrl: z.string().url().optional(),
 			websiteUrl: z.string().url().optional(),
 			coverImage: image().optional(),
+			section: z
+				.object({
+					variant: sectionVariantSchema.optional(),
+					extraClass: z.string().optional(),
+					media: sectionMediaSchema({ image }).optional(),
+				})
+				.optional(),
 			notes: z.array(z.string()).optional(),
 		})
 		.passthrough();

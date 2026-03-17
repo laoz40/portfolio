@@ -9,6 +9,13 @@ tools:
   - User Testing
   - UI Design
 coverImage: ../../assets/checkit/cover.webp
+altText: Check It Cover Image
+section:
+  variant: featured
+  media:
+    type: image
+    image: ../../assets/checkit/cover.webp
+    alt: Check It mobile app interface preview
 ---
 
 # Check It

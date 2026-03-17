@@ -1,3 +1,8 @@
+---
+section:
+  variant: contentOnly
+---
+
 ## Project Overview
 
 ### What is Horus?

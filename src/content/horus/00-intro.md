@@ -13,6 +13,13 @@ tools:
 githubUrl: https://github.com/laoz40/Horus
 websiteUrl: https://horus-workout.vercel.app
 coverImage: ../../assets/horus/cover.webp
+altText: Horus Cover Image
+section:
+  variant: featured
+  media:
+    type: image
+    image: ../../assets/horus/cover.webp
+    alt: Horus workout tracker interface preview
 ---
 
 # Horus
