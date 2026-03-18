@@ -36,6 +36,7 @@ export type SectionMedia =
 	  }
 	| {
 			type: "image";
+			variant?: "taped" | "raw";
 			image: ImageMetadata;
 			alt?: string;
 			caption?: string;

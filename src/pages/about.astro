@@ -1,113 +1,121 @@
 ---
+import { getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import AboutSectionMedia from "../components/about/AboutSectionMedia.astro";
 import DefaultLayout from "../layouts/DefaultLayout.astro";
-import AboutContent from "../content/about/about.md";
+
+type AboutImageMedia = Extract<
+	NonNullable<CollectionEntry<"about">["data"]["section"]>["media"],
+	{ type: "image" }
+>;
+
+const aboutEntries = (await getCollection("about")).sort((a, b) =>
+	a.id.localeCompare(b.id),
+);
+
+const aboutSections = await Promise.all(
+	aboutEntries.map(async (entry) => {
+		const { Content } = await render(entry);
+		const media = entry.data.section?.media;
+
+		if (media && media.type !== "image") {
+			throw new Error(
+				`About entry ${entry.id} uses unsupported media type: ${media.type}`,
+			);
+		}
+
+		return {
+			id: entry.id,
+			title: entry.data.title ?? entry.id,
+			Content,
+			media: media as AboutImageMedia | undefined,
+		};
+	}),
+);
 ---
 
 <DefaultLayout title="About">
 	<h1>A little bit about me</h1>
-	<article data-about-content>
-		<AboutContent />
+	<article class="about-content">
+		{
+			aboutSections.map(({ id, title, Content, media }, index) => (
+				<section
+					class:list={[
+						"about-section",
+						media ? "about-section--has-media" : "about-section--copy-only",
+						media && index % 2 === 1 ? "about-section--reverse" : undefined,
+					]}
+					data-about-section={id}>
+					<div class="about-section-copy">
+						<h2>{title}</h2>
+						<Content />
+					</div>
+					{media ? (
+						<div class="about-section-media">
+							<AboutSectionMedia media={media} />
+						</div>
+					) : null}
+				</section>
+			))
+		}
 	</article>
 </DefaultLayout>
-
-<script>
-	const sectionAboutContent = () => {
-		const aboutContentRoot = document.querySelector("[data-about-content]");
-		if (
-			!(aboutContentRoot instanceof HTMLElement) ||
-			aboutContentRoot.dataset.sectioned === "true"
-		) {
-			return;
-		}
-
-		const childNodes = Array.from(aboutContentRoot.childNodes);
-		if (childNodes.length === 0) {
-			return;
-		}
-
-		const fragment = document.createDocumentFragment();
-		let currentSectionCopy = null;
-
-		for (const node of childNodes) {
-			const isHeading =
-				node instanceof HTMLHeadingElement && node.tagName === "H2";
-
-			if (isHeading) {
-				const section = document.createElement("section");
-				section.className = "about-section";
-
-				const sectionCopy = document.createElement("div");
-				sectionCopy.className = "about-section-copy";
-				sectionCopy.append(node);
-
-				const sectionMedia = document.createElement("div");
-				sectionMedia.className = "about-section-media";
-
-				section.append(sectionCopy, sectionMedia);
-				fragment.append(section);
-				currentSectionCopy = sectionCopy;
-				continue;
-			}
-
-			if (currentSectionCopy) {
-				currentSectionCopy.append(node);
-				continue;
-			}
-
-			fragment.append(node);
-		}
-
-		aboutContentRoot.replaceChildren(fragment);
-		aboutContentRoot.dataset.sectioned = "true";
-	};
-
-	sectionAboutContent();
-	document.addEventListener("astro:page-load", sectionAboutContent);
-</script>
 
 <style>
 	h1 {
 		font-size: clamp(1.9rem, 5vw, 3.5rem);
 		font-weight: 700;
 		text-align: center;
+		width: min(100%, 78rem);
+		margin-inline: auto;
 		margin-bottom: clamp(1.25rem, 3vw, 2rem);
 	}
 
-	[data-about-content] {
+	.about-content {
 		--text-measure: 65ch;
+		--about-media-column-width: clamp(16rem, 28vw, 24rem);
 		display: grid;
-		gap: clamp(2rem, 3vw, 3rem);
+		gap: clamp(2.5rem, 5vw, 4.5rem);
+		width: min(100%, 78rem);
+		margin-inline: auto;
 		margin-top: clamp(1rem, 3vw, 2rem);
 	}
 
-	[data-about-content] :global(.about-section) {
+	.about-section {
 		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: clamp(2rem, 3vw, 3rem);
-		align-items: start;
+		gap: clamp(1.75rem, 4vw, 3.5rem);
+		align-items: center;
+	}
+
+	.about-section--has-media {
+		grid-template-columns: minmax(0, 1fr) var(--about-media-column-width);
 		grid-template-areas: "copy media";
 	}
 
-	[data-about-content] :global(.about-section:nth-of-type(even)) {
+	.about-section--has-media.about-section--reverse {
+		grid-template-columns: var(--about-media-column-width) minmax(0, 1fr);
 		grid-template-areas: "media copy";
 	}
 
-	[data-about-content] :global(.about-section-copy) {
+	.about-section--copy-only {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.about-section-copy {
 		min-width: 0;
 		grid-area: copy;
 	}
 
-	[data-about-content] :global(.about-section-media) {
-		display: block;
+	.about-section-media {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		grid-area: media;
 		width: 100%;
-		min-height: clamp(6rem, 14vw, 9.5rem);
-		border: 2px dashed var(--color-border-medium);
-		background: var(--color-accent-lime-soft);
-		border-radius: 0.5rem;
+		min-width: 0;
 	}
 
-	[data-about-content] :global(h2) {
+	h2 {
 		font-family: var(--font-handwriting);
 		font-size: clamp(1.5rem, 3vw, 2.5rem);
 		font-weight: 700;
@@ -117,7 +125,7 @@ import AboutContent from "../content/about/about.md";
 		max-width: 24ch;
 	}
 
-	[data-about-content] :global(p) {
+	.about-section-copy :global(p) {
 		font-family: var(--font-sans);
 		font-size: var(--type-sans-size-body);
 		font-weight: var(--type-sans-weight-regular);
@@ -128,13 +136,13 @@ import AboutContent from "../content/about/about.md";
 		text-wrap: pretty;
 	}
 
-	[data-about-content] :global(ul) {
+	.about-section-copy :global(ul) {
 		padding-left: 1.25rem;
 		margin: 0 0 1rem 0;
 		list-style-type: disc;
 	}
 
-	[data-about-content] :global(li) {
+	.about-section-copy :global(li) {
 		font-family: var(--font-sans);
 		font-size: var(--type-sans-size-body);
 		font-weight: var(--type-sans-weight-regular);
@@ -145,22 +153,16 @@ import AboutContent from "../content/about/about.md";
 	}
 
 	@media (max-width: 760px) {
-		[data-about-content] :global(.about-section) {
+		.about-section--has-media,
+		.about-section--has-media.about-section--reverse {
 			grid-template-columns: 1fr;
 			grid-template-areas:
 				"copy"
 				"media";
 		}
 
-		[data-about-content] :global(.about-section:nth-of-type(even)) {
-			grid-template-columns: 1fr;
-			grid-template-areas:
-				"copy"
-				"media";
-		}
-
-		[data-about-content] :global(.about-section-media) {
-			width: 100%;
+		.about-section-media {
+			justify-content: flex-start;
 		}
 	}
 </style>

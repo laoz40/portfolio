@@ -9,10 +9,13 @@ const sectionVariantSchema = z.enum([
 	"contentOnly",
 ]);
 
+const imageMediaVariantSchema = z.enum(["taped", "raw"]);
+
 const sectionMediaSchema = ({ image }) =>
 	z.discriminatedUnion("type", [
 		z.object({
 			type: z.literal("image"),
+			variant: imageMediaVariantSchema.optional(),
 			image: image(),
 			alt: z.string(),
 			caption: z.string().optional(),

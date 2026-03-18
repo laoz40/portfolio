@@ -1,0 +1,133 @@
+---
+import type { ImageMetadata } from "astro";
+
+const { media } = Astro.props as {
+	media: {
+		image: ImageMetadata;
+		alt: string;
+		caption?: string;
+		variant?: "taped" | "raw";
+	};
+};
+
+const variant = media.variant ?? "taped";
+const isTaped = variant === "taped";
+---
+
+<figure
+	class:list={[
+		"about-media-figure",
+		isTaped ? "about-media-figure--taped" : "about-media-figure--raw",
+	]}
+	style={`--about-media-max-width: ${media.image.width}px; --about-media-aspect-ratio: ${media.image.width} / ${media.image.height};`}>
+	{
+		isTaped ? (
+			<div class="about-media-frame">
+				<div class="about-media about-media--taped">
+					<img
+						class="about-media-image"
+						src={media.image.src}
+						alt={media.alt}
+						width={media.image.width}
+						height={media.image.height}
+						loading="lazy"
+						decoding="async"
+					/>
+				</div>
+			</div>
+		) : (
+			<img
+				class="about-media-image about-media-image--raw"
+				src={media.image.src}
+				alt={media.alt}
+				width={media.image.width}
+				height={media.image.height}
+				loading="lazy"
+				decoding="async"
+			/>
+		)
+	}
+	{
+		isTaped ? (
+			<figcaption class="about-media-caption">
+				{media.caption ?? media.alt}
+			</figcaption>
+		) : null
+	}
+</figure>
+
+<style>
+	.about-media-figure {
+		width: min(100%, var(--about-media-max-width));
+		margin: 0;
+	}
+
+	.about-media-figure--taped {
+		padding-top: calc(var(--size-project-tape-height) * 0.5);
+	}
+
+	.about-media-frame {
+		position: relative;
+		width: 100%;
+		min-width: 0;
+	}
+
+	.about-media-frame::before {
+		content: "";
+		position: absolute;
+		top: calc(var(--size-project-tape-height) * 0.2);
+		left: 50%;
+		width: var(--size-project-tape-width);
+		height: var(--size-project-tape-height);
+		transform: translate(-50%, -50%) rotate(1.2deg);
+		background: var(--color-tape);
+		pointer-events: none;
+		z-index: 2;
+	}
+
+	.about-media {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		aspect-ratio: var(--about-media-aspect-ratio);
+		max-height: clamp(18rem, 36vw, 26rem);
+		background: var(--color-media-fallback);
+		border: 8px solid var(--color-surface-page);
+		box-shadow: var(--shadow-paper-medium);
+		overflow: hidden;
+	}
+
+	.about-media-image {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+	}
+
+	.about-media-image--raw {
+		width: auto;
+		max-width: 100%;
+		max-height: clamp(18rem, 36vw, 26rem);
+		height: auto;
+		object-fit: contain;
+	}
+
+	.about-media-caption {
+		font-size: 1rem;
+		line-height: 1.4;
+		margin: 0.75rem 0 0;
+	}
+
+	@media (max-width: 760px) {
+		.about-media-figure {
+			width: min(100%, 26rem, var(--about-media-max-width));
+		}
+
+		.about-media,
+		.about-media-image--raw {
+			max-height: 22rem;
+		}
+	}
+</style>
