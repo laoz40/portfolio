@@ -1,6 +1,10 @@
 ---
 section:
   variant: media
+  media:
+    type: image
+    image: ../../assets/sprout/research.webp
+    alt: Affinity diagramming analysis of user research
   extraClass: section-handwriting-list
 ---
 

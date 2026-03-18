@@ -1,20 +1,36 @@
 ---
 section:
   variant: contentOnly
+inlineGalleries:
+  - id: paper-prototype
+    items:
+      - image: ../../assets/sprout/paper1.webp
+        alt: Sketches of augmented reality tree visualisation flow
+      - image: ../../assets/sprout/paper2.webp
+        alt: Paper prototype augmented reality tree visualisation flow
+      - image: ../../assets/sprout/paper3.webp
+        alt: Paper prototype selecting a tree flow
+      - image: ../../assets/sprout/paper4.webp
+        alt: Paper prototype augmented reality tree visualisation
+  - id: mid-fidelity
+    items:
+      - image: ../../assets/sprout/mid1.webp
+        alt: Mid-fidelity prototype home screen
+      - image: ../../assets/sprout/mid2.webp
+        alt: Mid-fidelity prototype tree information flow
+      - image: ../../assets/sprout/mid3.webp
+        alt: Mid-fidelity prototype community and sharing flow
+      - image: ../../assets/sprout/mid4.webp
+        alt: Mid-fidelity prototype community features
 ---
 
 ## Prototyping
 
 ### Developing our solution
 
-**We began with low-fidelity prototyping, to quickly test the concept and enable easy refinements.**
+We began with low-fidelity prototyping, to quickly test the concept and enable easy refinements.
 
-<div class="inline-gallery" aria-hidden="true">
-	<div class="inline-gallery__tile"></div>
-	<div class="inline-gallery__tile"></div>
-	<div class="inline-gallery__tile"></div>
-	<div class="inline-gallery__tile"></div>
-</div>
+<div class="inline-gallery" data-gallery="paper-prototype"></div>
 
 #### Paper Prototype
 
@@ -28,14 +44,9 @@ We began by creating low-fidelity sketches to plan the core features and screen 
 <br>
 <br>
 
-**After receiving feedback on the functionality of our concept, I developed the mid-fidelity prototype. The aim was to have a more realistic design and basic interactivity, allowing us to test user interactions more effectively.**
+After receiving feedback on the functionality of our concept, I developed the mid-fidelity prototype. The aim was to have a more realistic design and basic interactivity, allowing us to test user interactions more effectively.
 
-<div class="inline-gallery" aria-hidden="true">
-	<div class="inline-gallery__tile"></div>
-	<div class="inline-gallery__tile"></div>
-	<div class="inline-gallery__tile"></div>
-	<div class="inline-gallery__tile"></div>
-</div>
+<div class="inline-gallery" data-gallery="mid-fidelity"></div>
 
 #### Wireframes
 

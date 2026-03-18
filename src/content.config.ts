@@ -71,6 +71,20 @@ const sharedSchema = ({ image }) =>
 					ariaLabel: z.string().optional(),
 				})
 				.optional(),
+			inlineGalleries: z
+				.array(
+					z.object({
+						id: z.string(),
+						items: z.array(
+							z.object({
+								image: image(),
+								alt: z.string(),
+								caption: z.string().optional(),
+							}),
+						),
+					}),
+				)
+				.optional(),
 			notes: z.array(z.string()).optional(),
 		})
 		.passthrough();
