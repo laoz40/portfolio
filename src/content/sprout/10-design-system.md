@@ -1,6 +1,10 @@
 ---
 section:
   variant: media
+  media:
+    type: image
+    image: ../../assets/sprout/design-system.webp
+    alt: Design system
 ---
 
 ## Design System
