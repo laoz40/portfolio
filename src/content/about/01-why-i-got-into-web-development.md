@@ -8,8 +8,8 @@ section:
     alt: My first ever website made with HTML and CSS
 ---
 
-I first started "coding" at 11 by editing Team Fortress 2 HUDs. I loved to
-tweak the colours and animations, editing files that were similar to CSS. I've
+I first started "coding" at 11 by editing Team Fortress 2 (video game) HUDs. I loved
+tweaking the colours and animations, editing files that were similar to CSS. I've
 always enjoyed editing aesthetics and making things I use look nice (ricing).
 It's why I love using Android and Linux.
 
