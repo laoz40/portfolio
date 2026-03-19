@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import AboutSectionMedia from "../components/about/AboutSectionMedia.astro";
+import ImperfectButton from "../components/home/ImperfectButton.astro";
 import DefaultLayout from "../layouts/DefaultLayout.astro";
 
 type AboutImageMedia = Extract<
@@ -59,6 +60,14 @@ const aboutSections = await Promise.all(
 			))
 		}
 	</article>
+	<div class="about-actions">
+		<p class="about-actions-note">Thanks for reading all of this! (if you did)</p>
+		<ImperfectButton
+			href="/projects"
+			fill="var(--color-home-button-yellow)">
+			See my projects
+		</ImperfectButton>
+	</div>
 </DefaultLayout>
 
 <style>
@@ -150,6 +159,25 @@ const aboutSections = await Promise.all(
 		line-height: var(--type-sans-leading-compact);
 		max-width: var(--text-measure);
 		text-wrap: pretty;
+	}
+
+	.about-actions {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1rem;
+		width: min(100%, 78rem);
+		margin: clamp(2rem, 5vw, 3.5rem) auto 0;
+		text-align: center;
+	}
+
+	.about-actions-note {
+		margin: 0;
+		font-family: var(--font-handwriting);
+		font-size: clamp(1.4rem, 2vw, 2rem);
+		font-weight: 700;
+		line-height: 1.1;
+		text-wrap: balance;
 	}
 
 	@media (max-width: 760px) {

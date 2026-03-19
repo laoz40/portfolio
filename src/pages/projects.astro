@@ -2,6 +2,7 @@
 import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 import DefaultLayout from "../layouts/DefaultLayout.astro";
+import ImperfectButton from "../components/home/ImperfectButton.astro";
 import HighlightText from "../components/ui/HighlightText.astro";
 import ToolBadges from "../components/ui/ToolBadges.astro";
 import { getEntry } from "astro:content";
@@ -107,6 +108,13 @@ const projects: Array<{
 			})
 		}
 	</div>
+	<div class="projects-actions">
+		<ImperfectButton
+			href="/about"
+			fill="var(--color-home-button-sky)">
+			Read about me
+		</ImperfectButton>
+	</div>
 </DefaultLayout>
 
 <style>
@@ -123,6 +131,12 @@ const projects: Array<{
 		justify-content: center;
 		column-gap: clamp(2rem, 5vw, 4.5rem);
 		row-gap: clamp(1.75rem, 3vw, 3rem);
+	}
+
+	.projects-actions {
+		display: flex;
+		justify-content: center;
+		margin-top: clamp(2rem, 5vw, 3.5rem);
 	}
 
 	.project-card {
