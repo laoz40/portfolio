@@ -1,5 +1,5 @@
 ---
-title: Learning to code
+title: Misconceptions about coding
 ---
 
 At university, I had actually convinced myself I didn't enjoy coding, and focused more on
