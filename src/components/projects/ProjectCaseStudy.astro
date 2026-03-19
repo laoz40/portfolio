@@ -3,7 +3,7 @@ import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 import type { CaseStudySection, SectionMedia } from "./caseStudySections";
 import ScrollSpySidebar from "./ScrollSpySidebar.astro";
-import SectionCarouselMedia from "./media/SectionCarouselMedia.astro";
+import SectionCarouselMedia from "./media/SectionCarouselMedia.svelte";
 import SectionImageMedia from "./media/SectionImageMedia.astro";
 import SectionLinkButtons from "./SectionLinkButtons.astro";
 import SectionPlaceholderMedia from "./media/SectionPlaceholderMedia.astro";
@@ -214,7 +214,10 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 							) : null}
 						</div>
 						{isContentOnly ? null : isCarousel ? (
-							<SectionCarouselMedia items={carouselItems} />
+							<SectionCarouselMedia
+								client:visible
+								items={carouselItems}
+							/>
 						) : videoMedia ? (
 							<SectionVideoMedia
 								videoId={videoMedia.videoId}

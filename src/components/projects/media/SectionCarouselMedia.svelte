@@ -1,88 +1,195 @@
----
-import type { ImageMetadata } from "astro";
-import { Image } from "astro:assets";
+<script lang="ts">
+	import type { ImageMetadata } from "astro";
 
-type CarouselItem = {
-	image: ImageMetadata;
-	alt: string;
-	title?: string;
-	description?: string;
-};
+	type CarouselItem = {
+		image: ImageMetadata;
+		alt: string;
+		title?: string;
+		description?: string;
+	};
 
-const { items = [] } = Astro.props as {
-	items?: CarouselItem[];
-};
+	export let items: CarouselItem[] = [];
 
-const carouselMaxWidth =
-	items.length > 0 ? Math.max(...items.map((item) => item.image.width)) : 704;
----
+	const swipeThreshold = 48;
+	const pointerActivationThreshold = 12;
+	const defaultCarouselMaxWidth = 704;
+
+	let currentIndex = 0;
+	let activePointerId: number | null = null;
+	let pointerStartX = 0;
+	let pointerStartY = 0;
+	let pointerDeltaX = 0;
+	let pointerDeltaY = 0;
+	let isSwiping = false;
+
+	$: slideCount = items.length;
+	$: maxIndex = Math.max(slideCount - 1, 0);
+	$: currentIndex = Math.min(currentIndex, maxIndex);
+	$: carouselMaxWidth =
+		slideCount > 0
+			? Math.max(...items.map((item) => item.image.width))
+			: defaultCarouselMaxWidth;
+	$: hasMultipleSlides = slideCount > 1;
+
+	const goTo = (index: number) => {
+		currentIndex = Math.min(Math.max(index, 0), maxIndex);
+	};
+
+	const goPrev = () => {
+		if (currentIndex === 0) return;
+		goTo(currentIndex - 1);
+	};
+
+	const goNext = () => {
+		if (currentIndex >= maxIndex) return;
+		goTo(currentIndex + 1);
+	};
+
+	const resetSwipeState = () => {
+		activePointerId = null;
+		pointerStartX = 0;
+		pointerStartY = 0;
+		pointerDeltaX = 0;
+		pointerDeltaY = 0;
+		isSwiping = false;
+	};
+
+	const handlePointerDown = (event: PointerEvent) => {
+		if (!hasMultipleSlides) return;
+		if (event.pointerType === "mouse" && event.button !== 0) return;
+
+		activePointerId = event.pointerId;
+		pointerStartX = event.clientX;
+		pointerStartY = event.clientY;
+		pointerDeltaX = 0;
+		pointerDeltaY = 0;
+		isSwiping = false;
+
+		if (event.currentTarget instanceof HTMLElement) {
+			event.currentTarget.setPointerCapture(event.pointerId);
+		}
+	};
+
+	const handlePointerMove = (event: PointerEvent) => {
+		if (activePointerId !== event.pointerId) return;
+
+		pointerDeltaX = event.clientX - pointerStartX;
+		pointerDeltaY = event.clientY - pointerStartY;
+
+		if (
+			!isSwiping &&
+			Math.abs(pointerDeltaX) >= pointerActivationThreshold &&
+			Math.abs(pointerDeltaX) > Math.abs(pointerDeltaY)
+		) {
+			isSwiping = true;
+		}
+
+		if (isSwiping) {
+			event.preventDefault();
+		}
+	};
+
+	const handlePointerUp = (event: PointerEvent) => {
+		if (activePointerId !== event.pointerId) return;
+
+		if (
+			Math.abs(pointerDeltaX) >= swipeThreshold &&
+			Math.abs(pointerDeltaX) > Math.abs(pointerDeltaY)
+		) {
+			if (pointerDeltaX < 0) {
+				goNext();
+			} else {
+				goPrev();
+			}
+		}
+
+		if (event.currentTarget instanceof HTMLElement) {
+			event.currentTarget.releasePointerCapture(event.pointerId);
+		}
+
+		resetSwipeState();
+	};
+
+	const handlePointerCancel = (event: PointerEvent) => {
+		if (activePointerId !== event.pointerId) return;
+
+		if (event.currentTarget instanceof HTMLElement) {
+			event.currentTarget.releasePointerCapture(event.pointerId);
+		}
+
+		resetSwipeState();
+	};
+</script>
 
 <div
 	class="section-carousel"
-	style={`--section-carousel-max-width: ${carouselMaxWidth}px;`}
-	data-carousel>
+	style={`--section-carousel-max-width: ${carouselMaxWidth}px; --carousel-index: ${currentIndex};`}>
 	<div class="section-carousel-frame">
-		<div class="section-carousel-viewport">
-			<div
-				class="section-carousel-track"
-				data-carousel-track>
-				{
-					items.map((item, index) => (
-						<div
-							class="section-carousel-slide"
-							role="group"
-							aria-label={`Slide ${index + 1} of ${items.length}`}>
-							<div class="section-carousel-media">
-								<Image
-									class="section-carousel-image"
-									src={item.image}
-									alt={item.alt}
-									width={item.image.width}
-									height={item.image.height}
-									loading="lazy"
-									decoding="async"
-								/>
-							</div>
-							<div class="section-carousel-content">
-								<h4 class="section-carousel-title">
-									{item.title ?? `Slide ${index + 1}`}
-								</h4>
-								{item.description ? (
-									<p class="section-carousel-description">{item.description}</p>
-								) : null}
-							</div>
+		<div
+			class="section-carousel-viewport"
+			role="group"
+			aria-label="Project media carousel"
+			on:pointerdown={handlePointerDown}
+			on:pointermove={handlePointerMove}
+			on:pointerup={handlePointerUp}
+			on:pointercancel={handlePointerCancel}>
+			<div class="section-carousel-track">
+				{#each items as item, index}
+					<div
+						class="section-carousel-slide"
+						role="group"
+						aria-label={`Slide ${index + 1} of ${slideCount}`}>
+						<div class="section-carousel-media">
+							<img
+								class="section-carousel-image"
+								src={item.image.src}
+								alt={item.alt}
+								width={item.image.width}
+								height={item.image.height}
+								loading="lazy"
+								decoding="async"
+							/>
 						</div>
-					))
-				}
+						<div class="section-carousel-content">
+							<h4 class="section-carousel-title">
+								{item.title ?? `Slide ${index + 1}`}
+							</h4>
+							{#if item.description}
+								<p class="section-carousel-description">{item.description}</p>
+							{/if}
+						</div>
+					</div>
+				{/each}
 			</div>
 			<div
 				class="section-carousel-indicators"
 				aria-label="Carousel slide indicators">
-				{
-					items.map((carouselItem, dotIndex) => (
-						<button
-							type="button"
-							class="section-carousel-indicator"
-							data-carousel-dot
-							aria-label={`Go to slide ${dotIndex + 1}: ${carouselItem.title ?? carouselItem.alt}`}
-						/>
-					))
-				}
+				{#each items as carouselItem, dotIndex}
+					<button
+						type="button"
+						class="section-carousel-indicator"
+						on:click={() => goTo(dotIndex)}
+						aria-label={`Go to slide ${dotIndex + 1}: ${carouselItem.title ?? carouselItem.alt}`}
+						aria-current={dotIndex === currentIndex ? "true" : "false"}
+						disabled={!hasMultipleSlides}></button>
+				{/each}
 			</div>
 		</div>
 		<div class="section-carousel-controls">
 			<button
 				type="button"
 				class="section-carousel-button"
-				data-carousel-prev
-				aria-label="Previous slide">
+				on:click={goPrev}
+				aria-label="Previous slide"
+				disabled={!hasMultipleSlides || currentIndex === 0}>
 				&lt; Prev
 			</button>
 			<button
 				type="button"
 				class="section-carousel-button"
-				data-carousel-next
-				aria-label="Next slide">
+				on:click={goNext}
+				aria-label="Next slide"
+				disabled={!hasMultipleSlides || currentIndex === maxIndex}>
 				Next &gt;
 			</button>
 		</div>
@@ -134,6 +241,7 @@ const carouselMaxWidth =
 		transform: rotate(var(--section-media-tilt, 0deg));
 		min-width: 0;
 		max-width: 100%;
+		touch-action: pan-y;
 	}
 
 	.section-carousel-slide {
@@ -276,29 +384,30 @@ const carouselMaxWidth =
 			opacity 200ms ease;
 	}
 
-	.section-carousel-button[data-carousel-prev] {
+	.section-carousel-button:first-child {
 		left: clamp(0.5rem, 1vw, 0.9rem);
 		transform: translateY(-50%) rotate(-1.5deg);
 	}
 
-	.section-carousel-button[data-carousel-next] {
+	.section-carousel-button:last-child {
 		right: clamp(0.5rem, 1vw, 0.9rem);
 		transform: translateY(-50%) rotate(1.5deg);
 	}
 
-	.section-carousel-button[data-carousel-prev]:hover,
-	.section-carousel-button[data-carousel-prev]:focus-visible {
+	.section-carousel-button:first-child:hover,
+	.section-carousel-button:first-child:focus-visible {
 		box-shadow: var(--carousel-button-shadow-hover);
 		transform: translateY(calc(-50% - 4px)) rotate(-1.5deg);
 	}
 
-	.section-carousel-button[data-carousel-next]:hover,
-	.section-carousel-button[data-carousel-next]:focus-visible {
+	.section-carousel-button:last-child:hover,
+	.section-carousel-button:last-child:focus-visible {
 		box-shadow: var(--carousel-button-shadow-hover);
 		transform: translateY(calc(-50% - 4px)) rotate(1.5deg);
 	}
 
-	.section-carousel-button:disabled {
+	.section-carousel-button:disabled,
+	.section-carousel-indicator:disabled {
 		opacity: 0.4;
 		cursor: not-allowed;
 	}
@@ -388,17 +497,17 @@ const carouselMaxWidth =
 			transform: none;
 		}
 
-		.section-carousel-button[data-carousel-prev],
-		.section-carousel-button[data-carousel-next] {
+		.section-carousel-button:first-child,
+		.section-carousel-button:last-child {
 			left: auto;
 			right: auto;
 			transform: none;
 		}
 
-		.section-carousel-button[data-carousel-prev]:hover,
-		.section-carousel-button[data-carousel-prev]:focus-visible,
-		.section-carousel-button[data-carousel-next]:hover,
-		.section-carousel-button[data-carousel-next]:focus-visible {
+		.section-carousel-button:first-child:hover,
+		.section-carousel-button:first-child:focus-visible,
+		.section-carousel-button:last-child:hover,
+		.section-carousel-button:last-child:focus-visible {
 			transform: translateY(-2px);
 		}
 	}
@@ -409,87 +518,3 @@ const carouselMaxWidth =
 		}
 	}
 </style>
-
-<script>
-	const initCarousels = () => {
-		document.querySelectorAll("[data-carousel]").forEach((carousel) => {
-			if (!(carousel instanceof HTMLElement)) return;
-			if (carousel.dataset.carouselReady === "true") return;
-
-			const track = carousel.querySelector("[data-carousel-track]");
-			const prevButton = carousel.querySelector("[data-carousel-prev]");
-			const nextButton = carousel.querySelector("[data-carousel-next]");
-			const dotButtons = Array.from(
-				carousel.querySelectorAll("[data-carousel-dot]"),
-			);
-			if (!(track instanceof HTMLElement)) return;
-			if (!(prevButton instanceof HTMLButtonElement)) return;
-			if (!(nextButton instanceof HTMLButtonElement)) return;
-
-			const slideCount = track.children.length;
-			if (slideCount <= 1) {
-				prevButton.disabled = true;
-				nextButton.disabled = true;
-				dotButtons.forEach((dotButton, index) => {
-					if (!(dotButton instanceof HTMLButtonElement)) return;
-					dotButton.disabled = true;
-					dotButton.setAttribute(
-						"aria-current",
-						index === 0 ? "true" : "false",
-					);
-				});
-				carousel.dataset.carouselReady = "true";
-				return;
-			}
-
-			let currentIndex = 0;
-
-			const update = () => {
-				track.style.setProperty("--carousel-index", String(currentIndex));
-				prevButton.disabled = currentIndex === 0;
-				nextButton.disabled = currentIndex === slideCount - 1;
-				dotButtons.forEach((dotButton, index) => {
-					if (!(dotButton instanceof HTMLButtonElement)) return;
-					dotButton.setAttribute(
-						"aria-current",
-						index === currentIndex ? "true" : "false",
-					);
-				});
-			};
-
-			prevButton.addEventListener("click", () => {
-				if (currentIndex === 0) return;
-				currentIndex -= 1;
-				update();
-			});
-
-			nextButton.addEventListener("click", () => {
-				if (currentIndex >= slideCount - 1) return;
-				currentIndex += 1;
-				update();
-			});
-
-			dotButtons.forEach((dotButton, index) => {
-				if (!(dotButton instanceof HTMLButtonElement)) return;
-				dotButton.addEventListener("click", () => {
-					if (currentIndex === index) return;
-					currentIndex = index;
-					update();
-				});
-			});
-
-			update();
-			carousel.dataset.carouselReady = "true";
-		});
-	};
-
-	if (document.readyState === "loading") {
-		document.addEventListener("DOMContentLoaded", initCarousels, {
-			once: true,
-		});
-	} else {
-		initCarousels();
-	}
-
-	document.addEventListener("astro:page-load", initCarousels);
-</script>
