@@ -550,7 +550,8 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 
 	.project-content :global(.inline-image-frame) {
 		position: relative;
-		width: min(100%, var(--text-measure), var(--inline-image-max-width));
+		width: 100%;
+		max-width: calc(var(--text-measure) * 1.4);
 		padding-top: calc(var(--size-project-tape-height) * 0.5);
 		margin: 0 0 1.5rem;
 	}
