@@ -16,6 +16,7 @@ type ProjectFrontmatter = {
 };
 
 const projectSlugs = ["horus", "sprout", "checkit", "vvstudios"] as const;
+const disabledProjectSlugs = new Set<(typeof projectSlugs)[number]>(["vvstudios"]);
 
 const projectEntries = await Promise.all(
 	projectSlugs.map(async (slug) => ({
@@ -46,46 +47,61 @@ const projects: Array<{
 	<div class="projects-layout">
 		{
 			projects.map(({ slug, frontmatter }) => {
+				const isDisabled = disabledProjectSlugs.has(slug);
+				const cardContent = (
+					<div class="project-frame">
+						<div
+							class="preview"
+							aria-hidden="true">
+							{frontmatter.coverImage ? (
+								<Image
+									class="preview-image"
+									src={frontmatter.coverImage}
+									alt={frontmatter.altText}
+									loading="lazy"
+									decoding="async"
+								/>
+							) : (
+								<span>COMING SOON</span>
+							)}
+						</div>
+						<div class="project-meta">
+							<div class="project-copy">
+								<div class="project-title">
+									<HighlightText
+										tag="h2"
+										variant="yellow"
+										class="project-title-highlight">
+										{frontmatter.title}
+									</HighlightText>
+									<span>{frontmatter.project}</span>
+								</div>
+								<p>{frontmatter.description}</p>
+							</div>
+							<ToolBadges
+								tools={frontmatter.tools ?? []}
+								projectTitle={frontmatter.title}
+							/>
+						</div>
+					</div>
+				);
+
+				if (isDisabled) {
+					return (
+						<div
+							class="project-card project-card-disabled"
+							aria-disabled="true">
+							{cardContent}
+						</div>
+					);
+				}
+
 				return (
 					<a
 						class="project-card"
 						href={`/projects/${slug}`}
 						aria-label={`Open ${frontmatter.title} project page`}>
-						<div class="project-frame">
-							<div
-								class="preview"
-								aria-hidden="true">
-								{frontmatter.coverImage ? (
-									<Image
-										class="preview-image"
-										src={frontmatter.coverImage}
-										alt={frontmatter.altText}
-										loading="lazy"
-										decoding="async"
-									/>
-								) : (
-									<span>COMING SOON</span>
-								)}
-							</div>
-							<div class="project-meta">
-								<div class="project-copy">
-									<div class="project-title">
-										<HighlightText
-											tag="h2"
-											variant="yellow"
-											class="project-title-highlight">
-											{frontmatter.title}
-										</HighlightText>
-										<span>{frontmatter.project}</span>
-									</div>
-									<p>{frontmatter.description}</p>
-								</div>
-								<ToolBadges
-									tools={frontmatter.tools ?? []}
-									projectTitle={frontmatter.title}
-								/>
-							</div>
-						</div>
+						{cardContent}
 					</a>
 				);
 			})
@@ -115,6 +131,10 @@ const projects: Array<{
 		width: 100%;
 		color: var(--color-text-body);
 		text-decoration: none;
+	}
+
+	.project-card-disabled {
+		cursor: default;
 	}
 
 	.project-frame {
