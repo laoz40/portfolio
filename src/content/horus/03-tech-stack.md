@@ -21,7 +21,6 @@ section:
   <li>Better Auth</li>
   <li>Redis</li>
   <li>Zod</li>
-  <li>React Hook Form</li>
   <li>Tailwindcss</li>
   <li>shadcn/ui</li>
 </ul>
