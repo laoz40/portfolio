@@ -1,6 +1,6 @@
 ---
 section:
-  variant: media
+  variant: contentOnly
 ---
 
 ## Our Goal

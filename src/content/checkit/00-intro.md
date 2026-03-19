@@ -14,7 +14,7 @@ section:
   variant: featured
   media:
     type: image
-    image: ../../assets/checkit/cover.webp
+    image: ../../assets/checkit/featured.webp
     alt: Check It mobile app interface preview
 ---
 

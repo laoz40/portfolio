@@ -1,6 +1,6 @@
 ---
 section:
-  variant: media
+  variant: contentOnly
 ---
 
 ## Problem Area

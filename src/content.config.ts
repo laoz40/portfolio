@@ -88,6 +88,16 @@ const sharedSchema = ({ image }) =>
 					}),
 				)
 				.optional(),
+			inlineImages: z
+				.array(
+					z.object({
+						id: z.string(),
+						image: image(),
+						alt: z.string(),
+						caption: z.string().optional(),
+					}),
+				)
+				.optional(),
 			notes: z.array(z.string()).optional(),
 		})
 		.passthrough();

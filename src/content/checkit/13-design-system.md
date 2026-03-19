@@ -1,6 +1,10 @@
 ---
 section:
   variant: media
+  media:
+    type: image
+    image: ../../assets/checkit/design-system.webp
+    alt: Check it design system
 ---
 
 ## Design System

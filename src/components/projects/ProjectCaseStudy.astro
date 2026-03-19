@@ -90,6 +90,17 @@ type InlineGallery = {
 	}>;
 };
 
+type InlineImage = {
+	id: string;
+	image: {
+		src: string;
+		width: number;
+		height: number;
+	};
+	alt: string;
+	caption?: string;
+};
+
 const { sections, headingSelector = "h2" } = Astro.props as {
 	sections: CaseStudySection[];
 	headingSelector?: string;
@@ -131,6 +142,9 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 							| { inlineGalleries?: InlineGallery[] }
 							| undefined
 					)?.inlineGalleries ?? [];
+				const inlineImages =
+					(section.frontmatter as { inlineImages?: InlineImage[] } | undefined)
+						?.inlineImages ?? [];
 				const linksAriaLabel = (
 					frontmatterSection as { ariaLabel?: string } | undefined
 				)?.ariaLabel;
@@ -167,6 +181,28 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 												</figure>
 											</div>
 										))}
+									</div>
+								</template>
+							))}
+							{inlineImages.map((item) => (
+								<template data-inline-image-template={item.id}>
+									<div
+										class="inline-image-frame"
+										style={`--inline-image-max-width: ${item.image.width}px; --inline-image-aspect-ratio: ${item.image.width} / ${item.image.height};`}>
+										<div class="inline-image">
+											<img
+												class="inline-image__asset"
+												src={item.image.src}
+												alt={item.alt}
+												width={item.image.width}
+												height={item.image.height}
+												loading="lazy"
+												decoding="async"
+											/>
+										</div>
+										{item.caption ? (
+											<p class="inline-image__caption">{item.caption}</p>
+										) : null}
 									</div>
 								</template>
 							))}
@@ -228,8 +264,36 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 		}
 	};
 
+	const initInlineImages = () => {
+		const placeholders = document.querySelectorAll(".inline-image[data-image]");
+
+		for (const placeholder of placeholders) {
+			if (!(placeholder instanceof HTMLElement)) {
+				continue;
+			}
+
+			const imageId = placeholder.dataset.image;
+
+			if (!imageId || placeholder.dataset.inlineImageReady === "true") {
+				continue;
+			}
+
+			const template = document.querySelector(
+				`template[data-inline-image-template="${imageId}"]`,
+			);
+
+			if (!(template instanceof HTMLTemplateElement)) {
+				continue;
+			}
+
+			placeholder.replaceWith(template.content.cloneNode(true));
+		}
+	};
+
 	initInlineGalleries();
+	initInlineImages();
 	document.addEventListener("astro:page-load", initInlineGalleries);
+	document.addEventListener("astro:page-load", initInlineImages);
 </script>
 
 <style>
@@ -267,6 +331,11 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 	}
 
 	.section--featured :global(.section-media-frame) {
+		grid-column: 1 / -1;
+	}
+
+	.section--featured .section-copy,
+	.section--carousel .section-copy {
 		grid-column: 1 / -1;
 	}
 
@@ -311,7 +380,6 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 		letter-spacing: 0.01em;
 		line-height: 1;
 		margin: 2rem 0 1rem 0;
-		max-width: 18ch;
 	}
 
 	.project-content :global(h3) {
@@ -477,6 +545,51 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 		background: var(--color-surface-paper);
 	}
 
+	.project-content :global(.inline-image-frame) {
+		position: relative;
+		width: min(100%, var(--text-measure), var(--inline-image-max-width));
+		padding-top: calc(var(--size-project-tape-height) * 0.5);
+		margin: 0 0 1.5rem;
+	}
+
+	.project-content :global(.inline-image-frame::before) {
+		content: "";
+		position: absolute;
+		top: calc(var(--size-project-tape-height) * 0.5);
+		left: 50%;
+		width: var(--size-project-tape-width);
+		height: var(--size-project-tape-height);
+		transform: translate(-50%, -50%) rotate(1.2deg);
+		background: var(--color-tape);
+		pointer-events: none;
+		z-index: 2;
+	}
+
+	.project-content :global(.inline-image) {
+		position: relative;
+		aspect-ratio: var(--inline-image-aspect-ratio);
+		background: var(--color-accent-lime);
+		border: 8px solid var(--color-surface-page);
+		box-shadow: var(--shadow-paper-medium);
+		overflow: hidden;
+		transform: rotate(-0.35deg);
+	}
+
+	.project-content :global(.inline-image__asset) {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.project-content :global(.inline-image__caption) {
+		font-family: var(--font-sans);
+		font-size: 0.9rem;
+		line-height: 1.4;
+		margin: 0.6rem 0 0;
+		max-width: var(--text-measure);
+	}
+
 	.project-content :global(.inline-gallery__frame:nth-child(4n + 1)) {
 		--inline-gallery-tilt: -0.2deg;
 		--inline-gallery-shift: -1px;
@@ -506,7 +619,7 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 		margin-top: 1rem;
 	}
 
-	@media (max-width: 1240px) {
+	@media (max-width: 1700px) {
 		.section {
 			grid-template-columns: 1fr;
 			gap: 1rem;
@@ -543,6 +656,14 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 
 		.project-content :global(.inline-gallery) {
 			grid-template-columns: 1fr;
+		}
+
+		.project-content :global(.inline-image) {
+			transform: none;
+		}
+
+		.project-content :global(.inline-image-frame::before) {
+			transform: translate(-50%, -50%) rotate(1.2deg);
 		}
 	}
 </style>

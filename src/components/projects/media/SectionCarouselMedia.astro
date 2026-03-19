@@ -316,6 +316,7 @@ const carouselMaxWidth =
 
 		.section-carousel-viewport {
 			transform: none;
+			background: var(--color-surface-paper);
 		}
 
 		.section-carousel-slide {
@@ -336,13 +337,15 @@ const carouselMaxWidth =
 		}
 
 		.section-carousel-content {
-			padding: 1rem 1.25rem 0;
+			padding: 0 0.5rem;
+			gap: 0.2rem;
 			background: var(--color-surface-paper);
 		}
 
 		.section-carousel-title,
 		.section-carousel-description {
 			color: var(--color-text-body) !important;
+			margin: 0.5rem 0 0.5rem 0 !important;
 		}
 
 		.section-carousel-controls {
@@ -362,7 +365,20 @@ const carouselMaxWidth =
 			transform: none;
 			gap: 0.5rem;
 			justify-content: flex-start;
-			margin: 0.75rem 1.25rem 0.9rem;
+			margin: 0.35rem 0.85rem 0.5rem;
+		}
+
+		.section-carousel-indicator {
+			background: rgb(39 62 68 / 0.28);
+		}
+
+		.section-carousel-indicator:hover,
+		.section-carousel-indicator:focus-visible {
+			background: rgb(39 62 68 / 0.58);
+		}
+
+		.section-carousel-indicator[aria-current="true"] {
+			background: rgb(39 62 68 / 0.88);
 		}
 
 		.section-carousel-button {

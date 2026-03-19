@@ -1,6 +1,10 @@
 ---
 section:
   variant: media
+  media:
+    type: image
+    image: ../../assets/checkit/competitor-analysis.webp
+    alt: Competitor analysis table
 ---
 
 ## Competitor Analysis

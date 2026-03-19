@@ -1,6 +1,10 @@
 ---
 section:
-  variant: contentOnly
+  variant: media
+  media:
+    type: image
+    image: ../../assets/checkit/ideation.webp
+    alt: Ideation methods
 ---
 
 ## Ideation Process
