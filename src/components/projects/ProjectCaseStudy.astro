@@ -1,4 +1,6 @@
 ---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
 import type { CaseStudySection, SectionMedia } from "./caseStudySections";
 import ScrollSpySidebar from "./ScrollSpySidebar.astro";
 import SectionCarouselMedia from "./media/SectionCarouselMedia.astro";
@@ -82,11 +84,7 @@ type SectionLinks = Array<{
 type InlineGallery = {
 	id: string;
 	items: Array<{
-		image: {
-			src: string;
-			width: number;
-			height: number;
-		};
+		image: ImageMetadata;
 		alt: string;
 		caption?: string;
 	}>;
@@ -152,9 +150,9 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 										{gallery.items.map((item) => (
 											<div class="inline-gallery__frame">
 												<figure class="inline-gallery__tile">
-													<img
+													<Image
 														class="inline-gallery__image"
-														src={item.image.src}
+														src={item.image}
 														alt={item.alt}
 														width={item.image.width}
 														height={item.image.height}

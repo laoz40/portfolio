@@ -1,5 +1,6 @@
 ---
 import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
 
 const { image, alt } = Astro.props as {
 	image: ImageMetadata;
@@ -11,9 +12,9 @@ const { image, alt } = Astro.props as {
 	class="section-media-frame"
 	style={`--section-media-max-width: ${image.width}px; --section-media-aspect-ratio: ${image.width} / ${image.height};`}>
 	<div class="section-media">
-		<img
+		<Image
 			class="section-media-image"
-			src={image.src}
+			src={image}
 			alt={alt ?? ""}
 			width={image.width}
 			height={image.height}

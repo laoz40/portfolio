@@ -1,4 +1,6 @@
 ---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
 import DefaultLayout from "../layouts/DefaultLayout.astro";
 import HighlightText from "../components/ui/HighlightText.astro";
 import ToolBadges from "../components/ui/ToolBadges.astro";
@@ -9,7 +11,7 @@ type ProjectFrontmatter = {
 	project: string;
 	description: string;
 	tools?: string[];
-	coverImage?: { src: string };
+	coverImage?: ImageMetadata;
 	altText?: string;
 };
 
@@ -54,9 +56,9 @@ const projects: Array<{
 								class="preview"
 								aria-hidden="true">
 								{frontmatter.coverImage ? (
-									<img
+									<Image
 										class="preview-image"
-										src={frontmatter.coverImage.src}
+										src={frontmatter.coverImage}
 										alt={frontmatter.altText}
 										loading="lazy"
 										decoding="async"

@@ -1,5 +1,6 @@
 ---
 import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
 
 const { media } = Astro.props as {
 	media: {
@@ -24,9 +25,9 @@ const isTaped = variant === "taped";
 		isTaped ? (
 			<div class="about-media-frame">
 				<div class="about-media about-media--taped">
-					<img
+					<Image
 						class="about-media-image"
-						src={media.image.src}
+						src={media.image}
 						alt={media.alt}
 						width={media.image.width}
 						height={media.image.height}
@@ -36,9 +37,9 @@ const isTaped = variant === "taped";
 				</div>
 			</div>
 		) : (
-			<img
+			<Image
 				class="about-media-image about-media-image--raw"
-				src={media.image.src}
+				src={media.image}
 				alt={media.alt}
 				width={media.image.width}
 				height={media.image.height}

@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import dolphinImage from "../../assets/home/dolphin.webp";
 import icecreamImage from "../../assets/home/icecream.webp";
 import meImage from "../../assets/home/me.webp";
@@ -6,32 +7,40 @@ import penroseImage from "../../assets/home/penrose.webp";
 ---
 
 <div class="hero-art-cluster">
-	<img
+	<Image
 		class="hero-portrait"
-		src={meImage.src}
+		src={meImage}
 		alt="Illustration of Leo"
+		loading="eager"
+		fetchpriority="high"
 		decoding="async"
 	/>
 
 	<div
 		class="hero-sketch-cluster"
 		aria-hidden="true">
-		<img
+		<Image
 			class="hero-sketch hero-sketch-dolphin"
-			src={dolphinImage.src}
+			src={dolphinImage}
 			alt=""
+			loading="eager"
+			fetchpriority="high"
 			decoding="async"
 		/>
-		<img
+		<Image
 			class="hero-sketch hero-sketch-icecream"
-			src={icecreamImage.src}
+			src={icecreamImage}
 			alt=""
+			loading="eager"
+			fetchpriority="high"
 			decoding="async"
 		/>
-		<img
+		<Image
 			class="hero-sketch hero-sketch-penrose"
-			src={penroseImage.src}
+			src={penroseImage}
 			alt=""
+			loading="eager"
+			fetchpriority="high"
 			decoding="async"
 		/>
 	</div>

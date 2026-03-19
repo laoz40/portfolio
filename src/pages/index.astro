@@ -1,4 +1,6 @@
 ---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
 import DefaultLayout from "../layouts/DefaultLayout.astro";
 import HeroSketchCluster from "../components/home/HeroSketchCluster.astro";
 import ImperfectButton from "../components/home/ImperfectButton.astro";
@@ -12,7 +14,7 @@ type ProjectFrontmatter = {
 	project: string;
 	description: string;
 	tools?: string[];
-	coverImage?: { src: string };
+	coverImage?: ImageMetadata;
 };
 
 const horusEntry = await getEntry("horus", "00-intro");
@@ -73,11 +75,12 @@ const horus = horusEntry.data as ProjectFrontmatter;
 					aria-hidden="true">
 					{
 						horus.coverImage ? (
-							<img
+							<Image
 								class="preview-image"
-								src={horus.coverImage.src}
+								src={horus.coverImage}
 								alt=""
-								loading="lazy"
+								loading="eager"
+								fetchpriority="high"
 								decoding="async"
 							/>
 						) : null
