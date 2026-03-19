@@ -55,6 +55,19 @@
 	<div
 		class="nav-grain"
 		aria-hidden="true">
+		<svg class="nav-grain-svg">
+			<filter id="nav-grain-filter">
+				<feTurbulence
+					type="fractalNoise"
+					baseFrequency="0.5"
+					numOctaves="3"
+					stitchTiles="stitch"></feTurbulence>
+			</filter>
+			<rect
+				width="100%"
+				height="100%"
+				filter="url(#nav-grain-filter)"></rect>
+		</svg>
 	</div>
 
 	<div class="nav-brand font-bold">
@@ -194,9 +207,6 @@
 			4% 98%,
 			0 94%
 		);
-		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23grain)'/%3E%3C/svg%3E");
-		background-repeat: repeat;
-		background-size: 160px 160px;
 		mix-blend-mode: multiply;
 		opacity: 0;
 		transform: translateY(-0.4rem);
@@ -205,6 +215,12 @@
 			transform 220ms ease;
 		pointer-events: none;
 		z-index: 0;
+	}
+
+	.nav-grain-svg {
+		display: block;
+		width: 100%;
+		height: 100%;
 	}
 
 	nav.is-scrolled .nav-grain {
