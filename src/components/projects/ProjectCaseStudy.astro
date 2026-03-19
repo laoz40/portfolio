@@ -2,7 +2,7 @@
 import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 import type { CaseStudySection, SectionMedia } from "./caseStudySections";
-import ScrollSpySidebar from "./ScrollSpySidebar.astro";
+import Sidebar from "./Sidebar.svelte";
 import SectionCarouselMedia from "./media/SectionCarouselMedia.svelte";
 import SectionImageMedia from "./media/SectionImageMedia.astro";
 import SectionLinkButtons from "./SectionLinkButtons.astro";
@@ -108,7 +108,10 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 ---
 
 <div class="project-shell mt-4">
-	<ScrollSpySidebar headingSelector={headingSelector} />
+	<Sidebar
+		client:load
+		headingSelector={headingSelector}
+	/>
 	<article
 		class="project-content flex flex-col gap-12"
 		data-scrollspy-root>
