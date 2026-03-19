@@ -38,6 +38,9 @@ importers:
       "@tailwindcss/vite":
         specifier: ^4.2.1
         version: 4.2.1(vite@6.4.1(jiti@2.6.1)(lightningcss@1.31.1)(yaml@2.8.2))
+      prettier-plugin-svelte:
+        specifier: ^3.5.1
+        version: 3.5.1(prettier@3.8.1)(svelte@5.53.10)
       tailwindcss:
         specifier: ^4.1.18
         version: 4.1.18
@@ -2640,6 +2643,15 @@ packages:
       }
     engines: { node: ^14.15.0 || >=16.0.0 }
 
+  prettier-plugin-svelte@3.5.1:
+    resolution:
+      {
+        integrity: sha512-65+fr5+cgIKWKiqM1Doum4uX6bY8iFCdztvvp2RcF+AJoieaw9kJOFMNcJo/bkmKYsxFaM9OsVZK/gWauG/5mg==,
+      }
+    peerDependencies:
+      prettier: ^3.0.0
+      svelte: ^3.2.0 || ^4.0.0-next.0 || ^5.0.0-next.0
+
   prettier@3.8.1:
     resolution:
       {
@@ -5203,6 +5215,11 @@ snapshots:
       "@astrojs/compiler": 2.13.1
       prettier: 3.8.1
       sass-formatter: 0.7.9
+
+  prettier-plugin-svelte@3.5.1(prettier@3.8.1)(svelte@5.53.10):
+    dependencies:
+      prettier: 3.8.1
+      svelte: 5.53.10
 
   prettier@3.8.1: {}
 

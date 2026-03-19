@@ -147,8 +147,7 @@
 								width={item.image.width}
 								height={item.image.height}
 								loading="lazy"
-								decoding="async"
-							/>
+								decoding="async" />
 						</div>
 						<div class="section-carousel-content">
 							<h4 class="section-carousel-title">

@@ -54,7 +54,8 @@
 <nav class:is-scrolled={isScrolled}>
 	<div
 		class="nav-grain"
-		aria-hidden="true"></div>
+		aria-hidden="true">
+	</div>
 
 	<div class="nav-brand font-bold">
 		<a
@@ -77,10 +78,12 @@
 		aria-expanded={isMenuOpen}
 		aria-controls="site-nav-links"
 		aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}>
-		<span class="menu-toggle-icon" aria-hidden="true">
-			<span class="menu-toggle-bar bar-1" ></span>
-			<span class="menu-toggle-bar bar-2" ></span>
-			<span class="menu-toggle-bar bar-3" ></span>
+		<span
+			class="menu-toggle-icon"
+			aria-hidden="true">
+			<span class="menu-toggle-bar bar-1"></span>
+			<span class="menu-toggle-bar bar-2"></span>
+			<span class="menu-toggle-bar bar-3"></span>
 		</span>
 	</button>
 
