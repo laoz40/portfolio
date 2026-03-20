@@ -3,6 +3,7 @@ import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 import DefaultLayout from "../layouts/DefaultLayout.astro";
 import HeroSketchCluster from "../components/home/HeroSketchCluster.astro";
+import HeroLogoCluster from "../components/home/HeroLogoCluster.astro";
 import ImperfectButton from "../components/home/ImperfectButton.astro";
 import ScrollDownArrow from "../components/home/ScrollDownArrow.astro";
 import HighlightText from "../components/ui/HighlightText.astro";
@@ -31,6 +32,7 @@ const horus = horusEntry.data as ProjectFrontmatter;
 	home>
 	<section id="hero">
 		<HeroSketchCluster />
+		<HeroLogoCluster />
 
 		<div class="hero-copy">
 			<h1>Welcome to Leo's Website!</h1>

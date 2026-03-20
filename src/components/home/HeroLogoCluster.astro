@@ -1,0 +1,193 @@
+---
+import { Image } from "astro:assets";
+import tsImage from "../../assets/home/ts.webp";
+import reactImage from "../../assets/home/react.webp";
+import nextjsImage from "../../assets/home/nextjs.webp";
+import cssImage from "../../assets/home/css.webp";
+import figmaImage from "../../assets/home/figma.webp";
+---
+
+<div
+	class="hero-logo-cluster"
+	aria-hidden="true">
+	<p class="hero-logo-label">Stuff I use</p>
+	<Image
+		class="hero-logo hero-logo-ts"
+		src={tsImage}
+		alt=""
+		loading="eager"
+		fetchpriority="high"
+		decoding="async"
+	/>
+	<Image
+		class="hero-logo hero-logo-react"
+		src={reactImage}
+		alt=""
+		loading="eager"
+		fetchpriority="high"
+		decoding="async"
+	/>
+	<Image
+		class="hero-logo hero-logo-nextjs"
+		src={nextjsImage}
+		alt=""
+		loading="eager"
+		fetchpriority="high"
+		decoding="async"
+	/>
+	<Image
+		class="hero-logo hero-logo-css"
+		src={cssImage}
+		alt=""
+		loading="eager"
+		fetchpriority="high"
+		decoding="async"
+	/>
+	<Image
+		class="hero-logo hero-logo-figma"
+		src={figmaImage}
+		alt=""
+		loading="eager"
+		fetchpriority="high"
+		decoding="async"
+	/>
+</div>
+
+<style>
+	.hero-logo-cluster {
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		pointer-events: none;
+		user-select: none;
+	}
+
+	.hero-logo {
+		position: absolute;
+		right: clamp(0.5rem, 3vw, 2.75rem);
+		width: clamp(4.5rem, 8.5vw, 7.75rem);
+		height: auto;
+		object-fit: contain;
+		opacity: 0.8;
+		filter: saturate(0.5) contrast(1.1);
+	}
+
+	.hero-logo-label {
+		position: absolute;
+		right: clamp(0.5rem, 3vw, 2.5rem);
+		top: clamp(10rem, 16vh, 13rem);
+		margin: 0;
+		font-family: var(--font-handwriting);
+		font-size: 1rem;
+		letter-spacing: 0.01em;
+		color: var(--color-text-muted);
+		transform: rotate(-1deg);
+		opacity: 0.78;
+	}
+
+	.hero-logo-ts {
+		top: clamp(12.5rem, 22vh, 16rem);
+		right: clamp(5rem, 12vw, 9rem);
+		transform: rotate(6deg);
+	}
+
+	.hero-logo-react {
+		top: clamp(26rem, 44vh, 30.5rem);
+		right: clamp(6rem, 14vw, 10.5rem);
+		transform: rotate(-8deg);
+	}
+
+	.hero-logo-nextjs {
+		top: clamp(20.5rem, 35vh, 25rem);
+		right: 0;
+		width: clamp(5rem, 9.5vw, 8.25rem);
+		transform: rotate(5deg);
+	}
+
+	.hero-logo-css {
+		top: clamp(32rem, 54vh, 37rem);
+		right: clamp(0.75rem, 2.5vw, 2.25rem);
+		transform: rotate(-6deg);
+	}
+
+	.hero-logo-figma {
+		top: clamp(41.5rem, 68vh, 47rem);
+		right: clamp(0.25rem, 1.75vw, 1.75rem);
+		width: clamp(4.25rem, 7.75vw, 7rem);
+		transform: rotate(8deg);
+	}
+
+	@media (max-width: 980px) {
+		.hero-logo {
+			right: clamp(0.35rem, 2vw, 1.5rem);
+			width: clamp(3.75rem, 8vw, 6rem);
+		}
+
+		.hero-logo-ts {
+			top: clamp(10.5rem, 19vh, 13rem);
+			right: clamp(4rem, 10vw, 6.5rem);
+		}
+
+		.hero-logo-react {
+			top: clamp(18.5rem, 33vh, 22rem);
+			right: clamp(5rem, 12vw, 8rem);
+		}
+
+		.hero-logo-nextjs {
+			top: clamp(16.5rem, 29vh, 19.5rem);
+			right: clamp(0.35rem, 1.5vw, 1.35rem);
+			width: clamp(4.15rem, 8.5vw, 6.5rem);
+		}
+
+		.hero-logo-css {
+			top: clamp(25.5rem, 46vh, 29.5rem);
+			right: clamp(0.75rem, 2.5vw, 1.75rem);
+		}
+
+		.hero-logo-figma {
+			top: clamp(33rem, 58vh, 37.5rem);
+			right: clamp(0.35rem, 1.5vw, 1.5rem);
+			width: clamp(3.65rem, 7vw, 5.5rem);
+		}
+		.hero-logo-label {
+			top: clamp(6.75rem, 11vh, 8.25rem);
+			right: clamp(0.35rem, 2vw, 1.5rem);
+			font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+		}
+	}
+
+	@media (max-width: 640px) {
+		.hero-logo-cluster {
+			display: block;
+		}
+
+		.hero-logo-label,
+		.hero-logo-ts,
+		.hero-logo-css {
+			display: none;
+		}
+
+		.hero-logo {
+			width: clamp(2.75rem, 10vw, 3.5rem);
+			opacity: 0.75;
+		}
+
+		.hero-logo-react {
+			top: clamp(7.75rem, 17vh, 10rem);
+			right: clamp(2.1rem, 8vw, 3.4rem);
+			width: clamp(2.85rem, 10.5vw, 3.6rem);
+		}
+
+		.hero-logo-nextjs {
+			top: clamp(3.25rem, 8vh, 5.25rem);
+			right: clamp(0.35rem, 2.25vw, 1.2rem);
+			width: clamp(3rem, 12vw, 4rem);
+		}
+
+		.hero-logo-figma {
+			top: clamp(12.25rem, 25vh, 15.5rem);
+			right: clamp(0.5rem, 2.75vw, 1.6rem);
+			width: clamp(2.6rem, 10vw, 3.3rem);
+		}
+	}
+</style>
