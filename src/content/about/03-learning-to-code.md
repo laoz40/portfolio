@@ -1,5 +1,11 @@
 ---
 title: Misconceptions about coding
+section:
+  media:
+    type: image
+    variant: raw
+    image: ../../assets/about/cluster.webp
+    alt: Collection of various languages and tools I use
 ---
 
 At university, I had actually convinced myself I didn't enjoy coding, and focused more on

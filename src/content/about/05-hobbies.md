@@ -1,5 +1,11 @@
 ---
 title: Hobbies
+section:
+  media:
+    type: image
+    variant: raw
+    image: ../../assets/about/hobbies.webp
+    alt: Drawings of hobbies
 ---
 
 I love to play tabbletennis. It's so addicting and the skill ceiling is so

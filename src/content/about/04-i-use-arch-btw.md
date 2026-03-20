@@ -1,9 +1,15 @@
 ---
 title: I use Arch btw
+section:
+  media:
+    type: image
+    variant: taped
+    image: ../../assets/about/arch.webp
+    alt: My Arch Linux setup
 ---
 
 I installed Linux at the end of 2025. I have since installed it on every
-computer/laptop I own. I love the simplicity of it (arch btw), and how its so
+computer/laptop I own. I love the simplicity of it, and how its so
 modular and customisable. I have the ability to configure and script whatever I
 want.
 
