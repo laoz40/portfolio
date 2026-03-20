@@ -10,20 +10,27 @@
 		target: HTMLElement;
 	};
 
-	const slugifyHeadingText = (textValue: string) =>
-		String(textValue)
+	function slugifyHeadingText(textValue: string): string {
+		return String(textValue)
 			.toLowerCase()
 			.trim()
 			.replace(/[^a-z0-9\s-]/g, "")
 			.replace(/\s+/g, "-")
 			.replace(/-+/g, "-");
+	}
 
-	const isValidHeading = (headingNode: Element): headingNode is HTMLElement =>
-		headingNode instanceof HTMLElement &&
-		typeof headingNode.textContent === "string" &&
-		headingNode.textContent.trim().length > 0;
+	function isValidHeading(headingNode: Element): headingNode is HTMLElement {
+		return (
+			headingNode instanceof HTMLElement &&
+			typeof headingNode.textContent === "string" &&
+			headingNode.textContent.trim().length > 0
+		);
+	}
 
-	const ensureHeadingId = (headingNode: HTMLElement, usedIds: Set<string>) => {
+	function ensureHeadingId(
+		headingNode: HTMLElement,
+		usedIds: Set<string>,
+	): string {
 		if (headingNode.id) {
 			usedIds.add(headingNode.id);
 			return headingNode.id;
@@ -42,12 +49,18 @@
 		headingNode.id = nextId;
 		usedIds.add(nextId);
 		return nextId;
-	};
+	}
 
-	const getItemsFromHeadings = (
+	function getScrollSpyTarget(heading: HTMLElement): HTMLElement {
+		const nearestSection = heading.closest("section");
+
+		return nearestSection instanceof HTMLElement ? nearestSection : heading;
+	}
+
+	function getItemsFromHeadings(
 		contentRoot: Element,
 		headingSelectorValue: string,
-	): ScrollSpyItem[] => {
+	): ScrollSpyItem[] {
 		const usedIds = new Set<string>();
 		const seenTargets = new Set<HTMLElement>();
 		const nextItems: ScrollSpyItem[] = [];
@@ -58,9 +71,7 @@
 
 		for (const heading of headings) {
 			const id = ensureHeadingId(heading, usedIds);
-			const nearestSection = heading.closest("section");
-			const target =
-				nearestSection instanceof HTMLElement ? nearestSection : heading;
+			const target = getScrollSpyTarget(heading);
 
 			if (seenTargets.has(target)) {
 				continue;
@@ -75,40 +86,59 @@
 		}
 
 		return nextItems;
-	};
+	}
 
-	const pickActiveTarget = (
+	function getVisibleEntries(
 		entriesByTarget: Map<HTMLElement, IntersectionObserverEntry>,
-		anchorY: number,
-	) => {
-		const visibleEntries = Array.from(entriesByTarget.values());
-		if (visibleEntries.length === 0) {
-			return null;
-		}
-
-		const sortedByTopDesc = visibleEntries.sort(
+	): IntersectionObserverEntry[] {
+		return Array.from(entriesByTarget.values()).sort(
 			(entryA, entryB) =>
 				entryB.boundingClientRect.top - entryA.boundingClientRect.top,
 		);
+	}
 
-		const crossingEntry = sortedByTopDesc.find(
+	function findCrossingEntry(
+		entries: IntersectionObserverEntry[],
+		anchorY: number,
+	): IntersectionObserverEntry | undefined {
+		return entries.find(
 			(entry) =>
 				entry.boundingClientRect.top <= anchorY &&
 				entry.boundingClientRect.bottom >= anchorY,
 		);
+	}
+
+	function pickActiveTarget(
+		entriesByTarget: Map<HTMLElement, IntersectionObserverEntry>,
+		anchorY: number,
+	): HTMLElement | null {
+		const visibleEntries = getVisibleEntries(entriesByTarget);
+		if (visibleEntries.length === 0) {
+			return null;
+		}
+
+		const crossingEntry = findCrossingEntry(visibleEntries, anchorY);
 		if (crossingEntry) {
 			return crossingEntry.target instanceof HTMLElement
 				? crossingEntry.target
 				: null;
 		}
 
-		const nearestAboveEntry = sortedByTopDesc.find(
+		const nearestAboveEntry = visibleEntries.find(
 			(entry) => entry.boundingClientRect.top <= anchorY,
 		);
-		const fallbackTarget = (nearestAboveEntry || sortedByTopDesc[0]).target;
+		const fallbackTarget = (nearestAboveEntry ?? visibleEntries[0]).target;
 
 		return fallbackTarget instanceof HTMLElement ? fallbackTarget : null;
-	};
+	}
+
+	function isIntersectionObserverSupported(): boolean {
+		return "IntersectionObserver" in window;
+	}
+
+	function createTargetIdMap(items: ScrollSpyItem[]): Map<HTMLElement, string> {
+		return new Map(items.map((item) => [item.target, item.id] as const));
+	}
 
 	let items: ScrollSpyItem[] = [];
 	let activeId = "";
@@ -116,12 +146,68 @@
 	onMount(() => {
 		let observer: IntersectionObserver | null = null;
 
-		const cleanupObserver = () => {
+		function cleanupObserver(): void {
 			observer?.disconnect();
 			observer = null;
-		};
+		}
 
-		const syncScrollSpy = () => {
+		function syncActiveId(
+			targetIdByElement: Map<HTMLElement, string>,
+			intersectingTargets: Map<HTMLElement, IntersectionObserverEntry>,
+		): void {
+			const anchorY = window.innerHeight * 0.2;
+			const nextActiveTarget = pickActiveTarget(intersectingTargets, anchorY);
+
+			if (!nextActiveTarget) {
+				return;
+			}
+
+			const nextActiveId = targetIdByElement.get(nextActiveTarget);
+			if (nextActiveId) {
+				activeId = nextActiveId;
+			}
+		}
+
+		function createObserver(items: ScrollSpyItem[]): IntersectionObserver {
+			const targetIdByElement = createTargetIdMap(items);
+			const intersectingTargets = new Map<
+				HTMLElement,
+				IntersectionObserverEntry
+			>();
+
+			return new IntersectionObserver(
+				(entries) => {
+					for (const entry of entries) {
+						if (!(entry.target instanceof HTMLElement)) {
+							continue;
+						}
+
+						if (entry.isIntersecting) {
+							intersectingTargets.set(entry.target, entry);
+							continue;
+						}
+
+						intersectingTargets.delete(entry.target);
+					}
+
+					syncActiveId(targetIdByElement, intersectingTargets);
+				},
+				{
+					rootMargin: "-20% 0px -60% 0px",
+					threshold: [0, 0.25, 0.5],
+				},
+			);
+		}
+
+		function observeItems(nextItems: ScrollSpyItem[]): void {
+			observer = createObserver(nextItems);
+
+			for (const item of nextItems) {
+				observer.observe(item.target);
+			}
+		}
+
+		function syncScrollSpy(): void {
 			cleanupObserver();
 
 			const contentRoot = document.querySelector(rootSelector);
@@ -135,56 +221,12 @@
 			items = getItemsFromHeadings(contentRoot, headingSelector);
 			activeId = items[0]?.id ?? "";
 
-			if (items.length === 0 || !("IntersectionObserver" in window)) {
+			if (items.length === 0 || !isIntersectionObserverSupported()) {
 				return;
 			}
 
-			const targetIdByElement = new Map(
-				items.map((item) => [item.target, item.id] as const),
-			);
-			const intersectingTargets = new Map<
-				HTMLElement,
-				IntersectionObserverEntry
-			>();
-
-			observer = new IntersectionObserver(
-				(entries) => {
-					for (const entry of entries) {
-						if (!(entry.target instanceof HTMLElement)) {
-							continue;
-						}
-
-						if (entry.isIntersecting) {
-							intersectingTargets.set(entry.target, entry);
-						} else {
-							intersectingTargets.delete(entry.target);
-						}
-					}
-
-					const anchorY = window.innerHeight * 0.2;
-					const nextActiveTarget = pickActiveTarget(
-						intersectingTargets,
-						anchorY,
-					);
-					if (!nextActiveTarget) {
-						return;
-					}
-
-					const nextActiveId = targetIdByElement.get(nextActiveTarget);
-					if (nextActiveId) {
-						activeId = nextActiveId;
-					}
-				},
-				{
-					rootMargin: "-20% 0px -60% 0px",
-					threshold: [0, 0.25, 0.5],
-				},
-			);
-
-			for (const item of items) {
-				observer.observe(item.target);
-			}
-		};
+			observeItems(items);
+		}
 
 		syncScrollSpy();
 		document.addEventListener("astro:page-load", syncScrollSpy);

@@ -1,53 +1,40 @@
+<script lang="ts">
+	import { onMount } from "svelte";
+
+	let isVisible = false;
+
+	function syncScrollUpState(): void {
+		isVisible = window.scrollY > window.innerHeight;
+	}
+
+	function prefersReducedMotion(): boolean {
+		return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+	}
+
+	function scrollToTop(): void {
+		window.scrollTo({
+			top: 0,
+			behavior: prefersReducedMotion() ? "auto" : "smooth",
+		});
+	}
+
+	onMount(() => {
+		syncScrollUpState();
+	});
+</script>
+
+<svelte:window
+	on:scroll|passive={syncScrollUpState}
+	on:resize|passive={syncScrollUpState} />
+
 <button
 	type="button"
 	class="scroll-up"
-	data-scroll-up
+	class:is-visible={isVisible}
+	on:click={scrollToTop}
 	aria-label="Scroll back to top">
 	SCROLL UP
 </button>
-
-<script is:inline>
-	const initScrollUpButton = () => {
-		const scrollUpButton = document.querySelector("[data-scroll-up]");
-		if (!scrollUpButton) {
-			return;
-		}
-
-		const syncScrollUpState = () => {
-			const shouldShow = window.scrollY > window.innerHeight;
-			scrollUpButton.classList.toggle("is-visible", shouldShow);
-		};
-
-		if (scrollUpButton.dataset.scrollUpReady !== "true") {
-			scrollUpButton.dataset.scrollUpReady = "true";
-			scrollUpButton.addEventListener("click", () => {
-				const prefersReducedMotion = window.matchMedia(
-					"(prefers-reduced-motion: reduce)",
-				).matches;
-				window.scrollTo({
-					top: 0,
-					behavior: prefersReducedMotion ? "auto" : "smooth",
-				});
-			});
-
-			window.addEventListener("scroll", syncScrollUpState, {
-				passive: true,
-			});
-			window.addEventListener("resize", syncScrollUpState, {
-				passive: true,
-			});
-		}
-
-		syncScrollUpState();
-	};
-
-	if (!window.__scrollUpButtonReady) {
-		window.__scrollUpButtonReady = true;
-		document.addEventListener("astro:page-load", initScrollUpButton);
-	}
-
-	initScrollUpButton();
-</script>
 
 <style>
 	.scroll-up {

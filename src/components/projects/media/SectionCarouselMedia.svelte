@@ -31,32 +31,77 @@
 			: defaultCarouselMaxWidth;
 	$: hasMultipleSlides = slideCount > 1;
 
-	const goTo = (index: number) => {
-		currentIndex = Math.min(Math.max(index, 0), maxIndex);
-	};
+	function clampIndex(index: number): number {
+		return Math.min(Math.max(index, 0), maxIndex);
+	}
 
-	const goPrev = () => {
-		if (currentIndex === 0) return;
+	function goTo(index: number): void {
+		currentIndex = clampIndex(index);
+	}
+
+	function goPrev(): void {
+		if (currentIndex === 0) {
+			return;
+		}
+
 		goTo(currentIndex - 1);
-	};
+	}
 
-	const goNext = () => {
-		if (currentIndex >= maxIndex) return;
+	function goNext(): void {
+		if (currentIndex >= maxIndex) {
+			return;
+		}
+
 		goTo(currentIndex + 1);
-	};
+	}
 
-	const resetSwipeState = () => {
+	function resetSwipeState(): void {
 		activePointerId = null;
 		pointerStartX = 0;
 		pointerStartY = 0;
 		pointerDeltaX = 0;
 		pointerDeltaY = 0;
 		isSwiping = false;
-	};
+	}
 
-	const handlePointerDown = (event: PointerEvent) => {
-		if (!hasMultipleSlides) return;
-		if (event.pointerType === "mouse" && event.button !== 0) return;
+	function releasePointerCapture(event: PointerEvent): void {
+		if (event.currentTarget instanceof HTMLElement) {
+			event.currentTarget.releasePointerCapture(event.pointerId);
+		}
+	}
+
+	function shouldStartSwipe(): boolean {
+		return (
+			Math.abs(pointerDeltaX) >= pointerActivationThreshold &&
+			Math.abs(pointerDeltaX) > Math.abs(pointerDeltaY)
+		);
+	}
+
+	function shouldChangeSlides(): boolean {
+		return (
+			Math.abs(pointerDeltaX) >= swipeThreshold &&
+			Math.abs(pointerDeltaX) > Math.abs(pointerDeltaY)
+		);
+	}
+
+	function updatePointerDelta(event: PointerEvent): void {
+		pointerDeltaX = event.clientX - pointerStartX;
+		pointerDeltaY = event.clientY - pointerStartY;
+	}
+
+	function finishPointerInteraction(event: PointerEvent): void {
+		releasePointerCapture(event);
+		resetSwipeState();
+	}
+
+	function handlePointerDown(event: PointerEvent): void {
+		if (!hasMultipleSlides) {
+			return;
+		}
+
+		if (event.pointerType === "mouse" && event.button !== 0) {
+			return;
+		}
 
 		activePointerId = event.pointerId;
 		pointerStartX = event.clientX;
@@ -68,34 +113,30 @@
 		if (event.currentTarget instanceof HTMLElement) {
 			event.currentTarget.setPointerCapture(event.pointerId);
 		}
-	};
+	}
 
-	const handlePointerMove = (event: PointerEvent) => {
-		if (activePointerId !== event.pointerId) return;
+	function handlePointerMove(event: PointerEvent): void {
+		if (activePointerId !== event.pointerId) {
+			return;
+		}
 
-		pointerDeltaX = event.clientX - pointerStartX;
-		pointerDeltaY = event.clientY - pointerStartY;
+		updatePointerDelta(event);
 
-		if (
-			!isSwiping &&
-			Math.abs(pointerDeltaX) >= pointerActivationThreshold &&
-			Math.abs(pointerDeltaX) > Math.abs(pointerDeltaY)
-		) {
+		if (!isSwiping && shouldStartSwipe()) {
 			isSwiping = true;
 		}
 
 		if (isSwiping) {
 			event.preventDefault();
 		}
-	};
+	}
 
-	const handlePointerUp = (event: PointerEvent) => {
-		if (activePointerId !== event.pointerId) return;
+	function handlePointerUp(event: PointerEvent): void {
+		if (activePointerId !== event.pointerId) {
+			return;
+		}
 
-		if (
-			Math.abs(pointerDeltaX) >= swipeThreshold &&
-			Math.abs(pointerDeltaX) > Math.abs(pointerDeltaY)
-		) {
+		if (shouldChangeSlides()) {
 			if (pointerDeltaX < 0) {
 				goNext();
 			} else {
@@ -103,22 +144,16 @@
 			}
 		}
 
-		if (event.currentTarget instanceof HTMLElement) {
-			event.currentTarget.releasePointerCapture(event.pointerId);
+		finishPointerInteraction(event);
+	}
+
+	function handlePointerCancel(event: PointerEvent): void {
+		if (activePointerId !== event.pointerId) {
+			return;
 		}
 
-		resetSwipeState();
-	};
-
-	const handlePointerCancel = (event: PointerEvent) => {
-		if (activePointerId !== event.pointerId) return;
-
-		if (event.currentTarget instanceof HTMLElement) {
-			event.currentTarget.releasePointerCapture(event.pointerId);
-		}
-
-		resetSwipeState();
-	};
+		finishPointerInteraction(event);
+	}
 </script>
 
 <div

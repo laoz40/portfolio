@@ -1,13 +1,21 @@
-<script>
+<script lang="ts">
 	import { onMount } from "svelte";
 
-	const links = [
+	type LinkVariant = "yellow" | "lime" | "sky";
+
+	type SiteLink = {
+		href: string;
+		label: string;
+		variant: LinkVariant;
+	};
+
+	const links: SiteLink[] = [
 		{ href: "/projects", label: "Projects", variant: "yellow" },
 		{ href: "/about", label: "About", variant: "sky" },
 		{ href: "/contact", label: "Contact", variant: "lime" },
 	];
 
-	const highlightByVariant = {
+	const highlightByVariant: Record<LinkVariant, string> = {
 		yellow: "var(--color-highlight-yellow)",
 		lime: "var(--color-highlight-lime)",
 		sky: "var(--color-highlight-sky)",
@@ -16,40 +24,30 @@
 	let isScrolled = false;
 	let isMenuOpen = false;
 
-	onMount(() => {
-		const syncSiteNavScrollState = () => {
-			isScrolled = window.scrollY > 16;
-		};
+	function syncSiteNavState(): void {
+		isScrolled = window.scrollY > 16;
 
-		const syncMenuStateForViewport = () => {
-			if (window.innerWidth > 820) {
-				isMenuOpen = false;
-			}
-		};
+		if (window.innerWidth > 820) {
+			isMenuOpen = false;
+		}
+	}
 
-		window.addEventListener("scroll", syncSiteNavScrollState, {
-			passive: true,
-		});
-		window.addEventListener("resize", syncMenuStateForViewport, {
-			passive: true,
-		});
-		syncSiteNavScrollState();
-		syncMenuStateForViewport();
-
-		return () => {
-			window.removeEventListener("scroll", syncSiteNavScrollState);
-			window.removeEventListener("resize", syncMenuStateForViewport);
-		};
-	});
-
-	const toggleMenu = () => {
+	function toggleMenu(): void {
 		isMenuOpen = !isMenuOpen;
-	};
+	}
 
-	const closeMenu = () => {
+	function closeMenu(): void {
 		isMenuOpen = false;
-	};
+	}
+
+	onMount(() => {
+		syncSiteNavState();
+	});
 </script>
+
+<svelte:window
+	on:scroll|passive={syncSiteNavState}
+	on:resize|passive={syncSiteNavState} />
 
 <nav class:is-scrolled={isScrolled}>
 	<div
