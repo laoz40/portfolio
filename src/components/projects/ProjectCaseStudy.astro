@@ -1,15 +1,20 @@
 ---
 import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
-import type { CaseStudySection, SectionMedia } from "./caseStudySections";
+import type {
+	CarouselItem,
+	CaseStudySection,
+	SectionMedia,
+} from "./caseStudySections";
+import InlineGallery from "./inline/InlineGallery.svelte";
+import InlineImage from "./inline/InlineImage.svelte";
 import Sidebar from "./Sidebar.svelte";
 import SectionCarouselMedia from "./media/SectionCarouselMedia.svelte";
 import SectionImageMedia from "./media/SectionImageMedia.astro";
 import SectionLinkButtons from "./SectionLinkButtons.astro";
-import SectionPlaceholderMedia from "./media/SectionPlaceholderMedia.astro";
 import SectionVideoMedia from "./media/SectionVideoMedia.astro";
 
-const getYouTubeVideoId = (url: string) => {
+function getYouTubeVideoId(url: string): string | undefined {
 	try {
 		const parsedUrl = new URL(url);
 		const shortCode =
@@ -31,12 +36,12 @@ const getYouTubeVideoId = (url: string) => {
 	} catch {
 		return undefined;
 	}
-};
+}
 
-const resolveSectionMedia = (
+function resolveSectionMedia(
 	explicitMedia?: SectionMedia,
 	frontmatterMedia?: SectionMedia,
-) => {
+): SectionMedia | undefined {
 	const media = explicitMedia ?? frontmatterMedia;
 
 	if (!media) {
@@ -58,22 +63,15 @@ const resolveSectionMedia = (
 	}
 
 	return media;
-};
+}
 
-const resolveCarouselItems = (
-	explicitItems?: CaseStudySection["carouselItems"],
-	resolvedMedia?: SectionMedia,
-): NonNullable<CaseStudySection["carouselItems"]> => {
-	if (explicitItems && explicitItems.length > 0) {
-		return explicitItems;
-	}
-
+function getCarouselItems(resolvedMedia?: SectionMedia): CarouselItem[] {
 	if (resolvedMedia?.type === "carousel" && resolvedMedia.items.length > 0) {
 		return resolvedMedia.items;
 	}
 
 	return [];
-};
+}
 
 type SectionLinks = Array<{
 	label: string;
@@ -101,6 +99,101 @@ type InlineImage = {
 	caption?: string;
 };
 
+type SectionFrontmatterExtras = {
+	links?: SectionLinks;
+	ariaLabel?: string;
+	extraClass?: string;
+	media?: SectionMedia;
+	variant?: CaseStudySection["variant"];
+};
+
+type SectionContentFrontmatter = {
+	section?: SectionFrontmatterExtras;
+	inlineGalleries?: InlineGallery[];
+	inlineImages?: InlineImage[];
+};
+
+type SectionMediaKind = "none" | "carousel" | "video" | "image";
+
+type ResolvedSectionData = {
+	variant: NonNullable<CaseStudySection["variant"]>;
+	sectionClass: string | undefined;
+	sectionProps: Record<string, unknown>;
+	sectionLinks: SectionLinks;
+	linksAriaLabel: string | undefined;
+	inlineGalleries: InlineGallery[];
+	inlineImages: InlineImage[];
+	carouselItems: ReturnType<typeof getCarouselItems>;
+	mediaKind: SectionMediaKind;
+	imageMedia: Extract<SectionMedia, { type: "image" }> | undefined;
+	videoMedia: Extract<SectionMedia, { type: "youtube" }> | undefined;
+};
+
+function getSectionFrontmatter(
+	section: CaseStudySection,
+): SectionContentFrontmatter {
+	return (section.frontmatter as SectionContentFrontmatter | undefined) ?? {};
+}
+
+function getSectionVariant(
+	section: CaseStudySection,
+	frontmatterSection?: SectionFrontmatterExtras,
+): NonNullable<CaseStudySection["variant"]> {
+	return section.variant ?? frontmatterSection?.variant ?? "contentOnly";
+}
+
+function getMediaKind(
+	variant: NonNullable<CaseStudySection["variant"]>,
+	resolvedMedia?: SectionMedia,
+): SectionMediaKind {
+	if (variant === "contentOnly") {
+		return "none";
+	}
+
+	if (variant === "carousel") {
+		return "carousel";
+	}
+
+	if (resolvedMedia?.type === "youtube") {
+		return "video";
+	}
+
+	if (resolvedMedia?.type === "image") {
+		return "image";
+	}
+
+	return "none";
+}
+
+function getSectionRenderState(section: CaseStudySection): ResolvedSectionData {
+	const frontmatter = getSectionFrontmatter(section);
+	const frontmatterSection = frontmatter.section;
+	const variant = getSectionVariant(section, frontmatterSection);
+	const resolvedMedia = resolveSectionMedia(
+		section.media,
+		frontmatterSection?.media,
+	);
+	const videoMedia =
+		resolvedMedia?.type === "youtube" ? resolvedMedia : undefined;
+	const imageMedia =
+		resolvedMedia?.type === "image" ? resolvedMedia : undefined;
+	const mediaKind = getMediaKind(variant, resolvedMedia);
+
+	return {
+		variant,
+		sectionClass: section.extraClass ?? frontmatterSection?.extraClass,
+		sectionProps: section.props ?? {},
+		sectionLinks: frontmatterSection?.links ?? [],
+		linksAriaLabel: frontmatterSection?.ariaLabel,
+		inlineGalleries: frontmatter.inlineGalleries ?? [],
+		inlineImages: frontmatter.inlineImages ?? [],
+		carouselItems: getCarouselItems(resolvedMedia),
+		mediaKind,
+		imageMedia,
+		videoMedia,
+	};
+}
+
 const { sections, headingSelector = "h2" } = Astro.props as {
 	sections: CaseStudySection[];
 	headingSelector?: string;
@@ -118,96 +211,80 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 		{
 			sections.map((section) => {
 				const SectionComponent = section.Component;
-				const frontmatterSection = section.frontmatter?.section;
-				const variant =
-					section.variant ?? frontmatterSection?.variant ?? "contentOnly";
-				const resolvedMedia = resolveSectionMedia(
-					section.media,
-					frontmatterSection?.media,
-				);
-				const isCarousel = variant === "carousel";
-				const isContentOnly = variant === "contentOnly";
-				const videoMedia =
-					resolvedMedia?.type === "youtube" ? resolvedMedia : undefined;
-				const imageMedia =
-					resolvedMedia?.type === "image" ? resolvedMedia : undefined;
-				const sectionProps = section.props ?? {};
-				const carouselItems = resolveCarouselItems(
-					section.carouselItems,
-					resolvedMedia,
-				);
-				const sectionLinks =
-					(frontmatterSection as { links?: SectionLinks } | undefined)?.links ??
-					[];
-				const inlineGalleries =
-					(
-						section.frontmatter as
-							| { inlineGalleries?: InlineGallery[] }
-							| undefined
-					)?.inlineGalleries ?? [];
-				const inlineImages =
-					(section.frontmatter as { inlineImages?: InlineImage[] } | undefined)
-						?.inlineImages ?? [];
-				const linksAriaLabel = (
-					frontmatterSection as { ariaLabel?: string } | undefined
-				)?.ariaLabel;
+				const {
+					variant,
+					sectionClass,
+					sectionProps,
+					sectionLinks,
+					linksAriaLabel,
+					inlineGalleries,
+					inlineImages,
+					carouselItems,
+					mediaKind,
+					imageMedia,
+					videoMedia,
+				} = getSectionRenderState(section);
 
 				return (
 					<section
-						class:list={[
-							"section",
-							`section--${variant}`,
-							section.extraClass ?? frontmatterSection?.extraClass,
-						]}>
+						class:list={["section", `section--${variant}`, sectionClass]}>
 						<div class="section-copy">
 							<SectionComponent {...sectionProps} />
 							{inlineGalleries.map((gallery) => (
-								<template data-inline-gallery-template={gallery.id}>
-									<div class="inline-gallery">
-										{gallery.items.map((item) => (
-											<div class="inline-gallery__frame">
-												<figure class="inline-gallery__tile">
-													<Image
-														class="inline-gallery__image"
-														src={item.image}
-														alt={item.alt}
-														width={item.image.width}
-														height={item.image.height}
-														loading="lazy"
-														decoding="async"
-													/>
-													{item.caption ? (
-														<figcaption class="inline-gallery__caption">
-															{item.caption}
-														</figcaption>
-													) : null}
-												</figure>
-											</div>
-										))}
-									</div>
-								</template>
+								<InlineGallery
+									client:load
+									galleryId={gallery.id}>
+									<template>
+										<div class="inline-gallery">
+											{gallery.items.map((item) => (
+												<div class="inline-gallery__frame">
+													<figure class="inline-gallery__tile">
+														<Image
+															class="inline-gallery__image"
+															src={item.image}
+															alt={item.alt}
+															width={item.image.width}
+															height={item.image.height}
+															loading="lazy"
+															decoding="async"
+														/>
+														{item.caption ? (
+															<figcaption class="inline-gallery__caption">
+																{item.caption}
+															</figcaption>
+														) : null}
+													</figure>
+												</div>
+											))}
+										</div>
+									</template>
+								</InlineGallery>
 							))}
 							{inlineImages.map((item) => (
-								<template data-inline-image-template={item.id}>
-									<div
-										class="inline-image-frame"
-										style={`--inline-image-max-width: ${item.image.width}px; --inline-image-aspect-ratio: ${item.image.width} / ${item.image.height};`}>
-										<div class="inline-image">
-											<img
-												class="inline-image__asset"
-												src={item.image.src}
-												alt={item.alt}
-												width={item.image.width}
-												height={item.image.height}
-												loading="lazy"
-												decoding="async"
-											/>
+								<InlineImage
+									client:load
+									imageId={item.id}>
+									<template>
+										<div
+											class="inline-image-frame"
+											style={`--inline-image-max-width: ${item.image.width}px; --inline-image-aspect-ratio: ${item.image.width} / ${item.image.height};`}>
+											<div class="inline-image">
+												<img
+													class="inline-image__asset"
+													src={item.image.src}
+													alt={item.alt}
+													width={item.image.width}
+													height={item.image.height}
+													loading="lazy"
+													decoding="async"
+												/>
+											</div>
+											{item.caption ? (
+												<p class="inline-image__caption">{item.caption}</p>
+											) : null}
 										</div>
-										{item.caption ? (
-											<p class="inline-image__caption">{item.caption}</p>
-										) : null}
-									</div>
-								</template>
+									</template>
+								</InlineImage>
 							))}
 							{sectionLinks.length > 0 ? (
 								<SectionLinkButtons
@@ -216,91 +293,30 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 								/>
 							) : null}
 						</div>
-						{isContentOnly ? null : isCarousel ? (
+						{mediaKind === "carousel" ? (
 							<SectionCarouselMedia
 								client:visible
 								items={carouselItems}
 							/>
-						) : videoMedia ? (
+						) : null}
+						{mediaKind === "video" && videoMedia ? (
 							<SectionVideoMedia
 								videoId={videoMedia.videoId}
 								title={videoMedia.title}
 							/>
-						) : imageMedia ? (
+						) : null}
+						{mediaKind === "image" && imageMedia ? (
 							<SectionImageMedia
 								image={imageMedia.image}
 								alt={imageMedia.alt}
 							/>
-						) : (
-							<SectionPlaceholderMedia />
-						)}
+						) : null}
 					</section>
 				);
 			})
 		}
 	</article>
 </div>
-
-<script is:inline>
-	const initInlineGalleries = () => {
-		const placeholders = document.querySelectorAll(
-			".inline-gallery[data-gallery]",
-		);
-
-		for (const placeholder of placeholders) {
-			if (!(placeholder instanceof HTMLElement)) {
-				continue;
-			}
-
-			const galleryId = placeholder.dataset.gallery;
-
-			if (!galleryId || placeholder.dataset.inlineGalleryReady === "true") {
-				continue;
-			}
-
-			const template = document.querySelector(
-				`template[data-inline-gallery-template="${galleryId}"]`,
-			);
-
-			if (!(template instanceof HTMLTemplateElement)) {
-				continue;
-			}
-
-			placeholder.replaceWith(template.content.cloneNode(true));
-		}
-	};
-
-	const initInlineImages = () => {
-		const placeholders = document.querySelectorAll(".inline-image[data-image]");
-
-		for (const placeholder of placeholders) {
-			if (!(placeholder instanceof HTMLElement)) {
-				continue;
-			}
-
-			const imageId = placeholder.dataset.image;
-
-			if (!imageId || placeholder.dataset.inlineImageReady === "true") {
-				continue;
-			}
-
-			const template = document.querySelector(
-				`template[data-inline-image-template="${imageId}"]`,
-			);
-
-			if (!(template instanceof HTMLTemplateElement)) {
-				continue;
-			}
-
-			placeholder.replaceWith(template.content.cloneNode(true));
-		}
-	};
-
-	initInlineGalleries();
-	initInlineImages();
-	document.addEventListener("astro:page-load", initInlineGalleries);
-	document.addEventListener("astro:page-load", initInlineImages);
-</script>
 
 <style>
 	.project-shell {

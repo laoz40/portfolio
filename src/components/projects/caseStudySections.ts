@@ -70,7 +70,6 @@ export type CaseStudySection = {
 	extraClass?: string;
 	props?: Record<string, unknown>;
 	media?: SectionMedia;
-	carouselItems?: CarouselItem[];
 	frontmatter?: SectionFrontmatter;
 };
 
@@ -82,7 +81,6 @@ type CreateContentSectionOptions<C extends DataCollectionKey> = {
 	extraClass?: string;
 	props?: Record<string, unknown>;
 	media?: SectionMedia;
-	carouselItems?: CarouselItem[];
 };
 
 export type ContentSectionResult<C extends DataCollectionKey> = {
@@ -98,7 +96,6 @@ export const createContentSection = async <C extends DataCollectionKey>({
 	extraClass,
 	props,
 	media,
-	carouselItems,
 }: CreateContentSectionOptions<C>): Promise<ContentSectionResult<C>> => {
 	const entry = await getEntry(collection, entryId);
 
@@ -117,7 +114,6 @@ export const createContentSection = async <C extends DataCollectionKey>({
 			extraClass,
 			props,
 			media,
-			carouselItems,
 			frontmatter,
 		},
 	};
