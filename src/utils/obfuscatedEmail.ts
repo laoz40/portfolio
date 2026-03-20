@@ -1,5 +1,9 @@
-export const encodeHtmlEntities = (value: string) =>
-	Array.from(value, (character) => `&#${character.charCodeAt(0)};`).join("");
+export function encodeHtmlEntities(value: string): string {
+	return Array.from(value, (character) => `&#${character.charCodeAt(0)};`).join(
+		"",
+	);
+}
 
-export const encodeEmailHref = (email: string) =>
-	encodeHtmlEntities(`mailto:${email}`);
+export function encodeEmailHref(email: string): string {
+	return encodeHtmlEntities(`mailto:${email}`);
+}

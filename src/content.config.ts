@@ -102,30 +102,20 @@ const sharedSchema = ({ image }) =>
 		})
 		.passthrough();
 
-const about = defineCollection({
-	loader: glob({ pattern: "**/*.md", base: "./src/content/about" }),
-	schema: sharedSchema,
-});
+function createMarkdownCollection(
+	base: string,
+): ReturnType<typeof defineCollection> {
+	return defineCollection({
+		loader: glob({ pattern: "**/*.md", base }),
+		schema: sharedSchema,
+	});
+}
 
-const checkit = defineCollection({
-	loader: glob({ pattern: "**/*.md", base: "./src/content/checkit" }),
-	schema: sharedSchema,
-});
-
-const horus = defineCollection({
-	loader: glob({ pattern: "**/*.md", base: "./src/content/horus" }),
-	schema: sharedSchema,
-});
-
-const sprout = defineCollection({
-	loader: glob({ pattern: "**/*.md", base: "./src/content/sprout" }),
-	schema: sharedSchema,
-});
-
-const vvstudios = defineCollection({
-	loader: glob({ pattern: "**/*.md", base: "./src/content/vvstudios" }),
-	schema: sharedSchema,
-});
+const about = createMarkdownCollection("./src/content/about");
+const checkit = createMarkdownCollection("./src/content/checkit");
+const horus = createMarkdownCollection("./src/content/horus");
+const sprout = createMarkdownCollection("./src/content/sprout");
+const vvstudios = createMarkdownCollection("./src/content/vvstudios");
 
 export const collections = {
 	about,

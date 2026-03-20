@@ -1,33 +1,38 @@
 <script is:inline>
+	function decodeHtmlEntities(value) {
+		const textarea = document.createElement("textarea");
+		textarea.innerHTML = value;
+		return textarea.value;
+	}
+
+	function hydrateObfuscatedEmailLink(link) {
+		if (!(link instanceof HTMLAnchorElement)) {
+			return;
+		}
+
+		if (link.dataset.emailReady === "true") {
+			return;
+		}
+
+		const encodedEmailHref = link.dataset.emailEntities;
+		if (!encodedEmailHref) {
+			return;
+		}
+
+		link.href = decodeHtmlEntities(encodedEmailHref);
+		link.dataset.emailReady = "true";
+	}
+
+	function initObfuscatedEmailLinks() {
+		const emailLinks = document.querySelectorAll("[data-email-link]");
+
+		emailLinks.forEach((link) => {
+			hydrateObfuscatedEmailLink(link);
+		});
+	}
+
 	if (!window.__obfuscatedEmailLinksReady) {
 		window.__obfuscatedEmailLinksReady = true;
-
-		const decodeHtmlEntities = (value) => {
-			const textarea = document.createElement("textarea");
-			textarea.innerHTML = value;
-			return textarea.value;
-		};
-
-		const initObfuscatedEmailLinks = () => {
-			const emailLinks = document.querySelectorAll("[data-email-link]");
-
-			emailLinks.forEach((link) => {
-				if (
-					!(link instanceof HTMLAnchorElement) ||
-					link.dataset.emailReady === "true"
-				) {
-					return;
-				}
-
-				const encoded = link.dataset.emailEntities;
-				if (!encoded) {
-					return;
-				}
-
-				link.href = decodeHtmlEntities(encoded);
-				link.dataset.emailReady = "true";
-			});
-		};
 
 		initObfuscatedEmailLinks();
 		document.addEventListener("astro:page-load", initObfuscatedEmailLinks);

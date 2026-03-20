@@ -82,20 +82,42 @@ const footerLinks = [
 </footer>
 
 <script is:inline>
-	const initFooterUi = () => {
+	function syncFooterYear() {
 		const currentYearTargets = document.querySelectorAll("[data-current-year]");
-		if (currentYearTargets.length > 0) {
-			const currentYear = new Date().toLocaleDateString(undefined, {
-				year: "numeric",
-			});
 
-			currentYearTargets.forEach((target) => {
-				target.textContent = currentYear;
-			});
+		if (currentYearTargets.length === 0) {
+			return;
 		}
 
+		const currentYear = new Date().toLocaleDateString(undefined, {
+			year: "numeric",
+		});
+
+		currentYearTargets.forEach((target) => {
+			target.textContent = currentYear;
+		});
+	}
+
+	function revealFooterOnceVisible(entries, observer, footerRoot) {
+		for (const entry of entries) {
+			if (!entry.isIntersecting) {
+				continue;
+			}
+
+			footerRoot.classList.add("is-visible");
+			observer.disconnect();
+			return;
+		}
+	}
+
+	function initFooterReveal() {
 		const footerRoot = document.querySelector("[data-footer-root]");
-		if (!footerRoot || footerRoot.dataset.animReady === "true") {
+
+		if (!(footerRoot instanceof HTMLElement)) {
+			return;
+		}
+
+		if (footerRoot.dataset.animReady === "true") {
 			return;
 		}
 
@@ -107,15 +129,7 @@ const footerLinks = [
 		}
 
 		const observer = new IntersectionObserver(
-			(entries) => {
-				for (const entry of entries) {
-					if (!entry.isIntersecting) {
-						continue;
-					}
-					footerRoot.classList.add("is-visible");
-					observer.disconnect();
-				}
-			},
+			(entries) => revealFooterOnceVisible(entries, observer, footerRoot),
 			{
 				threshold: 0.25,
 				rootMargin: "0px 0px -8% 0px",
@@ -123,7 +137,12 @@ const footerLinks = [
 		);
 
 		observer.observe(footerRoot);
-	};
+	}
+
+	function initFooterUi() {
+		syncFooterYear();
+		initFooterReveal();
+	}
 
 	initFooterUi();
 	document.addEventListener("astro:page-load", initFooterUi);
