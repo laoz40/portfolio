@@ -10,9 +10,12 @@ const buttonPath = `M14,11
 	C-1,60 7,60 5,38
 	L6,23
 	C7,17 5,13 14,11 Z`;
-const { fill, href } = Astro.props as {
+const { fill, href, target, rel, ...attributes } = Astro.props as {
 	fill: string;
 	href?: string;
+	target?: string;
+	rel?: string;
+	[key: string]: unknown;
 };
 ---
 
@@ -20,6 +23,9 @@ const { fill, href } = Astro.props as {
 	href ? (
 		<a
 			href={href}
+			target={target}
+			rel={rel}
+			{...attributes}
 			class="imperfect-button"
 			style={`--fill: ${fill};`}>
 			<span>
@@ -43,6 +49,7 @@ const { fill, href } = Astro.props as {
 	) : (
 		<button
 			type="button"
+			{...attributes}
 			class="imperfect-button"
 			style={`--fill: ${fill};`}>
 			<span>

@@ -1,12 +1,22 @@
 ---
 import HighlightText from "../ui/HighlightText.astro";
 
-const { href, variant = "yellow", selectable = false } = Astro.props;
+const {
+	href,
+	variant = "yellow",
+	selectable = false,
+	target,
+	rel,
+	...attributes
+} = Astro.props;
 ---
 
 <a
 	class="nav-link"
-	href={href}>
+	href={href}
+	target={target}
+	rel={rel}
+	{...attributes}>
 	<HighlightText
 		class="nav-link-text"
 		variant={variant}

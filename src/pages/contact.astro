@@ -1,9 +1,81 @@
 ---
+import ObfuscatedEmailRuntime from "../components/contact/ObfuscatedEmailRuntime.astro";
+import ImperfectButton from "../components/home/ImperfectButton.astro";
 import DefaultLayout from "../layouts/DefaultLayout.astro";
+import { encodeEmailHref } from "../utils/obfuscatedEmail";
+
+type ContactLink = {
+	label: string;
+	href: string;
+	fill: string;
+	target: string | undefined;
+	rel: string | undefined;
+};
+
+const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL;
+const linkedInUrl = import.meta.env.PUBLIC_LINKEDIN_URL;
+const githubUrl = import.meta.env.PUBLIC_GITHUB_URL;
+
+const encodedEmailHref = contactEmail
+	? encodeEmailHref(contactEmail)
+	: undefined;
+
+const contactLinks = [
+	linkedInUrl
+		? {
+				label: "LinkedIn",
+				href: linkedInUrl,
+				fill: "var(--color-home-button-sky)",
+				target: "_blank",
+				rel: "noreferrer",
+			}
+		: null,
+	{
+		label: "Resume",
+		href: "/resume.pdf",
+		fill: "rgb(255 222 173)",
+		target: "_blank",
+		rel: "noreferrer",
+	},
+	githubUrl
+		? {
+				label: "GitHub",
+				href: githubUrl,
+				fill: "rgb(213 244 179)",
+				target: "_blank",
+				rel: "noreferrer",
+			}
+		: null,
+].filter((link): link is ContactLink => link !== null);
 ---
 
 <DefaultLayout title="Contact">
-	<h1>Contact</h1>
+	<ObfuscatedEmailRuntime />
+	<h1>Here are my links</h1>
+	<div class="contact-actions">
+		{
+			contactEmail ? (
+				<ImperfectButton
+					href="#"
+					fill="var(--color-home-button-yellow)"
+					data-email-link="true"
+					data-email-entities={encodedEmailHref}>
+					Email
+				</ImperfectButton>
+			) : null
+		}
+		{
+			contactLinks.map((link) => (
+				<ImperfectButton
+					href={link.href}
+					fill={link.fill}
+					target={link.target}
+					rel={link.rel}>
+					{link.label}
+				</ImperfectButton>
+			))
+		}
+	</div>
 </DefaultLayout>
 
 <style>
@@ -11,6 +83,19 @@ import DefaultLayout from "../layouts/DefaultLayout.astro";
 		font-size: clamp(1.9rem, 5vw, 3.5rem);
 		font-weight: 700;
 		text-align: center;
-		margin-bottom: clamp(1.25rem, 3vw, 2rem);
+		margin-bottom: 0.75rem;
+	}
+
+	.contact-actions {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1rem;
+		width: min(100%, 20rem);
+		margin: clamp(2rem, 5vw, 3.5rem) auto 0;
+	}
+
+	.contact-actions :global(.imperfect-button) {
+		width: min(100%, 20rem);
 	}
 </style>
