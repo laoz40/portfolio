@@ -17,7 +17,9 @@ type ProjectFrontmatter = {
 };
 
 const projectSlugs = ["horus", "sprout", "checkit", "vvstudios"] as const;
-const disabledProjectSlugs = new Set<(typeof projectSlugs)[number]>(["vvstudios"]);
+const disabledProjectSlugs = new Set<(typeof projectSlugs)[number]>([
+	"vvstudios",
+]);
 
 const projectEntries = await Promise.all(
 	projectSlugs.map(async (slug) => ({
