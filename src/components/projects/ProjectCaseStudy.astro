@@ -201,7 +201,7 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 ---
 
 <div
-	class="project-shell mx-auto mt-4 grid w-full [grid-template-columns:13rem_minmax(0,1fr)] items-start gap-10 max-[1142px]:grid-cols-1">
+	class="project-shell mx-auto mt-4 grid w-full grid-cols-[13rem_minmax(0,1fr)] items-start gap-10 max-[1142px]:grid-cols-1">
 	<Sidebar
 		client:load
 		headingSelector={headingSelector}
@@ -229,7 +229,7 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 				return (
 					<section
 						class:list={[
-							"section grid min-w-0 [grid-template-columns:minmax(0,var(--section-copy-max-width))_minmax(18rem,var(--section-media-column-width,var(--section-media-max-width)))] items-start justify-center gap-x-12 gap-y-8 max-[1450px]:grid-cols-1 max-[1450px]:gap-4",
+							"section grid min-w-0 grid-cols-[minmax(0,var(--section-copy-max-width))_minmax(18rem,var(--section-media-column-width,var(--section-media-max-width)))] items-start justify-center gap-x-12 gap-y-8 max-[1450px]:grid-cols-1 max-[1450px]:gap-4",
 							`section--${variant}`,
 							sectionClass,
 						]}>
@@ -240,9 +240,9 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 									client:load
 									galleryId={gallery.id}>
 									<template>
-										<div class="inline-gallery grid [grid-template-columns:repeat(2,minmax(0,max-content))] justify-start gap-x-4 gap-y-[1.35rem] max-sm:grid-cols-1">
+										<div class="inline-gallery grid grid-cols-[repeat(2,minmax(0,max-content))] justify-start gap-x-4 gap-y-[1.35rem] max-sm:grid-cols-1">
 											{gallery.items.map((item) => (
-												<div class="inline-gallery__frame relative w-full max-w-[21rem] min-w-0 justify-self-start pt-[calc(var(--size-project-tape-height)*0.5)] max-[1450px]:max-w-[min(100%,28rem)]">
+												<div class="inline-gallery__frame relative w-full max-w-84 min-w-0 justify-self-start pt-[calc(var(--size-project-tape-height)*0.5)] max-[1450px]:max-w-[min(100%,28rem)]">
 													<figure class="inline-gallery__tile paper-frame">
 														<Image
 															class="inline-gallery__image"

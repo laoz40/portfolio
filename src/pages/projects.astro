@@ -48,7 +48,7 @@ const projects: Array<{
 <DefaultLayout title="Projects">
 	<h1>These are my projects</h1>
 	<div
-		class="projects-layout grid [grid-template-columns:repeat(2,minmax(0,29.75rem))] justify-center gap-x-12 gap-y-8 max-[900px]:grid-cols-[minmax(0,1fr)] max-[900px]:justify-stretch max-[900px]:gap-7 min-[1440px]:[grid-template-columns:repeat(2,minmax(0,42.5rem))] min-[1440px]:gap-x-10">
+		class="projects-layout grid grid-cols-[repeat(2,minmax(0,29.75rem))] justify-center gap-x-12 gap-y-8 max-[900px]:grid-cols-[minmax(0,1fr)] max-[900px]:justify-stretch max-[900px]:gap-7 min-[1440px]:grid-cols-[repeat(2,minmax(0,42.5rem))] min-[1440px]:gap-x-10">
 		{
 			projects.map(({ slug, frontmatter }) => {
 				const isDisabled = disabledProjectSlugs.has(slug);
