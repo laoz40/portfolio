@@ -157,7 +157,7 @@
 </script>
 
 <div
-	class="section-carousel grid w-[min(100%,57.4vw,var(--section-carousel-max-width))] min-w-0 gap-3 self-center max-[1700px]:w-[min(100%,78vw,var(--section-carousel-max-width))] max-sm:w-full"
+	class="section-carousel grid w-[min(100%,57.4vw,var(--section-carousel-max-width))] min-w-0 gap-3 self-center max-[1450px]:w-full max-sm:w-full"
 	style={`--section-carousel-max-width: ${carouselMaxWidth}px; --carousel-index: ${currentIndex};`}>
 	<div
 		class="section-carousel-frame taped-frame relative min-w-0 pt-[calc(var(--size-project-tape-height)*0.5)]"

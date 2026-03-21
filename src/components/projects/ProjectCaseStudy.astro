@@ -207,7 +207,7 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 		headingSelector={headingSelector}
 	/>
 	<article
-		class="project-content flex w-full flex-col gap-12 px-4 max-sm:px-0"
+		class="project-content flex w-full flex-col gap-12 pl-4 max-sm:px-0"
 		data-scrollspy-root>
 		{
 			sections.map((section) => {
@@ -229,8 +229,7 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 				return (
 					<section
 						class:list={[
-							"section grid min-w-0 [grid-template-columns:minmax(0,1fr)_28rem] items-start gap-8 max-[1700px]:grid-cols-1 max-[1700px]:gap-4",
-							variant === "contentOnly" ? "grid-cols-1" : undefined,
+							"section grid min-w-0 [grid-template-columns:minmax(0,var(--section-copy-max-width))_minmax(18rem,var(--section-media-column-width,var(--section-media-max-width)))] items-start justify-center gap-x-12 gap-y-8 max-[1450px]:grid-cols-1 max-[1450px]:gap-4",
 							`section--${variant}`,
 							sectionClass,
 						]}>
@@ -243,7 +242,7 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 									<template>
 										<div class="inline-gallery grid [grid-template-columns:repeat(2,minmax(0,max-content))] justify-start gap-x-4 gap-y-[1.35rem] max-sm:grid-cols-1">
 											{gallery.items.map((item) => (
-												<div class="inline-gallery__frame relative w-full max-w-[21rem] min-w-0 justify-self-start pt-[calc(var(--size-project-tape-height)*0.5)] max-[1700px]:max-w-[min(100%,28rem)]">
+												<div class="inline-gallery__frame relative w-full max-w-[21rem] min-w-0 justify-self-start pt-[calc(var(--size-project-tape-height)*0.5)] max-[1450px]:max-w-[min(100%,28rem)]">
 													<figure class="inline-gallery__tile paper-frame">
 														<Image
 															class="inline-gallery__image"
@@ -333,12 +332,19 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 		--section-media-tilt: 0.4deg;
 	}
 
-	.section--featured :global(.section-media-frame) {
-		grid-column: 1 / -1;
+	.section {
+		width: min(
+			100%,
+			calc(
+				var(--section-copy-max-width) +
+					var(--section-media-column-width, var(--section-media-max-width)) +
+					3rem
+			)
+		);
+		margin-inline: auto;
 	}
 
-	.section--featured .section-copy,
-	.section--carousel .section-copy {
+	.section--featured :global(.section-media-frame) {
 		grid-column: 1 / -1;
 	}
 
@@ -351,13 +357,32 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 		grid-column: 1 / -1;
 	}
 
+	.section--carousel .section-copy {
+		grid-column: 1;
+		justify-self: start;
+	}
+
 	.section--carousel :global(.section-carousel-slide) {
 		min-height: 0;
 	}
 
 	.project-content {
-		--text-measure: 65ch;
+		--text-measure: 58ch;
+		--section-copy-max-width: 44rem;
+		--section-media-max-width: 28rem;
+		--section-stack-max-width: 44rem;
 		margin-inline: 0;
+	}
+
+	@media (min-width: 1450.02px) {
+		.project-content {
+			--section-media-visual-max-width: 36rem;
+		}
+	}
+
+	.section-copy {
+		width: min(100%, var(--section-copy-max-width));
+		justify-self: center;
 	}
 
 	.project-content :global(h2) {
@@ -419,7 +444,7 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 		font-size: var(--type-sans-size-body);
 		font-weight: var(--type-sans-weight-regular);
 		color: var(--color-text-body);
-		margin: 0 0 0.35rem 0;
+		margin: 0 0 0.5rem 0;
 		line-height: var(--type-sans-leading-relaxed);
 		max-width: var(--text-measure);
 		text-wrap: pretty;
@@ -574,14 +599,27 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 
 	.section-handwriting-list :global(li) {
 		font-family: var(--font-handwriting);
-		font-size: var(--type-hand-size-title-sm);
+		font-size: var(--type-hand-size-label);
 		color: inherit;
 		text-wrap: balance;
 		line-height: 1.15;
 		margin-top: 1rem;
 	}
 
-	@media (max-width: 1700px) {
+	@media (max-width: 1450px) {
+		.section {
+			width: min(100%, var(--section-stack-max-width));
+		}
+
+		.section-copy {
+			width: 100%;
+			justify-self: stretch;
+		}
+
+		.section--carousel .section-copy {
+			justify-self: stretch;
+		}
+
 		.project-content :global(.inline-gallery__tile) {
 			max-width: none;
 		}

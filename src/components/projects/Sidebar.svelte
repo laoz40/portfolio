@@ -283,7 +283,7 @@
 		display: inline-flex;
 		padding: 0.2rem 0;
 		font-family: var(--font-handwriting);
-		font-size: var(--type-hand-size-title-sm);
+		font-size: var(--type-hand-size-label);
 		font-weight: 400;
 		line-height: 1.25;
 		text-decoration: none;

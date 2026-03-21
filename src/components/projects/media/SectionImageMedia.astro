@@ -29,6 +29,19 @@ const { image, alt } = Astro.props as {
 		width: min(100%, var(--section-media-max-width));
 	}
 
+	@media (min-width: 1450.02px) {
+		.section-media-frame {
+			width: min(
+				var(--section-media-visual-max-width, var(--section-media-max-width)),
+				max(
+					100%,
+					var(--section-media-visual-max-width, var(--section-media-max-width))
+				)
+			);
+			justify-self: start;
+		}
+	}
+
 	.section-media {
 		position: relative;
 		aspect-ratio: var(--section-media-aspect-ratio);
@@ -44,9 +57,9 @@ const { image, alt } = Astro.props as {
 		object-fit: cover;
 	}
 
-	@media (max-width: 1700px) {
+	@media (max-width: 1450px) {
 		.section-media-frame {
-			width: min(100%, 42rem, var(--section-media-max-width));
+			width: 100%;
 		}
 	}
 
