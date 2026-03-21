@@ -12,6 +12,7 @@
 		"@astrojs/svelte": "^7.2.5",
 		"@fontsource-variable/outfit": "^5.2.8",
 		"@fontsource-variable/playpen-sans": "^5.2.9",
+		"@vercel/analytics": "^2.0.1",
 		"astro": "^5.17.1",
 		"prettier": "^3.8.1",
 		"prettier-plugin-astro": "^0.14.1",
