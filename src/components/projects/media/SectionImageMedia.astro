@@ -9,9 +9,9 @@ const { image, alt } = Astro.props as {
 ---
 
 <div
-	class="section-media-frame"
-	style={`--section-media-max-width: ${image.width}px; --section-media-aspect-ratio: ${image.width} / ${image.height};`}>
-	<div class="section-media">
+	class="section-media-frame taped-frame w-full min-w-0 self-center pt-[calc(var(--size-project-tape-height)*0.5)]"
+	style={`--section-media-max-width: ${image.width}px; --section-media-aspect-ratio: ${image.width} / ${image.height}; --tape-angle: calc(var(--section-media-tilt, 0deg) + 1.2deg);`}>
+	<div class="section-media paper-frame">
 		<Image
 			class="section-media-image"
 			src={image}
@@ -26,33 +26,12 @@ const { image, alt } = Astro.props as {
 
 <style>
 	.section-media-frame {
-		position: relative;
 		width: min(100%, var(--section-media-max-width));
-		align-self: center;
-		padding-top: calc(var(--size-project-tape-height) * 0.5);
-		min-width: 0;
-	}
-
-	.section-media-frame::before {
-		content: "";
-		position: absolute;
-		top: calc(var(--size-project-tape-height) * 0.5);
-		left: 50%;
-		width: var(--size-project-tape-width);
-		height: var(--size-project-tape-height);
-		transform: translate(-50%, -50%)
-			rotate(calc(var(--section-media-tilt, 0deg) + 1.2deg));
-		background: var(--color-tape);
-		pointer-events: none;
-		z-index: 2;
 	}
 
 	.section-media {
 		position: relative;
 		aspect-ratio: var(--section-media-aspect-ratio);
-		background: var(--color-media-fallback);
-		border: 8px solid var(--color-surface-page);
-		box-shadow: var(--shadow-paper-medium);
 		transform: rotate(var(--section-media-tilt, 0deg));
 		overflow: hidden;
 		min-width: 0;

@@ -251,7 +251,7 @@
 							aria-current={item.id === activeId ? "location" : undefined}>
 							<span
 								class="scrollspy-link-text highlight-text"
-								style="--highlight-colour: var(--color-highlight-yellow-strong);">
+								style="--highlight-color: var(--color-highlight-yellow-strong);">
 								{item.label}
 							</span>
 						</a>
@@ -282,7 +282,8 @@
 	.scrollspy-link {
 		display: inline-flex;
 		padding: 0.2rem 0;
-		font-size: 1.5rem;
+		font-family: var(--font-handwriting);
+		font-size: var(--type-hand-size-title-sm);
 		font-weight: 400;
 		line-height: 1.25;
 		text-decoration: none;

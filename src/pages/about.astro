@@ -37,22 +37,28 @@ const aboutSections = await Promise.all(
 
 <DefaultLayout title="About">
 	<h1>A little bit about me</h1>
-	<article class="about-content">
+	<article
+		class="mx-auto mt-6 grid w-full max-w-[78rem] gap-14 max-md:gap-10"
+		style="--text-measure: 65ch; --about-media-column-width: 22rem;">
 		{
 			aboutSections.map(({ id, title, Content, media }, index) => (
 				<section
 					class:list={[
-						"about-section",
-						media ? "about-section--has-media" : "about-section--copy-only",
-						media && index % 2 === 1 ? "about-section--reverse" : undefined,
+						"grid items-center gap-10 max-md:gap-7",
+						media
+							? "md:grid-cols-[minmax(0,1fr)_var(--about-media-column-width)] md:[grid-template-areas:'copy_media']"
+							: "grid-cols-[minmax(0,1fr)]",
+						media && index % 2 === 1
+							? "md:grid-cols-[var(--about-media-column-width)_minmax(0,1fr)] md:[grid-template-areas:'media_copy']"
+							: undefined,
 					]}
 					data-about-section={id}>
-					<div class="about-section-copy">
+					<div class="about-section-copy min-w-0 [grid-area:copy]">
 						<h2>{title}</h2>
 						<Content />
 					</div>
 					{media ? (
-						<div class="about-section-media">
+						<div class="about-section-media flex w-full min-w-0 items-center justify-center [grid-area:media] max-md:justify-start">
 							<AboutSectionMedia media={media} />
 						</div>
 					) : null}
@@ -60,7 +66,8 @@ const aboutSections = await Promise.all(
 			))
 		}
 	</article>
-	<div class="about-actions">
+	<div
+		class="mx-auto mt-10 flex w-full max-w-[78rem] flex-col items-center gap-4 text-center">
 		<p class="about-actions-note">
 			Thanks for reading all of this! (if you did)
 		</p>
@@ -74,61 +81,16 @@ const aboutSections = await Promise.all(
 
 <style>
 	h1 {
-		font-size: clamp(1.9rem, 5vw, 3.5rem);
+		margin: 0 auto 1.5rem;
+		font-size: var(--type-hand-size-display-md);
 		font-weight: 700;
 		text-align: center;
 		width: min(100%, 78rem);
-		margin-inline: auto;
-		margin-bottom: clamp(1.25rem, 3vw, 2rem);
-	}
-
-	.about-content {
-		--text-measure: 65ch;
-		--about-media-column-width: clamp(16rem, 28vw, 24rem);
-		display: grid;
-		gap: clamp(2.5rem, 5vw, 4.5rem);
-		width: min(100%, 78rem);
-		margin-inline: auto;
-		margin-top: clamp(1rem, 3vw, 2rem);
-	}
-
-	.about-section {
-		display: grid;
-		gap: clamp(1.75rem, 4vw, 3.5rem);
-		align-items: center;
-	}
-
-	.about-section--has-media {
-		grid-template-columns: minmax(0, 1fr) var(--about-media-column-width);
-		grid-template-areas: "copy media";
-	}
-
-	.about-section--has-media.about-section--reverse {
-		grid-template-columns: var(--about-media-column-width) minmax(0, 1fr);
-		grid-template-areas: "media copy";
-	}
-
-	.about-section--copy-only {
-		grid-template-columns: minmax(0, 1fr);
-	}
-
-	.about-section-copy {
-		min-width: 0;
-		grid-area: copy;
-	}
-
-	.about-section-media {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		grid-area: media;
-		width: 100%;
-		min-width: 0;
 	}
 
 	h2 {
 		font-family: var(--font-handwriting);
-		font-size: clamp(1.5rem, 3vw, 2.5rem);
+		font-size: var(--type-hand-size-title-lg);
 		font-weight: 700;
 		letter-spacing: 0.01em;
 		line-height: 1;
@@ -163,36 +125,12 @@ const aboutSections = await Promise.all(
 		text-wrap: pretty;
 	}
 
-	.about-actions {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 1rem;
-		width: min(100%, 78rem);
-		margin: clamp(2rem, 5vw, 3.5rem) auto 0;
-		text-align: center;
-	}
-
 	.about-actions-note {
 		margin: 0;
 		font-family: var(--font-handwriting);
-		font-size: clamp(1.4rem, 2vw, 2rem);
-		font-weight: 700;
-		line-height: 1.1;
+		font-size: var(--type-hand-size-title-md);
+		color: var(--color-text-handwriting);
+		font-weight: 400;
 		text-wrap: balance;
-	}
-
-	@media (max-width: 760px) {
-		.about-section--has-media,
-		.about-section--has-media.about-section--reverse {
-			grid-template-columns: 1fr;
-			grid-template-areas:
-				"copy"
-				"media";
-		}
-
-		.about-section-media {
-			justify-content: flex-start;
-		}
 	}
 </style>

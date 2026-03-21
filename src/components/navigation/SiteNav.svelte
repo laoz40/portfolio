@@ -49,11 +49,13 @@
 	on:scroll|passive={syncSiteNavState}
 	on:resize|passive={syncSiteNavState} />
 
-<nav class:is-scrolled={isScrolled}>
+<nav
+	class="fixed inset-x-0 top-0 [isolation:isolate] z-50 flex items-center justify-between gap-4 px-[var(--page-gutter)] max-[820px]:flex-wrap max-[820px]:py-1"
+	class:is-scrolled={isScrolled}>
 	<div
-		class="nav-grain"
+		class="nav-grain pointer-events-none absolute inset-x-0 top-0 bottom-[0.55rem] z-0 mix-blend-multiply"
 		aria-hidden="true">
-		<svg class="nav-grain-svg">
+		<svg class="block h-full w-full">
 			<filter id="nav-grain-filter">
 				<feTurbulence
 					type="fractalNoise"
@@ -68,14 +70,14 @@
 		</svg>
 	</div>
 
-	<div class="nav-brand font-bold">
+	<div class="nav-brand font-bold max-[820px]:flex-[1_1_auto]">
 		<a
-			class="nav-link"
+			class="nav-link inline-block no-underline"
 			on:click={closeMenu}
 			href="/">
 			<span
 				class="nav-link-text selectable"
-				style={`--highlight-colour: ${highlightByVariant.lime};`}>
+				style={`--highlight-color: ${highlightByVariant.lime};`}>
 				Leo Zhou
 			</span>
 		</a>
@@ -83,14 +85,14 @@
 
 	<button
 		type="button"
-		class="menu-toggle"
+		class="menu-toggle text-handwriting hidden cursor-pointer items-center justify-center border-none bg-transparent p-[0.4rem] max-[820px]:inline-flex max-[820px]:h-[3.05rem] max-[820px]:w-[3.05rem] min-[821px]:h-[2.8rem] min-[821px]:w-[2.8rem]"
 		class:is-open={isMenuOpen}
 		on:click={toggleMenu}
 		aria-expanded={isMenuOpen}
 		aria-controls="site-nav-links"
 		aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}>
 		<span
-			class="menu-toggle-icon"
+			class="menu-toggle-icon relative block h-[1.1rem] w-[1.4rem] max-[820px]:h-[1.28rem] max-[820px]:w-[1.65rem]"
 			aria-hidden="true">
 			<span class="menu-toggle-bar bar-1"></span>
 			<span class="menu-toggle-bar bar-2"></span>
@@ -100,16 +102,16 @@
 
 	<div
 		id="site-nav-links"
-		class="nav-links"
+		class="nav-links max-[820px]:bg-page min-w-0 flex-wrap items-center justify-end gap-4 max-[820px]:order-3 max-[820px]:hidden max-[820px]:w-full max-[820px]:flex-col max-[820px]:items-start max-[820px]:justify-start max-[820px]:gap-[0.1rem] max-[820px]:border max-[820px]:border-solid max-[820px]:border-[var(--color-border-soft)] max-[820px]:px-0 max-[820px]:pt-[0.35rem] max-[820px]:pb-[0.5rem] min-[821px]:flex"
 		class:is-open={isMenuOpen}>
 		{#each links as link}
 			<a
-				class="nav-link"
+				class="nav-link inline-block no-underline max-[820px]:w-full"
 				on:click={closeMenu}
 				href={link.href}>
 				<span
 					class="nav-link-text"
-					style={`--highlight-colour: ${highlightByVariant[link.variant]};`}>
+					style={`--highlight-color: ${highlightByVariant[link.variant]};`}>
 					{link.label}
 				</span>
 			</a>
@@ -119,20 +121,7 @@
 
 <style>
 	nav {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		width: 100%;
 		box-sizing: border-box;
-		z-index: 50;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-		gap: 1rem;
-		padding-inline: var(--page-gutter);
-		isolation: isolate;
 	}
 
 	nav::before {
@@ -182,11 +171,6 @@
 	}
 
 	.nav-grain {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0.55rem;
 		clip-path: polygon(
 			0 0,
 			100% 0,
@@ -215,12 +199,6 @@
 		z-index: 0;
 	}
 
-	.nav-grain-svg {
-		display: block;
-		width: 100%;
-		height: 100%;
-	}
-
 	nav.is-scrolled .nav-grain {
 		opacity: 0.3;
 		transform: translateY(0);
@@ -231,38 +209,13 @@
 		z-index: 1;
 	}
 
-	.nav-links {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: flex-end;
-		align-items: center;
-		gap: clamp(0.25rem, 1.2vw, 2.5rem);
-		min-width: 0;
-	}
-
 	.menu-toggle {
-		display: none;
-		align-items: center;
-		justify-content: center;
-		width: 2.8rem;
-		height: 2.8rem;
-		padding: 0.4rem;
-		border: none;
-		background: transparent;
 		color: var(--color-text-handwriting);
-		cursor: pointer;
 	}
 
 	.menu-toggle:focus-visible {
 		outline: 2px solid var(--color-highlight-sky);
 		outline-offset: 2px;
-	}
-
-	.menu-toggle-icon {
-		position: relative;
-		display: block;
-		width: 1.4rem;
-		height: 1.1rem;
 	}
 
 	.menu-toggle-bar {
@@ -307,21 +260,17 @@
 		transform: translateY(-0.622rem) rotate(-45deg);
 	}
 
-	.nav-link {
-		display: inline-block;
-		text-decoration: none;
-	}
-
 	.nav-link-text {
 		position: relative;
 		display: inline-block;
-		font-size: 1.9rem;
+		font-family: var(--font-handwriting);
+		font-size: var(--type-hand-size-title-md);
 		line-height: 1.1;
-		--highlight-top: 0.8em;
-		--highlight-bottom: 0.8em;
+		--highlight-top: 0.4em;
+		--highlight-bottom: 0.6em;
 		--highlight-left: -0.04em;
 		--highlight-right: -0.03em;
-		padding: clamp(0.6rem, 1.4vw, 1.5rem) clamp(0.45rem, 1vw, 1rem);
+		padding: 0.85rem 0.7rem;
 		transition: transform 120ms ease;
 		z-index: 0;
 		user-select: none;
@@ -334,11 +283,11 @@
 	.nav-link-text::before {
 		content: "";
 		position: absolute;
-		left: var(--highlight-left, -0.18em);
-		right: var(--highlight-right, -0.16em);
-		top: var(--highlight-top, 0.4em);
-		bottom: var(--highlight-bottom, 0.5em);
-		background: var(--highlight-colour);
+		left: var(--highlight-left);
+		right: var(--highlight-right);
+		top: var(--highlight-top);
+		bottom: var(--highlight-bottom);
+		background: var(--highlight-color);
 		clip-path: polygon(
 			2% 22%,
 			8% 8%,
@@ -382,66 +331,25 @@
 
 	@media (max-width: 820px) {
 		nav {
-			padding-top: 0.25rem;
-			padding-bottom: 0.25rem;
-			flex-wrap: wrap;
 			align-items: center;
-		}
-
-		.nav-brand {
-			flex: 1 1 auto;
-		}
-
-		.menu-toggle {
-			display: inline-flex;
-			width: 3.05rem;
-			height: 3.05rem;
-		}
-
-		.menu-toggle-icon {
-			width: 1.65rem;
-			height: 1.28rem;
 		}
 
 		.menu-toggle-bar {
 			height: 2.5px;
 		}
 
-		.nav-links {
-			display: none;
-			width: 100%;
-			order: 3;
-			padding: 0.35rem 0 0.5rem;
-			flex-direction: column;
-			align-items: flex-start;
-			justify-content: flex-start;
-			gap: 0.1rem;
-			background: var(--color-surface-page);
-			border: 1px solid var(--color-border-soft);
-		}
-
 		.nav-links.is-open {
 			display: flex;
 		}
 
-		.nav-links .nav-link {
-			width: 100%;
-		}
-
 		.nav-links .nav-link-text {
 			width: 100%;
-			font-size: 2.05rem;
+			font-size: var(--type-hand-size-title-md);
 			padding: 0.82rem 0.75rem;
 		}
 
 		.nav-brand .nav-link-text {
-			font-size: 1.75rem;
-		}
-	}
-
-	@media (max-width: 580px) {
-		nav {
-			align-items: center;
+			font-size: var(--type-hand-size-title-sm);
 		}
 	}
 </style>

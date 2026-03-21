@@ -30,20 +30,25 @@ const horus = horusEntry.data as ProjectFrontmatter;
 <DefaultLayout
 	title="Portfolio"
 	home>
-	<section id="hero">
+	<section
+		id="hero"
+		class="relative flex min-h-svh w-full flex-col items-center justify-center gap-4 px-8 pt-0 pb-[5.5rem] max-[1100px]:gap-3 max-[1100px]:px-6 max-[1100px]:pt-12 max-[1100px]:pb-24 max-[820px]:justify-start max-[820px]:px-4 max-[820px]:pt-[9.5rem] max-[820px]:pb-24 max-sm:gap-2 max-sm:pt-[11rem]">
 		<HeroSketchCluster />
 		<HeroLogoCluster />
 
-		<div class="hero-copy">
+		<div
+			class="hero-copy relative z-[2] flex w-full max-w-[54rem] flex-col items-center gap-4 max-[1100px]:max-w-[34rem] max-[820px]:max-w-[24rem] max-sm:max-w-[20rem] max-sm:gap-[0.9rem]">
 			<h1>Welcome to Leo's Website!</h1>
 
-			<div class="hero-roles">
+			<div
+				class="hero-roles flex flex-col items-center gap-[0.35rem] max-sm:gap-[0.2rem]">
 				<h2>Full Stack Developer</h2>
 				<h2>UX Designer</h2>
 			</div>
 		</div>
 
-		<div class="hero-actions">
+		<div
+			class="hero-actions relative z-[2] mt-4 flex flex-wrap items-center justify-center gap-6 max-[1100px]:mt-2 max-[820px]:mt-1 max-[420px]:max-w-[15rem] max-[420px]:grid-cols-1 max-sm:mt-2 max-sm:mb-[3.75rem] max-sm:grid max-sm:w-full max-sm:max-w-[21rem] max-sm:grid-cols-2 max-sm:gap-0">
 			<ImperfectButton
 				href="/projects"
 				fill="var(--color-home-button-yellow)">
@@ -56,7 +61,8 @@ const horus = horusEntry.data as ProjectFrontmatter;
 			</ImperfectButton>
 		</div>
 
-		<div class="hero-footer">
+		<div
+			class="hero-footer absolute bottom-6 left-1/2 z-[2] flex w-[calc(100%-2rem)] max-w-[44rem] -translate-x-1/2 flex-col items-center gap-2 max-[1100px]:bottom-5 max-[820px]:max-w-[34rem] max-sm:bottom-5 max-sm:w-[calc(100%-1.5rem)] max-sm:max-w-[22rem] max-sm:gap-2">
 			<p class="hero-note">
 				This website wasn't hand-coded or vibe-coded. It was all hand-drawn by
 				me.
@@ -65,7 +71,9 @@ const horus = horusEntry.data as ProjectFrontmatter;
 		</div>
 	</section>
 
-	<section id="featured">
+	<section
+		id="featured"
+		class="flex min-h-svh flex-col items-center gap-8 pt-24 max-sm:pt-16">
 		<h3>Featured Work</h3>
 		<a
 			class="project-card"
@@ -88,16 +96,17 @@ const horus = horusEntry.data as ProjectFrontmatter;
 						) : null
 					}
 				</div>
-				<div class="project-meta">
-					<div class="project-copy">
-						<div class="project-title">
+				<div
+					class="project-meta flex flex-1 flex-col justify-between px-0 pt-4 pb-[0.1rem]">
+					<div class="flex flex-col gap-[0.7rem]">
+						<div class="project-title flex flex-col items-start gap-[0.35rem]">
 							<HighlightText
 								tag="h4"
 								variant="yellow"
 								class="project-title-highlight">
 								{horus.title}
 							</HighlightText>
-							<span>{horus.project}</span>
+							<span class="project-subtitle">{horus.project}</span>
 						</div>
 						<p>{horus.description}</p>
 					</div>
@@ -108,7 +117,7 @@ const horus = horusEntry.data as ProjectFrontmatter;
 				</div>
 			</div>
 		</a>
-		<div class="featured-actions">
+		<div class="flex w-full justify-center">
 			<ImperfectButton
 				href="/projects"
 				fill="var(--color-home-button-yellow)">
@@ -119,48 +128,9 @@ const horus = horusEntry.data as ProjectFrontmatter;
 </DefaultLayout>
 
 <style>
-	#hero {
-		min-height: 100svh;
-		width: 100%;
-		box-sizing: border-box;
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		padding: 5rem clamp(1rem, 3vw, 2rem) 6.5rem;
-		gap: clamp(1.25rem, 3vw, 2rem);
-	}
-
-	.hero-copy {
-		position: relative;
-		z-index: 2;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: clamp(0.75rem, 2vw, 1.25rem);
-		max-width: min(100%, 54rem);
-	}
-
-	.hero-roles {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 0.35rem;
-	}
-
-	#featured {
-		min-height: 100svh;
-		padding-top: 6rem;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: clamp(1.5rem, 3vw, 2.5rem);
-	}
-
 	h1 {
 		margin: 0;
-		font-size: clamp(2.1rem, 9vw, 5rem);
+		font-size: var(--type-hand-size-display-lg);
 		font-weight: 700;
 		letter-spacing: -0.04em;
 		line-height: 0.96;
@@ -171,7 +141,7 @@ const horus = horusEntry.data as ProjectFrontmatter;
 
 	h2 {
 		margin: 0;
-		font-size: clamp(1.7rem, 5vw, 3rem);
+		font-size: var(--type-hand-size-display-sm);
 		line-height: 1.05;
 		letter-spacing: -0.02em;
 		text-align: center;
@@ -180,7 +150,7 @@ const horus = horusEntry.data as ProjectFrontmatter;
 
 	h3 {
 		margin: 0;
-		font-size: clamp(1.9rem, 5vw, 3.5rem);
+		font-size: var(--type-hand-size-display-md);
 		font-weight: 700;
 		line-height: 1;
 		text-align: center;
@@ -194,21 +164,15 @@ const horus = horusEntry.data as ProjectFrontmatter;
 		margin-top: 2rem;
 	}
 
-	.featured-actions {
-		display: flex;
-		justify-content: center;
-		width: 100%;
-	}
-
 	.project-frame {
 		position: relative;
 		display: flex;
 		flex-direction: column;
 		width: 100%;
-		min-height: clamp(33rem, 38vw, 36rem);
-		padding: clamp(0.75rem, 1.1vw, 0.95rem);
-		border: 0.18rem solid rgba(31, 30, 25, 0.08);
-		background: rgba(250, 247, 240, 0.98);
+		min-height: 35rem;
+		padding: 0.9rem;
+		border: 0.18rem solid var(--color-border-paper);
+		background: var(--color-surface-paper-raised);
 		box-shadow: var(--shadow-paper-rest);
 		transform: rotate(-0.35deg);
 		transition:
@@ -247,7 +211,7 @@ const horus = horusEntry.data as ProjectFrontmatter;
 	.preview {
 		width: 100%;
 		aspect-ratio: 16 / 9;
-		min-height: clamp(16.25rem, 21vw, 18.25rem);
+		min-height: 17.25rem;
 		background: var(--color-media-fallback);
 		overflow: hidden;
 	}
@@ -259,43 +223,23 @@ const horus = horusEntry.data as ProjectFrontmatter;
 		object-fit: cover;
 	}
 
-	.project-meta {
-		display: flex;
-		flex: 1;
-		flex-direction: column;
-		justify-content: space-between;
-		padding: clamp(0.75rem, 1.15vw, 0.95rem) 0 0.1rem;
-	}
-
-	.project-copy {
-		display: flex;
-		flex-direction: column;
-		gap: 0.7rem;
-	}
-
-	.project-title {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-		gap: 0.35rem;
-	}
-
 	:global(.project-title-highlight) {
 		margin: 0;
-		font-size: clamp(1.55rem, 1.2vw + 1.1rem, 2.15rem);
+		font-family: var(--font-handwriting);
+		font-size: var(--type-hand-size-title-md);
 		font-weight: 700;
 		line-height: 0.95;
-		color: var(--color-text-heading);
-		--highlight-colour: var(--color-highlight-yellow-strong);
+		color: var(--color-text-handwriting);
+		--highlight-color: var(--color-highlight-yellow-strong);
 		--highlight-top: 0.18em;
 		--highlight-bottom: 0.06em;
 		--highlight-left: -0.04em;
 		--highlight-right: -0.03em;
 	}
 
-	.project-title span {
+	.project-subtitle {
 		font-family: var(--font-handwriting);
-		font-size: clamp(1rem, 0.7vw + 0.85rem, 1.25rem);
+		font-size: var(--type-hand-size-label);
 		font-weight: 700;
 		letter-spacing: 0.02em;
 		color: var(--color-text-muted);
@@ -304,7 +248,7 @@ const horus = horusEntry.data as ProjectFrontmatter;
 	.project-meta p {
 		margin: 0;
 		font-family: var(--font-sans);
-		font-size: clamp(0.92rem, 0.35vw + 0.82rem, 0.99rem);
+		font-size: var(--type-sans-size-body-sm);
 		font-weight: var(--type-sans-weight-regular);
 		line-height: 1.45;
 		color: var(--color-text-muted);
@@ -312,78 +256,31 @@ const horus = horusEntry.data as ProjectFrontmatter;
 
 	.project-meta :global(.tool-badges) {
 		gap: 0.45rem;
-		padding-top: clamp(0.9rem, 1.8vw, 1.5rem);
+		padding-top: 1.2rem;
 	}
 
 	.project-meta :global(.tool-badge-shape) {
-		background: rgba(255, 255, 255, 0.9);
-		box-shadow: 0 3px 6px rgba(54, 43, 21, 0.08);
-	}
-
-	.hero-footer {
-		position: absolute;
-		left: 50%;
-		bottom: 2rem;
-		z-index: 2;
-		transform: translateX(-50%);
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 0.75rem;
-		width: min(100% - 2rem, 36rem);
+		background: var(--color-surface-overlay);
+		box-shadow: var(--shadow-badge-rest);
 	}
 
 	.hero-note {
 		margin: 0;
-		font-size: 1rem;
+		font-family: var(--font-handwriting);
+		color: var(--color-text-handwriting);
+		font-size: var(--type-hand-size-body);
 		text-align: center;
 	}
 
-	.hero-actions {
-		position: relative;
-		z-index: 2;
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		align-items: center;
-		margin-top: 2rem;
-		gap: clamp(0.75rem, 3vw, 3rem);
-	}
-
 	@media (max-width: 640px) {
-		#hero {
-			padding: 4.75rem 1rem 7rem;
-			justify-content: flex-end;
-			gap: 0.5rem;
-		}
-
-		.hero-copy {
-			margin-top: auto;
-			max-width: 20rem;
-			gap: 0.9rem;
-		}
-
-		.hero-roles {
-			gap: 0.2rem;
-		}
-
 		h1 {
-			font-size: clamp(2rem, 10vw, 4.25rem);
+			font-size: var(--type-hand-size-display-lg);
 			max-width: 10ch;
 		}
 
 		h2 {
-			font-size: clamp(1.5rem, 4vw, 2.1rem);
+			font-size: var(--type-hand-size-display-sm);
 			max-width: 15ch;
-		}
-
-		.hero-actions {
-			width: min(100%, 21rem);
-			display: grid;
-			grid-template-columns: repeat(2, minmax(0, 1fr));
-			gap: 0rem;
-			margin-top: 0.5rem;
-			margin-bottom: 4.5rem;
 		}
 
 		.hero-actions :global(.imperfect-button) {
@@ -397,19 +294,9 @@ const horus = horusEntry.data as ProjectFrontmatter;
 			line-height: 1.05;
 		}
 
-		.hero-footer {
-			bottom: 1.5rem;
-			width: min(100% - 1.5rem, 22rem);
-			gap: 0.5rem;
-		}
-
 		.hero-note {
 			font-size: 1rem;
 			text-wrap: balance;
-		}
-
-		#featured {
-			padding-top: 4rem;
 		}
 
 		.project-frame {
@@ -420,13 +307,6 @@ const horus = horusEntry.data as ProjectFrontmatter;
 		.project-card:hover .project-frame,
 		.project-card:focus-within .project-frame {
 			transform: translateY(-4px);
-		}
-	}
-
-	@media (max-width: 420px) {
-		.hero-actions {
-			width: min(100%, 15rem);
-			grid-template-columns: 1fr;
 		}
 	}
 </style>

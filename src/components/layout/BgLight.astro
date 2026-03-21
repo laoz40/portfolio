@@ -1,8 +1,8 @@
 <div
-	class="min-h-svh w-full relative flex flex-col"
+	class="relative flex min-h-svh w-full flex-col"
 	style="background-color: var(--color-surface-page); color: var(--color-text-default);">
 	<div
-		class="absolute inset-0 z-0 pointer-events-none"
+		class="pointer-events-none absolute inset-0 z-0"
 		style={`background-image:
 			linear-gradient(var(--color-grid-line) 1px, transparent 1px),
 			linear-gradient(90deg, var(--color-grid-line) 1px, transparent 1px),
@@ -13,7 +13,7 @@
 	</div>
 	<!-- Paper grain texture overlay -->
 	<div
-		class="absolute inset-0 z-0 pointer-events-none opacity-30 mix-blend-multiply">
+		class="pointer-events-none absolute inset-0 z-0 opacity-30 mix-blend-multiply">
 		<svg class="grain-svg">
 			<filter id="grain">
 				<feTurbulence

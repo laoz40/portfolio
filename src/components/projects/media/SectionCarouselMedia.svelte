@@ -157,24 +157,27 @@
 </script>
 
 <div
-	class="section-carousel"
+	class="section-carousel grid w-[min(100%,57.4vw,var(--section-carousel-max-width))] min-w-0 gap-3 self-center max-[1700px]:w-[min(100%,78vw,var(--section-carousel-max-width))] max-sm:w-full"
 	style={`--section-carousel-max-width: ${carouselMaxWidth}px; --carousel-index: ${currentIndex};`}>
-	<div class="section-carousel-frame">
+	<div
+		class="section-carousel-frame taped-frame relative min-w-0 pt-[calc(var(--size-project-tape-height)*0.5)]"
+		style="--tape-angle: calc(var(--section-media-tilt, 0deg) + 1.2deg);">
 		<div
-			class="section-carousel-viewport"
+			class="section-carousel-viewport paper-frame max-sm:bg-paper relative max-w-full min-w-0 [touch-action:pan-y]"
 			role="group"
 			aria-label="Project media carousel"
 			on:pointerdown={handlePointerDown}
 			on:pointermove={handlePointerMove}
 			on:pointerup={handlePointerUp}
 			on:pointercancel={handlePointerCancel}>
-			<div class="section-carousel-track">
+			<div class="section-carousel-track flex w-full min-w-0">
 				{#each items as item, index}
 					<div
-						class="section-carousel-slide"
+						class="section-carousel-slide max-sm:bg-paper relative flex min-w-full items-end overflow-hidden bg-[var(--color-media-fallback)] max-sm:grid max-sm:items-stretch"
 						role="group"
 						aria-label={`Slide ${index + 1} of ${slideCount}`}>
-						<div class="section-carousel-media">
+						<div
+							class="section-carousel-media absolute inset-0 z-0 max-sm:relative max-sm:inset-auto max-sm:aspect-[4/3]">
 							<img
 								class="section-carousel-image"
 								src={item.image.src}
@@ -184,7 +187,8 @@
 								loading="lazy"
 								decoding="async" />
 						</div>
-						<div class="section-carousel-content">
+						<div
+							class="section-carousel-content max-sm:bg-paper relative z-[2] flex w-full flex-col items-start gap-2 px-8 pt-4 pb-[2.8rem] max-sm:gap-[0.2rem] max-sm:px-2 max-sm:pt-0 max-sm:pb-0">
 							<h4 class="section-carousel-title">
 								{item.title ?? `Slide ${index + 1}`}
 							</h4>
@@ -196,7 +200,7 @@
 				{/each}
 			</div>
 			<div
-				class="section-carousel-indicators"
+				class="section-carousel-indicators absolute bottom-4 left-1/2 z-[2] flex -translate-x-1/2 items-center justify-center gap-[0.55rem] max-sm:static max-sm:bottom-auto max-sm:left-auto max-sm:m-[0.35rem_0.85rem_0.5rem] max-sm:translate-x-0 max-sm:justify-start max-sm:gap-2"
 				aria-label="Carousel slide indicators">
 				{#each items as carouselItem, dotIndex}
 					<button
@@ -209,7 +213,8 @@
 				{/each}
 			</div>
 		</div>
-		<div class="section-carousel-controls">
+		<div
+			class="section-carousel-controls pointer-events-none absolute inset-x-0 top-[calc(var(--size-project-tape-height)*0.5)] bottom-0 z-[3] max-sm:pointer-events-auto max-sm:static max-sm:mt-[0.4rem] max-sm:flex max-sm:justify-between max-sm:gap-3">
 			<button
 				type="button"
 				class="section-carousel-button"
@@ -231,67 +236,17 @@
 </div>
 
 <style>
-	.section-carousel {
-		width: min(100%, 57.4vw, var(--section-carousel-max-width));
-		align-self: center;
-		display: grid;
-		gap: 0.75rem;
-		min-width: 0;
-	}
-
-	.section-carousel-frame {
-		position: relative;
-		padding-top: calc(var(--size-project-tape-height) * 0.5);
-		min-width: 0;
-	}
-
-	.section-carousel-frame::before {
-		content: "";
-		position: absolute;
-		top: calc(var(--size-project-tape-height) * 0.5);
-		left: 50%;
-		width: var(--size-project-tape-width);
-		height: var(--size-project-tape-height);
-		transform: translate(-50%, -50%)
-			rotate(calc(var(--section-media-tilt, 0deg) + 1.2deg));
-		background: var(--color-tape);
-		pointer-events: none;
-		z-index: 2;
-	}
-
 	.section-carousel-track {
-		display: flex;
-		width: 100%;
 		transform: translateX(calc(var(--carousel-index, 0) * -100%));
 		transition: transform 260ms ease;
-		min-width: 0;
 	}
 
 	.section-carousel-viewport {
-		position: relative;
-		overflow: hidden;
-		border: 8px solid var(--color-surface-page);
-		box-shadow: var(--shadow-paper-medium);
 		transform: rotate(var(--section-media-tilt, 0deg));
-		min-width: 0;
-		max-width: 100%;
-		touch-action: pan-y;
 	}
 
 	.section-carousel-slide {
 		aspect-ratio: 4 / 3;
-		min-width: 100%;
-		display: flex;
-		align-items: flex-end;
-		position: relative;
-		overflow: hidden;
-		background: var(--color-media-fallback);
-	}
-
-	.section-carousel-media {
-		position: absolute;
-		inset: 0;
-		z-index: 0;
 	}
 
 	.section-carousel-image {
@@ -308,63 +263,32 @@
 		z-index: 1;
 		background: linear-gradient(
 			to top,
-			rgba(15, 12, 5, 0.82) 0%,
-			rgba(15, 12, 5, 0.56) 24%,
-			rgba(15, 12, 5, 0.2) 46%,
-			rgba(15, 12, 5, 0) 68%
+			var(--color-overlay-carousel-start) 0%,
+			var(--color-overlay-carousel-mid) 24%,
+			var(--color-overlay-carousel-soft) 46%,
+			var(--color-overlay-carousel-clear) 68%
 		);
 		pointer-events: none;
 	}
 
-	.section-carousel-content {
-		position: relative;
-		z-index: 2;
-		width: 100%;
-		padding: 1rem 2rem;
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-		gap: 0.5rem;
-		padding-bottom: 2.8rem;
-	}
-
 	.section-carousel-title {
 		font-family: var(--font-sans);
-		font-size: clamp(1rem, 0.5vw + 0.9rem, 1.2rem);
+		font-size: var(--type-sans-size-title);
 		font-weight: var(--type-sans-weight-emphasis);
 		line-height: var(--type-sans-leading-tight);
 		margin: 0;
-		color: #ffffff !important;
+		color: var(--color-text-on-dark) !important;
 		text-wrap: balance;
 	}
 
 	.section-carousel-description {
 		font-family: var(--font-sans);
-		font-size: clamp(0.9rem, 0.35vw + 0.8rem, 1rem);
+		font-size: var(--type-sans-size-body-sm);
 		font-weight: var(--type-sans-weight-regular);
 		line-height: var(--type-sans-leading-reading);
 		margin: 0;
-		color: #ffffff !important;
+		color: var(--color-text-on-dark) !important;
 		text-wrap: pretty;
-	}
-
-	.section-carousel-controls {
-		position: absolute;
-		inset: calc(var(--size-project-tape-height) * 0.5) 0 0;
-		z-index: 3;
-		pointer-events: none;
-	}
-
-	.section-carousel-indicators {
-		position: absolute;
-		left: 50%;
-		bottom: 1rem;
-		z-index: 2;
-		transform: translateX(-50%);
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		gap: 0.55rem;
 	}
 
 	.section-carousel-indicator {
@@ -373,7 +297,7 @@
 		padding: 0;
 		border: 0;
 		border-radius: 999px;
-		background: rgb(255 255 255 / 0.3);
+		background: var(--color-indicator-light);
 		cursor: pointer;
 		transition:
 			transform 180ms ease,
@@ -384,11 +308,11 @@
 	.section-carousel-indicator:hover,
 	.section-carousel-indicator:focus-visible {
 		transform: scale(1.12);
-		background: rgb(255 255 255 / 0.72);
+		background: var(--color-indicator-light-hover);
 	}
 
 	.section-carousel-indicator[aria-current="true"] {
-		background: rgb(255 255 255 / 0.98);
+		background: var(--color-indicator-light-active);
 		transform: scale(1.18);
 	}
 
@@ -398,12 +322,13 @@
 	}
 
 	.section-carousel-button {
-		--carousel-button-shadow-rest: 3px 4px 3px rgb(54 43 21 / 0.14);
-		--carousel-button-shadow-hover: 4px 5px 4px rgb(54 43 21 / 0.24);
+		--carousel-button-shadow-rest: 3px 4px 3px var(--color-shadow-paper-button);
+		--carousel-button-shadow-hover: 4px 5px 4px
+			var(--color-shadow-paper-button-hover);
 		position: absolute;
 		top: 50%;
 		font-family: var(--font-handwriting);
-		font-size: 2rem;
+		font-size: var(--type-hand-size-title-md);
 		font-weight: 700;
 		text-transform: uppercase;
 		padding: 0.3rem 0.6rem;
@@ -419,12 +344,12 @@
 	}
 
 	.section-carousel-button:first-child {
-		left: clamp(0.5rem, 1vw, 0.9rem);
+		left: 0.75rem;
 		transform: translateY(-50%) rotate(-1.5deg);
 	}
 
 	.section-carousel-button:last-child {
-		right: clamp(0.5rem, 1vw, 0.9rem);
+		right: 0.75rem;
 		transform: translateY(-50%) rotate(1.5deg);
 	}
 
@@ -446,43 +371,21 @@
 		cursor: not-allowed;
 	}
 
-	@media (max-width: 1700px) {
-		.section-carousel {
-			width: min(100%, 78vw, var(--section-carousel-max-width));
-		}
-	}
-
 	@media (max-width: 640px) {
-		.section-carousel {
-			width: 100%;
-		}
-
 		.section-carousel-viewport {
 			transform: none;
-			background: var(--color-surface-paper);
 		}
 
 		.section-carousel-slide {
 			aspect-ratio: auto;
-			display: grid;
-			align-items: stretch;
-			background: var(--color-surface-paper);
 		}
 
 		.section-carousel-media {
-			position: relative;
-			inset: auto;
 			aspect-ratio: 4 / 3;
 		}
 
 		.section-carousel-media::before {
 			display: none;
-		}
-
-		.section-carousel-content {
-			padding: 0 0.5rem;
-			gap: 0.2rem;
-			background: var(--color-surface-paper);
 		}
 
 		.section-carousel-title,
@@ -491,37 +394,17 @@
 			margin: 0.5rem 0 0.5rem 0 !important;
 		}
 
-		.section-carousel-controls {
-			position: static;
-			inset: auto;
-			margin-top: 0.4rem;
-			display: flex;
-			justify-content: space-between;
-			gap: 0.75rem;
-			pointer-events: auto;
-		}
-
-		.section-carousel-indicators {
-			position: static;
-			left: auto;
-			bottom: auto;
-			transform: none;
-			gap: 0.5rem;
-			justify-content: flex-start;
-			margin: 0.35rem 0.85rem 0.5rem;
-		}
-
 		.section-carousel-indicator {
-			background: rgb(39 62 68 / 0.28);
+			background: var(--color-indicator-dark);
 		}
 
 		.section-carousel-indicator:hover,
 		.section-carousel-indicator:focus-visible {
-			background: rgb(39 62 68 / 0.58);
+			background: var(--color-indicator-dark-hover);
 		}
 
 		.section-carousel-indicator[aria-current="true"] {
-			background: rgb(39 62 68 / 0.88);
+			background: var(--color-indicator-dark-active);
 		}
 
 		.section-carousel-button {

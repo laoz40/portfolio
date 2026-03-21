@@ -17,14 +17,16 @@ const isTaped = variant === "taped";
 
 <figure
 	class:list={[
-		"about-media-figure",
+		"about-media-figure m-0 w-full",
 		isTaped ? "about-media-figure--taped" : "about-media-figure--raw",
 	]}
 	style={`--about-media-max-width: ${media.image.width}px; --about-media-aspect-ratio: ${media.image.width} / ${media.image.height};`}>
 	{
 		isTaped ? (
-			<div class="about-media-frame">
-				<div class="about-media about-media--taped">
+			<div
+				class="about-media-frame taped-frame relative w-full min-w-0"
+				style="--tape-top: calc(var(--size-project-tape-height) * 0.2);">
+				<div class="about-media paper-frame about-media--taped">
 					<Image
 						class="about-media-image"
 						src={media.image}
@@ -60,30 +62,10 @@ const isTaped = variant === "taped";
 <style>
 	.about-media-figure {
 		width: min(100%, var(--about-media-max-width));
-		margin: 0;
 	}
 
 	.about-media-figure--taped {
 		padding-top: calc(var(--size-project-tape-height) * 0.5);
-	}
-
-	.about-media-frame {
-		position: relative;
-		width: 100%;
-		min-width: 0;
-	}
-
-	.about-media-frame::before {
-		content: "";
-		position: absolute;
-		top: calc(var(--size-project-tape-height) * 0.2);
-		left: 50%;
-		width: var(--size-project-tape-width);
-		height: var(--size-project-tape-height);
-		transform: translate(-50%, -50%) rotate(1.2deg);
-		background: var(--color-tape);
-		pointer-events: none;
-		z-index: 2;
 	}
 
 	.about-media {
@@ -92,10 +74,7 @@ const isTaped = variant === "taped";
 		align-items: center;
 		justify-content: center;
 		aspect-ratio: var(--about-media-aspect-ratio);
-		max-height: clamp(18rem, 36vw, 26rem);
-		background: var(--color-media-fallback);
-		border: 8px solid var(--color-surface-page);
-		box-shadow: var(--shadow-paper-medium);
+		max-height: 24rem;
 		overflow: hidden;
 	}
 
@@ -110,13 +89,14 @@ const isTaped = variant === "taped";
 	.about-media-image--raw {
 		width: auto;
 		max-width: 100%;
-		max-height: clamp(18rem, 36vw, 26rem);
+		max-height: 24rem;
 		height: auto;
 		object-fit: contain;
 	}
 
 	.about-media-caption {
-		font-size: 1rem;
+		font-family: var(--font-handwriting);
+		font-size: var(--type-hand-size-label);
 		line-height: 1.4;
 		margin: 0.75rem 0 0;
 	}

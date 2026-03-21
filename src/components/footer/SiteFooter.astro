@@ -33,10 +33,11 @@ const footerLinks = [
 <footer
 	id="contact"
 	aria-label="Social and contact links"
+	class="mt-40 grid grid-cols-1 items-start justify-items-center gap-[0.85rem] pb-32"
 	data-footer-root
 	transition:animate="none">
 	<ObfuscatedEmailRuntime />
-	<div class="footer-cta">
+	<div class="grid justify-items-center gap-[0.2rem] text-balance">
 		<a
 			class="footer-cta-link"
 			href="/contact">
@@ -44,7 +45,7 @@ const footerLinks = [
 		</a>
 	</div>
 
-	<div class="footer-links">
+	<div class="footer-links flex flex-wrap items-center justify-center gap-2">
 		{
 			contactEmail ? (
 				<NavLink
@@ -69,7 +70,7 @@ const footerLinks = [
 		}
 	</div>
 
-	<div class="footer-copyright-row">
+	<div class="flex w-full flex-col items-center justify-center gap-[0.2rem]">
 		<p class="footer-copyright">
 			<span aria-hidden="true">&copy;</span>
 			<span data-current-year>0000</span>
@@ -169,45 +170,28 @@ const footerLinks = [
 		transform: translateY(0);
 	}
 
-	.footer-cta {
-		display: grid;
-		justify-items: center;
-		gap: 0.2rem;
-		text-wrap: balance;
-	}
-
 	.footer-cta-link {
 		font-family: var(--font-handwriting);
-		font-size: clamp(1.5rem, 3.2vw, 2.35rem);
+		color: var(--color-text-handwriting);
+		font-size: var(--type-hand-size-title-lg);
 		font-weight: 700;
 		line-height: 1;
 		text-align: center;
 		text-decoration: none;
 	}
 
-	.footer-links {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 0.5rem;
-		flex-wrap: wrap;
-	}
-
-	.footer-copyright-row {
-		display: flex;
-		flex-direction: column;
-		width: 100%;
-		align-items: center;
-		justify-content: center;
-		gap: 0.2rem;
-	}
-
 	.footer-copyright {
 		margin: 0;
+		font-family: var(--font-sans);
+		font-weight: var(--type-sans-weight-regular);
+		color: var(--color-text-muted);
 	}
 
 	.footer-note {
 		margin: 1rem;
+		font-family: var(--font-handwriting);
+		font-weight: var(--type-hand-weight-regular);
+		color: var(--color-text-muted);
 		text-align: center;
 		text-wrap: balance;
 	}

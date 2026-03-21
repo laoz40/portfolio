@@ -38,8 +38,8 @@
 
 <style>
 	.scroll-up {
-		--scroll-up-shadow-rest: 3px 4px 3px rgb(54 43 21 / 0.14);
-		--scroll-up-shadow-hover: 4px 5px 4px rgb(54 43 21 / 0.24);
+		--scroll-up-shadow-rest: 3px 4px 3px var(--color-shadow-paper-button);
+		--scroll-up-shadow-hover: 4px 5px 4px var(--color-shadow-paper-button-hover);
 		position: fixed;
 		right: 1rem;
 		bottom: 3rem;
@@ -49,12 +49,12 @@
 		background: linear-gradient(
 			162deg,
 			var(--color-surface-paper) 0%,
-			rgb(255 253 245) 52%,
+			var(--color-surface-paper-tint) 52%,
 			var(--color-surface-paper) 100%
 		);
 		color: var(--color-text-handwriting);
 		font-family: var(--font-handwriting);
-		font-size: clamp(1rem, 1.2vw, 1.35rem);
+		font-size: var(--type-hand-size-body);
 		letter-spacing: 0.02em;
 		line-height: 1;
 		overflow: hidden;
@@ -79,8 +79,8 @@
 			-12deg,
 			transparent 0,
 			transparent 6px,
-			rgb(15 23 42 / 0.025) 6px,
-			rgb(15 23 42 / 0.025) 7px
+			rgb(from var(--color-text-strong) r g b / 0.025) 6px,
+			rgb(from var(--color-text-strong) r g b / 0.025) 7px
 		);
 	}
 

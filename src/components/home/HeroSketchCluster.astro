@@ -58,9 +58,9 @@ import penroseImage from "../../assets/home/penrose.webp";
 	.hero-portrait {
 		position: absolute;
 		left: 0;
-		top: 10vh;
+		top: 6vh;
 		z-index: 1;
-		width: clamp(12rem, 24vw, 22rem);
+		width: 18rem;
 		max-height: min(52svh, 32rem);
 		object-fit: contain;
 		object-position: bottom left;
@@ -75,7 +75,7 @@ import penroseImage from "../../assets/home/penrose.webp";
 
 	.hero-sketch {
 		position: absolute;
-		width: clamp(4.5rem, 9vw, 8.5rem);
+		width: 6.5rem;
 		height: auto;
 		object-fit: contain;
 		opacity: 0.7;
@@ -83,52 +83,83 @@ import penroseImage from "../../assets/home/penrose.webp";
 	}
 
 	.hero-sketch-dolphin {
-		left: clamp(-0.5rem, 1vw, 1rem);
-		top: clamp(33rem, 60vh, 39rem);
-		width: clamp(5.5rem, 11vw, 9.5rem);
+		left: 0.5rem;
+		top: 36rem;
+		width: 7.5rem;
 		transform: rotate(-9deg);
 	}
 
 	.hero-sketch-icecream {
-		left: clamp(8.5rem, 15vw, 15rem);
-		top: clamp(33rem, 60vh, 39rem);
+		left: 12rem;
+		top: 36rem;
 		transform: rotate(7deg);
 	}
 
 	.hero-sketch-penrose {
-		left: clamp(3rem, 7vw, 6.5rem);
-		top: clamp(45rem, 79vh, 51rem);
-		width: clamp(4rem, 8vw, 7rem);
+		left: 5rem;
+		top: 48rem;
+		width: 5.5rem;
 		transform: rotate(12deg);
 	}
 
 	@media (max-width: 980px) {
+		.hero-portrait {
+			width: 15rem;
+			max-height: min(46svh, 28rem);
+		}
+
 		.hero-sketch {
-			width: clamp(3.25rem, 8vw, 6rem);
+			width: 4.75rem;
 		}
 
 		.hero-sketch-dolphin {
-			left: clamp(-0.5rem, 0vw, 0.75rem);
-			top: clamp(20rem, 45vh, 33rem);
-			width: clamp(4rem, 9vw, 6.5rem);
+			left: 0.25rem;
+			top: 24rem;
+			width: 5.5rem;
 		}
 
 		.hero-sketch-icecream {
-			left: clamp(4rem, 9vw, 7rem);
-			top: clamp(20rem, 48vh, 33rem);
+			left: 5.5rem;
+			top: 24.5rem;
 		}
 
 		.hero-sketch-penrose {
-			left: clamp(2rem, 5vw, 3.75rem);
-			top: clamp(30rem, 50vh, 42rem);
-			width: clamp(3rem, 6.5vw, 5rem);
+			left: 3rem;
+			top: 35rem;
+			width: 4rem;
+		}
+	}
+
+	@media (max-width: 820px) {
+		.hero-portrait {
+			left: max(0.25rem, env(safe-area-inset-left));
+			top: 4.75rem;
+			width: 12rem;
+			max-height: 32svh;
+		}
+
+		.hero-sketch-dolphin {
+			left: 0.75rem;
+			top: 25rem;
+			width: 4.75rem;
+		}
+
+		.hero-sketch-icecream {
+			left: 6rem;
+			top: 24.5rem;
+			width: 4.25rem;
+		}
+
+		.hero-sketch-penrose {
+			display: none;
 		}
 	}
 
 	@media (max-width: 640px) {
 		.hero-portrait {
 			left: max(0.25rem, env(safe-area-inset-left));
-			width: clamp(8rem, 30vw, 12rem);
+			top: 4.5rem;
+			width: 10rem;
 			max-height: 28svh;
 			opacity: 0.9;
 		}

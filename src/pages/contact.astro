@@ -33,7 +33,7 @@ const contactLinks = [
 	{
 		label: "Resume",
 		href: "/resume.pdf",
-		fill: "rgb(255 222 173)",
+		fill: "var(--color-button-resume)",
 		target: "_blank",
 		rel: "noreferrer",
 	},
@@ -41,7 +41,7 @@ const contactLinks = [
 		? {
 				label: "GitHub",
 				href: githubUrl,
-				fill: "rgb(213 244 179)",
+				fill: "var(--color-button-github)",
 				target: "_blank",
 				rel: "noreferrer",
 			}
@@ -52,7 +52,8 @@ const contactLinks = [
 <DefaultLayout title="Contact">
 	<ObfuscatedEmailRuntime />
 	<h1>Here are my links</h1>
-	<div class="contact-actions">
+	<div
+		class="contact-actions mx-auto mt-10 flex w-full max-w-[20rem] flex-col items-center gap-4">
 		{
 			contactEmail ? (
 				<ImperfectButton
@@ -81,19 +82,10 @@ const contactLinks = [
 
 <style>
 	h1 {
-		font-size: clamp(1.9rem, 5vw, 3.5rem);
+		margin: 0 0 0.75rem;
+		font-size: var(--type-hand-size-display-md);
 		font-weight: 700;
 		text-align: center;
-		margin-bottom: 0.75rem;
-	}
-
-	.contact-actions {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 1rem;
-		width: min(100%, 20rem);
-		margin: clamp(2rem, 5vw, 3.5rem) auto 0;
 	}
 
 	.contact-actions :global(.imperfect-button) {
@@ -102,8 +94,10 @@ const contactLinks = [
 
 	.contact-thanks {
 		margin: 2rem auto 0;
+		font-family: var(--font-handwriting);
+		color: var(--color-text-handwriting);
 		text-align: center;
 		text-wrap: balance;
-		font-size: 1.5rem;
+		font-size: var(--type-hand-size-title-sm);
 	}
 </style>

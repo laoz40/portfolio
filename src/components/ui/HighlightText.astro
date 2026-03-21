@@ -12,13 +12,13 @@ const variantByName = {
 	sky: "var(--color-highlight-sky)",
 };
 
-const highlightColour = variantByName[variant] ?? variantByName.yellow;
+const highlightColor = variantByName[variant] ?? variantByName.yellow;
 const Tag = tag;
 ---
 
 <Tag
 	class:list={["highlight-text", className, { selectable }]}
-	style={`--highlight-colour: ${highlightColour};`}>
+	style={`--highlight-color: ${highlightColor};`}>
 	<slot />
 </Tag>
 
@@ -40,7 +40,7 @@ const Tag = tag;
 		right: var(--highlight-right, -0.16em);
 		top: var(--highlight-top, 0.4em);
 		bottom: var(--highlight-bottom, 0.5em);
-		background: var(--highlight-colour);
+		background: var(--highlight-color);
 		clip-path: polygon(
 			2% 22%,
 			8% 8%,

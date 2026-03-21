@@ -80,17 +80,18 @@ const { fill, href, target, rel, ...attributes } = Astro.props as {
 		place-items: center;
 		--fill-solid: rgb(from var(--fill) r g b);
 		--paper-fill: var(--fill-solid);
-		--button-shadow-rest: 3px 4px 2px rgb(0 0 0 / 0.14);
-		--button-shadow-hover: 5px 6px 3px rgb(0 0 0 / 0.2);
+		--button-shadow-rest: 3px 4px 2px var(--color-shadow-button-rest);
+		--button-shadow-hover: 5px 6px 3px var(--color-shadow-button-hover);
 		--button-motion-duration: 0.16s;
 		--button-motion-easing: cubic-bezier(0.22, 1, 0.36, 1);
 		--button-motion-active-duration: 0.08s;
 		--button-motion-active-easing: cubic-bezier(0.3, 0, 0.4, 1);
-		padding: clamp(0.75rem, 1.8vw, 1rem) clamp(1.2rem, 3.5vw, 2rem);
+		padding: 0.9rem 1.6rem;
 		border: 0;
 		cursor: pointer;
 		user-select: none;
-		font-size: clamp(1.1rem, 3.7vw, 2rem);
+		font-family: var(--font-handwriting);
+		font-size: var(--type-hand-size-title-md);
 		font-weight: 700;
 		text-decoration: none;
 		transition: transform var(--button-motion-duration)
@@ -140,7 +141,7 @@ const { fill, href, target, rel, ...attributes } = Astro.props as {
 	.imperfect-button:active svg {
 		transition-duration: var(--button-motion-active-duration);
 		transition-timing-function: var(--button-motion-active-easing);
-		filter: drop-shadow(2px 3px 2px rgb(0 0 0 / 0.18));
+		filter: drop-shadow(2px 3px 2px var(--color-shadow-button-active));
 	}
 
 	@media (prefers-reduced-motion: reduce) {

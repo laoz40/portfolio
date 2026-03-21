@@ -200,13 +200,14 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 };
 ---
 
-<div class="project-shell mt-4">
+<div
+	class="project-shell mx-auto mt-4 grid w-full [grid-template-columns:13rem_minmax(0,1fr)] items-start gap-10 max-[1142px]:grid-cols-1">
 	<Sidebar
 		client:load
 		headingSelector={headingSelector}
 	/>
 	<article
-		class="project-content flex flex-col gap-12"
+		class="project-content flex w-full flex-col gap-12 px-4 max-sm:px-0"
 		data-scrollspy-root>
 		{
 			sections.map((section) => {
@@ -227,18 +228,23 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 
 				return (
 					<section
-						class:list={["section", `section--${variant}`, sectionClass]}>
-						<div class="section-copy">
+						class:list={[
+							"section grid min-w-0 [grid-template-columns:minmax(0,1fr)_28rem] items-start gap-8 max-[1700px]:grid-cols-1 max-[1700px]:gap-4",
+							variant === "contentOnly" ? "grid-cols-1" : undefined,
+							`section--${variant}`,
+							sectionClass,
+						]}>
+						<div class="section-copy min-w-0">
 							<SectionComponent {...sectionProps} />
 							{inlineGalleries.map((gallery) => (
 								<InlineGallery
 									client:load
 									galleryId={gallery.id}>
 									<template>
-										<div class="inline-gallery">
+										<div class="inline-gallery grid [grid-template-columns:repeat(2,minmax(0,max-content))] justify-start gap-x-4 gap-y-[1.35rem] max-sm:grid-cols-1">
 											{gallery.items.map((item) => (
-												<div class="inline-gallery__frame">
-													<figure class="inline-gallery__tile">
+												<div class="inline-gallery__frame relative w-full max-w-[21rem] min-w-0 justify-self-start pt-[calc(var(--size-project-tape-height)*0.5)] max-[1700px]:max-w-[min(100%,28rem)]">
+													<figure class="inline-gallery__tile paper-frame">
 														<Image
 															class="inline-gallery__image"
 															src={item.image}
@@ -266,9 +272,9 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 									imageId={item.id}>
 									<template>
 										<div
-											class="inline-image-frame"
+											class="inline-image-frame taped-frame relative mb-6 w-full max-w-[calc(var(--text-measure)*1.4)] pt-[calc(var(--size-project-tape-height)*0.5)]"
 											style={`--inline-image-max-width: ${item.image.width}px; --inline-image-aspect-ratio: ${item.image.width} / ${item.image.height};`}>
-											<div class="inline-image">
+											<div class="inline-image paper-frame">
 												<img
 													class="inline-image__asset"
 													src={item.image.src}
@@ -319,37 +325,12 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 </div>
 
 <style>
-	.project-shell {
-		display: grid;
-		grid-template-columns: clamp(10.5rem, 16vw, 14rem) minmax(0, 1fr);
-		gap: clamp(1.5rem, 4vw, 5rem);
-		align-items: start;
-		width: 100%;
-		margin-inline: auto;
-	}
-
-	.section {
-		display: grid;
-		grid-template-columns: minmax(0, 1fr) clamp(20rem, 34vw, 30rem);
-		gap: clamp(1.25rem, 3vw, 2.5rem);
-		align-items: start;
-		min-width: 0;
-	}
-
-	.section-copy {
-		min-width: 0;
-	}
-
 	.section:nth-of-type(odd) {
 		--section-media-tilt: -0.4deg;
 	}
 
 	.section:nth-of-type(even) {
 		--section-media-tilt: 0.4deg;
-	}
-
-	.section--contentOnly {
-		grid-template-columns: 1fr;
 	}
 
 	.section--featured :global(.section-media-frame) {
@@ -376,9 +357,7 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 
 	.project-content {
 		--text-measure: 65ch;
-		width: 100%;
 		margin-inline: 0;
-		padding-inline: clamp(0.25rem, 1.5vw, 1rem);
 	}
 
 	.project-content :global(h2) {
@@ -387,7 +366,7 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 
 	.project-content :global(h1) {
 		font-family: var(--font-handwriting);
-		font-size: clamp(2.25rem, 9vw, 5rem);
+		font-size: var(--type-hand-size-display-lg);
 		font-weight: 700;
 		line-height: 0.95;
 		margin: 0 0 1rem 0;
@@ -396,7 +375,7 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 
 	.project-content :global(h2) {
 		font-family: var(--font-handwriting);
-		font-size: clamp(1rem, 2vw, 2rem);
+		font-size: var(--type-hand-size-title-sm);
 		font-weight: 400;
 		color: var(--color-text-body);
 		letter-spacing: 0.01em;
@@ -406,7 +385,7 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 
 	.project-content :global(h3) {
 		font-family: var(--font-handwriting);
-		font-size: clamp(2rem, 3vw, 3rem);
+		font-size: var(--type-hand-size-display-sm);
 		font-weight: 700;
 		line-height: 0.95;
 		max-width: 32ch;
@@ -480,7 +459,7 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 		border: 1px solid var(--color-border-soft);
 		background: var(--color-surface-paper);
 		box-shadow: 1px 2px 3px var(--color-shadow-soft);
-		font-size: 1.5rem;
+		font-size: var(--type-hand-size-title-sm);
 		font-family: var(--font-handwriting);
 		letter-spacing: 0.02em;
 		color: var(--color-text-handwriting);
@@ -504,21 +483,7 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 	}
 
 	.project-content :global(.inline-gallery) {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, max-content));
-		justify-content: start;
-		column-gap: 1rem;
-		row-gap: 1.35rem;
 		margin: 0 0 1.5rem 0;
-	}
-
-	.project-content :global(.inline-gallery__frame) {
-		position: relative;
-		width: 100%;
-		max-width: clamp(16rem, 23vw, 21rem);
-		justify-self: start;
-		padding-top: calc(var(--size-project-tape-height) * 0.5);
-		min-width: 0;
 	}
 
 	.project-content :global(.inline-gallery__frame::before) {
@@ -540,10 +505,7 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 		flex-direction: column;
 		position: relative;
 		width: 100%;
-		min-height: clamp(7rem, 16vh, 10rem);
-		background: var(--color-media-fallback);
-		border: 8px solid var(--color-surface-page);
-		box-shadow: var(--shadow-paper-medium);
+		min-height: 9rem;
 		overflow: hidden;
 		margin: 0;
 		transform: rotate(var(--inline-gallery-tilt, 0deg))
@@ -567,33 +529,10 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 		background: var(--color-surface-paper);
 	}
 
-	.project-content :global(.inline-image-frame) {
-		position: relative;
-		width: 100%;
-		max-width: calc(var(--text-measure) * 1.4);
-		padding-top: calc(var(--size-project-tape-height) * 0.5);
-		margin: 0 0 1.5rem;
-	}
-
-	.project-content :global(.inline-image-frame::before) {
-		content: "";
-		position: absolute;
-		top: calc(var(--size-project-tape-height) * 0.5);
-		left: 50%;
-		width: var(--size-project-tape-width);
-		height: var(--size-project-tape-height);
-		transform: translate(-50%, -50%) rotate(1.2deg);
-		background: var(--color-tape);
-		pointer-events: none;
-		z-index: 2;
-	}
-
 	.project-content :global(.inline-image) {
 		position: relative;
 		aspect-ratio: var(--inline-image-aspect-ratio);
 		background: var(--color-accent-lime);
-		border: 8px solid var(--color-surface-page);
-		box-shadow: var(--shadow-paper-medium);
 		overflow: hidden;
 		transform: rotate(-0.35deg);
 	}
@@ -635,7 +574,7 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 
 	.section-handwriting-list :global(li) {
 		font-family: var(--font-handwriting);
-		font-size: clamp(1.25rem, 0.5vw + 1rem, 1.5rem);
+		font-size: var(--type-hand-size-title-sm);
 		color: inherit;
 		text-wrap: balance;
 		line-height: 1.15;
@@ -643,42 +582,19 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 	}
 
 	@media (max-width: 1700px) {
-		.section {
-			grid-template-columns: 1fr;
-			gap: 1rem;
-		}
-
 		.project-content :global(.inline-gallery__tile) {
 			max-width: none;
-		}
-
-		.project-content :global(.inline-gallery__frame) {
-			max-width: min(100%, 28rem);
-		}
-	}
-
-	@media (max-width: 1142px) {
-		.project-shell {
-			grid-template-columns: 1fr;
 		}
 	}
 
 	@media (max-width: 640px) {
-		.project-content {
-			padding-inline: 0;
-		}
-
 		.project-content :global(h1) {
-			font-size: clamp(3rem, 14vw, 4rem);
+			font-size: var(--type-hand-size-display-lg);
 			margin-bottom: 0.5rem;
 		}
 
 		.project-content :global(h3) {
-			font-size: clamp(2.1rem, 9vw, 2.8rem);
-		}
-
-		.project-content :global(.inline-gallery) {
-			grid-template-columns: 1fr;
+			font-size: var(--type-hand-size-display-sm);
 		}
 
 		.project-content :global(.inline-image) {

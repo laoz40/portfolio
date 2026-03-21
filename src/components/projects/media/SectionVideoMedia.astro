@@ -7,8 +7,10 @@ const { videoId, title = "YouTube video" } = Astro.props as {
 const embedUrl = `https://www.youtube.com/embed/${videoId}`;
 ---
 
-<div class="section-media-frame">
-	<div class="section-media section-media--embed">
+<div
+	class="section-media-frame taped-frame w-full min-w-0 self-center pt-[calc(var(--size-project-tape-height)*0.5)] max-[1700px]:min-h-56 max-[1700px]:w-[min(100%,42rem)] max-sm:min-h-36"
+	style="--tape-angle: calc(var(--section-media-tilt, 0deg) + 1.2deg);">
+	<div class="section-media paper-frame section-media--embed">
 		<iframe
 			class="section-media-embed"
 			src={embedUrl}
@@ -23,33 +25,12 @@ const embedUrl = `https://www.youtube.com/embed/${videoId}`;
 
 <style>
 	.section-media-frame {
-		position: relative;
 		width: 100%;
-		align-self: center;
-		padding-top: calc(var(--size-project-tape-height) * 0.5);
-		min-width: 0;
-	}
-
-	.section-media-frame::before {
-		content: "";
-		position: absolute;
-		top: calc(var(--size-project-tape-height) * 0.5);
-		left: 50%;
-		width: var(--size-project-tape-width);
-		height: var(--size-project-tape-height);
-		transform: translate(-50%, -50%)
-			rotate(calc(var(--section-media-tilt, 0deg) + 1.2deg));
-		background: var(--color-tape);
-		pointer-events: none;
-		z-index: 2;
 	}
 
 	.section-media {
 		position: relative;
-		min-height: clamp(12rem, 36vh, 22rem);
-		background: var(--color-media-fallback);
-		border: 8px solid var(--color-surface-page);
-		box-shadow: var(--shadow-paper-medium);
+		min-height: 16rem;
 		transform: rotate(var(--section-media-tilt, 0deg));
 		min-width: 0;
 	}
@@ -69,21 +50,12 @@ const embedUrl = `https://www.youtube.com/embed/${videoId}`;
 	}
 
 	@media (max-width: 1700px) {
-		.section-media-frame {
-			min-height: clamp(10rem, 45vw, 14rem);
-			width: min(100%, 42rem);
-		}
-
 		.section-media--embed {
 			min-height: 0;
 		}
 	}
 
 	@media (max-width: 640px) {
-		.section-media-frame {
-			min-height: 9rem;
-		}
-
 		.section-media--embed {
 			min-height: 0;
 		}
