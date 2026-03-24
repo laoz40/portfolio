@@ -36,11 +36,11 @@
 }
 
 @font-face {
-	font-family: "Outfit Variable";
+	font-family: "JetBrains Mono Variable";
 	font-style: normal;
 	font-display: swap;
-	font-weight: 100 900;
-	src: url(@fontsource-variable/outfit/files/outfit-latin-wght-normal.woff2)
+	font-weight: 100 800;
+	src: url(@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2)
 		format("woff2-variations");
 	unicode-range:
 		U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
@@ -51,15 +51,14 @@
 :root {
 	--font-handwriting: "Leo Handwriting", "Playpen Sans Variable", cursive;
 	--font-sans:
-		"Outfit Variable", system-ui, -apple-system, "Segoe UI", Roboto,
-		"Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+		"JetBrains Mono Variable", "SFMono-Regular", Menlo, Monaco, Consolas,
+		"Liberation Mono", "Courier New", monospace;
 
-	--type-sans-size-body: 1.25rem;
-	--type-sans-size-body-sm: 0.98rem;
+	--type-sans-size-body: 1rem;
 	--type-sans-size-title: 1.1rem;
 	--type-sans-size-title-lg: 1.2rem;
 	--type-sans-weight-regular: 300;
-	--type-sans-weight-emphasis: 500;
+	--type-sans-weight-emphasis: 700;
 	--type-sans-leading-tight: 1.1;
 	--type-sans-leading-compact: 1.25;
 	--type-sans-leading-relaxed: 1.55;

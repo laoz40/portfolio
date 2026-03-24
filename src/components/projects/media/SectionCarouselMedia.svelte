@@ -283,7 +283,7 @@
 
 	.section-carousel-description {
 		font-family: var(--font-sans);
-		font-size: var(--type-sans-size-body-sm);
+		font-size: var(--type-sans-size-body);
 		font-weight: var(--type-sans-weight-regular);
 		line-height: var(--type-sans-leading-reading);
 		margin: 0;

@@ -64,8 +64,7 @@ const horus = horusEntry.data as ProjectFrontmatter;
 		<div
 			class="hero-footer absolute bottom-6 left-1/2 z-2 flex w-[calc(100%-2rem)] max-w-176 -translate-x-1/2 flex-col items-center gap-2 max-[1100px]:bottom-5 max-[820px]:max-w-136 max-sm:bottom-5 max-sm:w-[calc(100%-1.5rem)] max-sm:max-w-88 max-sm:gap-2">
 			<p class="hero-note">
-				This website wasn't hand-coded or vibe-coded. It was all hand-drawn by
-				me.
+				This website wasn't hand-coded or vibe-coded. It was all hand-drawn.
 			</p>
 			<ScrollDownArrow href="#featured" />
 		</div>
@@ -228,11 +227,11 @@ const horus = horusEntry.data as ProjectFrontmatter;
 		font-family: var(--font-handwriting);
 		font-size: var(--type-hand-size-title-md);
 		font-weight: 700;
-		line-height: 0.95;
+		line-height: 0.5;
 		color: var(--color-text-handwriting);
 		--highlight-color: var(--color-highlight-yellow-strong);
-		--highlight-top: 0.18em;
-		--highlight-bottom: 0.06em;
+		--highlight-top: -0.1em;
+		--highlight-bottom: -0.1em;
 		--highlight-left: -0.04em;
 		--highlight-right: -0.03em;
 	}
@@ -248,7 +247,7 @@ const horus = horusEntry.data as ProjectFrontmatter;
 	.project-meta p {
 		margin: 0;
 		font-family: var(--font-sans);
-		font-size: var(--type-sans-size-body-sm);
+		font-size: var(--type-sans-size-body);
 		font-weight: var(--type-sans-weight-regular);
 		line-height: 1.45;
 		color: var(--color-text-muted);

@@ -10,7 +10,7 @@ importers:
       "@astrojs/svelte":
         specifier: ^7.2.5
         version: 7.2.5(astro@5.17.1(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.57.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(lightningcss@1.31.1)(svelte@5.53.10)(typescript@5.9.3)(yaml@2.8.2)
-      "@fontsource-variable/outfit":
+      "@fontsource-variable/jetbrains-mono":
         specifier: ^5.2.8
         version: 5.2.8
       "@fontsource-variable/playpen-sans":
@@ -449,10 +449,10 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  "@fontsource-variable/outfit@5.2.8":
+  "@fontsource-variable/jetbrains-mono@5.2.8":
     resolution:
       {
-        integrity: sha512-4oUDCZx/Tcz6HZP423w/niqEH31Gks5IsqHV2ZZz1qKHaVIZdj2f0/S1IK2n8jl6Xo0o3N+3RjNHlV9R73ozQA==,
+        integrity: sha512-WBA9elru6Jdp5df2mES55wuOO0WIrn3kpXnI4+W2ek5u3ZgLS9XS4gmIlcQhiZOWEKl95meYdvK7xI+ETLCq/Q==,
       }
 
   "@fontsource-variable/playpen-sans@5.2.9":
@@ -3897,7 +3897,7 @@ snapshots:
   "@esbuild/win32-x64@0.25.12":
     optional: true
 
-  "@fontsource-variable/outfit@5.2.8": {}
+  "@fontsource-variable/jetbrains-mono@5.2.8": {}
 
   "@fontsource-variable/playpen-sans@5.2.9": {}
 
