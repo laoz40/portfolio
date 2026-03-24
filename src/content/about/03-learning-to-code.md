@@ -16,5 +16,5 @@ Towards the end of my degree, I realised how passionate and productive I was
 when learning by myself and not relying on learning in class. Much of what I
 was taught in uni already felt outdated, due to how quickly the industry moves.
 So I started teaching myself to code, and learnt so much in such a short period
-of time. I rebuilt my foundation, learning React, Next.js, and Svelte while
-building personal projects and have enjoyed every step of it.
+of time. I rebuilt my foundation, learning new things like React, Next.js, and
+Svelte while building personal projects and have enjoyed every step of it.
