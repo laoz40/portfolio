@@ -53,12 +53,12 @@ const aboutSections = await Promise.all(
 							: undefined,
 					]}
 					data-about-section={id}>
-					<div class="about-section-copy min-w-0 [grid-area:copy]">
+					<div class="about-section-copy min-w-0 md:[grid-area:copy]">
 						<h2>{title}</h2>
 						<Content />
 					</div>
 					{media ? (
-						<div class="about-section-media flex w-full min-w-0 items-center justify-center [grid-area:media] max-md:justify-start">
+						<div class="about-section-media flex w-full min-w-0 items-center justify-center max-md:justify-start md:[grid-area:media]">
 							<AboutSectionMedia media={media} />
 						</div>
 					) : null}
