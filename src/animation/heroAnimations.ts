@@ -1,11 +1,13 @@
 import { animate } from "motion";
 
 const timings = {
-	titleDuration: 0.3,
+	titleDuration: 0.2,
 	titleGap: 0.2,
-	subtitleDuration: 0.22,
+	subtitleDuration: 0.1,
 	afterTitleDelay: 0.2,
-	afterSubtitleDelay: 0.05,
+	afterSubtitleDelay: 0.2,
+	actionsDuration: 0.2,
+	heroImagesDuration: 0.7,
 };
 
 function sequenceDuration(count: number, duration: number, gap: number): number {
@@ -30,6 +32,9 @@ function runHeroTitleAnimation(): void {
 	);
 	const subtitle = hero.querySelector(".hero-roles");
 	const actions = hero.querySelector(".hero-actions");
+	const imageClusters = Array.from(hero.querySelectorAll(".hero-image-reveal")).filter(
+		(cluster): cluster is HTMLElement => cluster instanceof HTMLElement,
+	);
 
 	hero.dataset.animated = "true";
 
@@ -48,6 +53,9 @@ function runHeroTitleAnimation(): void {
 			actions.style.opacity = "1";
 			actions.style.transform = "translateY(0)";
 		}
+		imageClusters.forEach((cluster) => {
+			cluster.style.clipPath = "inset(0 0 0 0)";
+		});
 		return;
 	}
 
@@ -68,6 +76,10 @@ function runHeroTitleAnimation(): void {
 		actions.style.opacity = "0";
 		actions.style.transform = "translateY(8px)";
 	}
+	imageClusters.forEach((cluster) => {
+		cluster.style.clipPath = "inset(0 0 100% 0)";
+		cluster.style.willChange = "clip-path";
+	});
 
 	// Animate title lines in sequence.
 	const lineControls = animate(
@@ -100,7 +112,7 @@ function runHeroTitleAnimation(): void {
 
 	// Fade in the subtitle wrapper at the same time.
 	if (subtitle instanceof HTMLElement) {
-		animate(subtitle, { opacity: [0, 1] }, { duration: 0.12, delay: subtitleDelay });
+		animate(subtitle, { opacity: [0, 1] }, { duration: timings.subtitleDuration, delay: subtitleDelay });
 	}
 
 	// Actions follow after subtitle finishes + small gap.
@@ -113,8 +125,16 @@ function runHeroTitleAnimation(): void {
 	if (actions instanceof HTMLElement) {
 		animate(
 			actions,
-			{ opacity: [0, 1], y: [8, 0] },
-			{ duration: 0.35, ease: "easeOut", delay: actionsDelay },
+			{ opacity: [0, 1], y: [-5, 0] },
+			{ duration: timings.actionsDuration, ease: "easeOut", delay: actionsDelay },
+		);
+	}
+
+	if (imageClusters.length) {
+		animate(
+			imageClusters,
+			{ clipPath: ["inset(0 0 100% 0)", "inset(0 0 0 0)"] },
+			{ duration: timings.heroImagesDuration, ease: "easeOut", delay: actionsDelay },
 		);
 	}
 
@@ -125,6 +145,9 @@ function runHeroTitleAnimation(): void {
 		});
 		subtitleLines.forEach((line) => {
 			line.style.willChange = "";
+		});
+		imageClusters.forEach((cluster) => {
+			cluster.style.willChange = "";
 		});
 	});
 }
