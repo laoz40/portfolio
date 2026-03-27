@@ -1,18 +1,12 @@
 # AGENTS.md
 
-Practical instructions for coding agents operating in this repository.
+Astro project with some Svelte components. Motion for complex animations.
 
 ## Build/Lint/Test Commands
 
-Run all commands from repository root.
 Use pnpm.
 
 ## Code Style Guidelines
-
-Naming patterns used now:
-
-- Components: `PascalCase`
-- Route pages: lowercase names (example: `about.astro`, `projects.astro`)
 
 ### Imports
 
@@ -52,7 +46,6 @@ For browser scripts and UI logic:
 - Add `aria-label` when visible text is not sufficiently descriptive
 - Keep hover/focus behavior keyboard-accessible
 - Respect `prefers-reduced-motion`
-- Do not rely on motion alone for critical meaning
 
 ## Agent Working Agreement
 
