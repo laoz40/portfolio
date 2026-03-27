@@ -108,7 +108,7 @@ function runProjectsAnimations(): void {
 		const ctaObserver = new IntersectionObserver(
 			(entries, observer) => {
 				entries.forEach((entry) => {
-					if (!entry.isIntersecting || entry.intersectionRatio < 0.2) {
+					if (!entry.isIntersecting || entry.intersectionRatio < 0.6) {
 						return;
 					}
 					const target = entry.target;
@@ -130,7 +130,7 @@ function runProjectsAnimations(): void {
 					observer.unobserve(target);
 				});
 			},
-			{ threshold: [0.2] },
+			{ threshold: [0.6] },
 		);
 
 		ctaObserver.observe(cta);

@@ -10,9 +10,7 @@ type AboutImageMedia = Extract<
 	{ type: "image" }
 >;
 
-const aboutEntries = (await getCollection("about")).sort((a, b) =>
-	a.id.localeCompare(b.id),
-);
+const aboutEntries = (await getCollection("about")).sort((a, b) => a.id.localeCompare(b.id));
 
 const aboutSections = await Promise.all(
 	aboutEntries.map(async (entry) => {
@@ -20,9 +18,7 @@ const aboutSections = await Promise.all(
 		const media = entry.data.section?.media;
 
 		if (media && media.type !== "image") {
-			throw new Error(
-				`About entry ${entry.id} uses unsupported media type: ${media.type}`,
-			);
+			throw new Error(`About entry ${entry.id} uses unsupported media type: ${media.type}`);
 		}
 
 		return {
@@ -36,48 +32,56 @@ const aboutSections = await Promise.all(
 ---
 
 <DefaultLayout title="About">
-	<h1>A little bit about me</h1>
-	<article
-		class="mx-auto mt-6 grid w-full max-w-[78rem] gap-14 max-md:gap-10"
-		style="--text-measure: 65ch; --about-media-column-width: 22rem;">
-		{
-			aboutSections.map(({ id, title, Content, media }, index) => (
-				<section
-					class:list={[
-						"grid items-center gap-10 max-md:gap-7",
-						media
-							? "md:grid-cols-[minmax(0,1fr)_var(--about-media-column-width)] md:[grid-template-areas:'copy_media']"
-							: "grid-cols-[minmax(0,1fr)]",
-						media && index % 2 === 1
-							? "md:grid-cols-[var(--about-media-column-width)_minmax(0,1fr)] md:[grid-template-areas:'media_copy']"
-							: undefined,
-					]}
-					data-about-section={id}>
-					<div class="about-section-copy min-w-0 md:[grid-area:copy]">
-						<h2>{title}</h2>
-						<Content />
-					</div>
-					{media ? (
-						<div class="about-section-media flex w-full min-w-0 items-center justify-center max-md:justify-start md:[grid-area:media]">
-							<AboutSectionMedia media={media} />
+	<section class="about-page">
+		<h1>A little bit about me</h1>
+		<article
+			class="mx-auto mt-6 grid w-full max-w-[78rem] gap-14 max-md:gap-10"
+			style="--text-measure: 65ch; --about-media-column-width: 22rem;">
+			{
+				aboutSections.map(({ id, title, Content, media }, index) => (
+					<section
+						class:list={[
+							"grid items-center gap-10 max-md:gap-7",
+							media
+								? "md:grid-cols-[minmax(0,1fr)_var(--about-media-column-width)] md:[grid-template-areas:'copy_media']"
+								: "grid-cols-[minmax(0,1fr)]",
+							media && index % 2 === 1
+								? "md:grid-cols-[var(--about-media-column-width)_minmax(0,1fr)] md:[grid-template-areas:'media_copy']"
+								: undefined,
+						]}
+						data-about-section={id}>
+						<div class="about-section-copy min-w-0 md:[grid-area:copy]">
+							<h2>{title}</h2>
+							<Content />
 						</div>
-					) : null}
-				</section>
-			))
-		}
-	</article>
-	<div
-		class="mx-auto mt-10 flex w-full max-w-[78rem] flex-col items-center gap-4 text-center">
-		<p class="about-actions-note">
-			Thanks for reading all of this! (if you did)
-		</p>
-		<ImperfectButton
-			href="/projects"
-			fill="var(--color-home-button-yellow)">
-			See my projects
-		</ImperfectButton>
-	</div>
+						{media ? (
+							<div class="about-section-media flex w-full min-w-0 items-center justify-center max-md:justify-start md:[grid-area:media]">
+								<AboutSectionMedia media={media} />
+							</div>
+						) : null}
+					</section>
+				))
+			}
+		</article>
+		<div
+			class="about-actions-reveal mx-auto mt-10 flex w-full max-w-[78rem] flex-col items-center gap-4 text-center">
+			<p class="about-actions-note about-actions-note-reveal">
+				Thanks for reading all of this! (if you did)
+			</p>
+			<div class="about-actions-cta-reveal">
+				<ImperfectButton
+					href="/projects"
+					fill="var(--color-home-button-yellow)">
+					See my projects
+				</ImperfectButton>
+			</div>
+		</div>
+	</section>
 </DefaultLayout>
+
+<script>
+	import "../animation/aboutAnimations.ts";
+</script>
 
 <style>
 	h1 {
