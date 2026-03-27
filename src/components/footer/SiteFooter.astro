@@ -13,9 +13,7 @@ type FooterLink = {
 
 const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL;
 const linkedInUrl = import.meta.env.PUBLIC_LINKEDIN_URL;
-const encodedEmailHref = contactEmail
-	? encodeEmailHref(contactEmail)
-	: undefined;
+const encodedEmailHref = contactEmail ? encodeEmailHref(contactEmail) : undefined;
 
 const footerLinks = [
 	linkedInUrl
@@ -37,7 +35,7 @@ const footerLinks = [
 	data-footer-root
 	transition:animate="none">
 	<ObfuscatedEmailRuntime />
-	<div class="grid justify-items-center gap-[0.2rem] text-balance">
+	<div class="footer-cta-reveal grid justify-items-center gap-[0.2rem] text-balance">
 		<a
 			class="footer-cta-link"
 			href="/contact">
@@ -48,105 +46,46 @@ const footerLinks = [
 	<div class="footer-links flex flex-wrap items-center justify-center gap-2">
 		{
 			contactEmail ? (
-				<NavLink
-					href="#"
-					variant="lime"
-					data-email-link="true"
-					data-email-entities={encodedEmailHref}>
-					Email
-				</NavLink>
+				<div class="footer-link-reveal">
+					<NavLink
+						href="#"
+						variant="lime"
+						data-email-link="true"
+						data-email-entities={encodedEmailHref}>
+						Email
+					</NavLink>
+				</div>
 			) : null
 		}
 		{
 			footerLinks.map((link) => (
-				<NavLink
-					href={link.href}
-					variant={link.variant}
-					target={link.target}
-					rel={link.rel}>
-					{link.label}
-				</NavLink>
+				<div class="footer-link-reveal">
+					<NavLink
+						href={link.href}
+						variant={link.variant}
+						target={link.target}
+						rel={link.rel}>
+						{link.label}
+					</NavLink>
+				</div>
 			))
 		}
 	</div>
 
 	<div class="flex w-full flex-col items-center justify-center gap-[0.2rem]">
-		<p class="footer-copyright">
+		<p class="footer-copyright footer-copyright-reveal">
 			<span aria-hidden="true">&copy;</span>
 			<span data-current-year>0000</span>
 			<span>Leo Zhou</span>
 		</p>
-		<p class="footer-note">
+		<p class="footer-note footer-note-reveal">
 			Handwriting typeface created by me. Please don't steal my identity.
 		</p>
 	</div>
 </footer>
 
-<script is:inline>
-	function syncFooterYear() {
-		const currentYearTargets = document.querySelectorAll("[data-current-year]");
-
-		if (currentYearTargets.length === 0) {
-			return;
-		}
-
-		const currentYear = new Date().toLocaleDateString(undefined, {
-			year: "numeric",
-		});
-
-		currentYearTargets.forEach((target) => {
-			target.textContent = currentYear;
-		});
-	}
-
-	function revealFooterOnceVisible(entries, observer, footerRoot) {
-		for (const entry of entries) {
-			if (!entry.isIntersecting) {
-				continue;
-			}
-
-			footerRoot.classList.add("is-visible");
-			observer.disconnect();
-			return;
-		}
-	}
-
-	function initFooterReveal() {
-		const footerRoot = document.querySelector("[data-footer-root]");
-
-		if (!(footerRoot instanceof HTMLElement)) {
-			return;
-		}
-
-		if (footerRoot.dataset.animReady === "true") {
-			return;
-		}
-
-		footerRoot.dataset.animReady = "true";
-
-		if (!("IntersectionObserver" in window)) {
-			footerRoot.classList.add("is-visible");
-			return;
-		}
-
-		const observer = new IntersectionObserver(
-			(entries) => revealFooterOnceVisible(entries, observer, footerRoot),
-			{
-				threshold: 0.25,
-				rootMargin: "0px 0px -8% 0px",
-			},
-		);
-
-		observer.observe(footerRoot);
-	}
-
-	function initFooterUi() {
-		syncFooterYear();
-		initFooterReveal();
-	}
-
-	initFooterUi();
-	document.addEventListener("astro:page-load", initFooterUi);
+<script>
+	import "../../animation/footerAnimations.ts";
 </script>
 
 <style>
@@ -158,16 +97,10 @@ const footerLinks = [
 		gap: 0.85rem;
 		margin-top: 10rem;
 		padding-bottom: 8rem;
-		opacity: 0;
-		transform: translateY(1rem);
-		transition:
-			opacity 420ms ease,
-			transform 420ms cubic-bezier(0.2, 0.9, 0.2, 1);
 	}
 
-	footer.is-visible {
-		opacity: 1;
-		transform: translateY(0);
+	.footer-link-reveal {
+		display: inline-flex;
 	}
 
 	.footer-cta-link {
