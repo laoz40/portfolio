@@ -17,9 +17,7 @@ type ProjectFrontmatter = {
 };
 
 const projectSlugs = ["horus", "sprout", "checkit", "vvstudios"] as const;
-const disabledProjectSlugs = new Set<(typeof projectSlugs)[number]>([
-	"vvstudios",
-]);
+const disabledProjectSlugs = new Set<(typeof projectSlugs)[number]>(["vvstudios"]);
 
 const projectEntries = await Promise.all(
 	projectSlugs.map(async (slug) => ({
@@ -28,9 +26,7 @@ const projectEntries = await Promise.all(
 	})),
 );
 
-const missingProjects = projectEntries
-	.filter(({ entry }) => !entry)
-	.map(({ slug }) => slug);
+const missingProjects = projectEntries.filter(({ entry }) => !entry).map(({ slug }) => slug);
 
 if (missingProjects.length > 0) {
 	throw new Error(`Missing intro entry for: ${missingProjects.join(", ")}`);
@@ -46,79 +42,87 @@ const projects: Array<{
 ---
 
 <DefaultLayout title="Projects">
-	<h1>These are my projects</h1>
-	<div
-		class="projects-layout grid grid-cols-[repeat(2,minmax(0,29.75rem))] justify-center gap-x-12 gap-y-8 max-[900px]:grid-cols-[minmax(0,1fr)] max-[900px]:justify-stretch max-[900px]:gap-7 min-[1440px]:grid-cols-[repeat(2,minmax(0,42.5rem))] min-[1440px]:gap-x-10">
-		{
-			projects.map(({ slug, frontmatter }) => {
-				const isDisabled = disabledProjectSlugs.has(slug);
-				const cardContent = (
-					<div class="project-frame">
-						<div
-							class="preview"
-							aria-hidden="true">
-							{frontmatter.coverImage ? (
-								<Image
-									class="preview-image"
-									src={frontmatter.coverImage}
-									alt={frontmatter.altText}
-									loading="lazy"
-									decoding="async"
-								/>
-							) : (
-								<span class="preview-placeholder">COMING SOON</span>
-							)}
-						</div>
-						<div class="project-meta flex flex-1 flex-col justify-between px-0 pt-4 pb-[0.1rem] min-[1440px]:gap-4">
-							<div class="flex flex-col gap-[0.7rem]">
-								<div class="project-title flex flex-col items-start gap-[0.35rem]">
-									<HighlightText
-										tag="h2"
-										variant="yellow"
-										class="project-title-highlight">
-										{frontmatter.title}
-									</HighlightText>
-									<span class="project-subtitle">{frontmatter.project}</span>
-								</div>
-								<p>{frontmatter.description}</p>
+	<section class="projects-page">
+		<h1>
+			<span class="projects-heading-reveal">These are my projects</span>
+		</h1>
+		<div
+			class="projects-layout grid grid-cols-[repeat(2,minmax(0,29.75rem))] justify-center gap-x-12 gap-y-8 max-[900px]:grid-cols-[minmax(0,1fr)] max-[900px]:justify-stretch max-[900px]:gap-7 min-[1440px]:grid-cols-[repeat(2,minmax(0,42.5rem))] min-[1440px]:gap-x-10">
+			{
+				projects.map(({ slug, frontmatter }) => {
+					const isDisabled = disabledProjectSlugs.has(slug);
+					const cardContent = (
+						<div class="project-frame">
+							<div
+								class="preview"
+								aria-hidden="true">
+								{frontmatter.coverImage ? (
+									<Image
+										class="preview-image"
+										src={frontmatter.coverImage}
+										alt={frontmatter.altText}
+										loading="lazy"
+										decoding="async"
+									/>
+								) : (
+									<span class="preview-placeholder">COMING SOON</span>
+								)}
 							</div>
-							<ToolBadges
-								tools={frontmatter.tools ?? []}
-								projectTitle={frontmatter.title}
-							/>
-						</div>
-					</div>
-				);
-
-				if (isDisabled) {
-					return (
-						<div
-							class="project-card project-card-disabled"
-							aria-disabled="true">
-							{cardContent}
+							<div class="project-meta flex flex-1 flex-col justify-between px-0 pt-4 pb-[0.1rem] min-[1440px]:gap-4">
+								<div class="flex flex-col gap-[0.7rem]">
+									<div class="project-title flex flex-col items-start gap-[0.35rem]">
+										<HighlightText
+											tag="h2"
+											variant="yellow"
+											class="project-title-highlight">
+											{frontmatter.title}
+										</HighlightText>
+										<span class="project-subtitle">{frontmatter.project}</span>
+									</div>
+									<p>{frontmatter.description}</p>
+								</div>
+								<ToolBadges
+									tools={frontmatter.tools ?? []}
+									projectTitle={frontmatter.title}
+								/>
+							</div>
 						</div>
 					);
-				}
 
-				return (
-					<a
-						class="project-card"
-						href={`/projects/${slug}`}
-						aria-label={`Open ${frontmatter.title} project page`}>
-						{cardContent}
-					</a>
-				);
-			})
-		}
-	</div>
-	<div class="mt-10 flex justify-center">
-		<ImperfectButton
-			href="/about"
-			fill="var(--color-home-button-sky)">
-			Read about me
-		</ImperfectButton>
-	</div>
+					if (isDisabled) {
+						return (
+							<div
+								class="project-card project-card-reveal project-card-disabled"
+								aria-disabled="true">
+								{cardContent}
+							</div>
+						);
+					}
+
+					return (
+						<a
+							class="project-card project-card-reveal"
+							href={`/projects/${slug}`}
+							aria-label={`Open ${frontmatter.title} project page`}>
+							{cardContent}
+						</a>
+					);
+				})
+			}
+		</div>
+		<div class="projects-cta-reveal mt-10 flex justify-center">
+			<ImperfectButton
+				href="/about"
+				fill="var(--color-home-button-sky)">
+				Read about me
+			</ImperfectButton>
+		</div>
+	</section>
 </DefaultLayout>
+
+<script>
+	import "../animation/projectsAnimations.ts";
+</script>
 
 <style>
 	h1 {
@@ -126,6 +130,10 @@ const projects: Array<{
 		font-size: var(--type-hand-size-display-md);
 		font-weight: 700;
 		text-align: center;
+	}
+
+	.projects-heading-reveal {
+		display: inline-block;
 	}
 
 	.project-card {
@@ -185,10 +193,7 @@ const projects: Array<{
 
 	.project-card:hover :global(.project-title-highlight)::before,
 	.project-card:focus-within :global(.project-title-highlight)::before {
-		transform: var(
-			--highlight-transform-active,
-			scaleX(1) skewX(-4deg) rotate(-1.2deg)
-		);
+		transform: var(--highlight-transform-active, scaleX(1) skewX(-4deg) rotate(-1.2deg));
 		opacity: 1;
 	}
 
