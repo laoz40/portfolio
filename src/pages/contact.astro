@@ -16,9 +16,7 @@ const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL;
 const linkedInUrl = import.meta.env.PUBLIC_LINKEDIN_URL;
 const githubUrl = import.meta.env.PUBLIC_GITHUB_URL;
 
-const encodedEmailHref = contactEmail
-	? encodeEmailHref(contactEmail)
-	: undefined;
+const encodedEmailHref = contactEmail ? encodeEmailHref(contactEmail) : undefined;
 
 const contactLinks = [
 	linkedInUrl
@@ -51,34 +49,44 @@ const contactLinks = [
 
 <DefaultLayout title="Contact">
 	<ObfuscatedEmailRuntime />
-	<h1>Here are my links</h1>
-	<div
-		class="contact-actions mx-auto mt-10 flex w-full max-w-[20rem] flex-col items-center gap-4">
-		{
-			contactEmail ? (
-				<ImperfectButton
-					href="#"
-					fill="var(--color-home-button-yellow)"
-					data-email-link="true"
-					data-email-entities={encodedEmailHref}>
-					Email
-				</ImperfectButton>
-			) : null
-		}
-		{
-			contactLinks.map((link) => (
-				<ImperfectButton
-					href={link.href}
-					fill={link.fill}
-					target={link.target}
-					rel={link.rel}>
-					{link.label}
-				</ImperfectButton>
-			))
-		}
-	</div>
-	<p class="contact-thanks">Thanks for visiting my website :)</p>
+	<section class="contact-page">
+		<h1>Here are my links</h1>
+		<div
+			class="contact-actions mx-auto mt-10 flex w-full max-w-[20rem] flex-col items-center gap-4">
+			{
+				contactEmail ? (
+					<div class="contact-link-reveal">
+						<ImperfectButton
+							href="#"
+							fill="var(--color-home-button-yellow)"
+							data-email-link="true"
+							data-email-entities={encodedEmailHref}>
+							Email
+						</ImperfectButton>
+					</div>
+				) : null
+			}
+			{
+				contactLinks.map((link) => (
+					<div class="contact-link-reveal">
+						<ImperfectButton
+							href={link.href}
+							fill={link.fill}
+							target={link.target}
+							rel={link.rel}>
+							{link.label}
+						</ImperfectButton>
+					</div>
+				))
+			}
+		</div>
+		<p class="contact-thanks contact-thanks-reveal">Thanks for visiting my website :)</p>
+	</section>
 </DefaultLayout>
+
+<script>
+	import "../animation/contactAnimations.ts";
+</script>
 
 <style>
 	h1 {
@@ -89,6 +97,10 @@ const contactLinks = [
 	}
 
 	.contact-actions :global(.imperfect-button) {
+		width: 100%;
+	}
+
+	.contact-link-reveal {
 		width: min(100%, 20rem);
 	}
 
