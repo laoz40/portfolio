@@ -2,12 +2,14 @@ import { animate } from "motion";
 
 const timings = {
 	titleDuration: 0.2,
-	titleGap: 0.2,
+	titleGap: 0.1,
+	afterTitleDelay: 0.5,
 	subtitleDuration: 0.1,
-	afterTitleDelay: 0.2,
-	afterSubtitleDelay: 0.2,
-	actionsDuration: 0.2,
-	heroImagesDuration: 0.7,
+	afterSubtitleDelay: 0.3,
+	actionsDuration: 0.3,
+	heroImagesDuration: 0.8,
+	footerNoteDuration: 0.3,
+	scrollArrowDuration: 0.3,
 };
 
 function sequenceDuration(count: number, duration: number, gap: number): number {
@@ -35,6 +37,8 @@ function runHeroTitleAnimation(): void {
 	const imageClusters = Array.from(hero.querySelectorAll(".hero-image-reveal")).filter(
 		(cluster): cluster is HTMLElement => cluster instanceof HTMLElement,
 	);
+	const footerNote = hero.querySelector(".hero-note");
+	const scrollArrow = hero.querySelector(".scroll-down");
 
 	hero.dataset.animated = "true";
 
@@ -56,6 +60,12 @@ function runHeroTitleAnimation(): void {
 		imageClusters.forEach((cluster) => {
 			cluster.style.clipPath = "inset(0 0 0 0)";
 		});
+		if (footerNote instanceof HTMLElement) {
+			footerNote.style.clipPath = "inset(0 0 0 0)";
+		}
+		if (scrollArrow instanceof HTMLElement) {
+			scrollArrow.style.clipPath = "inset(0 0 0 0)";
+		}
 		return;
 	}
 
@@ -80,6 +90,14 @@ function runHeroTitleAnimation(): void {
 		cluster.style.clipPath = "inset(0 0 100% 0)";
 		cluster.style.willChange = "clip-path";
 	});
+	if (footerNote instanceof HTMLElement) {
+		footerNote.style.clipPath = "inset(0 100% 0 0)";
+		footerNote.style.willChange = "clip-path";
+	}
+	if (scrollArrow instanceof HTMLElement) {
+		scrollArrow.style.clipPath = "inset(0 0 100% 0)";
+		scrollArrow.style.willChange = "clip-path";
+	}
 
 	// Animate title lines in sequence.
 	const lineControls = animate(
@@ -138,6 +156,28 @@ function runHeroTitleAnimation(): void {
 		);
 	}
 
+	const footerAnimations: Promise<void>[] = [];
+
+	if (footerNote instanceof HTMLElement) {
+		footerAnimations.push(
+			animate(
+				footerNote,
+				{ clipPath: ["inset(0 100% 0 0)", "inset(0 0 0 0)"] },
+				{ duration: timings.footerNoteDuration, ease: "easeOut", delay: actionsDelay },
+			).finished,
+		);
+	}
+
+	if (scrollArrow instanceof HTMLElement) {
+		footerAnimations.push(
+			animate(
+				scrollArrow,
+				{ clipPath: ["inset(0 0 100% 0)", "inset(0 0 0 0)"] },
+				{ duration: timings.scrollArrowDuration, ease: "easeOut", delay: actionsDelay },
+			).finished,
+		);
+	}
+
 	// Clear will-change when title animation completes.
 	void lineControls.finished.then(() => {
 		titleLines.forEach((line) => {
@@ -150,6 +190,17 @@ function runHeroTitleAnimation(): void {
 			cluster.style.willChange = "";
 		});
 	});
+
+	if (footerAnimations.length) {
+		void Promise.all(footerAnimations).then(() => {
+			if (footerNote instanceof HTMLElement) {
+				footerNote.style.willChange = "";
+			}
+			if (scrollArrow instanceof HTMLElement) {
+				scrollArrow.style.willChange = "";
+			}
+		});
+	}
 }
 
 document.addEventListener("astro:page-load", runHeroTitleAnimation);
