@@ -25,6 +25,8 @@ if (!horusEntry) {
 }
 
 const horus = horusEntry.data as ProjectFrontmatter;
+const heroTitle = "Welcome to Leo's Website!";
+const heroTitleLines = ["Welcome to", "Leo's Website!"];
 ---
 
 <DefaultLayout
@@ -38,7 +40,21 @@ const horus = horusEntry.data as ProjectFrontmatter;
 
 		<div
 			class="hero-copy relative z-2 flex w-full max-w-216 flex-col items-center gap-4 max-[1100px]:max-w-136 max-[820px]:max-w-[24rem] max-sm:max-w-[20rem] max-sm:gap-[0.9rem]">
-			<h1>Welcome to Leo's Website!</h1>
+			<h1
+				class="hero-title"
+				aria-label={heroTitle}>
+				{
+					heroTitleLines.map((line) => (
+						<span class="hero-title-line">
+							<span
+								class="hero-title-text"
+								aria-hidden="true">
+								{line}
+							</span>
+						</span>
+					))
+				}
+			</h1>
 
 			<div
 				class="hero-roles flex flex-col items-center gap-[0.35rem] max-sm:gap-[0.2rem]">
@@ -126,6 +142,10 @@ const horus = horusEntry.data as ProjectFrontmatter;
 	</section>
 </DefaultLayout>
 
+<script>
+	import "../animation/heroAnimations.ts";
+</script>
+
 <style>
 	h1 {
 		margin: 0;
@@ -136,6 +156,24 @@ const horus = horusEntry.data as ProjectFrontmatter;
 		text-align: center;
 		text-wrap: balance;
 		max-width: 12ch;
+	}
+
+	.hero-title-line {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		overflow: hidden;
+		width: fit-content;
+		margin: 0 auto;
+	}
+
+	.hero-title-line + .hero-title-line {
+		margin-top: 0.08em;
+	}
+
+	.hero-title-text {
+		display: inline-block;
 	}
 
 	h2 {
