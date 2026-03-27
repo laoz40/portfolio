@@ -1,3 +1,9 @@
+<script context="module" lang="ts">
+	export interface Props {
+		home?: boolean;
+	}
+</script>
+
 <script lang="ts">
 	import { onMount } from "svelte";
 
@@ -20,6 +26,8 @@
 		lime: "var(--color-highlight-lime)",
 		sky: "var(--color-highlight-sky)",
 	};
+
+	export let home: Props["home"] = false;
 
 	let isScrolled = false;
 	let isMenuOpen = false;
@@ -50,8 +58,9 @@
 	on:resize|passive={syncSiteNavState} />
 
 <nav
-	class="fixed inset-x-0 top-0 [isolation:isolate] z-50 flex items-center justify-between gap-4 px-[var(--page-gutter)] max-[820px]:flex-wrap max-[820px]:py-1"
-	class:is-scrolled={isScrolled}>
+	class="fixed inset-x-0 top-0 isolate z-50 flex items-center justify-between gap-4 px-(--page-gutter) max-[820px]:flex-wrap max-[820px]:py-1"
+	class:is-scrolled={isScrolled}
+	class:nav-fade-in={home}>
 	<div
 		class="nav-grain pointer-events-none absolute inset-x-0 top-0 bottom-[0.55rem] z-0 mix-blend-multiply"
 		aria-hidden="true">
@@ -102,7 +111,7 @@
 
 	<div
 		id="site-nav-links"
-		class="nav-links max-[820px]:bg-page min-w-0 flex-wrap items-center justify-end gap-4 max-[820px]:order-3 max-[820px]:hidden max-[820px]:w-full max-[820px]:flex-col max-[820px]:items-start max-[820px]:justify-start max-[820px]:gap-[0.1rem] max-[820px]:border max-[820px]:border-solid max-[820px]:border-[var(--color-border-soft)] max-[820px]:px-0 max-[820px]:pt-[0.35rem] max-[820px]:pb-[0.5rem] min-[821px]:flex"
+		class="nav-links max-[820px]:bg-page min-w-0 flex-wrap items-center justify-end gap-4 max-[820px]:order-3 max-[820px]:hidden max-[820px]:w-full max-[820px]:flex-col max-[820px]:items-start max-[820px]:justify-start max-[820px]:gap-[0.1rem] max-[820px]:border max-[820px]:border-solid max-[820px]:border-border-soft-token max-[820px]:px-0 max-[820px]:pt-[0.35rem] max-[820px]:pb-2 min-[821px]:flex"
 		class:is-open={isMenuOpen}>
 		{#each links as link}
 			<a
@@ -202,6 +211,17 @@
 	nav.is-scrolled .nav-grain {
 		opacity: 0.3;
 		transform: translateY(0);
+	}
+
+	nav.nav-fade-in {
+		opacity: 0;
+		animation: navFadeIn 1000ms ease-out 1500ms forwards;
+	}
+
+	@keyframes navFadeIn {
+		to {
+			opacity: 1;
+		}
 	}
 
 	nav > :not(.nav-grain) {
@@ -350,6 +370,13 @@
 
 		.nav-brand .nav-link-text {
 			font-size: var(--type-hand-size-title-sm);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		nav.nav-fade-in {
+			animation: none;
+			opacity: 1;
 		}
 	}
 </style>

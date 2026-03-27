@@ -55,7 +55,10 @@ const { title, home = false } = Astro.props;
 	<body>
 		<Analytics />
 		<BgLight>
-			<SiteNav client:load />
+			<SiteNav
+				client:load
+				home={home}
+			/>
 			<main
 				class:list={[
 					"mx-(--page-gutter) flex min-h-svh min-w-0 flex-1 flex-col",
