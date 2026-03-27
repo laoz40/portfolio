@@ -10,6 +10,8 @@ const timings = {
 	heroImagesDuration: 0.8,
 	footerNoteDuration: 0.3,
 	scrollArrowDuration: 0.3,
+	featuredCardDuration: 0.35,
+	featuredCtaDuration: 0.3,
 };
 
 function sequenceDuration(count: number, duration: number, gap: number): number {
@@ -39,6 +41,8 @@ function runHeroTitleAnimation(): void {
 	);
 	const footerNote = hero.querySelector(".hero-note");
 	const scrollArrow = hero.querySelector(".scroll-down");
+	const featuredCard = document.querySelector(".featured-project-card-reveal");
+	const featuredCta = document.querySelector(".featured-projects-cta-reveal");
 
 	hero.dataset.animated = "true";
 
@@ -65,6 +69,14 @@ function runHeroTitleAnimation(): void {
 		}
 		if (scrollArrow instanceof HTMLElement) {
 			scrollArrow.style.clipPath = "inset(0 0 0 0)";
+		}
+		if (featuredCard instanceof HTMLElement) {
+			featuredCard.style.transform = "translateY(0)";
+			featuredCard.style.opacity = "1";
+		}
+		if (featuredCta instanceof HTMLElement) {
+			featuredCta.style.transform = "translateY(0)";
+			featuredCta.style.opacity = "1";
 		}
 		return;
 	}
@@ -98,6 +110,93 @@ function runHeroTitleAnimation(): void {
 		scrollArrow.style.clipPath = "inset(0 0 100% 0)";
 		scrollArrow.style.willChange = "clip-path";
 	}
+	if (featuredCard instanceof HTMLElement) {
+		featuredCard.style.transform = "translateY(-18px)";
+		featuredCard.style.opacity = "0";
+		featuredCard.style.willChange = "transform, opacity";
+	}
+	if (featuredCta instanceof HTMLElement) {
+		featuredCta.style.transform = "translateY(-12px)";
+		featuredCta.style.opacity = "0";
+		featuredCta.style.willChange = "transform, opacity";
+	}
+
+	if (!("IntersectionObserver" in window)) {
+		if (featuredCard instanceof HTMLElement) {
+			featuredCard.style.transform = "translateY(0)";
+			featuredCard.style.opacity = "1";
+			featuredCard.style.willChange = "";
+		}
+		if (featuredCta instanceof HTMLElement) {
+			featuredCta.style.transform = "translateY(0)";
+			featuredCta.style.opacity = "1";
+			featuredCta.style.willChange = "";
+		}
+	} else {
+		if (featuredCard instanceof HTMLElement) {
+			const featuredCardObserver = new IntersectionObserver(
+				(entries, observer) => {
+					entries.forEach((entry) => {
+						if (!entry.isIntersecting || entry.intersectionRatio < 0.2) {
+							return;
+						}
+						const target = entry.target;
+						if (!(target instanceof HTMLElement)) {
+							return;
+						}
+
+						void animate(
+							target,
+							{
+								transform: ["translateY(-18px)", "translateY(0px)"],
+								opacity: [0, 1],
+							},
+							{ duration: timings.featuredCardDuration, ease: "easeIn" },
+						).finished.then(() => {
+							target.style.willChange = "";
+						});
+
+						observer.unobserve(target);
+					});
+				},
+				{ threshold: [0.2] },
+			);
+
+			featuredCardObserver.observe(featuredCard);
+		}
+
+		if (featuredCta instanceof HTMLElement) {
+			const featuredCtaObserver = new IntersectionObserver(
+				(entries, observer) => {
+					entries.forEach((entry) => {
+						if (!entry.isIntersecting || entry.intersectionRatio < 0.6) {
+							return;
+						}
+						const target = entry.target;
+						if (!(target instanceof HTMLElement)) {
+							return;
+						}
+
+						void animate(
+							target,
+							{
+								transform: ["translateY(-12px)", "translateY(0px)"],
+								opacity: [0, 1],
+							},
+							{ duration: timings.featuredCtaDuration, ease: "easeIn" },
+						).finished.then(() => {
+							target.style.willChange = "";
+						});
+
+						observer.unobserve(target);
+					});
+				},
+				{ threshold: [0.6] },
+			);
+
+			featuredCtaObserver.observe(featuredCta);
+		}
+	}
 
 	// Animate title lines in sequence.
 	const lineControls = animate(
@@ -130,7 +229,11 @@ function runHeroTitleAnimation(): void {
 
 	// Fade in the subtitle wrapper at the same time.
 	if (subtitle instanceof HTMLElement) {
-		animate(subtitle, { opacity: [0, 1] }, { duration: timings.subtitleDuration, delay: subtitleDelay });
+		animate(
+			subtitle,
+			{ opacity: [0, 1] },
+			{ duration: timings.subtitleDuration, delay: subtitleDelay },
+		);
 	}
 
 	// Actions follow after subtitle finishes + small gap.

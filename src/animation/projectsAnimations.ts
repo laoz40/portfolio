@@ -122,7 +122,7 @@ function runProjectsAnimations(): void {
 							transform: ["translateY(-14px)", "translateY(0px)"],
 							opacity: [0, 1],
 						},
-						{ duration: timings.ctaDuration, ease: "easeOut" },
+						{ duration: timings.ctaDuration, ease: "easeIn" },
 					).finished.then(() => {
 						target.style.willChange = "";
 					});
