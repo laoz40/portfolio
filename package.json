@@ -14,6 +14,7 @@
 		"@fontsource-variable/playpen-sans": "^5.2.9",
 		"@vercel/analytics": "^2.0.1",
 		"astro": "^5.17.1",
+		"motion": "^12.38.0",
 		"prettier": "^3.8.1",
 		"prettier-plugin-astro": "^0.14.1",
 		"sharp": "^0.34.5",
