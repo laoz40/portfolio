@@ -15,12 +15,12 @@ altText: Horus Cover Image
 section:
   variant: featured
   links:
-    - label: GitHub
-      href: https://github.com/laoz40/Horus
-      fill: var(--color-home-button-yellow)
     - label: Web App Link
       href: https://horus-workout.vercel.app
       fill: var(--color-home-button-sky)
+    - label: GitHub
+      href: https://github.com/laoz40/Horus
+      fill: var(--color-home-button-yellow)
   ariaLabel: Horus project links
   media:
     type: image

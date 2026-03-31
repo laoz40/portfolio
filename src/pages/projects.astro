@@ -16,13 +16,19 @@ type ProjectFrontmatter = {
 	altText?: string;
 };
 
-const projectSlugs = ["horus", "sprout", "checkit", "vvstudios"] as const;
-const disabledProjectSlugs = new Set<(typeof projectSlugs)[number]>(["vvstudios"]);
+const projectSlugs = ["horus", "vv-podcast-studio", "sprout", "checkit"] as const;
+type ProjectCollection = "horus" | "vvPodcastStudio" | "sprout" | "checkit";
 
+const projectCollections = {
+	horus: "horus",
+	"vv-podcast-studio": "vvPodcastStudio",
+	sprout: "sprout",
+	checkit: "checkit",
+} as const satisfies Record<(typeof projectSlugs)[number], ProjectCollection>;
 const projectEntries = await Promise.all(
 	projectSlugs.map(async (slug) => ({
 		slug,
-		entry: await getEntry(slug, "00-intro"),
+		entry: await getEntry(projectCollections[slug], "00-intro"),
 	})),
 );
 
@@ -50,7 +56,6 @@ const projects: Array<{
 			class="projects-layout grid grid-cols-[repeat(2,minmax(0,29.75rem))] justify-center gap-x-12 gap-y-8 max-[900px]:grid-cols-[minmax(0,1fr)] max-[900px]:justify-stretch max-[900px]:gap-7 min-[1440px]:grid-cols-[repeat(2,minmax(0,42.5rem))] min-[1440px]:gap-x-10">
 			{
 				projects.map(({ slug, frontmatter }) => {
-					const isDisabled = disabledProjectSlugs.has(slug);
 					const cardContent = (
 						<div class="project-frame">
 							<div
@@ -88,16 +93,6 @@ const projects: Array<{
 							</div>
 						</div>
 					);
-
-					if (isDisabled) {
-						return (
-							<div
-								class="project-card project-card-reveal project-card-disabled"
-								aria-disabled="true">
-								{cardContent}
-							</div>
-						);
-					}
 
 					return (
 						<a
@@ -142,10 +137,6 @@ const projects: Array<{
 		width: 100%;
 		color: var(--color-text-body);
 		text-decoration: none;
-	}
-
-	.project-card-disabled {
-		cursor: default;
 	}
 
 	.project-frame {
