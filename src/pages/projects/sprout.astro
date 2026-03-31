@@ -120,6 +120,12 @@ const sections = [
 ];
 ---
 
-<DefaultLayout title={introFrontmatter.title}>
+<DefaultLayout
+	title="Sprout AR App Case Study | Leo Zhou"
+	description="Take a look at Leo Zhou’s Sprout case study, an AR app design project that encourages people to plant trees, brought to life through thoughtful research, prototyping, and real user testing."
+	pathname="/projects/sprout"
+	ogType="article"
+	ogImage={introFrontmatter.coverImage}
+	ogImageAlt={introFrontmatter.altText ?? introFrontmatter.section?.media?.alt}>
 	<ProjectCaseStudy sections={sections} />
 </DefaultLayout>

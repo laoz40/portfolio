@@ -47,10 +47,13 @@ const contactLinks = [
 ].filter((link): link is ContactLink => link !== null);
 ---
 
-<DefaultLayout title="Contact">
+<DefaultLayout
+	title="Contact Leo Zhou | Full Stack Developer & UX Designer"
+	description="Get in touch with Leo Zhou for frontend development, UX design, and portfolio enquiries. Find email, LinkedIn, GitHub, and resume links here."
+	pathname="/contact">
 	<ObfuscatedEmailRuntime />
 	<section class="contact-page">
-		<h1>Here are my links</h1>
+		<h1>Get in touch</h1>
 		<div
 			class="contact-actions mx-auto mt-10 flex w-full max-w-[20rem] flex-col items-center gap-4">
 			{

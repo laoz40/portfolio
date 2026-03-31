@@ -6,11 +6,7 @@ import Intro from "../../content/vv-podcast-studio/00-intro.md";
 import ProjectOverview from "../../content/vv-podcast-studio/01-project-overview.md";
 import KeyImprovements from "../../content/vv-podcast-studio/02-key-improvements.md";
 
-const [
-	introResult,
-	projectOverviewResult,
-	keyImprovementsResult,
-] = await Promise.all([
+const [introResult, projectOverviewResult, keyImprovementsResult] = await Promise.all([
 	createContentSection({
 		collection: "vvPodcastStudio",
 		entryId: "00-intro",
@@ -32,13 +28,15 @@ const { frontmatter: introFrontmatter, section: introSection } = introResult;
 const { section: projectOverviewSection } = projectOverviewResult;
 const { section: keyImprovementsSection } = keyImprovementsResult;
 
-const sections = [
-	introSection,
-	projectOverviewSection,
-	keyImprovementsSection,
-];
+const sections = [introSection, projectOverviewSection, keyImprovementsSection];
 ---
 
-<DefaultLayout title={introFrontmatter.title}>
+<DefaultLayout
+	title="VV Podcast Studio Website Redesign Case Study | Leo Zhou"
+	description="Review Leo Zhou's VV Podcast Studio case study covering a custom website rebuild, UX improvements, and workflow automations for the business."
+	pathname="/projects/vv-podcast-studio"
+	ogType="article"
+	ogImage={introFrontmatter.coverImage}
+	ogImageAlt={introFrontmatter.altText ?? introFrontmatter.section?.media?.alt}>
 	<ProjectCaseStudy sections={sections} />
 </DefaultLayout>

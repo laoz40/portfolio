@@ -147,6 +147,12 @@ const sections = [
 ];
 ---
 
-<DefaultLayout title={introFrontmatter.title}>
+<DefaultLayout
+	title="Check It App Case Study | Leo Zhou"
+	description="See how Leo Zhou designed Check It, a mobile app concept aimed at reducing social media usage and improving productivity through user-centred design."
+	pathname="/projects/checkit"
+	ogType="article"
+	ogImage={introFrontmatter.coverImage}
+	ogImageAlt={introFrontmatter.altText ?? introFrontmatter.section?.media?.alt}>
 	<ProjectCaseStudy sections={sections} />
 </DefaultLayout>

@@ -7,47 +7,44 @@ import ProjectOverview from "../../content/horus/01-project-overview.md";
 import ProjectFeatures from "../../content/horus/02-project-features.md";
 import TechStack from "../../content/horus/03-tech-stack.md";
 
-const [
-	introResult,
-	projectOverviewResult,
-	projectFeaturesResult,
-	techStackResult,
-] = await Promise.all([
-	createContentSection({
-		collection: "horus",
-		entryId: "00-intro",
-		Component: Intro,
-	}),
-	createContentSection({
-		collection: "horus",
-		entryId: "01-project-overview",
-		Component: ProjectOverview,
-	}),
-	createContentSection({
-		collection: "horus",
-		entryId: "02-project-features",
-		Component: ProjectFeatures,
-	}),
-	createContentSection({
-		collection: "horus",
-		entryId: "03-tech-stack",
-		Component: TechStack,
-	}),
-]);
+const [introResult, projectOverviewResult, projectFeaturesResult, techStackResult] =
+	await Promise.all([
+		createContentSection({
+			collection: "horus",
+			entryId: "00-intro",
+			Component: Intro,
+		}),
+		createContentSection({
+			collection: "horus",
+			entryId: "01-project-overview",
+			Component: ProjectOverview,
+		}),
+		createContentSection({
+			collection: "horus",
+			entryId: "02-project-features",
+			Component: ProjectFeatures,
+		}),
+		createContentSection({
+			collection: "horus",
+			entryId: "03-tech-stack",
+			Component: TechStack,
+		}),
+	]);
 
 const { frontmatter: introFrontmatter, section: introSection } = introResult;
 const { section: projectOverviewSection } = projectOverviewResult;
 const { section: projectFeaturesSection } = projectFeaturesResult;
 const { section: techStackSection } = techStackResult;
 
-const sections = [
-	introSection,
-	projectOverviewSection,
-	projectFeaturesSection,
-	techStackSection,
-];
+const sections = [introSection, projectOverviewSection, projectFeaturesSection, techStackSection];
 ---
 
-<DefaultLayout title={introFrontmatter.title}>
+<DefaultLayout
+	title="Horus Workout Tracker Case Study | Leo Zhou"
+	description="Read the Horus case study by Leo Zhou, covering the design and development of a full stack workout tracker web app built with React, Next.js, and Convex."
+	pathname="/projects/horus"
+	ogType="article"
+	ogImage={introFrontmatter.coverImage}
+	ogImageAlt={introFrontmatter.altText ?? introFrontmatter.section?.media?.alt}>
 	<ProjectCaseStudy sections={sections} />
 </DefaultLayout>
