@@ -2,13 +2,14 @@
 import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 
-const { image, alt } = Astro.props as {
+const { image, alt, caption } = Astro.props as {
 	image: ImageMetadata;
 	alt?: string;
+	caption?: string;
 };
 ---
 
-<div
+<figure
 	class="section-media-frame taped-frame w-full min-w-0 self-center pt-[calc(var(--size-project-tape-height)*0.5)]"
 	style={`--section-media-max-width: ${image.width}px; --section-media-aspect-ratio: ${image.width} / ${image.height}; --tape-angle: calc(var(--section-media-tilt, 0deg) + 1.2deg);`}>
 	<div class="section-media paper-frame">
@@ -22,7 +23,8 @@ const { image, alt } = Astro.props as {
 			decoding="async"
 		/>
 	</div>
-</div>
+	{caption ? <figcaption class="section-media-caption">{caption}</figcaption> : null}
+</figure>
 
 <style>
 	.section-media-frame {
@@ -55,6 +57,13 @@ const { image, alt } = Astro.props as {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+	}
+
+	.section-media-caption {
+		margin: 0.75rem 0 0;
+		font-family: var(--font-handwriting);
+		font-size: var(--type-hand-size-label);
+		line-height: 1.4;
 	}
 
 	@media (max-width: 1450px) {

@@ -1,6 +1,11 @@
 ---
 section:
-  variant: contentOnly
+  variant: media
+  media:
+    type: image
+    image: ../../assets/vv-podcast-studio/booking.webp
+    alt: VV Podcast Studio website booking form
+    caption: New appointment booking form redesign
 ---
 
 ## Key Improvements
@@ -26,4 +31,3 @@ I improved website performance to deliver faster load times and a more responsiv
 #### Accessibility & Responsiveness
 
 I strengthened accessibility across the site by supporting full keyboard navigation, improving content structure, and ensuring responsive layouts. The website now works well across devices and is easier to use for people with a range of needs.
-

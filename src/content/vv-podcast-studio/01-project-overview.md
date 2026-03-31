@@ -15,7 +15,7 @@ The previous setup depended on an embedded Google Form, which created a
 disjointed user experience and failed to align with the brand’s visual
 identity.
 
-The form’s structure were rigid and could not be meaningfully customised,
+The form’s structure was rigid and could not be meaningfully customised,
 resulting in a generic and less intuitive experience for users. It wasn't
 possible to create a cohesive design or implement custom layouts and animations
 that would improve usability and engagement. Submissions were handled in a
