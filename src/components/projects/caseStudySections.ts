@@ -1,17 +1,8 @@
 import type { ImageMetadata } from "astro";
-import {
-	getEntry,
-	type CollectionEntry,
-	type DataCollectionKey,
-} from "astro:content";
+import { getEntry, type CollectionEntry, type DataCollectionKey } from "astro:content";
 import type { AstroComponentFactory } from "astro/runtime/server/index.js";
 
-export type SectionVariant =
-	| "featured"
-	| "media"
-	| "gallery"
-	| "carousel"
-	| "contentOnly";
+export type SectionVariant = "featured" | "media" | "gallery" | "carousel" | "contentOnly";
 
 export type CarouselItem = {
 	image: ImageMetadata;
@@ -103,8 +94,7 @@ export const createContentSection = async <C extends DataCollectionKey>({
 		throw new Error(`Missing ${entryId} entry for: ${collection}`);
 	}
 
-	const frontmatter = entry.data as CollectionEntry<C>["data"] &
-		SectionFrontmatter;
+	const frontmatter = entry.data as CollectionEntry<C>["data"] & SectionFrontmatter;
 
 	return {
 		frontmatter,

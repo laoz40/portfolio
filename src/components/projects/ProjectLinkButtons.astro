@@ -18,11 +18,7 @@ const { links, ariaLabel = "Project links" } = Astro.props as {
 	aria-label={ariaLabel}>
 	{
 		links.map((link, index) => (
-			<div
-				class:list={[
-					"project-link-buttons__item",
-					`project-link-buttons__item--${index + 1}`,
-				]}>
+			<div class:list={["project-link-buttons__item", `project-link-buttons__item--${index + 1}`]}>
 				<ImperfectButton
 					href={link.href}
 					fill={link.fill}>

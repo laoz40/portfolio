@@ -6,9 +6,7 @@
 	let root: HTMLDivElement | null = null;
 
 	function replacePlaceholder(): void {
-		const placeholder = document.querySelector(
-			`.inline-image[data-image="${imageId}"]`,
-		);
+		const placeholder = document.querySelector(`.inline-image[data-image="${imageId}"]`);
 		const template = root?.querySelector("template");
 
 		if (!(placeholder instanceof HTMLElement)) {

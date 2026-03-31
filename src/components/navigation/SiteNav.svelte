@@ -1,4 +1,6 @@
-<script context="module" lang="ts">
+<script
+	context="module"
+	lang="ts">
 	export interface Props {
 		home?: boolean;
 	}
@@ -111,7 +113,7 @@
 
 	<div
 		id="site-nav-links"
-		class="nav-links max-[820px]:bg-page min-w-0 flex-wrap items-center justify-end gap-4 max-[820px]:order-3 max-[820px]:hidden max-[820px]:w-full max-[820px]:flex-col max-[820px]:items-start max-[820px]:justify-start max-[820px]:gap-[0.1rem] max-[820px]:border max-[820px]:border-solid max-[820px]:border-border-soft-token max-[820px]:px-0 max-[820px]:pt-[0.35rem] max-[820px]:pb-2 min-[821px]:flex"
+		class="nav-links max-[820px]:bg-page max-[820px]:border-border-soft-token min-w-0 flex-wrap items-center justify-end gap-4 max-[820px]:order-3 max-[820px]:hidden max-[820px]:w-full max-[820px]:flex-col max-[820px]:items-start max-[820px]:justify-start max-[820px]:gap-[0.1rem] max-[820px]:border max-[820px]:border-solid max-[820px]:px-0 max-[820px]:pt-[0.35rem] max-[820px]:pb-2 min-[821px]:flex"
 		class:is-open={isMenuOpen}>
 		{#each links as link}
 			<a
@@ -324,10 +326,7 @@
 			4% 91%
 		);
 		transform-origin: left;
-		transform: var(
-			--highlight-transform-base,
-			scaleX(0.2) skewX(-4deg) rotate(-1.2deg)
-		);
+		transform: var(--highlight-transform-base, scaleX(0.2) skewX(-4deg) rotate(-1.2deg));
 		opacity: 0;
 		transition:
 			transform 220ms ease,
@@ -338,10 +337,7 @@
 
 	.nav-link:hover .nav-link-text::before,
 	.nav-link:focus-visible .nav-link-text::before {
-		transform: var(
-			--highlight-transform-active,
-			scaleX(1) skewX(-4deg) rotate(-1.2deg)
-		);
+		transform: var(--highlight-transform-active, scaleX(1) skewX(-4deg) rotate(-1.2deg));
 		opacity: 1;
 	}
 

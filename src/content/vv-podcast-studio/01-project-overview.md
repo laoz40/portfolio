@@ -25,4 +25,3 @@ and reducing continuity throughout the site.
 The overall website flow also lacked clear direction. There was no dedicated landing
 page or strong call-to-action to guide users toward completing the form, which
 weakened engagement and made the conversion process less effective.
-

@@ -27,17 +27,13 @@
 		);
 	}
 
-	function ensureHeadingId(
-		headingNode: HTMLElement,
-		usedIds: Set<string>,
-	): string {
+	function ensureHeadingId(headingNode: HTMLElement, usedIds: Set<string>): string {
 		if (headingNode.id) {
 			usedIds.add(headingNode.id);
 			return headingNode.id;
 		}
 
-		const baseId =
-			slugifyHeadingText(headingNode.textContent ?? "") || "section";
+		const baseId = slugifyHeadingText(headingNode.textContent ?? "") || "section";
 		let nextId = baseId;
 		let suffix = 2;
 
@@ -65,9 +61,9 @@
 		const seenTargets = new Set<HTMLElement>();
 		const nextItems: ScrollSpyItem[] = [];
 
-		const headings = Array.from(
-			contentRoot.querySelectorAll(headingSelectorValue),
-		).filter(isValidHeading);
+		const headings = Array.from(contentRoot.querySelectorAll(headingSelectorValue)).filter(
+			isValidHeading,
+		);
 
 		for (const heading of headings) {
 			const id = ensureHeadingId(heading, usedIds);
@@ -92,8 +88,7 @@
 		entriesByTarget: Map<HTMLElement, IntersectionObserverEntry>,
 	): IntersectionObserverEntry[] {
 		return Array.from(entriesByTarget.values()).sort(
-			(entryA, entryB) =>
-				entryB.boundingClientRect.top - entryA.boundingClientRect.top,
+			(entryA, entryB) => entryB.boundingClientRect.top - entryA.boundingClientRect.top,
 		);
 	}
 
@@ -103,8 +98,7 @@
 	): IntersectionObserverEntry | undefined {
 		return entries.find(
 			(entry) =>
-				entry.boundingClientRect.top <= anchorY &&
-				entry.boundingClientRect.bottom >= anchorY,
+				entry.boundingClientRect.top <= anchorY && entry.boundingClientRect.bottom >= anchorY,
 		);
 	}
 
@@ -119,9 +113,7 @@
 
 		const crossingEntry = findCrossingEntry(visibleEntries, anchorY);
 		if (crossingEntry) {
-			return crossingEntry.target instanceof HTMLElement
-				? crossingEntry.target
-				: null;
+			return crossingEntry.target instanceof HTMLElement ? crossingEntry.target : null;
 		}
 
 		const nearestAboveEntry = visibleEntries.find(
@@ -170,10 +162,7 @@
 
 		function createObserver(items: ScrollSpyItem[]): IntersectionObserver {
 			const targetIdByElement = createTargetIdMap(items);
-			const intersectingTargets = new Map<
-				HTMLElement,
-				IntersectionObserverEntry
-			>();
+			const intersectingTargets = new Map<HTMLElement, IntersectionObserverEntry>();
 
 			return new IntersectionObserver(
 				(entries) => {
@@ -309,10 +298,7 @@
 	.scrollspy-link:hover .scrollspy-link-text::before,
 	.scrollspy-link:focus-visible .scrollspy-link-text::before,
 	.scrollspy-link.is-active .scrollspy-link-text::before {
-		transform: var(
-			--highlight-transform-active,
-			scaleX(1) skewX(-4deg) rotate(-1.2deg)
-		);
+		transform: var(--highlight-transform-active, scaleX(1) skewX(-4deg) rotate(-1.2deg));
 		opacity: 1;
 	}
 

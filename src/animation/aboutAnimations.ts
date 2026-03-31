@@ -50,7 +50,7 @@ function runAboutActionsAnimation(): void {
 	const observer = new IntersectionObserver(
 		(entries, observerInstance) => {
 			entries.forEach((entry) => {
-					if (!entry.isIntersecting || entry.intersectionRatio < 0.6) {
+				if (!entry.isIntersecting || entry.intersectionRatio < 0.6) {
 					return;
 				}
 
@@ -80,8 +80,8 @@ function runAboutActionsAnimation(): void {
 				observerInstance.unobserve(actions);
 			});
 		},
-			{ threshold: [0.6] },
-		);
+		{ threshold: [0.6] },
+	);
 
 	observer.observe(actions);
 }

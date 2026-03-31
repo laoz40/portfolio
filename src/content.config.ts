@@ -1,13 +1,7 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
-const sectionVariantSchema = z.enum([
-	"featured",
-	"media",
-	"gallery",
-	"carousel",
-	"contentOnly",
-]);
+const sectionVariantSchema = z.enum(["featured", "media", "gallery", "carousel", "contentOnly"]);
 
 const imageMediaVariantSchema = z.enum(["taped", "raw"]);
 
@@ -102,9 +96,7 @@ const sharedSchema = ({ image }) =>
 		})
 		.passthrough();
 
-function createMarkdownCollection(
-	base: string,
-): ReturnType<typeof defineCollection> {
+function createMarkdownCollection(base: string): ReturnType<typeof defineCollection> {
 	return defineCollection({
 		loader: glob({ pattern: "**/*.md", base }),
 		schema: sharedSchema,

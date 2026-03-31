@@ -1,14 +1,7 @@
 ---
 import HighlightText from "../ui/HighlightText.astro";
 
-const {
-	href,
-	variant = "yellow",
-	selectable = false,
-	target,
-	rel,
-	...attributes
-} = Astro.props;
+const { href, variant = "yellow", selectable = false, target, rel, ...attributes } = Astro.props;
 ---
 
 <a
@@ -48,10 +41,7 @@ const {
 
 	.nav-link:hover :global(.nav-link-text)::before,
 	.nav-link:focus-visible :global(.nav-link-text)::before {
-		transform: var(
-			--highlight-transform-active,
-			scaleX(1) skewX(-4deg) rotate(-1.2deg)
-		);
+		transform: var(--highlight-transform-active, scaleX(1) skewX(-4deg) rotate(-1.2deg));
 		opacity: 1;
 	}
 

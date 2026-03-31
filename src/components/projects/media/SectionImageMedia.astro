@@ -35,10 +35,7 @@ const { image, alt, caption } = Astro.props as {
 		.section-media-frame {
 			width: min(
 				var(--section-media-visual-max-width, var(--section-media-max-width)),
-				max(
-					100%,
-					var(--section-media-visual-max-width, var(--section-media-max-width))
-				)
+				max(100%, var(--section-media-visual-max-width, var(--section-media-max-width)))
 			);
 			justify-self: start;
 		}

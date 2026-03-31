@@ -6,9 +6,7 @@
 	let root: HTMLDivElement | null = null;
 
 	function replacePlaceholder(): void {
-		const placeholder = document.querySelector(
-			`.inline-gallery[data-gallery="${galleryId}"]`,
-		);
+		const placeholder = document.querySelector(`.inline-gallery[data-gallery="${galleryId}"]`);
 		const template = root?.querySelector("template");
 
 		if (!(placeholder instanceof HTMLElement)) {

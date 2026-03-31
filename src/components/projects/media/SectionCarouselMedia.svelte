@@ -26,9 +26,7 @@
 	$: maxIndex = Math.max(slideCount - 1, 0);
 	$: currentIndex = Math.min(currentIndex, maxIndex);
 	$: carouselMaxWidth =
-		slideCount > 0
-			? Math.max(...items.map((item) => item.image.width))
-			: defaultCarouselMaxWidth;
+		slideCount > 0 ? Math.max(...items.map((item) => item.image.width)) : defaultCarouselMaxWidth;
 	$: hasMultipleSlides = slideCount > 1;
 
 	function clampIndex(index: number): number {
@@ -79,8 +77,7 @@
 
 	function shouldChangeSlides(): boolean {
 		return (
-			Math.abs(pointerDeltaX) >= swipeThreshold &&
-			Math.abs(pointerDeltaX) > Math.abs(pointerDeltaY)
+			Math.abs(pointerDeltaX) >= swipeThreshold && Math.abs(pointerDeltaX) > Math.abs(pointerDeltaY)
 		);
 	}
 
@@ -323,8 +320,7 @@
 
 	.section-carousel-button {
 		--carousel-button-shadow-rest: 3px 4px 3px var(--color-shadow-paper-button);
-		--carousel-button-shadow-hover: 4px 5px 4px
-			var(--color-shadow-paper-button-hover);
+		--carousel-button-shadow-hover: 4px 5px 4px var(--color-shadow-paper-button-hover);
 		position: absolute;
 		top: 50%;
 		font-family: var(--font-handwriting);
