@@ -1,6 +1,11 @@
 ---
 section:
-  variant: contentOnly
+  variant: media
+  media:
+    type: image
+    image: ../../assets/vv-podcast-studio/old.png
+    alt: Old VV Podcast Studio website
+    caption: Previous implementation of the website using a web builder
 ---
 
 ## Project Overview
