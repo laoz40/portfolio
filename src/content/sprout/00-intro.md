@@ -9,7 +9,7 @@ tools:
   - User Testing
   - UI Design
   - Video Editing
-coverImage: ../../assets/sprout/cover.webp
+coverImage: ../../assets/sprout/cover.png
 altText: Sprout Cover Image (Photography Credit @josephgvideo)
 section:
   variant: featured
