@@ -5,12 +5,18 @@ type ProjectLink = {
 	href: string;
 	label: string;
 	fill: string;
+	target?: string;
+	rel?: string;
 };
 
 const { links, ariaLabel = "Project links" } = Astro.props as {
 	links: ProjectLink[];
 	ariaLabel?: string;
 };
+
+function isExternalHref(href: string): boolean {
+	return /^https?:\/\//.test(href);
+}
 ---
 
 <nav
@@ -21,6 +27,8 @@ const { links, ariaLabel = "Project links" } = Astro.props as {
 			<div class:list={["project-link-buttons__item", `project-link-buttons__item--${index + 1}`]}>
 				<ImperfectButton
 					href={link.href}
+					target={link.target ?? (isExternalHref(link.href) ? "_blank" : undefined)}
+					rel={link.rel ?? (isExternalHref(link.href) ? "noopener noreferrer" : undefined)}
 					fill={link.fill}>
 					{link.label}
 				</ImperfectButton>

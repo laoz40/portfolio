@@ -16,6 +16,8 @@ export type SectionLink = {
 	label: string;
 	href: string;
 	fill: string;
+	target?: string;
+	rel?: string;
 };
 
 export type SectionMedia =
