@@ -32,13 +32,13 @@ const aboutSections = await Promise.all(
 ---
 
 <DefaultLayout
-	title="About Leo Zhou | Full Stack Developer & UX Designer"
+	title="About Leo Zhou | Front End Engineer & UX Designer"
 	description="Learn about Leo Zhou's background in frontend development, UX design, and the process behind his work across web and interface design."
 	pathname="/about">
 	<section class="about-page">
 		<h1>A little bit about me</h1>
 		<article
-			class="mx-auto mt-6 grid w-full max-w-[78rem] gap-14 max-md:gap-10"
+			class="mx-auto mt-6 grid w-full max-w-312 gap-14 max-md:gap-10"
 			style="--text-measure: 65ch; --about-media-column-width: 22rem;">
 			{
 				aboutSections.map(({ id, title, Content, media }, index) => (
@@ -67,7 +67,7 @@ const aboutSections = await Promise.all(
 			}
 		</article>
 		<div
-			class="about-actions-reveal mx-auto mt-10 flex w-full max-w-[78rem] flex-col items-center gap-4 text-center">
+			class="about-actions-reveal mx-auto mt-10 flex w-full max-w-312 flex-col items-center gap-4 text-center">
 			<p class="about-actions-note about-actions-note-reveal">
 				Thanks for reading all of this! (if you did)
 			</p>
