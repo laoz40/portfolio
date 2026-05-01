@@ -12,7 +12,7 @@ section:
 
 ### What improvements were made to the website?
 
-#### Automation & Operational Efficiency
+#### Automation & Efficiency
 
 - Developed custom booking form that accepts payments through Stripe
 - Automated calendar event creation using Google Calendar API
