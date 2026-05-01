@@ -55,6 +55,5 @@ When implementing changes:
 2. Run relevant checks:
    - `pnpm prettier --check .`
    - `pnpm astro check` for Astro/TS-impacting edits
-   - `pnpm build` for integration confidence
 3. If checks fail, fix before finishing
 4. If you add tests/tooling scripts, update this file
