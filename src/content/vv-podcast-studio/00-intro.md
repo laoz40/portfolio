@@ -1,13 +1,17 @@
 ---
-title: VV Podcast Studio Website Overhaul
-project: Business Website Redesign
-description: I rebuilt the company website from scratch, moving it off a basic web builder to a fully custom solution. I reduced a lot of manual work for the business through automations and made large improvements to the UX.
+title: VV Podcast Studio
+project: Website Rebuild
+description: Rebuilt company website, migrating from web builder to fully custom solution. Reduced significant manual work for the business through automations and made large improvements to the UX.
 tools:
-  - Astro
-  - Svelte
-  - JavaScript
+  - Tanstack Start
+  - React
+  - TypeScript
+  - Convex
+  - Stripe
+  - Google Calendar API
+  - Resend
+  - Framer Motion
   - Tailwind
-  - Motion
   - Figma
 coverImage: ../../assets/vv-podcast-studio/cover.webp
 altText: VV Podcast Studio website cover image
@@ -29,4 +33,4 @@ section:
 
 # VV Podcast Studio Website Overhaul
 
-This website is still in development.
+Website content is still being developed.
