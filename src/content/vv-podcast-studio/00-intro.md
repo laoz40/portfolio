@@ -8,11 +8,9 @@ tools:
   - TypeScript
   - Convex
   - Stripe
-  - Google Calendar API
   - Resend
+  - Google Calendar API
   - Framer Motion
-  - Tailwind
-  - Figma
 coverImage: ../../assets/vv-podcast-studio/cover.webp
 altText: VV Podcast Studio website cover image
 section:

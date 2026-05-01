@@ -18,13 +18,13 @@ type ProjectFrontmatter = {
 	coverImage?: ImageMetadata;
 };
 
-const horusEntry = await getEntry("horus", "00-intro");
+const vvPodcastStudioEntry = await getEntry("vvPodcastStudio", "00-intro");
 
-if (!horusEntry) {
-	throw new Error("Missing intro entry for: horus");
+if (!vvPodcastStudioEntry) {
+	throw new Error("Missing intro entry for: vv-podcast-studio");
 }
 
-const horus = horusEntry.data as ProjectFrontmatter;
+const vvPodcastStudio = vvPodcastStudioEntry.data as ProjectFrontmatter;
 const heroTitle = "Welcome to Leo's Website!";
 const heroTitleLines = ["Welcome to", "Leo's Website!"];
 ---
@@ -91,17 +91,17 @@ const heroTitleLines = ["Welcome to", "Leo's Website!"];
 		<h3>Featured Work</h3>
 		<a
 			class="project-card featured-project-card-reveal"
-			href="/projects/horus"
-			aria-label={`Open ${horus.title} project page`}>
+			href="/projects/vv-podcast-studio"
+			aria-label={`Open ${vvPodcastStudio.title} project page`}>
 			<div class="project-frame">
 				<div
 					class="preview"
 					aria-hidden="true">
 					{
-						horus.coverImage ? (
+						vvPodcastStudio.coverImage ? (
 							<Image
 								class="preview-image"
-								src={horus.coverImage}
+								src={vvPodcastStudio.coverImage}
 								alt=""
 								loading="eager"
 								fetchpriority="high"
@@ -117,15 +117,15 @@ const heroTitleLines = ["Welcome to", "Leo's Website!"];
 								tag="h4"
 								variant="yellow"
 								class="project-title-highlight">
-								{horus.title}
+								{vvPodcastStudio.title}
 							</HighlightText>
-							<span class="project-subtitle">{horus.project}</span>
+							<span class="project-subtitle">{vvPodcastStudio.project}</span>
 						</div>
-						<p>{horus.description}</p>
+						<p>{vvPodcastStudio.description}</p>
 					</div>
 					<ToolBadges
-						tools={horus.tools ?? []}
-						projectTitle={horus.title}
+						tools={vvPodcastStudio.tools ?? []}
+						projectTitle={vvPodcastStudio.title}
 					/>
 				</div>
 			</div>
@@ -331,9 +331,23 @@ const heroTitleLines = ["Welcome to", "Leo's Website!"];
 			text-wrap: balance;
 		}
 
+		.project-meta :global(.tool-badges) {
+			gap: 0.3rem;
+			padding-top: 0.8rem;
+		}
+
+		.project-meta :global(.tool-badge-shape) {
+			padding: 0.1rem 0.45rem;
+			font-size: 0.95rem;
+		}
+
 		.project-frame {
 			min-height: auto;
 			transform: none;
+		}
+
+		.preview {
+			min-height: auto;
 		}
 
 		.project-card:hover .project-frame,

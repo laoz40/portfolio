@@ -1,7 +1,7 @@
 ---
 title: Horus
-project: Full Stack Workout Tracker Web App
-description: I created a full stack mobile web app to help people track their workouts. Built using React, Next.js and Convex.
+project: Full Stack Web App
+description: Built a full stack mobile web app to track my gym workouts. I use it almost every day.
 tools:
   - Next.js
   - React
