@@ -11,7 +11,7 @@ tools:
   - Resend
   - Google Calendar API
   - Framer Motion
-coverImage: ../../assets/vv-podcast-studio/cover.webp
+coverImage: ../../assets/vv-podcast-studio/cover.png
 altText: VV Podcast Studio website cover image
 section:
   variant: featured
@@ -25,7 +25,7 @@ section:
   ariaLabel: VV Podcast Studio website project links
   media:
     type: image
-    image: ../../assets/vv-podcast-studio/cover.webp
+    image: ../../assets/vv-podcast-studio/cover.png
     alt: VV Podcast Studio website preview
 ---
 
