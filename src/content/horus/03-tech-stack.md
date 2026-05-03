@@ -3,7 +3,7 @@ section:
   variant: media
   media:
     type: image
-    image: ../../assets/horus/history.webp
+    image: ../../assets/horus/history.png
     alt: Workout history screen mockup
 ---
 

@@ -10,7 +10,7 @@ tools:
   - Better Auth
   - Zod
   - Tailwind
-coverImage: ../../assets/horus/cover.webp
+coverImage: ../../assets/horus/cover.png
 altText: Horus Cover Image
 section:
   variant: featured
@@ -24,7 +24,7 @@ section:
   ariaLabel: Horus project links
   media:
     type: image
-    image: ../../assets/horus/cover.webp
+    image: ../../assets/horus/cover.png
     alt: Horus workout tracker interface preview
 ---
 

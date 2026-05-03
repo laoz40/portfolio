@@ -3,7 +3,7 @@ section:
   variant: media
   media:
     type: image
-    image: ../../assets/horus/light.webp
+    image: ../../assets/horus/light.png
     alt: Workout form screen mockup
 ---
 

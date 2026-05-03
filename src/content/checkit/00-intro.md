@@ -8,13 +8,13 @@ tools:
   - Prototyping
   - User Testing
   - UI Design
-coverImage: ../../assets/checkit/cover.webp
+coverImage: ../../assets/checkit/cover.png
 altText: Check It Cover Image
 section:
   variant: featured
   media:
     type: image
-    image: ../../assets/checkit/featured.webp
+    image: ../../assets/checkit/featured.png
     alt: Check It mobile app interface preview
 ---
 
