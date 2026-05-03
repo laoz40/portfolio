@@ -190,7 +190,8 @@ h6 {
 
 .paper-frame {
 	background: var(--paper-frame-background, var(--color-media-fallback));
-	border: 8px solid var(--color-surface-page);
+	border: var(--paper-frame-border-width, 8px) solid
+		var(--paper-frame-border-color, var(--color-surface-page));
 	box-shadow: var(--paper-frame-shadow, var(--shadow-paper-medium));
 	overflow: hidden;
 }

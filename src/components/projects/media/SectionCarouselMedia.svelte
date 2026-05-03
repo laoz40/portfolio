@@ -233,6 +233,11 @@
 </div>
 
 <style>
+	.section-carousel-frame {
+		--paper-frame-border-color: var(--color-surface-paper);
+		--paper-frame-shadow: 0 0 0 0.18rem rgb(31 30 25 / 0.08), var(--shadow-paper-medium);
+	}
+
 	.section-carousel-track {
 		transform: translateX(calc(var(--carousel-index, 0) * -100%));
 		transition: transform 260ms ease;

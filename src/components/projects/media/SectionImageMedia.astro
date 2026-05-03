@@ -28,6 +28,8 @@ const { image, alt, caption } = Astro.props as {
 
 <style>
 	.section-media-frame {
+		--paper-frame-border-color: var(--color-surface-paper);
+		--paper-frame-shadow: 0 0 0 0.18rem rgb(31 30 25 / 0.08), var(--shadow-paper-medium);
 		width: min(100%, var(--section-media-max-width));
 	}
 
