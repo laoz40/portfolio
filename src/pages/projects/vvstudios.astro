@@ -2,23 +2,23 @@
 import { createContentSection } from "../../components/projects/caseStudySections";
 import DefaultLayout from "../../layouts/DefaultLayout.astro";
 import ProjectCaseStudy from "../../components/projects/ProjectCaseStudy.astro";
-import Intro from "../../content/vv-podcast-studio/00-intro.md";
-import ProjectOverview from "../../content/vv-podcast-studio/01-project-overview.md";
-import KeyImprovements from "../../content/vv-podcast-studio/02-key-improvements.md";
+import Intro from "../../content/vvstudios/00-intro.md";
+import ProjectOverview from "../../content/vvstudios/01-project-overview.md";
+import KeyImprovements from "../../content/vvstudios/02-key-improvements.md";
 
 const [introResult, projectOverviewResult, keyImprovementsResult] = await Promise.all([
 	createContentSection({
-		collection: "vvPodcastStudio",
+		collection: "vvstudios",
 		entryId: "00-intro",
 		Component: Intro,
 	}),
 	createContentSection({
-		collection: "vvPodcastStudio",
+		collection: "vvstudios",
 		entryId: "01-project-overview",
 		Component: ProjectOverview,
 	}),
 	createContentSection({
-		collection: "vvPodcastStudio",
+		collection: "vvstudios",
 		entryId: "02-key-improvements",
 		Component: KeyImprovements,
 	}),
@@ -32,9 +32,9 @@ const sections = [introSection, projectOverviewSection, keyImprovementsSection];
 ---
 
 <DefaultLayout
-	title="VV Podcast Studio Website Redesign Case Study | Leo Zhou"
-	description="Review Leo Zhou's VV Podcast Studio case study covering a custom website rebuild, UX improvements, and workflow automations for the business."
-	pathname="/projects/vv-podcast-studio"
+	title="VV Studios Website Rebuild Case Study | Leo Zhou"
+	description="Review Leo Zhou's VV Studios case study covering a custom website rebuild, UX improvements, and workflow automations for the business."
+	pathname="/projects/vvstudios"
 	ogType="article"
 	ogImage={introFrontmatter.coverImage}
 	ogImageAlt={introFrontmatter.altText ?? introFrontmatter.section?.media?.alt}>

@@ -3,8 +3,8 @@ section:
   variant: media
   media:
     type: image
-    image: ../../assets/vv-podcast-studio/booking.png
-    alt: VV Podcast Studio website booking form
+    image: ../../assets/vvstudios/booking.png
+    alt: VV Studios website booking form
     caption: New appointment booking form redesign
 ---
 

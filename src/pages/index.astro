@@ -18,13 +18,13 @@ type ProjectFrontmatter = {
 	coverImage?: ImageMetadata;
 };
 
-const vvPodcastStudioEntry = await getEntry("vvPodcastStudio", "00-intro");
+const vvstudiosEntry = await getEntry("vvstudios", "00-intro");
 
-if (!vvPodcastStudioEntry) {
-	throw new Error("Missing intro entry for: vv-podcast-studio");
+if (!vvstudiosEntry) {
+	throw new Error("Missing intro entry for: vvstudios");
 }
 
-const vvPodcastStudio = vvPodcastStudioEntry.data as ProjectFrontmatter;
+const vvstudios = vvstudiosEntry.data as ProjectFrontmatter;
 const heroTitle = "Welcome to Leo's Website!";
 const heroTitleLines = ["Welcome to", "Leo's Website!"];
 ---
@@ -91,17 +91,17 @@ const heroTitleLines = ["Welcome to", "Leo's Website!"];
 		<h3>Featured Work</h3>
 		<a
 			class="project-card featured-project-card-reveal"
-			href="/projects/vv-podcast-studio"
-			aria-label={`Open ${vvPodcastStudio.title} project page`}>
+			href="/projects/vvstudios"
+			aria-label={`Open ${vvstudios.title} project page`}>
 			<div class="project-frame">
 				<div
 					class="preview"
 					aria-hidden="true">
 					{
-						vvPodcastStudio.coverImage ? (
+						vvstudios.coverImage ? (
 							<Image
 								class="preview-image"
-								src={vvPodcastStudio.coverImage}
+								src={vvstudios.coverImage}
 								alt=""
 								loading="eager"
 								fetchpriority="high"
@@ -117,15 +117,15 @@ const heroTitleLines = ["Welcome to", "Leo's Website!"];
 								tag="h4"
 								variant="yellow"
 								class="project-title-highlight">
-								{vvPodcastStudio.title}
+								{vvstudios.title}
 							</HighlightText>
-							<span class="project-subtitle">{vvPodcastStudio.project}</span>
+							<span class="project-subtitle">{vvstudios.project}</span>
 						</div>
-						<p>{vvPodcastStudio.description}</p>
+						<p>{vvstudios.description}</p>
 					</div>
 					<ToolBadges
-						tools={vvPodcastStudio.tools ?? []}
-						projectTitle={vvPodcastStudio.title}
+						tools={vvstudios.tools ?? []}
+						projectTitle={vvstudios.title}
 					/>
 				</div>
 			</div>

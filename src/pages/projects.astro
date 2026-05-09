@@ -16,12 +16,12 @@ type ProjectFrontmatter = {
 	altText?: string;
 };
 
-const projectSlugs = ["horus", "vv-podcast-studio", "sprout", "checkit"] as const;
-type ProjectCollection = "horus" | "vvPodcastStudio" | "sprout" | "checkit";
+const projectSlugs = ["horus", "vvstudios", "sprout", "checkit"] as const;
+type ProjectCollection = "horus" | "vvstudios" | "sprout" | "checkit";
 
 const projectCollections = {
 	horus: "horus",
-	"vv-podcast-studio": "vvPodcastStudio",
+	"vvstudios": "vvstudios",
 	sprout: "sprout",
 	checkit: "checkit",
 } as const satisfies Record<(typeof projectSlugs)[number], ProjectCollection>;

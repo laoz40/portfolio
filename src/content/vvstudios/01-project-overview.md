@@ -3,14 +3,14 @@ section:
   variant: media
   media:
     type: image
-    image: ../../assets/vv-podcast-studio/old.png
-    alt: Old VV Podcast Studio website
+    image: ../../assets/vvstudios/old.png
+    alt: Old VV Studios website
     caption: Previous implementation of the website using a web builder
 ---
 
 ## Project Overview
 
-### Why was the VV Podcast Studio website rebuilt?
+### Why was the VV Studios website rebuilt?
 
 I rebuilt the company website from scratch. The previous website used a web
 builder, which made it difficult to maintain and customise.

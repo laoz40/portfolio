@@ -1,5 +1,5 @@
 ---
-title: VV Podcast Studio
+title: VV Studios
 project: Website Rebuild
 description: Rebuilt company website, migrating from web builder to fully custom solution. Reduced significant manual work for the business through automations and made large improvements to the UX.
 tools:
@@ -11,8 +11,8 @@ tools:
   - Resend
   - Google Calendar API
   - Framer Motion
-coverImage: ../../assets/vv-podcast-studio/cover.png
-altText: VV Podcast Studio website cover image
+coverImage: ../../assets/vvstudios/cover.png
+altText: VV Studios website cover image
 section:
   variant: featured
   links:
@@ -22,13 +22,13 @@ section:
     - label: GitHub
       href: https://github.com/laoz40/vvstudios
       fill: var(--color-home-button-yellow)
-  ariaLabel: VV Podcast Studio website project links
+  ariaLabel: VV Studios website project links
   media:
     type: image
-    image: ../../assets/vv-podcast-studio/cover.png
-    alt: VV Podcast Studio website preview
+    image: ../../assets/vvstudios/cover.png
+    alt: VV Studios website preview
 ---
 
-# VV Podcast Studio Website Overhaul
+# VV Studios Booking Overhaul
 
 Website content is still being developed.
