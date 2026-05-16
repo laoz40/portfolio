@@ -53,87 +53,30 @@ function runProjectsAnimations(): void {
 		cta.style.willChange = "transform, opacity";
 	}
 
-	if (!("IntersectionObserver" in window)) {
-		cards.forEach((card) => {
-			card.style.transform = "translateY(0)";
-			card.style.opacity = "1";
+	cards.forEach((card, index) => {
+		void animate(
+			card,
+			{
+				transform: ["translateY(-18px)", "translateY(0px)"],
+				opacity: [0, 1],
+			},
+			{ duration: timings.cardDuration, ease: "easeOut", delay: index * timings.cardStagger },
+		).finished.then(() => {
 			card.style.willChange = "";
 		});
-		if (cta instanceof HTMLElement) {
-			cta.style.transform = "translateY(0)";
-			cta.style.opacity = "1";
-			cta.style.willChange = "";
-		}
-		return;
-	}
-
-	const cardObserver = new IntersectionObserver(
-		(entries, observer) => {
-			const enteringCards = entries
-				.filter(
-					(entry) =>
-						entry.isIntersecting &&
-						entry.intersectionRatio >= 0.2 &&
-						entry.target instanceof HTMLElement,
-				)
-				.map((entry) => entry.target)
-				.filter((target): target is HTMLElement => target instanceof HTMLElement)
-				.sort((a, b) => cards.indexOf(a) - cards.indexOf(b));
-
-			enteringCards.forEach((card, index) => {
-				const delay = enteringCards.length > 1 ? index * timings.cardStagger : 0;
-
-				void animate(
-					card,
-					{
-						transform: ["translateY(-18px)", "translateY(0px)"],
-						opacity: [0, 1],
-					},
-					{ duration: timings.cardDuration, ease: "easeOut", delay },
-				).finished.then(() => {
-					card.style.willChange = "";
-				});
-
-				observer.unobserve(card);
-			});
-		},
-		{ threshold: [0.2] },
-	);
-
-	cards.forEach((card) => {
-		cardObserver.observe(card);
 	});
 
 	if (cta instanceof HTMLElement) {
-		const ctaObserver = new IntersectionObserver(
-			(entries, observer) => {
-				entries.forEach((entry) => {
-					if (!entry.isIntersecting || entry.intersectionRatio < 0.6) {
-						return;
-					}
-					const target = entry.target;
-					if (!(target instanceof HTMLElement)) {
-						return;
-					}
-
-					void animate(
-						target,
-						{
-							transform: ["translateY(-14px)", "translateY(0px)"],
-							opacity: [0, 1],
-						},
-						{ duration: timings.ctaDuration, ease: "easeIn" },
-					).finished.then(() => {
-						target.style.willChange = "";
-					});
-
-					observer.unobserve(target);
-				});
+		void animate(
+			cta,
+			{
+				transform: ["translateY(-14px)", "translateY(0px)"],
+				opacity: [0, 1],
 			},
-			{ threshold: [0.6] },
-		);
-
-		ctaObserver.observe(cta);
+			{ duration: timings.ctaDuration, ease: "easeIn", delay: cards.length * timings.cardStagger },
+		).finished.then(() => {
+			cta.style.willChange = "";
+		});
 	}
 }
 
