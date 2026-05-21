@@ -31,4 +31,3 @@ section:
 
 # VV Studios Booking Overhaul
 
-_Website content is still being developed._
