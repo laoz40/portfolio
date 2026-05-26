@@ -1,6 +1,6 @@
 ---
 title: VV Studios
-project: Website Rebuild
+project: Custom Booking System
 description: Rebuilt company website, migrating from web builder to fully custom solution. Reduced significant manual work for the business through automations and made large improvements to the UX.
 tools:
   - Tanstack Start
@@ -29,5 +29,5 @@ section:
     alt: VV Studios website preview
 ---
 
-# VV Studios Booking Overhaul
+# VV Studios Booking System
 
