@@ -4,9 +4,11 @@ import DefaultLayout from "../../layouts/DefaultLayout.astro";
 import ProjectCaseStudy from "../../components/projects/ProjectCaseStudy.astro";
 import Intro from "../../content/vvstudios/00-intro.md";
 import ProjectOverview from "../../content/vvstudios/01-project-overview.md";
-import KeyImprovements from "../../content/vvstudios/02-key-improvements.md";
+import ProjectShowcase from "../../content/vvstudios/02-project-showcase.md";
+import PreviousWebsite from "../../content/vvstudios/03-previous-website.md";
+import KeyImprovements from "../../content/vvstudios/04-key-improvements.md";
 
-const [introResult, projectOverviewResult, keyImprovementsResult] = await Promise.all([
+const [introResult, projectOverviewResult, projectShowcaseResult, previousWebsiteResult, keyImprovementsResult] = await Promise.all([
 	createContentSection({
 		collection: "vvstudios",
 		entryId: "00-intro",
@@ -19,16 +21,34 @@ const [introResult, projectOverviewResult, keyImprovementsResult] = await Promis
 	}),
 	createContentSection({
 		collection: "vvstudios",
-		entryId: "02-key-improvements",
+		entryId: "02-project-showcase",
+		Component: ProjectShowcase,
+	}),
+	createContentSection({
+		collection: "vvstudios",
+		entryId: "03-previous-website",
+		Component: PreviousWebsite,
+	}),
+	createContentSection({
+		collection: "vvstudios",
+		entryId: "04-key-improvements",
 		Component: KeyImprovements,
 	}),
 ]);
 
 const { frontmatter: introFrontmatter, section: introSection } = introResult;
 const { section: projectOverviewSection } = projectOverviewResult;
+const { section: projectShowcaseSection } = projectShowcaseResult;
+const { section: previousWebsiteSection } = previousWebsiteResult;
 const { section: keyImprovementsSection } = keyImprovementsResult;
 
-const sections = [introSection, projectOverviewSection, keyImprovementsSection];
+const sections = [
+	introSection,
+	projectOverviewSection,
+	projectShowcaseSection,
+	previousWebsiteSection,
+	keyImprovementsSection,
+];
 ---
 
 <DefaultLayout

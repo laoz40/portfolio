@@ -44,6 +44,9 @@ export type SectionMedia =
 	  }
 	| {
 			type: "carousel";
+			imageFit?: "cover" | "contain";
+			aspectRatio?: "4:3" | "16:9";
+			background?: "default" | "black";
 			items: CarouselItem[];
 	  };
 

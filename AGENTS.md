@@ -2,9 +2,10 @@
 
 Astro project with some Svelte components. Motion for complex animations.
 
-## Build/Lint/Test Commands
+## Lint/Test Commands
 
 Use pnpm.
+Do not run build
 
 ## Code Style Guidelines
 

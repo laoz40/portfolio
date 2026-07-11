@@ -9,6 +9,9 @@
 	};
 
 	export let items: CarouselItem[] = [];
+	export let imageFit: "cover" | "contain" = "cover";
+	export let aspectRatio: "4:3" | "16:9" = "4:3";
+	export let background: "default" | "black" = "default";
 
 	const swipeThreshold = 48;
 	const pointerActivationThreshold = 12;
@@ -155,7 +158,7 @@
 
 <div
 	class="section-carousel grid w-[min(100%,57.4vw,var(--section-carousel-max-width))] min-w-0 gap-3 self-center max-[1450px]:w-full max-sm:w-full"
-	style={`--section-carousel-max-width: ${carouselMaxWidth}px; --carousel-index: ${currentIndex};`}>
+	style={`--section-carousel-max-width: ${carouselMaxWidth}px; --carousel-index: ${currentIndex}; --section-carousel-image-fit: ${imageFit}; --section-carousel-aspect-ratio: ${aspectRatio.replace(":", " / ")}; --section-carousel-background: ${background === "black" ? "#000" : "var(--color-media-fallback)"};`}>
 	<div
 		class="section-carousel-frame taped-frame relative min-w-0 pt-[calc(var(--size-project-tape-height)*0.5)]"
 		style="--tape-angle: calc(var(--section-media-tilt, 0deg) + 1.2deg);">
@@ -248,14 +251,15 @@
 	}
 
 	.section-carousel-slide {
-		aspect-ratio: 4 / 3;
+		aspect-ratio: var(--section-carousel-aspect-ratio, 4 / 3);
+		background: var(--section-carousel-background, var(--color-media-fallback)) !important;
 	}
 
 	.section-carousel-image {
 		display: block;
 		width: 100%;
 		height: 100%;
-		object-fit: cover;
+		object-fit: var(--section-carousel-image-fit, cover);
 	}
 
 	.section-carousel-media::before {
@@ -382,7 +386,7 @@
 		}
 
 		.section-carousel-media {
-			aspect-ratio: 4 / 3;
+			aspect-ratio: var(--section-carousel-aspect-ratio, 4 / 3);
 		}
 
 		.section-carousel-media::before {

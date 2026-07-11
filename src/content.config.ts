@@ -31,6 +31,9 @@ const sectionMediaSchema = ({ image }) =>
 		}),
 		z.object({
 			type: z.literal("carousel"),
+			imageFit: z.enum(["cover", "contain"]).optional(),
+			aspectRatio: z.enum(["4:3", "16:9"]).optional(),
+			background: z.enum(["default", "black"]).optional(),
 			items: z.array(
 				z.object({
 					image: image(),

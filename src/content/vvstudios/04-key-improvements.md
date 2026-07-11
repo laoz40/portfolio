@@ -3,9 +3,8 @@ section:
   variant: media
   media:
     type: image
-    image: ../../assets/vvstudios/booking.png
-    alt: VV Studios website booking form
-    caption: New appointment booking form redesign
+    image: ../../assets/vvstudios/gallery.png
+    alt: VV Studios gallery page featuring studio photography and video work
 ---
 
 ## Key Improvements
