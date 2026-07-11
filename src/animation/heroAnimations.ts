@@ -9,8 +9,8 @@ const timings = {
 	actionsDuration: 0.3,
 	heroImagesDuration: 0.8,
 	footerNoteDuration: 0.3,
-	scrollArrowDuration: 0.3,
-	featuredCardDuration: 0.35,
+	featuredCardDuration: 0.45,
+	featuredCardFadeDuration: 0.12,
 	featuredCtaDuration: 0.3,
 };
 
@@ -40,7 +40,6 @@ function runHeroTitleAnimation(): void {
 		(cluster): cluster is HTMLElement => cluster instanceof HTMLElement,
 	);
 	const footerNote = hero.querySelector(".hero-note");
-	const scrollArrow = hero.querySelector(".scroll-down");
 	const featuredCard = document.querySelector(".featured-project-card-reveal");
 	const featuredCta = document.querySelector(".featured-projects-cta-reveal");
 
@@ -66,9 +65,6 @@ function runHeroTitleAnimation(): void {
 		});
 		if (footerNote instanceof HTMLElement) {
 			footerNote.style.clipPath = "inset(0 0 0 0)";
-		}
-		if (scrollArrow instanceof HTMLElement) {
-			scrollArrow.style.clipPath = "inset(0 0 0 0)";
 		}
 		if (featuredCard instanceof HTMLElement) {
 			featuredCard.style.transform = "translateY(0)";
@@ -106,12 +102,8 @@ function runHeroTitleAnimation(): void {
 		footerNote.style.clipPath = "inset(0 100% 0 0)";
 		footerNote.style.willChange = "clip-path";
 	}
-	if (scrollArrow instanceof HTMLElement) {
-		scrollArrow.style.clipPath = "inset(0 0 100% 0)";
-		scrollArrow.style.willChange = "clip-path";
-	}
 	if (featuredCard instanceof HTMLElement) {
-		featuredCard.style.transform = "translateY(-18px)";
+		featuredCard.style.transform = "translateY(16rem)";
 		featuredCard.style.opacity = "0";
 		featuredCard.style.willChange = "transform, opacity";
 	}
@@ -122,49 +114,12 @@ function runHeroTitleAnimation(): void {
 	}
 
 	if (!("IntersectionObserver" in window)) {
-		if (featuredCard instanceof HTMLElement) {
-			featuredCard.style.transform = "translateY(0)";
-			featuredCard.style.opacity = "1";
-			featuredCard.style.willChange = "";
-		}
 		if (featuredCta instanceof HTMLElement) {
 			featuredCta.style.transform = "translateY(0)";
 			featuredCta.style.opacity = "1";
 			featuredCta.style.willChange = "";
 		}
 	} else {
-		if (featuredCard instanceof HTMLElement) {
-			const featuredCardObserver = new IntersectionObserver(
-				(entries, observer) => {
-					entries.forEach((entry) => {
-						if (!entry.isIntersecting || entry.intersectionRatio < 0.2) {
-							return;
-						}
-						const target = entry.target;
-						if (!(target instanceof HTMLElement)) {
-							return;
-						}
-
-						void animate(
-							target,
-							{
-								transform: ["translateY(-18px)", "translateY(0px)"],
-								opacity: [0, 1],
-							},
-							{ duration: timings.featuredCardDuration, ease: "easeIn" },
-						).finished.then(() => {
-							target.style.willChange = "";
-						});
-
-						observer.unobserve(target);
-					});
-				},
-				{ threshold: [0.2] },
-			);
-
-			featuredCardObserver.observe(featuredCard);
-		}
-
 		if (featuredCta instanceof HTMLElement) {
 			const featuredCtaObserver = new IntersectionObserver(
 				(entries, observer) => {
@@ -242,6 +197,27 @@ function runHeroTitleAnimation(): void {
 		(subtitleLines.length ? timings.subtitleDuration : 0) +
 		timings.afterSubtitleDelay;
 
+	const featuredCardDelay = actionsDelay + timings.heroImagesDuration;
+
+	if (featuredCard instanceof HTMLElement) {
+		void animate(
+			featuredCard,
+			{ transform: ["translateY(16rem)", "translateY(0px)"] },
+			{
+				duration: timings.featuredCardDuration,
+				ease: "easeOut",
+				delay: featuredCardDelay,
+			},
+		).finished.then(() => {
+			featuredCard.style.willChange = "";
+		});
+		void animate(
+			featuredCard,
+			{ opacity: [0, 1] },
+			{ duration: timings.featuredCardFadeDuration, delay: featuredCardDelay },
+		);
+	}
+
 	// Fade/slide actions in last.
 	if (actions instanceof HTMLElement) {
 		animate(
@@ -271,16 +247,6 @@ function runHeroTitleAnimation(): void {
 		);
 	}
 
-	if (scrollArrow instanceof HTMLElement) {
-		footerAnimations.push(
-			animate(
-				scrollArrow,
-				{ clipPath: ["inset(0 0 100% 0)", "inset(0 0 0 0)"] },
-				{ duration: timings.scrollArrowDuration, ease: "easeOut", delay: actionsDelay },
-			).finished,
-		);
-	}
-
 	// Clear will-change when title animation completes.
 	void lineControls.finished.then(() => {
 		titleLines.forEach((line) => {
@@ -298,9 +264,6 @@ function runHeroTitleAnimation(): void {
 		void Promise.all(footerAnimations).then(() => {
 			if (footerNote instanceof HTMLElement) {
 				footerNote.style.willChange = "";
-			}
-			if (scrollArrow instanceof HTMLElement) {
-				scrollArrow.style.willChange = "";
 			}
 		});
 	}
