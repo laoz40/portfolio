@@ -1,7 +1,7 @@
 ---
 title: Horus
 project: Full Stack Web App
-description: Built a full stack mobile web app to track my gym workouts. I use it almost every day.
+description: I made an app to track my gym workouts. I use it almost every day to monitor my progress and apply progressive overload (so I can get massive).
 tools:
   - Next.js
   - React

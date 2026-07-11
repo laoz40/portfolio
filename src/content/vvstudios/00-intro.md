@@ -1,7 +1,7 @@
 ---
 title: VV Studios
 project: Custom Booking System
-description: Rebuilt company website, migrating from web builder to fully custom solution. Reduced significant manual work for the business through automations and made large improvements to the UX.
+description: I rebuilt the company website from scratch. Created a custom booking system, and an internal dashboard to allow admins to track bookings, manage deliverables and easily communicate with clients.
 tools:
   - Tanstack Start
   - React
