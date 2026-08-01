@@ -187,11 +187,6 @@ const heroTitleLines = ["Welcome to", "Leo's Website!"];
 		text-decoration: none;
 	}
 
-	.featured-project-card-reveal {
-		transform: translateY(16rem);
-		opacity: 0;
-	}
-
 	.project-frame {
 		position: relative;
 		display: flex;
@@ -295,13 +290,6 @@ const heroTitleLines = ["Welcome to", "Leo's Website!"];
 		color: var(--color-text-handwriting);
 		font-size: var(--type-hand-size-body);
 		text-align: center;
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.featured-project-card-reveal {
-			transform: none;
-			opacity: 1;
-		}
 	}
 
 	@media (max-width: 640px) {
