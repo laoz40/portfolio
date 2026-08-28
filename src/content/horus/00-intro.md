@@ -16,7 +16,7 @@ section:
   variant: featured
   links:
     - label: Web App Link
-      href: https://horus-workout.vercel.app
+      href: https://horus.leozhou.cc
       fill: var(--color-home-button-sky)
     - label: GitHub
       href: https://github.com/laoz40/Horus
