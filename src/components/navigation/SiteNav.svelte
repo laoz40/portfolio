@@ -115,7 +115,7 @@
 		id="site-nav-links"
 		class="nav-links max-[820px]:bg-page max-[820px]:border-border-soft-token min-w-0 flex-wrap items-center justify-end gap-4 max-[820px]:order-3 max-[820px]:hidden max-[820px]:w-full max-[820px]:flex-col max-[820px]:items-start max-[820px]:justify-start max-[820px]:gap-[0.1rem] max-[820px]:border max-[820px]:border-solid max-[820px]:px-0 max-[820px]:pt-[0.35rem] max-[820px]:pb-2 min-[821px]:flex"
 		class:is-open={isMenuOpen}>
-		{#each links as link}
+		{#each links as link (link.href)}
 			<a
 				class="nav-link inline-block no-underline max-[820px]:w-full"
 				on:click={closeMenu}
