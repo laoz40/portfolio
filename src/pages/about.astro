@@ -1,12 +1,12 @@
 ---
 import { getCollection, render } from "astro:content";
-import type { CollectionEntry } from "astro:content";
 import AboutSectionMedia from "../components/about/AboutSectionMedia.astro";
 import ImperfectButton from "../components/home/ImperfectButton.astro";
 import DefaultLayout from "../layouts/DefaultLayout.astro";
+import type { ContentFrontmatter } from "../components/projects/caseStudySections";
 
 type AboutImageMedia = Extract<
-	NonNullable<CollectionEntry<"about">["data"]["section"]>["media"],
+	NonNullable<ContentFrontmatter["section"]>["media"],
 	{ type: "image" }
 >;
 
@@ -15,7 +15,8 @@ const aboutEntries = (await getCollection("about")).sort((a, b) => a.id.localeCo
 const aboutSections = await Promise.all(
 	aboutEntries.map(async (entry) => {
 		const { Content } = await render(entry);
-		const media = entry.data.section?.media;
+		const data = entry.data as ContentFrontmatter;
+		const media = data.section?.media;
 
 		if (media && media.type !== "image") {
 			throw new Error(`About entry ${entry.id} uses unsupported media type: ${media.type}`);
@@ -23,7 +24,7 @@ const aboutSections = await Promise.all(
 
 		return {
 			id: entry.id,
-			title: entry.data.title ?? entry.id,
+			title: data.title ?? entry.id,
 			Content,
 			media: media as AboutImageMedia | undefined,
 		};

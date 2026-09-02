@@ -1,6 +1,9 @@
 ---
 import DefaultLayout from "../../layouts/DefaultLayout.astro";
-import { createContentSection } from "../../components/projects/caseStudySections";
+import {
+	createContentSection,
+	getImageMediaAlt,
+} from "../../components/projects/caseStudySections";
 import ProjectCaseStudy from "../../components/projects/ProjectCaseStudy.astro";
 import Intro from "../../content/sprout/00-intro.md";
 import ProjectOverview from "../../content/sprout/01-project-overview.md";
@@ -126,6 +129,6 @@ const sections = [
 	pathname="/projects/sprout"
 	ogType="article"
 	ogImage={introFrontmatter.coverImage}
-	ogImageAlt={introFrontmatter.altText ?? introFrontmatter.section?.media?.alt}>
+	ogImageAlt={introFrontmatter.altText ?? getImageMediaAlt(introFrontmatter.section?.media)}>
 	<ProjectCaseStudy sections={sections} />
 </DefaultLayout>

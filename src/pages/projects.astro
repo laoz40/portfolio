@@ -21,7 +21,7 @@ type ProjectCollection = "horus" | "vvstudios" | "sprout" | "checkit";
 
 const projectCollections = {
 	horus: "horus",
-	"vvstudios": "vvstudios",
+	vvstudios: "vvstudios",
 	sprout: "sprout",
 	checkit: "checkit",
 } as const satisfies Record<(typeof projectSlugs)[number], ProjectCollection>;
@@ -68,7 +68,7 @@ const projects: Array<{
 									<Image
 										class="preview-image"
 										src={frontmatter.coverImage}
-										alt={frontmatter.altText}
+										alt={frontmatter.altText ?? ""}
 										loading="lazy"
 										decoding="async"
 									/>
