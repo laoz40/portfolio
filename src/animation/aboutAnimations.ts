@@ -1,4 +1,5 @@
 import { animate } from "motion";
+import { prefersReducedMotion } from "./motionPreferences";
 
 const timings = {
 	thankYouDuration: 0.3,
@@ -25,7 +26,7 @@ function runAboutActionsAnimation(): void {
 
 	aboutPage.dataset.animated = "true";
 
-	if (window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches) {
+	if (prefersReducedMotion()) {
 		thankYou.style.clipPath = "inset(0 0 0 0)";
 		cta.style.opacity = "1";
 		cta.style.transform = "translateY(0)";
