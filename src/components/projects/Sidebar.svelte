@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+	import { SvelteMap, SvelteSet } from "svelte/reactivity";
 
 	export let rootSelector = "[data-scrollspy-root]";
 	export let headingSelector = "h2";
@@ -27,7 +28,7 @@
 		);
 	}
 
-	function ensureHeadingId(headingNode: HTMLElement, usedIds: Set<string>): string {
+	function ensureHeadingId(headingNode: HTMLElement, usedIds: SvelteSet<string>): string {
 		if (headingNode.id) {
 			usedIds.add(headingNode.id);
 			return headingNode.id;
@@ -57,8 +58,8 @@
 		contentRoot: Element,
 		headingSelectorValue: string,
 	): ScrollSpyItem[] {
-		const usedIds = new Set<string>();
-		const seenTargets = new Set<HTMLElement>();
+		const usedIds = new SvelteSet<string>();
+		const seenTargets = new SvelteSet<HTMLElement>();
 		const nextItems: ScrollSpyItem[] = [];
 
 		const headings = Array.from(contentRoot.querySelectorAll(headingSelectorValue)).filter(
@@ -85,7 +86,7 @@
 	}
 
 	function getVisibleEntries(
-		entriesByTarget: Map<HTMLElement, IntersectionObserverEntry>,
+		entriesByTarget: SvelteMap<HTMLElement, IntersectionObserverEntry>,
 	): IntersectionObserverEntry[] {
 		return Array.from(entriesByTarget.values()).sort(
 			(entryA, entryB) => entryB.boundingClientRect.top - entryA.boundingClientRect.top,
@@ -162,7 +163,7 @@
 
 		function createObserver(items: ScrollSpyItem[]): IntersectionObserver {
 			const targetIdByElement = createTargetIdMap(items);
-			const intersectingTargets = new Map<HTMLElement, IntersectionObserverEntry>();
+			const intersectingTargets = new SvelteMap<HTMLElement, IntersectionObserverEntry>();
 
 			return new IntersectionObserver(
 				(entries) => {
@@ -231,7 +232,7 @@
 	<aside class="scrollspy">
 		<nav aria-label="On this page">
 			<ul class="scrollspy-list">
-				{#each items as item}
+				{#each items as item (item.id)}
 					<li>
 						<a
 							class:is-active={item.id === activeId}
