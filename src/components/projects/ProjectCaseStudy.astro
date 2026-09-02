@@ -71,7 +71,7 @@ type SectionLinks = Array<{
 	fill: string;
 }>;
 
-type InlineGallery = {
+type InlineGalleryData = {
 	id: string;
 	items: Array<{
 		image: ImageMetadata;
@@ -80,7 +80,7 @@ type InlineGallery = {
 	}>;
 };
 
-type InlineImage = {
+type InlineImageData = {
 	id: string;
 	image: {
 		src: string;
@@ -101,8 +101,8 @@ type SectionFrontmatterExtras = {
 
 type SectionContentFrontmatter = {
 	section?: SectionFrontmatterExtras;
-	inlineGalleries?: InlineGallery[];
-	inlineImages?: InlineImage[];
+	inlineGalleries?: InlineGalleryData[];
+	inlineImages?: InlineImageData[];
 };
 
 type SectionMediaKind = "none" | "carousel" | "video" | "image";
@@ -113,8 +113,8 @@ type ResolvedSectionData = {
 	sectionProps: Record<string, unknown>;
 	sectionLinks: SectionLinks;
 	linksAriaLabel: string | undefined;
-	inlineGalleries: InlineGallery[];
-	inlineImages: InlineImage[];
+	inlineGalleries: InlineGalleryData[];
+	inlineImages: InlineImageData[];
 	carouselItems: ReturnType<typeof getCarouselItems>;
 	carouselImageFit: "cover" | "contain";
 	carouselAspectRatio: "4:3" | "16:9";
