@@ -171,7 +171,7 @@
 			on:pointerup={handlePointerUp}
 			on:pointercancel={handlePointerCancel}>
 			<div class="section-carousel-track flex w-full min-w-0">
-				{#each items as item, index}
+				{#each items as item, index (item.image.src)}
 					<div
 						class="section-carousel-slide max-sm:bg-paper relative flex min-w-full items-end overflow-hidden bg-[var(--color-media-fallback)] max-sm:grid max-sm:items-stretch"
 						role="group"
@@ -202,7 +202,7 @@
 			<div
 				class="section-carousel-indicators absolute bottom-4 left-1/2 z-[2] flex -translate-x-1/2 items-center justify-center gap-[0.55rem] max-sm:static max-sm:bottom-auto max-sm:left-auto max-sm:m-[0.35rem_0.85rem_0.5rem] max-sm:translate-x-0 max-sm:justify-start max-sm:gap-2"
 				aria-label="Carousel slide indicators">
-				{#each items as carouselItem, dotIndex}
+				{#each items as carouselItem, dotIndex (carouselItem.image.src)}
 					<button
 						type="button"
 						class="section-carousel-indicator"
