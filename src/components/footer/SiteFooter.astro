@@ -15,17 +15,17 @@ const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL;
 const linkedInUrl = import.meta.env.PUBLIC_LINKEDIN_URL;
 const encodedEmailHref = contactEmail ? encodeEmailHref(contactEmail) : undefined;
 
-const footerLinks = [
-	linkedInUrl
-		? {
+const footerLinks: FooterLink[] = linkedInUrl
+	? [
+			{
 				label: "LinkedIn",
 				href: linkedInUrl,
 				variant: "lime",
 				target: "_blank",
 				rel: "noreferrer",
-			}
-		: null,
-].filter((link): link is FooterLink => link !== null);
+			},
+		]
+	: [];
 ---
 
 <footer

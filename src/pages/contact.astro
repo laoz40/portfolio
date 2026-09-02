@@ -18,16 +18,18 @@ const githubUrl = import.meta.env.PUBLIC_GITHUB_URL;
 
 const encodedEmailHref = contactEmail ? encodeEmailHref(contactEmail) : undefined;
 
-const contactLinks = [
-	linkedInUrl
-		? {
-				label: "LinkedIn",
-				href: linkedInUrl,
-				fill: "var(--color-home-button-sky)",
-				target: "_blank",
-				rel: "noreferrer",
-			}
-		: null,
+const contactLinks: ContactLink[] = [
+	...(linkedInUrl
+		? [
+				{
+					label: "LinkedIn",
+					href: linkedInUrl,
+					fill: "var(--color-home-button-sky)",
+					target: "_blank",
+					rel: "noreferrer",
+				},
+			]
+		: []),
 	{
 		label: "Resume",
 		href: "/resume.pdf",
@@ -35,16 +37,18 @@ const contactLinks = [
 		target: "_blank",
 		rel: "noreferrer",
 	},
-	githubUrl
-		? {
-				label: "GitHub",
-				href: githubUrl,
-				fill: "var(--color-button-github)",
-				target: "_blank",
-				rel: "noreferrer",
-			}
-		: null,
-].filter((link): link is ContactLink => link !== null);
+	...(githubUrl
+		? [
+				{
+					label: "GitHub",
+					href: githubUrl,
+					fill: "var(--color-button-github)",
+					target: "_blank",
+					rel: "noreferrer",
+				},
+			]
+		: []),
+];
 ---
 
 <DefaultLayout
