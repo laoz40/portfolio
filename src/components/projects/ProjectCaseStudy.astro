@@ -158,33 +158,75 @@ function getMediaKind(
 	return "none";
 }
 
-function getSectionRenderState(section: CaseStudySection): ResolvedSectionData {
-	const frontmatter = getSectionFrontmatter(section);
-	const frontmatterSection = frontmatter.section;
-	const variant = getSectionVariant(section, frontmatterSection);
-	const resolvedMedia = resolveSectionMedia(section.media, frontmatterSection?.media);
-	const videoMedia = resolvedMedia?.type === "youtube" ? resolvedMedia : undefined;
-	const imageMedia = resolvedMedia?.type === "image" ? resolvedMedia : undefined;
-	const mediaKind = getMediaKind(variant, resolvedMedia);
+function getCarouselRenderConfig(
+	resolvedMedia?: SectionMedia,
+): Pick<
+	ResolvedSectionData,
+	"carouselItems" | "carouselImageFit" | "carouselAspectRatio" | "carouselBackground"
+> {
+	if (resolvedMedia?.type !== "carousel") {
+		return {
+			carouselItems: [],
+			carouselImageFit: "cover",
+			carouselAspectRatio: "4:3",
+			carouselBackground: "default",
+		};
+	}
 
 	return {
-		variant,
+		carouselItems: getCarouselItems(resolvedMedia),
+		carouselImageFit: resolvedMedia.imageFit ?? "cover",
+		carouselAspectRatio: resolvedMedia.aspectRatio ?? "4:3",
+		carouselBackground: resolvedMedia.background ?? "default",
+	};
+}
+
+function getSectionContentState(
+	section: CaseStudySection,
+	frontmatter: SectionContentFrontmatter,
+): Pick<
+	ResolvedSectionData,
+	| "sectionClass"
+	| "sectionProps"
+	| "sectionLinks"
+	| "linksAriaLabel"
+	| "inlineGalleries"
+	| "inlineImages"
+> {
+	const frontmatterSection = frontmatter.section;
+
+	return {
 		sectionClass: section.extraClass ?? frontmatterSection?.extraClass,
 		sectionProps: section.props ?? {},
 		sectionLinks: frontmatterSection?.links ?? [],
 		linksAriaLabel: frontmatterSection?.ariaLabel,
 		inlineGalleries: frontmatter.inlineGalleries ?? [],
 		inlineImages: frontmatter.inlineImages ?? [],
-		carouselItems: getCarouselItems(resolvedMedia),
-		carouselImageFit:
-			resolvedMedia?.type === "carousel" ? (resolvedMedia.imageFit ?? "cover") : "cover",
-		carouselAspectRatio:
-			resolvedMedia?.type === "carousel" ? (resolvedMedia.aspectRatio ?? "4:3") : "4:3",
-		carouselBackground:
-			resolvedMedia?.type === "carousel" ? (resolvedMedia.background ?? "default") : "default",
-		mediaKind,
-		imageMedia,
-		videoMedia,
+	};
+}
+
+function getResolvedMediaState(
+	variant: NonNullable<CaseStudySection["variant"]>,
+	resolvedMedia?: SectionMedia,
+): Pick<ResolvedSectionData, "mediaKind" | "imageMedia" | "videoMedia"> {
+	return {
+		mediaKind: getMediaKind(variant, resolvedMedia),
+		videoMedia: resolvedMedia?.type === "youtube" ? resolvedMedia : undefined,
+		imageMedia: resolvedMedia?.type === "image" ? resolvedMedia : undefined,
+	};
+}
+
+function getSectionRenderState(section: CaseStudySection): ResolvedSectionData {
+	const frontmatter = getSectionFrontmatter(section);
+	const frontmatterSection = frontmatter.section;
+	const variant = getSectionVariant(section, frontmatterSection);
+	const resolvedMedia = resolveSectionMedia(section.media, frontmatterSection?.media);
+
+	return {
+		variant,
+		...getSectionContentState(section, frontmatter),
+		...getCarouselRenderConfig(resolvedMedia),
+		...getResolvedMediaState(variant, resolvedMedia),
 	};
 }
 
