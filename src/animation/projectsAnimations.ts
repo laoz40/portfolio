@@ -1,4 +1,5 @@
 import { animate } from "motion";
+import { prefersReducedMotion } from "./motionPreferences";
 
 const timings = {
 	cardDuration: 0.35,
@@ -29,7 +30,7 @@ function runProjectsAnimations(): void {
 
 	page.dataset.animated = "true";
 
-	if (window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches) {
+	if (prefersReducedMotion()) {
 		cards.forEach((card) => {
 			card.style.transform = "translateY(0)";
 			card.style.opacity = "1";

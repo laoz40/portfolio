@@ -1,4 +1,5 @@
 import { animate } from "motion";
+import { prefersReducedMotion } from "./motionPreferences";
 
 const timings = {
 	revealDuration: 0.28,
@@ -57,7 +58,7 @@ function runFooterRevealAnimation(): void {
 		});
 	};
 
-	if (window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches) {
+	if (prefersReducedMotion()) {
 		showFinalState();
 		return;
 	}

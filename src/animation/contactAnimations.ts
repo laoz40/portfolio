@@ -1,4 +1,5 @@
 import { animate } from "motion";
+import { prefersReducedMotion } from "./motionPreferences";
 
 const timings = {
 	linkDuration: 0.25,
@@ -24,7 +25,7 @@ function runContactAnimations(): void {
 
 	contactPage.dataset.animated = "true";
 
-	if (window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches) {
+	if (prefersReducedMotion()) {
 		linkItems.forEach((item) => {
 			item.style.transform = "translateY(0)";
 			item.style.opacity = "1";
