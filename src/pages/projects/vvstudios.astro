@@ -1,5 +1,8 @@
 ---
-import { createContentSection } from "../../components/projects/caseStudySections";
+import {
+	createContentSection,
+	getImageMediaAlt,
+} from "../../components/projects/caseStudySections";
 import DefaultLayout from "../../layouts/DefaultLayout.astro";
 import ProjectCaseStudy from "../../components/projects/ProjectCaseStudy.astro";
 import Intro from "../../content/vvstudios/00-intro.md";
@@ -8,7 +11,13 @@ import ProjectShowcase from "../../content/vvstudios/02-project-showcase.md";
 import PreviousWebsite from "../../content/vvstudios/03-previous-website.md";
 import KeyImprovements from "../../content/vvstudios/04-key-improvements.md";
 
-const [introResult, projectOverviewResult, projectShowcaseResult, previousWebsiteResult, keyImprovementsResult] = await Promise.all([
+const [
+	introResult,
+	projectOverviewResult,
+	projectShowcaseResult,
+	previousWebsiteResult,
+	keyImprovementsResult,
+] = await Promise.all([
 	createContentSection({
 		collection: "vvstudios",
 		entryId: "00-intro",
@@ -57,6 +66,6 @@ const sections = [
 	pathname="/projects/vvstudios"
 	ogType="article"
 	ogImage={introFrontmatter.coverImage}
-	ogImageAlt={introFrontmatter.altText ?? introFrontmatter.section?.media?.alt}>
+	ogImageAlt={introFrontmatter.altText ?? getImageMediaAlt(introFrontmatter.section?.media)}>
 	<ProjectCaseStudy sections={sections} />
 </DefaultLayout>

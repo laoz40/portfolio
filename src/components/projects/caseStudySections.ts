@@ -1,5 +1,5 @@
 import type { ImageMetadata } from "astro";
-import { getEntry, type CollectionEntry, type DataCollectionKey } from "astro:content";
+import { getEntry, type CollectionKey } from "astro:content";
 import type { AstroComponentFactory } from "astro/runtime/server/index.js";
 
 export type SectionVariant = "featured" | "media" | "gallery" | "carousel" | "contentOnly";
@@ -69,7 +69,7 @@ export type CaseStudySection = {
 	frontmatter?: SectionFrontmatter;
 };
 
-type CreateContentSectionOptions<C extends DataCollectionKey> = {
+type CreateContentSectionOptions<C extends CollectionKey> = {
 	collection: C;
 	entryId: string;
 	Component: AstroComponentFactory;
@@ -79,12 +79,25 @@ type CreateContentSectionOptions<C extends DataCollectionKey> = {
 	media?: SectionMedia;
 };
 
-export type ContentSectionResult<C extends DataCollectionKey> = {
-	frontmatter: CollectionEntry<C>["data"];
+export type ContentFrontmatter = SectionFrontmatter & {
+	title?: string;
+	project?: string;
+	description?: string;
+	tools?: string[];
+	coverImage?: ImageMetadata;
+	altText?: string;
+};
+
+export type ContentSectionResult = {
+	frontmatter: ContentFrontmatter;
 	section: CaseStudySection;
 };
 
-export const createContentSection = async <C extends DataCollectionKey>({
+export function getImageMediaAlt(media?: SectionMedia): string | undefined {
+	return media?.type === "image" ? media.alt : undefined;
+}
+
+export const createContentSection = async <C extends CollectionKey>({
 	collection,
 	entryId,
 	Component,
@@ -92,14 +105,14 @@ export const createContentSection = async <C extends DataCollectionKey>({
 	extraClass,
 	props,
 	media,
-}: CreateContentSectionOptions<C>): Promise<ContentSectionResult<C>> => {
+}: CreateContentSectionOptions<C>): Promise<ContentSectionResult> => {
 	const entry = await getEntry(collection, entryId);
 
 	if (!entry) {
 		throw new Error(`Missing ${entryId} entry for: ${collection}`);
 	}
 
-	const frontmatter = entry.data as CollectionEntry<C>["data"] & SectionFrontmatter;
+	const frontmatter = entry.data as ContentFrontmatter;
 
 	return {
 		frontmatter,

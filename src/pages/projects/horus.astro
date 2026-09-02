@@ -1,5 +1,8 @@
 ---
-import { createContentSection } from "../../components/projects/caseStudySections";
+import {
+	createContentSection,
+	getImageMediaAlt,
+} from "../../components/projects/caseStudySections";
 import DefaultLayout from "../../layouts/DefaultLayout.astro";
 import ProjectCaseStudy from "../../components/projects/ProjectCaseStudy.astro";
 import Intro from "../../content/horus/00-intro.md";
@@ -45,6 +48,6 @@ const sections = [introSection, projectOverviewSection, projectFeaturesSection, 
 	pathname="/projects/horus"
 	ogType="article"
 	ogImage={introFrontmatter.coverImage}
-	ogImageAlt={introFrontmatter.altText ?? introFrontmatter.section?.media?.alt}>
+	ogImageAlt={introFrontmatter.altText ?? getImageMediaAlt(introFrontmatter.section?.media)}>
 	<ProjectCaseStudy sections={sections} />
 </DefaultLayout>
