@@ -1,11 +1,12 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection, type SchemaContext } from "astro:content";
 import { glob } from "astro/loaders";
+import { z } from "astro/zod";
 
 const sectionVariantSchema = z.enum(["featured", "media", "gallery", "carousel", "contentOnly"]);
 
 const imageMediaVariantSchema = z.enum(["taped", "raw"]);
 
-const sectionMediaSchema = ({ image }) =>
+const sectionMediaSchema = ({ image }: SchemaContext) =>
 	z.discriminatedUnion("type", [
 		z.object({
 			type: z.literal("image"),
@@ -46,7 +47,7 @@ const sectionMediaSchema = ({ image }) =>
 		}),
 	]);
 
-const sharedSchema = ({ image }) =>
+const sharedSchema = ({ image }: SchemaContext) =>
 	z
 		.object({
 			title: z.string().optional(),
@@ -97,9 +98,9 @@ const sharedSchema = ({ image }) =>
 				.optional(),
 			notes: z.array(z.string()).optional(),
 		})
-		.passthrough();
+		.loose();
 
-function createMarkdownCollection(base: string): ReturnType<typeof defineCollection> {
+function createMarkdownCollection(base: string) {
 	return defineCollection({
 		loader: glob({ pattern: "**/*.md", base }),
 		schema: sharedSchema,
