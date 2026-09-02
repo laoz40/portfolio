@@ -5,16 +5,16 @@ This is portfolio website. Main aesthetic is scrapbook style (paper texture back
 ## Stack
 
 - Astro, with some Svelte components for complex parts.
-    - Built in Astro to prioritise performance and SEO. Want to have super low bundle size.
-    - Goal is to keep site blazingly fast and accessible.
-    - One of the most important things it to keep the site responsive. Many people may see it on mobile.
+  - Built in Astro to prioritise performance and SEO. Want to have super low bundle size.
+  - Goal is to keep site blazingly fast and accessible.
+  - One of the most important things it to keep the site responsive. Many people may see it on mobile.
 - Motion for complex animations, because want it to look pleasing and interesting.
 - Markdown files are how I want to structure all content for each project e.g. text, images, layout of each section
-    - Good way to keep content organised and easy to maintain.
-    - Each project loops through all markdown files in a dir and builds a page, where each file becomes a section.
-    - Sections can include title, media, text in different layouts.
-    - Media (mostly images) can be inline, inline grid, to the side or carousel.
-    - Section variant/styling, images, text, links are defined in the markdown frontmatter.
+  - Good way to keep content organised and easy to maintain.
+  - Each project loops through all markdown files in a dir and builds a page, where each file becomes a section.
+  - Sections can include title, media, text in different layouts.
+  - Media (mostly images) can be inline, inline grid, to the side or carousel.
+  - Section variant/styling, images, text, links are defined in the markdown frontmatter.
 - pnpm
 
 ## File/Change Hygiene
@@ -50,4 +50,3 @@ This is portfolio website. Main aesthetic is scrapbook style (paper texture back
 - Avoid arbitrary values: clamp, min(...), custom pixel brackets, and custom breakpoints.
 - Use theme-token color utilities (background, foreground, primary, etc.) over standard palette classes (white, gray, black).
 - Do not add classes that already exist in the parent component
-
