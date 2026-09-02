@@ -24,6 +24,7 @@ export default tseslint.config(
 			"array-callback-return": "error",
 			complexity: ["error", { max: 12 }],
 			"max-depth": ["error", { max: 3 }],
+			"max-lines": ["error", { max: 500 }],
 			"no-unused-expressions": "error",
 			"no-var": "error",
 			"prefer-const": "error",
