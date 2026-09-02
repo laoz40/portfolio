@@ -18,11 +18,11 @@ section:
 - Automated email notifications through Resend
 - Automated invoice generation and session reminder emails created using react-email and react-pdf
 - Implemented a centralized admin dashboard backed by Convex for managing bookings and operations
-    - Allows admins to quickly view upcoming and past bookings
-    - Added lead tracking to streamline follow-up calls and conversions
-    - Enabled direct customer communication from the dashboard
-    - Integrated a fast workflow for sending edited footage and other deliverables
-    - Developed support for creating both standard and custom invoices
+  - Allows admins to quickly view upcoming and past bookings
+  - Added lead tracking to streamline follow-up calls and conversions
+  - Enabled direct customer communication from the dashboard
+  - Integrated a fast workflow for sending edited footage and other deliverables
+  - Developed support for creating both standard and custom invoices
 
 #### User Experience & Interface Design
 

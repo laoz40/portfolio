@@ -176,9 +176,12 @@ function getSectionRenderState(section: CaseStudySection): ResolvedSectionData {
 		inlineGalleries: frontmatter.inlineGalleries ?? [],
 		inlineImages: frontmatter.inlineImages ?? [],
 		carouselItems: getCarouselItems(resolvedMedia),
-		carouselImageFit: resolvedMedia?.type === "carousel" ? resolvedMedia.imageFit ?? "cover" : "cover",
-		carouselAspectRatio: resolvedMedia?.type === "carousel" ? resolvedMedia.aspectRatio ?? "4:3" : "4:3",
-		carouselBackground: resolvedMedia?.type === "carousel" ? resolvedMedia.background ?? "default" : "default",
+		carouselImageFit:
+			resolvedMedia?.type === "carousel" ? (resolvedMedia.imageFit ?? "cover") : "cover",
+		carouselAspectRatio:
+			resolvedMedia?.type === "carousel" ? (resolvedMedia.aspectRatio ?? "4:3") : "4:3",
+		carouselBackground:
+			resolvedMedia?.type === "carousel" ? (resolvedMedia.background ?? "default") : "default",
 		mediaKind,
 		imageMedia,
 		videoMedia,
