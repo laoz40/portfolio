@@ -1,7 +1,21 @@
 ---
-const { tag = "span", variant = "yellow", selectable = false, class: className } = Astro.props;
+type HighlightVariant = "yellow" | "lime" | "sky";
 
-const variantByName = {
+type Props = {
+	tag?: "span" | "h2" | "h4";
+	variant?: HighlightVariant;
+	selectable?: boolean;
+	class?: string;
+};
+
+const {
+	tag = "span",
+	variant = "yellow",
+	selectable = false,
+	class: className,
+} = Astro.props as Props;
+
+const variantByName: Record<HighlightVariant, string> = {
 	yellow: "var(--color-highlight-yellow)",
 	lime: "var(--color-highlight-lime)",
 	sky: "var(--color-highlight-sky)",
