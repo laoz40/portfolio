@@ -23,7 +23,7 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 		headingSelector={headingSelector}
 	/>
 	<article
-		class="project-content flex w-full flex-col gap-12 pl-4 max-sm:px-0"
+		class="project-content min-case-study:[--section-media-visual-max-width:36rem] [&_.inline-gallery\_\_caption]:font-body [&_.inline-gallery\_\_caption]:bg-paper max-case-study:[&_.inline-gallery\_\_tile]:max-w-none [&_.inline-image\_\_caption]:font-body [&_b]:font-body [&_b]:text-body [&_h1]:font-hand [&_h1]:text-hand-display-lg max-sm:[&_h1]:text-hand-display-md [&_h2]:font-hand [&_h2]:text-hand-title-sm [&_h2]:text-body [&_h3]:font-hand [&_h3]:text-hand-display-sm max-sm:[&_h3]:text-hand-display-sm [&_h4]:font-body [&_h4]:text-body [&_li]:font-body [&_li]:text-body [&_p]:font-body [&_p]:text-body [&_strong]:font-body [&_strong]:text-body [&_.project-badges_li]:bg-paper [&_.project-badges_li]:font-hand [&_.project-badges_li]:text-hand-body [&_.project-badges_li]:text-handwriting flex w-full flex-col gap-12 pl-4 [--section-copy-max-width:44rem] [--section-media-max-width:28rem] [--section-stack-max-width:44rem] [--text-measure:66ch] max-sm:px-0 [&_.inline-gallery]:mb-6 [&_.inline-gallery\_\_caption]:m-0 [&_.inline-gallery\_\_caption]:px-[0.85rem] [&_.inline-gallery\_\_caption]:pt-3 [&_.inline-gallery\_\_caption]:pb-[0.8rem] [&_.inline-gallery\_\_caption]:text-[0.9rem] [&_.inline-gallery\_\_caption]:leading-[1.4] [&_.inline-gallery\_\_frame]:[--paper-frame-border-color:var(--color-surface-paper)] [&_.inline-gallery\_\_frame]:[--paper-frame-shadow:0_0_0_0.18rem_rgb(31_30_25/0.08),var(--shadow-paper-medium)] [&_.inline-gallery\_\_image]:block [&_.inline-gallery\_\_image]:h-full [&_.inline-gallery\_\_image]:w-full [&_.inline-gallery\_\_image]:flex-1 [&_.inline-gallery\_\_image]:object-cover [&_.inline-gallery\_\_tile]:relative [&_.inline-gallery\_\_tile]:m-0 [&_.inline-gallery\_\_tile]:flex [&_.inline-gallery\_\_tile]:min-h-36 [&_.inline-gallery\_\_tile]:w-full [&_.inline-gallery\_\_tile]:translate-y-[var(--inline-gallery-shift,0px)] [&_.inline-gallery\_\_tile]:rotate-[var(--inline-gallery-tilt,0deg)] [&_.inline-gallery\_\_tile]:flex-col [&_.inline-gallery\_\_tile]:overflow-hidden [&_.inline-image]:relative [&_.inline-image]:[aspect-ratio:var(--inline-image-aspect-ratio)] [&_.inline-image]:rotate-[-0.35deg] [&_.inline-image]:overflow-hidden [&_.inline-image]:bg-[var(--color-accent-lime)] max-sm:[&_.inline-image]:rotate-0 [&_.inline-image-frame]:[--paper-frame-border-color:var(--color-surface-paper)] [&_.inline-image-frame]:[--paper-frame-shadow:0_0_0_0.18rem_rgb(31_30_25/0.08),var(--shadow-paper-medium)] max-sm:[&_.inline-image-frame::before]:rotate-[1.2deg] [&_.inline-image\_\_asset]:block [&_.inline-image\_\_asset]:h-full [&_.inline-image\_\_asset]:w-full [&_.inline-image\_\_asset]:object-cover [&_.inline-image\_\_caption]:mt-[0.6rem] [&_.inline-image\_\_caption]:mb-0 [&_.inline-image\_\_caption]:max-w-[var(--text-measure)] [&_.inline-image\_\_caption]:text-[0.9rem] [&_.inline-image\_\_caption]:leading-[1.4] [&_.project-badges]:m-0 [&_.project-badges]:mb-4 [&_.project-badges]:flex [&_.project-badges]:list-none [&_.project-badges]:flex-wrap [&_.project-badges]:gap-2 [&_.project-badges]:p-0 [&_.project-badges_li]:m-0 [&_.project-badges_li]:inline-block [&_.project-badges_li]:max-w-none [&_.project-badges_li]:border [&_.project-badges_li]:border-[var(--color-border-soft)] [&_.project-badges_li]:px-[0.65rem] [&_.project-badges_li]:py-[0.1rem] [&_.project-badges_li]:leading-[1.2] [&_.project-badges_li]:tracking-[0.02em] [&_b]:font-bold [&_h1]:m-0 [&_h1]:mb-4 [&_h1]:leading-[0.95] [&_h1]:font-bold [&_h1]:whitespace-nowrap max-sm:[&_h1]:mb-2 max-sm:[&_h1]:whitespace-normal [&_h2]:mt-8 [&_h2]:mb-4 [&_h2]:[scroll-margin-top:calc(var(--nav-offset)+1rem)] [&_h2]:leading-none [&_h2]:font-normal [&_h2]:tracking-[0.01em] [&_h3]:mb-4 [&_h3]:leading-[0.95] [&_h3]:font-bold [&_h3]:text-balance [&_h4]:mt-8 [&_h4]:mb-2 [&_h4]:text-base [&_h4]:leading-[var(--type-sans-leading-tight)] [&_h4]:font-bold [&_h4]:tracking-[0.01em] [&_li]:mb-2 [&_li]:max-w-[var(--text-measure)] [&_li]:text-base [&_li]:leading-[var(--type-sans-leading-relaxed)] [&_li]:font-light [&_li]:text-pretty [&_ol]:mb-4 [&_ol]:list-decimal [&_ol]:pl-5 [&_p]:mb-4 [&_p]:max-w-[var(--text-measure)] [&_p]:text-base [&_p]:leading-[var(--type-sans-leading-reading)] [&_p]:font-light [&_p]:text-pretty [&_strong]:font-bold [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:pl-5"
 		data-scrollspy-root>
 		{
 			sections.map((section) => {
@@ -48,11 +48,19 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 				return (
 					<section
 						class:list={[
-							"section grid min-w-0 grid-cols-[minmax(0,var(--section-copy-max-width))_minmax(18rem,var(--section-media-column-width,var(--section-media-max-width)))] items-start justify-center gap-x-12 gap-y-8 max-[1450px]:grid-cols-1 max-[1450px]:gap-4",
+							"section max-case-study:w-[min(100%,var(--section-stack-max-width))] max-case-study:grid-cols-1 max-case-study:gap-4 mx-auto grid w-[min(100%,calc(var(--section-copy-max-width)+var(--section-media-column-width,var(--section-media-max-width))+3rem))] min-w-0 grid-cols-[minmax(0,var(--section-copy-max-width))_minmax(18rem,var(--section-media-column-width,var(--section-media-max-width)))] items-start justify-center gap-x-12 gap-y-8",
 							`section--${variant}`,
 							sectionClass,
+							variant === "featured" &&
+								"[&.section--featured_.section-media--embed]:min-h-0 [&.section--featured_.section-media-frame]:col-span-full [&.section--featured_.section-media-frame]:w-full [&.section--featured_.section-media-frame]:justify-self-center",
+							variant === "carousel" &&
+								"max-case-study:[&.section--carousel_.section-copy]:justify-self-stretch [&.section--carousel_.section-carousel]:static [&.section--carousel_.section-carousel]:col-span-full [&.section--carousel_.section-carousel-slide]:min-h-0 [&.section--carousel_.section-copy]:col-span-1 [&.section--carousel_.section-copy]:justify-self-start",
+							sectionClass === "section--media-only" &&
+								"[&.section--media-only_.section-copy]:hidden",
+							sectionClass === "section-handwriting-list" &&
+								"[&.section-handwriting-list_li]:font-hand [&.section-handwriting-list_li]:text-hand-label [&.section-handwriting-list_li]:mt-4 [&.section-handwriting-list_li]:leading-[1.15] [&.section-handwriting-list_li]:text-balance [&.section-handwriting-list_li]:text-inherit",
 						]}>
-						<div class="section-copy min-w-0">
+						<div class="section-copy max-case-study:w-full max-case-study:justify-self-stretch w-[min(100%,var(--section-copy-max-width))] min-w-0 justify-self-center">
 							<SectionComponent {...sectionProps} />
 							{inlineGalleries.map((gallery) => (
 								<InlineGallery
@@ -61,7 +69,9 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 									<template>
 										<div class="inline-gallery grid grid-cols-[repeat(2,minmax(0,max-content))] justify-start gap-x-4 gap-y-[1.35rem] max-sm:grid-cols-1">
 											{gallery.items.map((item) => (
-												<div class="inline-gallery__frame relative w-full max-w-84 min-w-0 justify-self-start pt-[calc(var(--size-project-tape-height)*0.5)] max-[1450px]:max-w-[min(100%,28rem)]">
+												<div
+													class="inline-gallery__frame taped-frame max-case-study:max-w-[min(100%,28rem)] relative w-full max-w-84 min-w-0 justify-self-start pt-[calc(var(--size-project-tape-height)*0.5)]"
+													style="--tape-angle: calc(var(--inline-gallery-tilt, 0deg) + 1.2deg);">
 													<figure class="inline-gallery__tile paper-frame">
 														<Image
 															class="inline-gallery__image"
@@ -153,259 +163,6 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 		--section-media-tilt: 0.4deg;
 	}
 
-	.section {
-		width: min(
-			100%,
-			calc(
-				var(--section-copy-max-width) +
-					var(--section-media-column-width, var(--section-media-max-width)) + 3rem
-			)
-		);
-		margin-inline: auto;
-	}
-
-	.section--featured :global(.section-media-frame) {
-		grid-column: 1 / -1;
-		width: 100%;
-		justify-self: center;
-	}
-
-	.section--featured :global(.section-media--embed) {
-		min-height: 0;
-	}
-
-	.section--carousel :global(.section-carousel) {
-		position: static;
-		grid-column: 1 / -1;
-	}
-
-	.section--carousel .section-copy {
-		grid-column: 1;
-		justify-self: start;
-	}
-
-	.section--media-only .section-copy {
-		display: none;
-	}
-
-	.section--carousel :global(.section-carousel-slide) {
-		min-height: 0;
-	}
-
-	.project-content {
-		--text-measure: 66ch;
-		--section-copy-max-width: 44rem;
-		--section-media-max-width: 28rem;
-		--section-stack-max-width: 44rem;
-		margin-inline: 0;
-	}
-
-	@media (min-width: 1450.02px) {
-		.project-content {
-			--section-media-visual-max-width: 36rem;
-		}
-	}
-
-	.section-copy {
-		width: min(100%, var(--section-copy-max-width));
-		justify-self: center;
-	}
-
-	.project-content :global(h2) {
-		scroll-margin-top: calc(var(--nav-offset) + 1rem);
-	}
-
-	.project-content :global(h1) {
-		font-family: var(--font-handwriting);
-		font-size: var(--type-hand-size-display-lg);
-		font-weight: 700;
-		line-height: 0.95;
-		margin: 0 0 1rem 0;
-		white-space: nowrap;
-	}
-
-	.project-content :global(h2) {
-		font-family: var(--font-handwriting);
-		font-size: var(--type-hand-size-title-sm);
-		font-weight: 400;
-		color: var(--color-text-body);
-		letter-spacing: 0.01em;
-		line-height: 1;
-		margin: 2rem 0 1rem 0;
-	}
-
-	.project-content :global(h3) {
-		font-family: var(--font-handwriting);
-		font-size: var(--type-hand-size-display-sm);
-		font-weight: 700;
-		line-height: 0.95;
-		text-wrap: balance;
-		margin-bottom: 1rem;
-	}
-
-	.project-content :global(h4) {
-		font-family: var(--font-sans);
-		font-size: var(--type-sans-size-body);
-		font-weight: var(--type-sans-weight-emphasis);
-		color: var(--color-text-body);
-		margin: 2rem 0 0.5rem 0;
-		letter-spacing: 0.01em;
-		line-height: var(--type-sans-leading-tight);
-	}
-
-	.project-content :global(p) {
-		font-family: var(--font-sans);
-		font-size: var(--type-sans-size-body);
-		font-weight: var(--type-sans-weight-regular);
-		color: var(--color-text-body);
-		margin: 0 0 1rem 0;
-		line-height: var(--type-sans-leading-reading);
-		max-width: var(--text-measure);
-		text-wrap: pretty;
-	}
-
-	.project-content :global(li) {
-		font-family: var(--font-sans);
-		font-size: var(--type-sans-size-body);
-		font-weight: var(--type-sans-weight-regular);
-		color: var(--color-text-body);
-		margin: 0 0 0.5rem 0;
-		line-height: var(--type-sans-leading-relaxed);
-		max-width: var(--text-measure);
-		text-wrap: pretty;
-	}
-
-	.project-content :global(strong),
-	.project-content :global(b) {
-		font-family: var(--font-sans);
-		font-weight: var(--type-sans-weight-emphasis);
-		color: var(--color-text-body);
-	}
-
-	.project-content :global(ul),
-	.project-content :global(ol) {
-		padding-left: 1.25rem;
-		margin: 0 0 1rem 0;
-	}
-
-	.project-content :global(ul) {
-		list-style-type: disc;
-	}
-
-	.project-content :global(.project-badges) {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-		margin: 0 0 1rem 0;
-		padding: 0;
-		list-style: none;
-	}
-
-	.project-content :global(.project-badges li) {
-		margin: 0;
-		max-width: none;
-		display: inline-block;
-		padding: 0.1rem 0.65rem;
-		border: 1px solid var(--color-border-soft);
-		background: var(--color-surface-paper);
-		box-shadow: 1px 2px 3px var(--color-shadow-soft);
-		font-size: var(--type-hand-size-body);
-		font-family: var(--font-handwriting);
-		letter-spacing: 0.02em;
-		color: var(--color-text-handwriting);
-		line-height: 1.2;
-	}
-
-	.project-content :global(.project-badges li:nth-child(3n + 1)) {
-		transform: rotate(-0.9deg) translateY(-0.5px);
-	}
-
-	.project-content :global(.project-badges li:nth-child(3n + 2)) {
-		transform: rotate(0.65deg) translateY(0.35px);
-	}
-
-	.project-content :global(.project-badges li:nth-child(3n + 3)) {
-		transform: rotate(-0.45deg) translateY(0.2px);
-	}
-
-	.project-content :global(ol) {
-		list-style-type: decimal;
-	}
-
-	.project-content :global(.inline-gallery) {
-		margin: 0 0 1.5rem 0;
-	}
-
-	.project-content :global(.inline-gallery__frame),
-	.project-content :global(.inline-image-frame) {
-		--paper-frame-border-color: var(--color-surface-paper);
-		--paper-frame-shadow: 0 0 0 0.18rem rgb(31 30 25 / 0.08), var(--shadow-paper-medium);
-	}
-
-	.project-content :global(.inline-gallery__frame::before) {
-		content: "";
-		position: absolute;
-		top: calc(var(--size-project-tape-height) * 0.5);
-		left: 50%;
-		width: var(--size-project-tape-width);
-		height: var(--size-project-tape-height);
-		transform: translate(-50%, -50%) rotate(calc(var(--inline-gallery-tilt, 0deg) + 1.2deg));
-		background: var(--color-tape);
-		pointer-events: none;
-		z-index: 2;
-	}
-
-	.project-content :global(.inline-gallery__tile) {
-		display: flex;
-		flex-direction: column;
-		position: relative;
-		width: 100%;
-		min-height: 9rem;
-		overflow: hidden;
-		margin: 0;
-		transform: rotate(var(--inline-gallery-tilt, 0deg)) translateY(var(--inline-gallery-shift, 0px));
-	}
-
-	.project-content :global(.inline-gallery__image) {
-		display: block;
-		width: 100%;
-		height: 100%;
-		flex: 1;
-		object-fit: cover;
-	}
-
-	.project-content :global(.inline-gallery__caption) {
-		font-family: var(--font-sans);
-		font-size: 0.9rem;
-		line-height: 1.4;
-		margin: 0;
-		padding: 0.75rem 0.85rem 0.8rem;
-		background: var(--color-surface-paper);
-	}
-
-	.project-content :global(.inline-image) {
-		position: relative;
-		aspect-ratio: var(--inline-image-aspect-ratio);
-		background: var(--color-accent-lime);
-		overflow: hidden;
-		transform: rotate(-0.35deg);
-	}
-
-	.project-content :global(.inline-image__asset) {
-		display: block;
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
-
-	.project-content :global(.inline-image__caption) {
-		font-family: var(--font-sans);
-		font-size: 0.9rem;
-		line-height: 1.4;
-		margin: 0.6rem 0 0;
-		max-width: var(--text-measure);
-	}
-
 	.project-content :global(.inline-gallery__frame:nth-child(4n + 1)) {
 		--inline-gallery-tilt: -0.2deg;
 		--inline-gallery-shift: -1px;
@@ -426,51 +183,15 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 		--inline-gallery-shift: 1px;
 	}
 
-	.section-handwriting-list :global(li) {
-		font-family: var(--font-handwriting);
-		font-size: var(--type-hand-size-label);
-		color: inherit;
-		text-wrap: balance;
-		line-height: 1.15;
-		margin-top: 1rem;
+	.project-content :global(.project-badges li:nth-child(3n + 1)) {
+		transform: rotate(-0.9deg) translateY(-0.5px);
 	}
 
-	@media (max-width: 1450px) {
-		.section {
-			width: min(100%, var(--section-stack-max-width));
-		}
-
-		.section-copy {
-			width: 100%;
-			justify-self: stretch;
-		}
-
-		.section--carousel .section-copy {
-			justify-self: stretch;
-		}
-
-		.project-content :global(.inline-gallery__tile) {
-			max-width: none;
-		}
+	.project-content :global(.project-badges li:nth-child(3n + 2)) {
+		transform: rotate(0.65deg) translateY(0.35px);
 	}
 
-	@media (max-width: 640px) {
-		.project-content :global(h1) {
-			font-size: var(--type-hand-size-display-md);
-			margin-bottom: 0.5rem;
-			white-space: normal;
-		}
-
-		.project-content :global(h3) {
-			font-size: var(--type-hand-size-display-sm);
-		}
-
-		.project-content :global(.inline-image) {
-			transform: none;
-		}
-
-		.project-content :global(.inline-image-frame::before) {
-			transform: translate(-50%, -50%) rotate(1.2deg);
-		}
+	.project-content :global(.project-badges li:nth-child(3n + 3)) {
+		transform: rotate(-0.45deg) translateY(0.2px);
 	}
 </style>

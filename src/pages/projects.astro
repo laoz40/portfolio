@@ -52,42 +52,48 @@ const projects: Array<{
 	description="Browse Leo Zhou's frontend and UX case studies, including product design, web app development, and website redesign projects."
 	pathname="/projects">
 	<section class="projects-page">
-		<h1>
-			<span class="projects-heading-reveal">My projects</span>
+		<h1 class="text-hand-display-md m-0 mb-10 text-center font-bold">
+			<span class="projects-heading-reveal inline-block">My projects</span>
 		</h1>
 		<div
 			class="projects-layout grid grid-cols-[repeat(2,minmax(0,29.75rem))] justify-center gap-x-12 gap-y-8 max-[900px]:grid-cols-[minmax(0,1fr)] max-[900px]:justify-stretch max-[900px]:gap-7 min-[1440px]:grid-cols-[repeat(2,minmax(0,42.5rem))] min-[1440px]:gap-x-10">
 			{
 				projects.map(({ slug, frontmatter }) => {
 					const cardContent = (
-						<div class="project-frame">
+						<div class="project-frame relative flex min-h-[35rem] w-full rotate-[var(--preview-tilt,0deg)] flex-col border-[0.18rem] border-[rgb(31_30_25/0.14)] bg-[rgb(255_253_246)] p-[0.9rem] shadow-[var(--shadow-paper-rest)] transition-[box-shadow,transform] duration-200 group-hover:-translate-y-1 group-hover:rotate-[var(--preview-tilt,0deg)] group-hover:shadow-[var(--shadow-paper-hover)] before:pointer-events-none before:absolute before:top-0 before:left-1/2 before:z-1 before:h-[var(--size-project-tape-height)] before:w-[var(--size-project-tape-width)] before:-translate-x-1/2 before:-translate-y-1/2 before:rotate-[1.2deg] before:bg-[var(--color-tape)] before:content-[''] max-[900px]:min-h-auto max-[900px]:p-[0.95rem] max-sm:rotate-0 max-sm:group-hover:-translate-y-1 max-sm:group-hover:rotate-0 min-[1440px]:min-h-[39rem]">
 							<div
-								class="preview"
+								class="preview flex aspect-video w-full items-center justify-center overflow-hidden bg-[rgb(249_245_236)] text-center"
 								aria-hidden="true">
 								{frontmatter.coverImage ? (
 									<Image
-										class="preview-image"
+										class="preview-image block h-full w-full object-contain"
 										src={frontmatter.coverImage}
 										alt={frontmatter.altText ?? ""}
 										loading="lazy"
 										decoding="async"
 									/>
 								) : (
-									<span class="preview-placeholder">COMING SOON</span>
+									<span class="preview-placeholder font-hand text-[3rem] font-bold">
+										COMING SOON
+									</span>
 								)}
 							</div>
-							<div class="project-meta flex flex-1 flex-col justify-between px-0 pt-4 pb-[0.1rem] min-[1440px]:gap-4">
+							<div class="project-meta [&_.tool-badge-shape]:bg-paper flex flex-1 flex-col justify-between px-0 pt-4 pb-[0.1rem] min-[1440px]:gap-4 [&_.tool-badge-shape]:shadow-[var(--shadow-badge-rest)] max-sm:[&_.tool-badge-shape]:px-[0.45rem] max-sm:[&_.tool-badge-shape]:text-[0.95rem] [&_.tool-badges]:gap-[0.45rem] [&_.tool-badges]:pt-5 max-sm:[&_.tool-badges]:gap-[0.3rem] max-sm:[&_.tool-badges]:pt-[0.8rem] min-[1440px]:[&_.tool-badges]:mt-auto min-[1440px]:[&_.tool-badges]:pt-5">
 								<div class="flex flex-col gap-[0.7rem]">
 									<div class="project-title flex flex-col items-start gap-[0.35rem]">
 										<HighlightText
 											tag="h2"
 											variant="yellow"
-											class="project-title-highlight">
+											class="project-title-highlight font-hand text-hand-title-md text-handwriting m-0 leading-[0.5] font-bold [--highlight-bottom:-0.1em] [--highlight-color:var(--color-highlight-yellow-strong)] [--highlight-left:-0.04em] [--highlight-right:-0.03em] [--highlight-top:-0.1em]">
 											{frontmatter.title}
 										</HighlightText>
-										<span class="project-subtitle">{frontmatter.project}</span>
+										<span class="project-subtitle font-hand text-muted text-[length:var(--type-hand-size-label)] leading-none font-bold tracking-[0.02em]">
+											{frontmatter.project}
+										</span>
 									</div>
-									<p>{frontmatter.description}</p>
+									<p class="font-body text-muted m-0 text-base leading-[1.45] font-light max-sm:text-[0.95rem]">
+										{frontmatter.description}
+									</p>
 								</div>
 								<ToolBadges
 									tools={frontmatter.tools ?? []}
@@ -99,7 +105,7 @@ const projects: Array<{
 
 					return (
 						<a
-							class="project-card project-card-reveal"
+							class="project-card project-card-reveal group text-body flex w-full flex-col no-underline odd:[--preview-tilt:-0.45deg] even:[--preview-tilt:0.45deg] max-[900px]:w-full"
 							href={`/projects/${slug}`}
 							aria-label={`Open ${frontmatter.title} project page`}>
 							{cardContent}
@@ -121,186 +127,3 @@ const projects: Array<{
 <script>
 	import "../animation/projectsAnimations.ts";
 </script>
-
-<style>
-	h1 {
-		margin: 0 0 2.5rem;
-		font-size: var(--type-hand-size-display-md);
-		font-weight: 700;
-		text-align: center;
-	}
-
-	.projects-heading-reveal {
-		display: inline-block;
-	}
-
-	.project-card {
-		display: flex;
-		flex-direction: column;
-		width: 100%;
-		color: var(--color-text-body);
-		text-decoration: none;
-	}
-
-	.project-frame {
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		height: 100%;
-		min-height: 35rem;
-		padding: 0.9rem;
-		border: 0.18rem solid rgb(31 30 25 / 0.14);
-		background: rgb(255 253 246);
-		box-shadow: var(--shadow-paper-rest);
-		transform: rotate(var(--preview-tilt, 0deg));
-		transition:
-			box-shadow 200ms ease,
-			transform 200ms ease;
-	}
-
-	.project-frame::before {
-		content: "";
-		position: absolute;
-		top: 0;
-		left: 50%;
-		width: var(--size-project-tape-width);
-		height: var(--size-project-tape-height);
-		transform: translate(-50%, -50%) rotate(1.2deg);
-		background: var(--color-tape);
-		pointer-events: none;
-		z-index: 1;
-	}
-
-	.project-card:nth-of-type(odd) {
-		--preview-tilt: -0.45deg;
-	}
-
-	.project-card:nth-of-type(even) {
-		--preview-tilt: 0.45deg;
-	}
-
-	.project-card:hover .project-frame,
-	.project-card:focus-within .project-frame {
-		box-shadow: var(--shadow-paper-hover);
-		transform: translateY(-4px) rotate(var(--preview-tilt, 0deg));
-	}
-
-	.project-card:hover :global(.project-title-highlight)::before,
-	.project-card:focus-within :global(.project-title-highlight)::before {
-		transform: var(--highlight-transform-active, scaleX(1) skewX(-4deg) rotate(-1.2deg));
-		opacity: 1;
-	}
-
-	.preview {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		text-align: center;
-		width: 100%;
-		aspect-ratio: 16 / 9;
-		background: rgb(249 245 236);
-		overflow: hidden;
-	}
-
-	.preview-placeholder {
-		font-size: 3rem;
-		font-weight: 700;
-		font-family: var(--font-handwriting);
-	}
-
-	.preview-image {
-		display: block;
-		width: 100%;
-		height: 100%;
-		object-fit: contain;
-	}
-
-	:global(.project-title-highlight) {
-		margin: 0;
-		font-family: var(--font-handwriting);
-		font-size: var(--type-hand-size-title-md);
-		font-weight: 700;
-		line-height: 0.5;
-		color: var(--color-text-handwriting);
-		--highlight-color: var(--color-highlight-yellow-strong);
-		--highlight-top: -0.1em;
-		--highlight-bottom: -0.1em;
-		--highlight-left: -0.04em;
-		--highlight-right: -0.03em;
-	}
-
-	.project-subtitle {
-		font-family: var(--font-handwriting);
-		font-size: var(--type-hand-size-label);
-		font-weight: 700;
-		line-height: 1;
-		letter-spacing: 0.02em;
-		color: var(--color-text-muted);
-	}
-
-	.project-meta p {
-		margin: 0;
-		font-family: var(--font-sans);
-		font-size: var(--type-sans-size-body);
-		font-weight: var(--type-sans-weight-regular);
-		line-height: 1.45;
-		color: var(--color-text-muted);
-	}
-
-	.project-meta :global(.tool-badges) {
-		gap: 0.45rem;
-		padding-top: 1.2rem;
-	}
-
-	.project-meta :global(.tool-badge-shape) {
-		background: var(--color-surface-paper);
-		box-shadow: var(--shadow-badge-rest);
-	}
-
-	@media (max-width: 900px) {
-		.project-frame {
-			min-height: auto;
-			padding: 0.95rem;
-		}
-
-		.project-card {
-			width: 100%;
-		}
-	}
-
-	@media (max-width: 640px) {
-		.project-meta p {
-			font-size: 0.95rem;
-		}
-
-		.project-meta :global(.tool-badges) {
-			gap: 0.3rem;
-			padding-top: 0.8rem;
-		}
-
-		.project-meta :global(.tool-badge-shape) {
-			padding: 0 0.45rem;
-			font-size: 0.95rem;
-		}
-
-		.project-frame {
-			transform: none;
-		}
-
-		.project-card:hover .project-frame,
-		.project-card:focus-within .project-frame {
-			transform: translateY(-4px);
-		}
-	}
-
-	@media (min-width: 1440px) {
-		.project-frame {
-			min-height: 39rem;
-		}
-
-		.project-meta :global(.tool-badges) {
-			margin-top: auto;
-			padding-top: 1.25rem;
-		}
-	}
-</style>
