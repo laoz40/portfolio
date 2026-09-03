@@ -12,6 +12,8 @@
 	--color-handwriting: var(--color-text-handwriting);
 	--color-border-soft-token: var(--color-border-soft);
 	--color-border-medium-token: var(--color-border-medium);
+	--breakpoint-nav: 820px;
+	--breakpoint-case-study: 1450px;
 }
 
 @font-face {
@@ -171,24 +173,24 @@ h6 {
 	color: var(--color-text-handwriting);
 }
 
-.taped-frame {
+@utility taped-frame {
 	position: relative;
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: var(--tape-top, calc(var(--size-project-tape-height) * 0.5));
+		left: 50%;
+		width: var(--size-project-tape-width);
+		height: var(--size-project-tape-height);
+		transform: translate(-50%, -50%) rotate(var(--tape-angle, 1.2deg));
+		background: var(--color-tape);
+		pointer-events: none;
+		z-index: var(--tape-z-index, 2);
+	}
 }
 
-.taped-frame::before {
-	content: "";
-	position: absolute;
-	top: var(--tape-top, calc(var(--size-project-tape-height) * 0.5));
-	left: 50%;
-	width: var(--size-project-tape-width);
-	height: var(--size-project-tape-height);
-	transform: translate(-50%, -50%) rotate(var(--tape-angle, 1.2deg));
-	background: var(--color-tape);
-	pointer-events: none;
-	z-index: var(--tape-z-index, 2);
-}
-
-.paper-frame {
+@utility paper-frame {
 	background: var(--paper-frame-background, var(--color-media-fallback));
 	border: var(--paper-frame-border-width, 8px) solid
 		var(--paper-frame-border-color, var(--color-surface-page));
