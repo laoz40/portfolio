@@ -1,10 +1,6 @@
 import { animate } from "motion";
 import { prefersReducedMotion } from "./motionPreferences";
-
-const timings = {
-	revealDuration: 0.28,
-	revealStagger: 0.3,
-};
+import { footerTimings as timings } from "./timings";
 
 function syncFooterYear(): void {
 	const currentYearTargets = document.querySelectorAll("[data-current-year]");

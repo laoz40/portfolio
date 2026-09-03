@@ -1,12 +1,6 @@
 import { animate } from "motion";
 import { prefersReducedMotion } from "./motionPreferences";
-
-const timings = {
-	linkDuration: 0.25,
-	linkStagger: 0.08,
-	thanksDuration: 0.4,
-	thanksDelay: 0.1,
-};
+import { contactTimings as timings } from "./timings";
 
 function runContactAnimations(): void {
 	const contactPage = document.querySelector(".contact-page");

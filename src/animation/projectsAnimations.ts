@@ -1,11 +1,6 @@
 import { animate } from "motion";
 import { prefersReducedMotion } from "./motionPreferences";
-
-const timings = {
-	cardDuration: 0.35,
-	cardStagger: 0.08,
-	ctaDuration: 0.3,
-};
+import { projectsTimings as timings } from "./timings";
 
 const selectors = {
 	page: ".projects-page",

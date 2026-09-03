@@ -1,19 +1,6 @@
 import { animate } from "motion";
 import { prefersReducedMotion } from "./motionPreferences";
-
-const timings = {
-	titleDuration: 0.2,
-	titleGap: 0.1,
-	afterTitleDelay: 0.5,
-	subtitleDuration: 0.1,
-	afterSubtitleDelay: 0.3,
-	actionsDuration: 0.3,
-	heroImagesDuration: 0.8,
-	footerNoteDuration: 0.3,
-	featuredCardDuration: 0.45,
-	featuredCardFadeDuration: 0.12,
-	featuredCtaDuration: 0.3,
-};
+import { heroTimings as timings, sequenceDuration } from "./timings";
 
 type HeroElements = {
 	titleLines: HTMLElement[];
@@ -25,10 +12,6 @@ type HeroElements = {
 	featuredCard: Element | null;
 	featuredCta: Element | null;
 };
-
-function sequenceDuration(count: number, duration: number, gap: number): number {
-	return count ? (count - 1) * (duration + gap) + duration : 0;
-}
 
 function collectHeroElements(hero: HTMLElement): HeroElements | null {
 	const titleLines = Array.from(hero.querySelectorAll(".hero-title-text")).filter(
