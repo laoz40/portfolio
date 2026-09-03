@@ -26,13 +26,14 @@ const { fill, href, target, rel, ...attributes } = Astro.props as {
 			target={target}
 			rel={rel}
 			{...attributes}
-			class="imperfect-button"
+			class="imperfect-button font-hand text-hand-title-md relative inline-grid cursor-pointer place-items-center border-0 px-6 py-3.5 font-bold no-underline select-none"
 			style={`--fill: ${fill};`}>
-			<span>
+			<span class="relative z-10 select-none">
 				<slot />
 			</span>
 
 			<svg
+				class="imperfect-button-shape pointer-events-none absolute inset-0 z-0 h-full w-full"
 				viewBox="0 0 220 70"
 				preserveAspectRatio="none"
 				aria-hidden="true">
@@ -50,13 +51,14 @@ const { fill, href, target, rel, ...attributes } = Astro.props as {
 		<button
 			type="button"
 			{...attributes}
-			class="imperfect-button"
+			class="imperfect-button font-hand text-hand-title-md relative inline-grid cursor-pointer place-items-center border-0 px-6 py-3.5 font-bold select-none"
 			style={`--fill: ${fill};`}>
-			<span>
+			<span class="relative z-10 select-none">
 				<slot />
 			</span>
 
 			<svg
+				class="imperfect-button-shape pointer-events-none absolute inset-0 z-0 h-full w-full"
 				viewBox="0 0 220 70"
 				preserveAspectRatio="none"
 				aria-hidden="true">
@@ -75,9 +77,6 @@ const { fill, href, target, rel, ...attributes } = Astro.props as {
 
 <style>
 	.imperfect-button {
-		position: relative;
-		display: inline-grid;
-		place-items: center;
 		--fill-solid: rgb(from var(--fill) r g b);
 		--paper-fill: var(--fill-solid);
 		--button-shadow-rest: 3px 4px 2px var(--color-shadow-button-rest);
@@ -86,31 +85,11 @@ const { fill, href, target, rel, ...attributes } = Astro.props as {
 		--button-motion-easing: cubic-bezier(0.22, 1, 0.36, 1);
 		--button-motion-active-duration: 0.08s;
 		--button-motion-active-easing: cubic-bezier(0.3, 0, 0.4, 1);
-		padding: 0.9rem 1.6rem;
-		border: 0;
-		cursor: pointer;
-		user-select: none;
-		font-family: var(--font-handwriting);
-		font-size: var(--type-hand-size-title-md);
-		font-weight: 700;
-		text-decoration: none;
+		letter-spacing: 0.2px;
 		transition: transform var(--button-motion-duration) var(--button-motion-easing);
 	}
 
-	span {
-		position: relative;
-		z-index: 1000;
-		letter-spacing: 0.2px;
-		user-select: none;
-	}
-
-	svg {
-		position: absolute;
-		inset: 0;
-		width: 100%;
-		height: 100%;
-		z-index: 0;
-		pointer-events: none;
+	.imperfect-button-shape {
 		transition:
 			transform var(--button-motion-duration) var(--button-motion-easing),
 			filter var(--button-motion-duration) var(--button-motion-easing),
@@ -119,7 +98,7 @@ const { fill, href, target, rel, ...attributes } = Astro.props as {
 		fill: var(--paper-fill);
 	}
 
-	path {
+	.imperfect-button-shape path {
 		stroke-width: 3.2;
 	}
 
@@ -127,7 +106,7 @@ const { fill, href, target, rel, ...attributes } = Astro.props as {
 		transform: translate(-2px, -3px) rotate(-0.9deg);
 	}
 
-	.imperfect-button:hover svg {
+	.imperfect-button:hover .imperfect-button-shape {
 		filter: drop-shadow(var(--button-shadow-hover));
 	}
 
@@ -137,7 +116,7 @@ const { fill, href, target, rel, ...attributes } = Astro.props as {
 		transform: translate(1px, 1px) rotate(-0.15deg);
 	}
 
-	.imperfect-button:active svg {
+	.imperfect-button:active .imperfect-button-shape {
 		transition-duration: var(--button-motion-active-duration);
 		transition-timing-function: var(--button-motion-active-easing);
 		filter: drop-shadow(2px 3px 2px var(--color-shadow-button-active));
@@ -145,7 +124,7 @@ const { fill, href, target, rel, ...attributes } = Astro.props as {
 
 	@media (prefers-reduced-motion: reduce) {
 		.imperfect-button,
-		svg {
+		.imperfect-button-shape {
 			transition: none;
 		}
 

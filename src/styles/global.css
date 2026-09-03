@@ -12,6 +12,9 @@
 	--color-handwriting: var(--color-text-handwriting);
 	--color-border-soft-token: var(--color-border-soft);
 	--color-border-medium-token: var(--color-border-medium);
+	--text-hand-body: var(--type-hand-size-body);
+	--text-hand-label-sm: var(--type-hand-size-label-sm);
+	--text-hand-title-md: var(--type-hand-size-title-md);
 	--breakpoint-nav: 820px;
 	--breakpoint-case-study: 1450px;
 }
@@ -196,6 +199,53 @@ h6 {
 		var(--paper-frame-border-color, var(--color-surface-page));
 	box-shadow: var(--paper-frame-shadow, var(--shadow-paper-medium));
 	overflow: hidden;
+}
+
+@utility highlight-text {
+	position: relative;
+	display: inline-block;
+	z-index: 0;
+
+	&::before {
+		content: "";
+		position: absolute;
+		left: var(--highlight-left, -0.18em);
+		right: var(--highlight-right, -0.16em);
+		top: var(--highlight-top, 0.4em);
+		bottom: var(--highlight-bottom, 0.5em);
+		background: var(--highlight-color);
+		clip-path: polygon(
+			2% 22%,
+			8% 8%,
+			35% 5%,
+			48% 14%,
+			78% 18%,
+			98% 24%,
+			96% 82%,
+			88% 95%,
+			57% 94%,
+			42% 86%,
+			28% 93%,
+			13% 85%,
+			4% 91%
+		);
+		transform-origin: left;
+		transform: var(--highlight-transform-base, scaleX(0.2) skewX(-4deg) rotate(-1.2deg));
+		opacity: 0;
+		transition:
+			transform 220ms ease,
+			opacity 100ms ease;
+		z-index: -1;
+		pointer-events: none;
+	}
+
+	&:hover::before,
+	&:focus-visible::before,
+	.group:hover &::before,
+	.group:focus-visible &::before {
+		transform: var(--highlight-transform-active, scaleX(1) skewX(-4deg) rotate(-1.2deg));
+		opacity: 1;
+	}
 }
 
 img,
