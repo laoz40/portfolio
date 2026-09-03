@@ -3,7 +3,7 @@ const { href = "#featured", label = "Scroll to featured section" } = Astro.props
 ---
 
 <a
-	class="scroll-down"
+	class="scroll-down text-handwriting inline-flex items-center justify-center leading-none no-underline transition-transform duration-150 hover:-translate-y-1 focus-visible:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-none motion-reduce:focus-visible:translate-none [&_svg]:h-12 [&_svg]:w-12 [&_svg]:drop-shadow-[1px_2px_0_var(--color-shadow-medium)]"
 	href={href}
 	aria-label={label}>
 	<svg
@@ -33,37 +33,3 @@ const { href = "#featured", label = "Scroll to featured section" } = Astro.props
 		></path>
 	</svg>
 </a>
-
-<style>
-	.scroll-down {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		line-height: 1;
-		text-decoration: none;
-		transition: transform 180ms ease;
-		color: var(--color-text-handwriting);
-	}
-
-	.scroll-down svg {
-		width: 3rem;
-		height: 3rem;
-		filter: drop-shadow(1px 2px 0 var(--color-shadow-medium));
-	}
-
-	.scroll-down:hover,
-	.scroll-down:focus-visible {
-		transform: translateY(-0.25rem);
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.scroll-down {
-			transition: none;
-		}
-
-		.scroll-down:hover,
-		.scroll-down:focus-visible {
-			transform: none;
-		}
-	}
-</style>

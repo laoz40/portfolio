@@ -35,20 +35,20 @@ const heroTitleLines = ["Welcome to", "Leo's Website!"];
 	home>
 	<section
 		id="hero"
-		class="relative flex min-h-[82svh] w-full flex-col items-center justify-center gap-4 px-8 pt-0 pb-22 max-[1100px]:gap-3 max-[1100px]:px-6 max-[1100px]:pt-12 max-[1100px]:pb-24 max-[820px]:min-h-[calc(100svh-8rem)] max-[820px]:justify-start max-[820px]:px-4 max-[820px]:pt-64 max-[820px]:pb-24 max-sm:gap-2 max-sm:pt-72">
+		class="max-nav:min-h-[calc(100svh-8rem)] max-nav:justify-start max-nav:px-4 max-nav:pt-64 max-nav:pb-24 relative flex min-h-[82svh] w-full flex-col items-center justify-center gap-4 px-8 pt-0 pb-22 max-[1100px]:gap-3 max-[1100px]:px-6 max-[1100px]:pt-12 max-[1100px]:pb-24 max-sm:gap-2 max-sm:pt-72">
 		<HeroSketchCluster />
 		<HeroLogoCluster />
 
 		<div
-			class="hero-copy relative z-2 flex w-full max-w-216 flex-col items-center gap-4 max-[1100px]:max-w-136 max-[820px]:max-w-[24rem] max-sm:max-w-[20rem] max-sm:gap-[0.9rem]">
+			class="hero-copy max-nav:max-w-96 relative z-2 flex w-full max-w-216 flex-col items-center gap-4 max-[1100px]:max-w-136 max-sm:max-w-80 max-sm:gap-[0.9rem]">
 			<h1
-				class="hero-title"
+				class="hero-title text-hand-display-lg m-0 max-w-[12ch] text-center leading-[0.96] font-bold tracking-[-0.04em] text-balance max-sm:max-w-[10ch]"
 				aria-label={heroTitle}>
 				{
 					heroTitleLines.map((line) => (
-						<span class="hero-title-line">
+						<span class="hero-title-line relative mx-auto flex w-fit flex-col items-center overflow-hidden [&+&]:mt-[0.08em]">
 							<span
-								class="hero-title-text"
+								class="hero-title-text inline-block"
 								aria-hidden="true">
 								{line}
 							</span>
@@ -58,13 +58,19 @@ const heroTitleLines = ["Welcome to", "Leo's Website!"];
 			</h1>
 
 			<div class="hero-roles flex flex-col items-center gap-[0.35rem] max-sm:gap-[0.2rem]">
-				<h2>Full Stack Developer</h2>
-				<h2>UX Designer</h2>
+				<h2
+					class="text-hand-display-sm m-0 text-center leading-[1.05] tracking-[-0.02em] text-balance max-sm:max-w-[15ch]">
+					Full Stack Developer
+				</h2>
+				<h2
+					class="text-hand-display-sm m-0 text-center leading-[1.05] tracking-[-0.02em] text-balance max-sm:max-w-[15ch]">
+					UX Designer
+				</h2>
 			</div>
 		</div>
 
 		<div
-			class="hero-actions relative z-2 mt-4 flex flex-wrap items-center justify-center gap-6 max-[1100px]:mt-2 max-[820px]:mt-1 max-[420px]:max-w-60 max-[420px]:grid-cols-1 max-sm:mt-2 max-sm:mb-15 max-sm:grid max-sm:w-full max-sm:max-w-84 max-sm:grid-cols-2 max-sm:gap-0">
+			class="hero-actions max-nav:mt-1 relative z-2 mt-4 flex flex-wrap items-center justify-center gap-6 max-[1100px]:mt-2 max-[420px]:max-w-60 max-[420px]:grid-cols-1 max-sm:mt-2 max-sm:mb-15 max-sm:grid max-sm:w-full max-sm:max-w-84 max-sm:grid-cols-2 max-sm:gap-0 max-sm:[&_.imperfect-button]:min-h-12 max-sm:[&_.imperfect-button]:w-full max-sm:[&_.imperfect-button]:p-4 max-sm:[&_.imperfect-button]:text-2xl max-sm:[&_.imperfect-button>span]:leading-[1.05]">
 			<ImperfectButton
 				href="/projects"
 				fill="var(--color-home-button-yellow)">
@@ -78,8 +84,11 @@ const heroTitleLines = ["Welcome to", "Leo's Website!"];
 		</div>
 
 		<div
-			class="hero-footer absolute bottom-6 left-1/2 z-2 flex w-[calc(100%-2rem)] max-w-176 -translate-x-1/2 flex-col items-center gap-2 max-[1100px]:bottom-5 max-[820px]:max-w-136 max-sm:bottom-5 max-sm:w-[calc(100%-1.5rem)] max-sm:max-w-88 max-sm:gap-2">
-			<p class="hero-note">This website wasn't hand-coded or vibe-coded. It was all hand-drawn.</p>
+			class="hero-footer max-nav:max-w-136 absolute bottom-6 left-1/2 z-2 flex w-[calc(100%-2rem)] max-w-176 -translate-x-1/2 flex-col items-center gap-2 max-[1100px]:bottom-5 max-sm:bottom-5 max-sm:w-[calc(100%-1.5rem)] max-sm:max-w-88 max-sm:gap-2">
+			<p
+				class="hero-note font-hand text-hand-body text-handwriting m-0 text-center max-sm:text-base max-sm:text-balance">
+				This website wasn't hand-coded or vibe-coded. It was all hand-drawn.
+			</p>
 		</div>
 	</section>
 
@@ -87,17 +96,18 @@ const heroTitleLines = ["Welcome to", "Leo's Website!"];
 		id="featured"
 		class="flex min-h-svh flex-col items-center gap-8 pt-6 max-sm:pt-4">
 		<a
-			class="project-card featured-project-card-reveal"
+			class="project-card group featured-project-card-reveal text-body flex w-full max-w-[70rem] no-underline"
 			href="/projects/vvstudios"
 			aria-label={`Open ${vvstudios.title} project page`}>
-			<div class="project-frame">
+			<div
+				class="project-frame relative flex min-h-[35rem] w-full -rotate-[0.35deg] flex-col border-[0.18rem] border-[rgb(31_30_25/0.14)] bg-[rgb(255_253_246)] p-[0.9rem] shadow-[var(--shadow-paper-rest)] transition-[box-shadow,transform] duration-200 group-hover:-translate-y-1 group-hover:-rotate-[0.35deg] group-hover:shadow-[var(--shadow-paper-hover)] before:pointer-events-none before:absolute before:top-0 before:left-1/2 before:z-1 before:h-[var(--size-project-tape-height)] before:w-[var(--size-project-tape-width)] before:-translate-x-1/2 before:-translate-y-1/2 before:rotate-[1.2deg] before:bg-[var(--color-tape)] before:content-[''] max-sm:min-h-auto max-sm:rotate-0 max-sm:group-hover:-translate-y-1 max-sm:group-hover:rotate-0">
 				<div
-					class="preview"
+					class="preview aspect-video min-h-[17.25rem] w-full overflow-hidden bg-[rgb(249_245_236)] max-sm:min-h-auto"
 					aria-hidden="true">
 					{
 						vvstudios.coverImage ? (
 							<Image
-								class="preview-image"
+								class="preview-image block h-full w-full object-cover"
 								src={vvstudios.coverImage}
 								alt=""
 								loading="eager"
@@ -107,18 +117,25 @@ const heroTitleLines = ["Welcome to", "Leo's Website!"];
 						) : null
 					}
 				</div>
-				<div class="project-meta flex flex-1 flex-col justify-between px-0 pt-4 pb-[0.1rem]">
+				<div
+					class="project-meta [&_.tool-badge-shape]:bg-paper flex flex-1 flex-col justify-between px-0 pt-4 pb-[0.1rem] [&_.tool-badge-shape]:shadow-[var(--shadow-badge-rest)] max-sm:[&_.tool-badge-shape]:px-[0.45rem] max-sm:[&_.tool-badge-shape]:text-[0.95rem] [&_.tool-badges]:gap-[0.45rem] [&_.tool-badges]:pt-[0.8rem] max-sm:[&_.tool-badges]:gap-[0.3rem] max-sm:[&_.tool-badges]:pt-[0.8rem]">
 					<div class="flex flex-col gap-[0.7rem]">
 						<div class="project-title flex flex-col items-start gap-[0.35rem]">
 							<HighlightText
 								tag="h4"
 								variant="yellow"
-								class="project-title-highlight">
+								class="project-title-highlight font-hand text-hand-title-md text-handwriting m-0 leading-[0.5] font-bold [--highlight-bottom:-0.1em] [--highlight-color:var(--color-highlight-yellow-strong)] [--highlight-left:-0.04em] [--highlight-right:-0.03em] [--highlight-top:-0.1em]">
 								{vvstudios.title}
 							</HighlightText>
-							<span class="project-subtitle">{vvstudios.project}</span>
+							<span
+								class="project-subtitle font-hand text-muted text-[length:var(--type-hand-size-label)] font-bold tracking-[0.02em]">
+								{vvstudios.project}
+							</span>
 						</div>
-						<p>{vvstudios.description}</p>
+						<p
+							class="font-body text-muted m-0 text-base leading-[1.45] font-light max-sm:text-[0.95rem]">
+							{vvstudios.description}
+						</p>
 					</div>
 					<ToolBadges
 						tools={vvstudios.tools ?? []}
@@ -140,207 +157,3 @@ const heroTitleLines = ["Welcome to", "Leo's Website!"];
 <script>
 	import "../animation/heroAnimations.ts";
 </script>
-
-<style>
-	h1 {
-		margin: 0;
-		font-size: var(--type-hand-size-display-lg);
-		font-weight: 700;
-		letter-spacing: -0.04em;
-		line-height: 0.96;
-		text-align: center;
-		text-wrap: balance;
-		max-width: 12ch;
-	}
-
-	.hero-title-line {
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		overflow: hidden;
-		width: fit-content;
-		margin: 0 auto;
-	}
-
-	.hero-title-line + .hero-title-line {
-		margin-top: 0.08em;
-	}
-
-	.hero-title-text {
-		display: inline-block;
-	}
-
-	h2 {
-		margin: 0;
-		font-size: var(--type-hand-size-display-sm);
-		line-height: 1.05;
-		letter-spacing: -0.02em;
-		text-align: center;
-		text-wrap: balance;
-	}
-
-	.project-card {
-		display: flex;
-		width: min(100%, 70rem);
-		color: var(--color-text-body);
-		text-decoration: none;
-	}
-
-	.project-frame {
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		width: 100%;
-		min-height: 35rem;
-		padding: 0.9rem;
-		border: 0.18rem solid rgb(31 30 25 / 0.14);
-		background: rgb(255 253 246);
-		box-shadow: var(--shadow-paper-rest);
-		transform: rotate(-0.35deg);
-		transition:
-			box-shadow 200ms ease,
-			transform 200ms ease;
-	}
-
-	.project-frame::before {
-		content: "";
-		position: absolute;
-		top: 0;
-		left: 50%;
-		width: var(--size-project-tape-width);
-		height: var(--size-project-tape-height);
-		transform: translate(-50%, -50%) rotate(1.2deg);
-		background: var(--color-tape);
-		pointer-events: none;
-		z-index: 1;
-	}
-
-	.project-card:hover .project-frame,
-	.project-card:focus-within .project-frame {
-		box-shadow: var(--shadow-paper-hover);
-		transform: translateY(-4px) rotate(-0.35deg);
-	}
-
-	.project-card:hover :global(.project-title-highlight)::before,
-	.project-card:focus-within :global(.project-title-highlight)::before {
-		transform: var(--highlight-transform-active, scaleX(1) skewX(-4deg) rotate(-1.2deg));
-		opacity: 1;
-	}
-
-	.preview {
-		width: 100%;
-		aspect-ratio: 16 / 9;
-		min-height: 17.25rem;
-		background: rgb(249 245 236);
-		overflow: hidden;
-	}
-
-	.preview-image {
-		display: block;
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
-
-	:global(.project-title-highlight) {
-		margin: 0;
-		font-family: var(--font-handwriting);
-		font-size: var(--type-hand-size-title-md);
-		font-weight: 700;
-		line-height: 0.5;
-		color: var(--color-text-handwriting);
-		--highlight-color: var(--color-highlight-yellow-strong);
-		--highlight-top: -0.1em;
-		--highlight-bottom: -0.1em;
-		--highlight-left: -0.04em;
-		--highlight-right: -0.03em;
-	}
-
-	.project-subtitle {
-		font-family: var(--font-handwriting);
-		font-size: var(--type-hand-size-label);
-		font-weight: 700;
-		letter-spacing: 0.02em;
-		color: var(--color-text-muted);
-	}
-
-	.project-meta p {
-		margin: 0;
-		font-family: var(--font-sans);
-		font-size: var(--type-sans-size-body);
-		font-weight: var(--type-sans-weight-regular);
-		line-height: 1.45;
-		color: var(--color-text-muted);
-	}
-
-	.project-meta :global(.tool-badges) {
-		gap: 0.45rem;
-		padding-top: 1.2rem;
-	}
-
-	.project-meta :global(.tool-badge-shape) {
-		background: var(--color-surface-paper);
-		box-shadow: var(--shadow-badge-rest);
-	}
-
-	.hero-note {
-		margin: 0;
-		font-family: var(--font-handwriting);
-		color: var(--color-text-handwriting);
-		font-size: var(--type-hand-size-body);
-		text-align: center;
-	}
-
-	@media (max-width: 640px) {
-		h1 {
-			font-size: var(--type-hand-size-display-lg);
-			max-width: 10ch;
-		}
-
-		h2 {
-			font-size: var(--type-hand-size-display-sm);
-			max-width: 15ch;
-		}
-
-		.hero-actions :global(.imperfect-button) {
-			width: 100%;
-			min-height: 3rem;
-			padding: 1rem 1rem;
-			font-size: 1.5rem;
-		}
-
-		.hero-actions :global(.imperfect-button > span) {
-			line-height: 1.05;
-		}
-
-		.hero-note {
-			font-size: 1rem;
-			text-wrap: balance;
-		}
-
-		.project-meta :global(.tool-badges) {
-			gap: 0.3rem;
-			padding-top: 0.8rem;
-		}
-
-		.project-meta :global(.tool-badge-shape) {
-			padding: 0 0.45rem;
-			font-size: 0.95rem;
-		}
-
-		.project-frame {
-			min-height: auto;
-			transform: none;
-		}
-
-		.preview {
-			min-height: auto;
-		}
-
-		.project-card:hover .project-frame,
-		.project-card:focus-within .project-frame {
-			transform: translateY(-4px);
-		}
-	}
-</style>
