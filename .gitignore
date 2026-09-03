@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# verification evidence (keep the skill; drop run artifacts)
+.verification-evidence/

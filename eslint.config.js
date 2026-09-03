@@ -6,7 +6,7 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-	{ ignores: ["dist/", ".astro/"] },
+	{ ignores: ["dist/", ".astro/", ".verification-evidence/"] },
 	eslint.configs.recommended,
 	...tseslint.configs.recommended,
 	...eslintPluginAstro.configs["flat/recommended"],
