@@ -29,6 +29,9 @@
 		sky: "var(--color-highlight-sky)",
 	};
 
+	const navLinkHighlightStyle =
+		"--highlight-top: 0.4em; --highlight-bottom: 0.6em; --highlight-left: -0.04em; --highlight-right: -0.03em;";
+
 	export let home: Props["home"] = false;
 
 	let isScrolled = false;
@@ -60,7 +63,7 @@
 	on:resize|passive={syncSiteNavState} />
 
 <nav
-	class="fixed inset-x-0 top-0 isolate z-50 flex items-center justify-between gap-4 px-(--page-gutter) max-[820px]:flex-wrap max-[820px]:py-1"
+	class="max-nav:flex-wrap max-nav:items-center max-nav:py-1 fixed inset-x-0 top-0 isolate z-50 flex items-center justify-between gap-4 px-(--page-gutter)"
 	class:is-scrolled={isScrolled}
 	class:nav-fade-in={home}>
 	<div
@@ -81,14 +84,14 @@
 		</svg>
 	</div>
 
-	<div class="nav-brand font-bold max-[820px]:flex-[1_1_auto]">
+	<div class="nav-brand max-nav:flex-[1_1_auto] relative z-1 font-bold">
 		<a
-			class="nav-link inline-block no-underline"
+			class="nav-link group inline-block no-underline"
 			on:click={closeMenu}
 			href="/">
 			<span
-				class="nav-link-text selectable"
-				style={`--highlight-color: ${highlightByVariant.lime};`}>
+				class="nav-link-text highlight-text font-hand text-hand-title-md max-nav:text-hand-title-sm px-3 py-3.5 leading-tight transition-transform duration-150 select-text group-active:scale-95"
+				style={`${navLinkHighlightStyle} --highlight-color: ${highlightByVariant.lime};`}>
 				Leo Zhou
 			</span>
 		</a>
@@ -96,14 +99,14 @@
 
 	<button
 		type="button"
-		class="menu-toggle text-handwriting hidden cursor-pointer items-center justify-center border-none bg-transparent p-[0.4rem] max-[820px]:inline-flex max-[820px]:h-[3.05rem] max-[820px]:w-[3.05rem] min-[821px]:h-[2.8rem] min-[821px]:w-[2.8rem]"
+		class="menu-toggle text-handwriting focus-visible:outline-accent max-nav:inline-flex max-nav:h-[3.05rem] max-nav:w-[3.05rem] min-nav:h-[2.8rem] min-nav:w-[2.8rem] hidden cursor-pointer items-center justify-center border-none bg-transparent p-1.5 focus-visible:outline-2 focus-visible:outline-offset-2"
 		class:is-open={isMenuOpen}
 		on:click={toggleMenu}
 		aria-expanded={isMenuOpen}
 		aria-controls="site-nav-links"
 		aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}>
 		<span
-			class="menu-toggle-icon relative block h-[1.1rem] w-[1.4rem] max-[820px]:h-[1.28rem] max-[820px]:w-[1.65rem]"
+			class="menu-toggle-icon max-nav:h-[1.28rem] max-nav:w-[1.65rem] relative block h-[1.1rem] w-[1.4rem]"
 			aria-hidden="true">
 			<span class="menu-toggle-bar bar-1"></span>
 			<span class="menu-toggle-bar bar-2"></span>
@@ -113,16 +116,16 @@
 
 	<div
 		id="site-nav-links"
-		class="nav-links max-[820px]:bg-page max-[820px]:border-border-soft-token min-w-0 flex-wrap items-center justify-end gap-4 max-[820px]:order-3 max-[820px]:hidden max-[820px]:w-full max-[820px]:flex-col max-[820px]:items-start max-[820px]:justify-start max-[820px]:gap-[0.1rem] max-[820px]:border max-[820px]:border-solid max-[820px]:px-0 max-[820px]:pt-[0.35rem] max-[820px]:pb-2 min-[821px]:flex"
+		class="nav-links max-nav:bg-page max-nav:border-border-soft-token max-nav:order-3 max-nav:hidden max-nav:w-full max-nav:flex-col max-nav:items-start max-nav:justify-start max-nav:gap-px max-nav:border max-nav:border-solid max-nav:px-0 max-nav:pt-1.5 max-nav:pb-2 min-nav:flex relative z-1 min-w-0 flex-wrap items-center justify-end gap-4"
 		class:is-open={isMenuOpen}>
 		{#each links as link (link.href)}
 			<a
-				class="nav-link inline-block no-underline max-[820px]:w-full"
+				class="nav-link group max-nav:w-full inline-block no-underline"
 				on:click={closeMenu}
 				href={link.href}>
 				<span
-					class="nav-link-text"
-					style={`--highlight-color: ${highlightByVariant[link.variant]};`}>
+					class="nav-link-text highlight-text font-hand text-hand-title-md max-nav:w-full px-3 py-3.5 leading-tight transition-transform duration-150 select-none group-active:scale-95"
+					style={`${navLinkHighlightStyle} --highlight-color: ${highlightByVariant[link.variant]};`}>
 					{link.label}
 				</span>
 			</a>
@@ -131,10 +134,6 @@
 </nav>
 
 <style>
-	nav {
-		box-sizing: border-box;
-	}
-
 	nav::before {
 		content: "";
 		position: absolute;
@@ -200,14 +199,11 @@
 			4% 98%,
 			0 94%
 		);
-		mix-blend-mode: multiply;
 		opacity: 0;
 		transform: translateY(-0.4rem);
 		transition:
 			opacity 220ms ease,
 			transform 220ms ease;
-		pointer-events: none;
-		z-index: 0;
 	}
 
 	nav.is-scrolled .nav-grain {
@@ -224,20 +220,6 @@
 		to {
 			opacity: 1;
 		}
-	}
-
-	nav > :not(.nav-grain) {
-		position: relative;
-		z-index: 1;
-	}
-
-	.menu-toggle {
-		color: var(--color-text-handwriting);
-	}
-
-	.menu-toggle:focus-visible {
-		outline: 2px solid var(--color-highlight-sky);
-		outline-offset: 2px;
 	}
 
 	.menu-toggle-bar {
@@ -282,90 +264,13 @@
 		transform: translateY(-0.622rem) rotate(-45deg);
 	}
 
-	.nav-link-text {
-		position: relative;
-		display: inline-block;
-		font-family: var(--font-handwriting);
-		font-size: var(--type-hand-size-title-md);
-		line-height: 1.1;
-		--highlight-top: 0.4em;
-		--highlight-bottom: 0.6em;
-		--highlight-left: -0.04em;
-		--highlight-right: -0.03em;
-		padding: 0.85rem 0.7rem;
-		transition: transform 120ms ease;
-		z-index: 0;
-		user-select: none;
-	}
-
-	.nav-link-text.selectable {
-		user-select: text;
-	}
-
-	.nav-link-text::before {
-		content: "";
-		position: absolute;
-		left: var(--highlight-left);
-		right: var(--highlight-right);
-		top: var(--highlight-top);
-		bottom: var(--highlight-bottom);
-		background: var(--highlight-color);
-		clip-path: polygon(
-			2% 22%,
-			8% 8%,
-			35% 5%,
-			48% 14%,
-			78% 18%,
-			98% 24%,
-			96% 82%,
-			88% 95%,
-			57% 94%,
-			42% 86%,
-			28% 93%,
-			13% 85%,
-			4% 91%
-		);
-		transform-origin: left;
-		transform: var(--highlight-transform-base, scaleX(0.2) skewX(-4deg) rotate(-1.2deg));
-		opacity: 0;
-		transition:
-			transform 220ms ease,
-			opacity 100ms ease;
-		z-index: -1;
-		pointer-events: none;
-	}
-
-	.nav-link:hover .nav-link-text::before,
-	.nav-link:focus-visible .nav-link-text::before {
-		transform: var(--highlight-transform-active, scaleX(1) skewX(-4deg) rotate(-1.2deg));
-		opacity: 1;
-	}
-
-	.nav-link:active .nav-link-text {
-		transform: scale(0.95);
-	}
-
 	@media (max-width: 820px) {
-		nav {
-			align-items: center;
-		}
-
 		.menu-toggle-bar {
 			height: 2.5px;
 		}
 
 		.nav-links.is-open {
 			display: flex;
-		}
-
-		.nav-links .nav-link-text {
-			width: 100%;
-			font-size: var(--type-hand-size-title-md);
-			padding: 0.82rem 0.75rem;
-		}
-
-		.nav-brand .nav-link-text {
-			font-size: var(--type-hand-size-title-sm);
 		}
 	}
 

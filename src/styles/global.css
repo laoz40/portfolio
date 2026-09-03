@@ -10,11 +10,14 @@
 	--color-heading: var(--color-text-heading);
 	--color-muted: var(--color-text-muted);
 	--color-handwriting: var(--color-text-handwriting);
+	--color-foreground: var(--color-text-default);
 	--color-border-soft-token: var(--color-border-soft);
 	--color-border-medium-token: var(--color-border-medium);
 	--text-hand-body: var(--type-hand-size-body);
 	--text-hand-label-sm: var(--type-hand-size-label-sm);
+	--text-hand-title-sm: var(--type-hand-size-title-sm);
 	--text-hand-title-md: var(--type-hand-size-title-md);
+	--text-hand-title-lg: var(--type-hand-size-title-lg);
 	--breakpoint-nav: 820px;
 	--breakpoint-case-study: 1450px;
 }
