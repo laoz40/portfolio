@@ -57,12 +57,12 @@ const contactLinks: ContactLink[] = [
 	pathname="/contact">
 	<ObfuscatedEmailRuntime />
 	<section class="contact-page">
-		<h1>Get in touch</h1>
+		<h1 class="text-hand-display-md m-0 mb-3 text-center font-bold">Get in touch</h1>
 		<div
-			class="contact-actions mx-auto mt-10 flex w-full max-w-[20rem] flex-col items-center gap-4">
+			class="contact-actions mx-auto mt-10 flex w-full max-w-80 flex-col items-center gap-4 [&_.imperfect-button]:w-full">
 			{
 				contactEmail ? (
-					<div class="contact-link-reveal">
+					<div class="contact-link-reveal w-full max-w-80">
 						<ImperfectButton
 							href="#"
 							fill="var(--color-home-button-yellow)"
@@ -75,7 +75,7 @@ const contactLinks: ContactLink[] = [
 			}
 			{
 				contactLinks.map((link) => (
-					<div class="contact-link-reveal">
+					<div class="contact-link-reveal w-full max-w-80">
 						<ImperfectButton
 							href={link.href}
 							fill={link.fill}
@@ -87,36 +87,13 @@ const contactLinks: ContactLink[] = [
 				))
 			}
 		</div>
-		<p class="contact-thanks contact-thanks-reveal">Thanks for visiting my website :)</p>
+		<p
+			class="contact-thanks contact-thanks-reveal font-hand text-hand-title-sm text-handwriting mx-auto mt-8 text-center text-balance">
+			Thanks for visiting my website :)
+		</p>
 	</section>
 </DefaultLayout>
 
 <script>
 	import "../animation/contactAnimations.ts";
 </script>
-
-<style>
-	h1 {
-		margin: 0 0 0.75rem;
-		font-size: var(--type-hand-size-display-md);
-		font-weight: 700;
-		text-align: center;
-	}
-
-	.contact-actions :global(.imperfect-button) {
-		width: 100%;
-	}
-
-	.contact-link-reveal {
-		width: min(100%, 20rem);
-	}
-
-	.contact-thanks {
-		margin: 2rem auto 0;
-		font-family: var(--font-handwriting);
-		color: var(--color-text-handwriting);
-		text-align: center;
-		text-wrap: balance;
-		font-size: var(--type-hand-size-title-sm);
-	}
-</style>
