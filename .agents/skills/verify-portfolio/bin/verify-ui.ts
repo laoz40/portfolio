@@ -4,6 +4,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium, type Page } from "playwright";
 import { features, viewports, type FeatureRecipe, type ViewportName } from "./recipes.ts";
+import { driveAnimation } from "./animation-drive.ts";
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..");
 const evidenceRoot = join(repoRoot, ".verification-evidence");
@@ -420,6 +421,26 @@ async function drive(args: string[]): Promise<void> {
 	throw new Error("drive needs --feature <id> or both --page and --target");
 }
 
+async function animate(args: string[]): Promise<void> {
+	const instance = await loadInstance();
+	const url = instance?.url ?? baseUrlFromEnv();
+	if (!(await fetchOk(url))) {
+		throw new Error(`Nothing healthy at ${url}. Run launch, then doctor.`);
+	}
+
+	const runId = process.env.VERIFY_RUN_ID ?? String(Date.now());
+	const runDir = join(evidenceRoot, runId);
+	await mkdir(runDir, { recursive: true });
+	const viewportNames = parseViewports(readFlag(args, "--viewports"));
+	const featureId = readFlag(args, "--feature");
+	if (featureId === undefined) {
+		throw new Error("animate needs --feature <id>");
+	}
+
+	await driveAnimation({ url, featureId, viewportNames, args, runDir });
+	console.log(`Animated ${featureId}; evidence in ${runDir}`);
+}
+
 const command = process.argv[2];
 const commandArgs = process.argv.slice(3);
 
@@ -439,12 +460,17 @@ async function main(): Promise<void> {
 		return;
 	}
 
+	if (command === "animate") {
+		await animate(commandArgs);
+		return;
+	}
+
 	if (command === "cleanup") {
 		await cleanup();
 		return;
 	}
 
-	throw new Error("Usage: verify-ui launch|doctor|drive|cleanup");
+	throw new Error("Usage: verify-ui launch|doctor|drive|animate|cleanup");
 }
 
 try {

@@ -1,10 +1,6 @@
 import { animate } from "motion";
 import { prefersReducedMotion } from "./motionPreferences";
-
-const timings = {
-	thankYouDuration: 0.3,
-	ctaDuration: 0.3,
-};
+import { aboutTimings as timings } from "./timings";
 
 function runAboutActionsAnimation(): void {
 	const aboutPage = document.querySelector(".about-page");

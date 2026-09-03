@@ -39,3 +39,13 @@ Each feature file starts with an H1 title and one paragraph describing the user-
 - [Project carousel](./project-carousel.md) covers case-study media carousels.
 - [Project sidebar](./project-sidebar.md) covers on-this-page jump links.
 - [Footer](./footer.md) covers the contact footer on default layout pages.
+
+## Animations
+
+Motion checks use `pnpm verify:ui animate`, not `drive`. Read [animations/README.md](./animations/README.md), then the matching animation feature file.
+
+- [Hero sequence](./animations/hero-sequence.md) covers the home load choreography and featured CTA.
+- [Project cards](./animations/project-cards.md) covers the projects index stagger.
+- [Contact links](./animations/contact-links.md) covers contact link and thanks reveals.
+- [Footer reveal](./animations/footer-reveal.md) covers the footer clip-path stagger after scroll.
+- [About actions](./animations/about-actions.md) covers the about-page thank-you and CTA.
