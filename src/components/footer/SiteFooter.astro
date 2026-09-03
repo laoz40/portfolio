@@ -37,16 +37,17 @@ const footerLinks: FooterLink[] = linkedInUrl
 	<ObfuscatedEmailRuntime />
 	<div class="footer-cta-reveal grid justify-items-center gap-[0.2rem] text-balance">
 		<a
-			class="footer-cta-link"
+			class="footer-cta-link font-hand text-handwriting text-hand-title-lg text-center leading-none font-bold no-underline"
 			href="/contact">
 			If you've scrolled this far, you probably wanted these:
 		</a>
 	</div>
 
-	<div class="footer-links flex flex-wrap items-center justify-center gap-2">
+	<div
+		class="footer-links flex flex-wrap items-center justify-center gap-2 max-sm:[&_.nav-link-text]:text-2xl">
 		{
 			contactEmail ? (
-				<div class="footer-link-reveal">
+				<div class="footer-link-reveal inline-flex">
 					<NavLink
 						href="#"
 						variant="lime"
@@ -59,7 +60,7 @@ const footerLinks: FooterLink[] = linkedInUrl
 		}
 		{
 			footerLinks.map((link) => (
-				<div class="footer-link-reveal">
+				<div class="footer-link-reveal inline-flex">
 					<NavLink
 						href={link.href}
 						variant={link.variant}
@@ -73,12 +74,13 @@ const footerLinks: FooterLink[] = linkedInUrl
 	</div>
 
 	<div class="flex w-full flex-col items-center justify-center gap-[0.2rem]">
-		<p class="footer-copyright footer-copyright-reveal">
+		<p class="footer-copyright footer-copyright-reveal font-hand text-muted m-0">
 			<span aria-hidden="true">&copy;</span>
 			<span data-current-year>0000</span>
 			<span>Leo Zhou</span>
 		</p>
-		<p class="footer-note footer-note-reveal">
+		<p
+			class="footer-note footer-note-reveal font-hand text-muted m-4 text-center font-normal text-balance">
 			Handwriting typeface created by me. Please don't impersonate me.
 		</p>
 	</div>
@@ -87,50 +89,3 @@ const footerLinks: FooterLink[] = linkedInUrl
 <script>
 	import "../../animation/footerAnimations.ts";
 </script>
-
-<style>
-	footer {
-		display: grid;
-		grid-template-columns: 1fr;
-		align-items: start;
-		justify-items: center;
-		gap: 0.85rem;
-		margin-top: 10rem;
-		padding-bottom: 8rem;
-	}
-
-	.footer-link-reveal {
-		display: inline-flex;
-	}
-
-	.footer-cta-link {
-		font-family: var(--font-handwriting);
-		color: var(--color-text-handwriting);
-		font-size: var(--type-hand-size-title-lg);
-		font-weight: 700;
-		line-height: 1;
-		text-align: center;
-		text-decoration: none;
-	}
-
-	.footer-copyright {
-		margin: 0;
-		font-family: var(--font-handwriting);
-		color: var(--color-text-muted);
-	}
-
-	.footer-note {
-		margin: 1rem;
-		font-family: var(--font-handwriting);
-		font-weight: var(--type-hand-weight-regular);
-		color: var(--color-text-muted);
-		text-align: center;
-		text-wrap: balance;
-	}
-
-	@media (max-width: 640px) {
-		.footer-links :global(.nav-link-text) {
-			font-size: 1.5rem;
-		}
-	}
-</style>
