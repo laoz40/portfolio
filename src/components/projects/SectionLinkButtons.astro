@@ -10,7 +10,7 @@ const { links, ariaLabel = "Project links" } = Astro.props as {
 
 {
 	links.length > 0 ? (
-		<div class="section-link-buttons">
+		<div class="mt-5 flex justify-start max-sm:mt-2">
 			<ProjectLinkButtons
 				links={links}
 				ariaLabel={ariaLabel}
@@ -18,17 +18,3 @@ const { links, ariaLabel = "Project links" } = Astro.props as {
 		</div>
 	) : null
 }
-
-<style>
-	.section-link-buttons {
-		display: flex;
-		justify-content: flex-start;
-		margin-top: 1.25rem;
-	}
-
-	@media (max-width: 640px) {
-		.section-link-buttons {
-			margin-top: 0.5rem;
-		}
-	}
-</style>

@@ -20,11 +20,17 @@ function isExternalHref(href: string): boolean {
 ---
 
 <nav
-	class="project-link-buttons"
+	class="grid w-[min(100%,21rem)] grid-cols-2 items-stretch gap-0 max-[520px]:grid-cols-1 max-[520px]:gap-2"
 	aria-label={ariaLabel}>
 	{
 		links.map((link, index) => (
-			<div class:list={["project-link-buttons__item", `project-link-buttons__item--${index + 1}`]}>
+			<div
+				class:list={[
+					"min-w-0 [&_.imperfect-button]:min-h-12 [&_.imperfect-button]:w-full [&_.imperfect-button]:p-4 [&_.imperfect-button]:text-center [&_.imperfect-button]:text-2xl [&_.imperfect-button]:leading-[1.05] [&_.imperfect-button]:font-bold max-[520px]:[&_.imperfect-button]:min-h-[4.25rem] max-[520px]:[&_.imperfect-button]:px-4 max-[520px]:[&_.imperfect-button]:py-[0.85rem] max-[520px]:[&_.imperfect-button]:text-[1.8rem] [&_.imperfect-button_span]:inline-block [&_.imperfect-button_span]:max-w-[10ch] [&_.imperfect-button_span]:text-balance",
+					index === 0
+						? "project-link-buttons__item--1 -rotate-[0.65deg] motion-reduce:rotate-0 max-[520px]:rotate-0"
+						: "project-link-buttons__item--2 translate-y-[0.15rem] rotate-[0.7deg] motion-reduce:translate-y-0 motion-reduce:rotate-0 max-[520px]:translate-y-0 max-[520px]:rotate-0",
+				]}>
 				<ImperfectButton
 					href={link.href}
 					target={link.target ?? (isExternalHref(link.href) ? "_blank" : undefined)}
@@ -36,66 +42,3 @@ function isExternalHref(href: string): boolean {
 		))
 	}
 </nav>
-
-<style>
-	.project-link-buttons {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 0;
-		width: min(100%, 21rem);
-		align-items: stretch;
-	}
-
-	.project-link-buttons__item {
-		min-width: 0;
-	}
-
-	.project-link-buttons__item--1 {
-		transform: rotate(-0.65deg);
-	}
-
-	.project-link-buttons__item--2 {
-		transform: rotate(0.7deg) translateY(0.15rem);
-	}
-
-	.project-link-buttons__item :global(.imperfect-button) {
-		width: 100%;
-		min-height: 3rem;
-		padding: 1rem 1rem;
-		font-size: 1.5rem;
-		font-weight: 700;
-		line-height: 1.05;
-		text-align: center;
-	}
-
-	.project-link-buttons__item :global(.imperfect-button span) {
-		display: inline-block;
-		max-width: 10ch;
-		text-wrap: balance;
-	}
-
-	@media (max-width: 520px) {
-		.project-link-buttons {
-			grid-template-columns: 1fr;
-			gap: 0.5rem;
-		}
-
-		.project-link-buttons__item :global(.imperfect-button) {
-			min-height: 4.25rem;
-			padding: 0.85rem 1rem;
-			font-size: 1.8rem;
-		}
-
-		.project-link-buttons__item--1,
-		.project-link-buttons__item--2 {
-			transform: none;
-		}
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.project-link-buttons__item--1,
-		.project-link-buttons__item--2 {
-			transform: none;
-		}
-	}
-</style>

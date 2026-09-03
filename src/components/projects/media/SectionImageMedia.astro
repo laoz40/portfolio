@@ -10,11 +10,12 @@ const { image, alt, caption } = Astro.props as {
 ---
 
 <figure
-	class="section-media-frame taped-frame w-full min-w-0 self-center pt-[calc(var(--size-project-tape-height)*0.5)]"
+	class="section-media-frame taped-frame max-case-study:w-full min-case-study:w-[min(var(--section-media-visual-max-width,var(--section-media-max-width)),max(100%,var(--section-media-visual-max-width,var(--section-media-max-width))))] min-case-study:justify-self-start w-[min(100%,var(--section-media-max-width))] min-w-0 self-center pt-[calc(var(--size-project-tape-height)*0.5)] [--paper-frame-border-color:var(--color-surface-paper)] [--paper-frame-shadow:0_0_0_0.18rem_rgb(31_30_25/0.08),var(--shadow-paper-medium)] max-sm:[&::before]:rotate-[1.2deg]"
 	style={`--section-media-max-width: ${image.width}px; --section-media-aspect-ratio: ${image.width} / ${image.height}; --tape-angle: calc(var(--section-media-tilt, 0deg) + 1.2deg);`}>
-	<div class="section-media paper-frame">
+	<div
+		class="section-media paper-frame relative [aspect-ratio:var(--section-media-aspect-ratio)] min-w-0 rotate-[var(--section-media-tilt,0deg)] overflow-hidden max-sm:rotate-0">
 		<Image
-			class="section-media-image"
+			class="section-media-image block h-full w-full object-cover"
 			src={image}
 			alt={alt ?? ""}
 			width={image.width}
@@ -23,61 +24,9 @@ const { image, alt, caption } = Astro.props as {
 			decoding="async"
 		/>
 	</div>
-	{caption ? <figcaption class="section-media-caption">{caption}</figcaption> : null}
+	{
+		caption ? (
+			<figcaption class="font-hand text-hand-label mt-3 leading-[1.4]">{caption}</figcaption>
+		) : null
+	}
 </figure>
-
-<style>
-	.section-media-frame {
-		--paper-frame-border-color: var(--color-surface-paper);
-		--paper-frame-shadow: 0 0 0 0.18rem rgb(31 30 25 / 0.08), var(--shadow-paper-medium);
-		width: min(100%, var(--section-media-max-width));
-	}
-
-	@media (min-width: 1450.02px) {
-		.section-media-frame {
-			width: min(
-				var(--section-media-visual-max-width, var(--section-media-max-width)),
-				max(100%, var(--section-media-visual-max-width, var(--section-media-max-width)))
-			);
-			justify-self: start;
-		}
-	}
-
-	.section-media {
-		position: relative;
-		aspect-ratio: var(--section-media-aspect-ratio);
-		transform: rotate(var(--section-media-tilt, 0deg));
-		overflow: hidden;
-		min-width: 0;
-	}
-
-	.section-media-image {
-		display: block;
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
-
-	.section-media-caption {
-		margin: 0.75rem 0 0;
-		font-family: var(--font-handwriting);
-		font-size: var(--type-hand-size-label);
-		line-height: 1.4;
-	}
-
-	@media (max-width: 1450px) {
-		.section-media-frame {
-			width: 100%;
-		}
-	}
-
-	@media (max-width: 640px) {
-		.section-media {
-			transform: none;
-		}
-
-		.section-media-frame::before {
-			transform: translate(-50%, -50%) rotate(1.2deg);
-		}
-	}
-</style>
