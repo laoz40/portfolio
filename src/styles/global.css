@@ -19,6 +19,7 @@
 	--text-hand-title-md: var(--type-hand-size-title-md);
 	--text-hand-title-lg: var(--type-hand-size-title-lg);
 	--text-hand-display-sm: var(--type-hand-size-display-sm);
+	--text-hand-display-md: var(--type-hand-size-display-md);
 	--text-hand-display-lg: var(--type-hand-size-display-lg);
 	--breakpoint-nav: 820px;
 	--breakpoint-case-study: 1450px;
