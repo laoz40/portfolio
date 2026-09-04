@@ -5,16 +5,47 @@ const { href, variant = "yellow", selectable = false, target, rel, ...attributes
 ---
 
 <a
-	class="nav-link group inline-block no-underline"
+	class="nav-link inline-block no-underline"
 	href={href}
 	target={target}
 	rel={rel}
 	{...attributes}>
 	<HighlightText
-		class="nav-link-text font-hand text-hand-title-md px-3 py-3.5 leading-tight transition-transform duration-150 group-active:scale-95"
+		class="nav-link-text"
 		variant={variant}
-		selectable={selectable}
-		style="--highlight-top: 0.4em; --highlight-bottom: 0.6em; --highlight-left: -0.04em; --highlight-right: -0.03em;">
+		selectable={selectable}>
 		<slot />
 	</HighlightText>
 </a>
+
+<style>
+	.nav-link :global(.nav-link-text) {
+		font-family: var(--font-handwriting);
+		font-size: var(--type-hand-size-title-md);
+		line-height: 1.1;
+		--highlight-top: 0.4em;
+		--highlight-bottom: 0.6em;
+		--highlight-left: -0.04em;
+		--highlight-right: -0.03em;
+		padding: 0.85rem 0.7rem;
+		transition: transform 120ms ease;
+	}
+
+	.nav-link :global(.nav-link-text:not(.selectable)) {
+		user-select: none;
+	}
+
+	.nav-link :global(.nav-link-text.selectable) {
+		user-select: text;
+	}
+
+	.nav-link:hover :global(.nav-link-text)::before,
+	.nav-link:focus-visible :global(.nav-link-text)::before {
+		transform: var(--highlight-transform-active, scaleX(1) skewX(-4deg) rotate(-1.2deg));
+		opacity: 1;
+	}
+
+	.nav-link:active :global(.nav-link-text) {
+		transform: scale(0.95);
+	}
+</style>

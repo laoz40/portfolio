@@ -29,9 +29,6 @@
 		sky: "var(--color-highlight-sky)",
 	};
 
-	const navLinkHighlightStyle =
-		"--highlight-top: 0.4em; --highlight-bottom: 0.6em; --highlight-left: -0.04em; --highlight-right: -0.03em;";
-
 	export let home: Props["home"] = false;
 
 	let isScrolled = false;
@@ -69,7 +66,7 @@
 	<div
 		class="nav-grain pointer-events-none absolute inset-x-0 top-0 bottom-[0.55rem] z-0 mix-blend-multiply"
 		aria-hidden="true">
-		<svg class="block h-full w-full">
+		<svg class="nav-grain-svg">
 			<filter id="nav-grain-filter">
 				<feTurbulence
 					type="fractalNoise"
@@ -86,12 +83,12 @@
 
 	<div class="nav-brand max-nav:flex-[1_1_auto] relative z-1 font-bold">
 		<a
-			class="nav-link group inline-block no-underline"
+			class="nav-link inline-block no-underline"
 			on:click={closeMenu}
 			href="/">
 			<span
-				class="nav-link-text highlight-text font-hand text-hand-title-md max-nav:text-hand-title-sm px-3 py-3.5 leading-tight transition-transform duration-150 select-text group-active:scale-95"
-				style={`${navLinkHighlightStyle} --highlight-color: ${highlightByVariant.lime};`}>
+				class="nav-link-text selectable"
+				style={`--highlight-color: ${highlightByVariant.lime};`}>
 				Leo Zhou
 			</span>
 		</a>
@@ -120,12 +117,12 @@
 		class:is-open={isMenuOpen}>
 		{#each links as link (link.href)}
 			<a
-				class="nav-link group max-nav:w-full inline-block no-underline"
+				class="nav-link max-nav:w-full inline-block no-underline"
 				on:click={closeMenu}
 				href={link.href}>
 				<span
-					class="nav-link-text highlight-text font-hand text-hand-title-md max-nav:w-full px-3 py-3.5 leading-tight transition-transform duration-150 select-none group-active:scale-95"
-					style={`${navLinkHighlightStyle} --highlight-color: ${highlightByVariant[link.variant]};`}>
+					class="nav-link-text"
+					style={`--highlight-color: ${highlightByVariant[link.variant]};`}>
 					{link.label}
 				</span>
 			</a>
@@ -180,6 +177,12 @@
 		transform: translateY(0);
 	}
 
+	.nav-grain-svg {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
 	.nav-grain {
 		clip-path: polygon(
 			0 0,
@@ -209,6 +212,69 @@
 	nav.is-scrolled .nav-grain {
 		opacity: 0.3;
 		transform: translateY(0);
+	}
+
+	.nav-link-text {
+		position: relative;
+		display: inline-block;
+		font-family: var(--font-handwriting);
+		font-size: var(--type-hand-size-title-md);
+		line-height: 1.1;
+		--highlight-top: 0.4em;
+		--highlight-bottom: 0.6em;
+		--highlight-left: -0.04em;
+		--highlight-right: -0.03em;
+		padding: 0.85rem 0.7rem;
+		transition: transform 120ms ease;
+		z-index: 0;
+		user-select: none;
+	}
+
+	.nav-link-text.selectable {
+		user-select: text;
+	}
+
+	.nav-link-text::before {
+		content: "";
+		position: absolute;
+		left: var(--highlight-left);
+		right: var(--highlight-right);
+		top: var(--highlight-top);
+		bottom: var(--highlight-bottom);
+		background: var(--highlight-color);
+		clip-path: polygon(
+			2% 22%,
+			8% 8%,
+			35% 5%,
+			48% 14%,
+			78% 18%,
+			98% 24%,
+			96% 82%,
+			88% 95%,
+			57% 94%,
+			42% 86%,
+			28% 93%,
+			13% 85%,
+			4% 91%
+		);
+		transform-origin: left;
+		transform: var(--highlight-transform-base, scaleX(0.2) skewX(-4deg) rotate(-1.2deg));
+		opacity: 0;
+		transition:
+			transform 220ms ease,
+			opacity 100ms ease;
+		z-index: -1;
+		pointer-events: none;
+	}
+
+	.nav-link:hover .nav-link-text::before,
+	.nav-link:focus-visible .nav-link-text::before {
+		transform: var(--highlight-transform-active, scaleX(1) skewX(-4deg) rotate(-1.2deg));
+		opacity: 1;
+	}
+
+	.nav-link:active .nav-link-text {
+		transform: scale(0.95);
 	}
 
 	nav.nav-fade-in {
@@ -271,6 +337,16 @@
 
 		.nav-links.is-open {
 			display: flex;
+		}
+
+		.nav-links .nav-link-text {
+			width: 100%;
+			font-size: var(--type-hand-size-title-md);
+			padding: 0.82rem 0.75rem;
+		}
+
+		.nav-brand .nav-link-text {
+			font-size: var(--type-hand-size-title-sm);
 		}
 	}
 
