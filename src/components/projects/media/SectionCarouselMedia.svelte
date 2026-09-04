@@ -173,13 +173,12 @@
 			<div class="section-carousel-track flex w-full min-w-0">
 				{#each items as item, index (item.image.src)}
 					<div
-						class="section-carousel-slide max-sm:bg-paper relative flex [aspect-ratio:var(--section-carousel-aspect-ratio,4/3)] min-w-full items-end overflow-hidden !bg-[var(--section-carousel-background,var(--color-media-fallback))] max-sm:grid max-sm:[aspect-ratio:auto] max-sm:items-stretch"
+						class="section-carousel-slide"
 						role="group"
 						aria-label={`Slide ${index + 1} of ${slideCount}`}>
-						<div
-							class="section-carousel-media absolute inset-0 z-0 max-sm:relative max-sm:inset-auto max-sm:[aspect-ratio:var(--section-carousel-aspect-ratio,4/3)] max-sm:aspect-[4/3]">
+						<div class="section-carousel-media">
 							<img
-								class="section-carousel-image block h-full w-full [object-fit:var(--section-carousel-image-fit,cover)]"
+								class="section-carousel-image"
 								src={item.image.src}
 								alt={item.alt}
 								width={item.image.width}
@@ -187,17 +186,12 @@
 								loading="lazy"
 								decoding="async" />
 						</div>
-						<div
-							class="section-carousel-content max-sm:bg-paper relative z-[2] flex w-full flex-col items-start gap-2 px-8 pt-4 pb-[2.8rem] max-sm:gap-[0.2rem] max-sm:px-2 max-sm:pt-0 max-sm:pb-0">
-							<h4
-								class="section-carousel-title font-body max-sm:text-body m-0 text-[length:var(--type-sans-size-title)] leading-[var(--type-sans-leading-tight)] font-bold text-balance text-[var(--color-text-on-dark)] max-sm:my-2">
+						<div class="section-carousel-content">
+							<h4 class="section-carousel-title">
 								{item.title ?? `Slide ${index + 1}`}
 							</h4>
 							{#if item.description}
-								<p
-									class="section-carousel-description font-body max-sm:text-body m-0 text-base leading-[var(--type-sans-leading-reading)] font-light text-pretty text-[var(--color-text-on-dark)] max-sm:my-2">
-									{item.description}
-								</p>
+								<p class="section-carousel-description">{item.description}</p>
 							{/if}
 						</div>
 					</div>
@@ -209,7 +203,7 @@
 				{#each items as carouselItem, dotIndex (carouselItem.image.src)}
 					<button
 						type="button"
-						class="section-carousel-indicator h-[0.8rem] w-[0.8rem] cursor-pointer rounded-full border-0 bg-[var(--color-indicator-light)] p-0 transition-[transform,background-color,opacity] duration-150 hover:scale-[1.12] hover:bg-[var(--color-indicator-light-hover)] focus-visible:scale-[1.12] focus-visible:bg-[var(--color-indicator-light-hover)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-accent)] disabled:cursor-not-allowed disabled:opacity-40 aria-[current=true]:scale-[1.18] aria-[current=true]:bg-[var(--color-indicator-light-active)] max-sm:bg-[var(--color-indicator-dark)] max-sm:hover:bg-[var(--color-indicator-dark-hover)] max-sm:focus-visible:bg-[var(--color-indicator-dark-hover)] max-sm:aria-[current=true]:bg-[var(--color-indicator-dark-active)]"
+						class="section-carousel-indicator"
 						on:click={() => goTo(dotIndex)}
 						aria-label={`Go to slide ${dotIndex + 1}: ${carouselItem.title ?? carouselItem.alt}`}
 						aria-current={dotIndex === currentIndex ? "true" : "false"}
@@ -240,9 +234,52 @@
 </div>
 
 <style>
+	.section-carousel-frame {
+		--paper-frame-border-color: var(--color-surface-paper);
+		--paper-frame-shadow: 0 0 0 0.18rem rgb(31 30 25 / 0.08), var(--shadow-paper-medium);
+	}
+
 	.section-carousel-track {
 		transform: translateX(calc(var(--carousel-index, 0) * -100%));
 		transition: transform 260ms ease;
+	}
+
+	.section-carousel-viewport {
+		transform: rotate(var(--section-media-tilt, 0deg));
+	}
+
+	.section-carousel-slide {
+		position: relative;
+		display: flex;
+		min-width: 100%;
+		align-items: flex-end;
+		overflow: hidden;
+		aspect-ratio: var(--section-carousel-aspect-ratio, 4 / 3);
+		background: var(--section-carousel-background, var(--color-media-fallback)) !important;
+	}
+
+	.section-carousel-media {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+	}
+
+	.section-carousel-image {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: var(--section-carousel-image-fit, cover);
+	}
+
+	.section-carousel-content {
+		position: relative;
+		z-index: 2;
+		display: flex;
+		width: 100%;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.5rem;
+		padding: 1rem 2rem 2.8rem;
 	}
 
 	.section-carousel-media::before {
@@ -260,9 +297,101 @@
 		pointer-events: none;
 	}
 
+	.section-carousel-title {
+		font-family: var(--font-sans);
+		font-size: var(--type-sans-size-title);
+		font-weight: var(--type-sans-weight-emphasis);
+		line-height: var(--type-sans-leading-tight);
+		margin: 0;
+		color: var(--color-text-on-dark) !important;
+		text-wrap: balance;
+	}
+
+	.section-carousel-description {
+		font-family: var(--font-sans);
+		font-size: var(--type-sans-size-body);
+		font-weight: var(--type-sans-weight-regular);
+		line-height: var(--type-sans-leading-reading);
+		margin: 0;
+		color: var(--color-text-on-dark) !important;
+		text-wrap: pretty;
+	}
+
+	.section-carousel-indicator {
+		width: 0.8rem;
+		height: 0.8rem;
+		padding: 0;
+		border: 0;
+		border-radius: 999px;
+		background: var(--color-indicator-light);
+		cursor: pointer;
+		transition:
+			transform 180ms ease,
+			background-color 180ms ease,
+			opacity 180ms ease;
+	}
+
+	.section-carousel-indicator:hover,
+	.section-carousel-indicator:focus-visible {
+		transform: scale(1.12);
+		background: var(--color-indicator-light-hover);
+	}
+
+	.section-carousel-indicator[aria-current="true"] {
+		background: var(--color-indicator-light-active);
+		transform: scale(1.18);
+	}
+
+	.section-carousel-indicator:focus-visible {
+		outline: 2px solid var(--color-accent);
+		outline-offset: 3px;
+	}
+
 	@media (max-width: 640px) {
+		.section-carousel-viewport {
+			transform: none;
+		}
+
+		.section-carousel-slide {
+			display: grid;
+			aspect-ratio: auto;
+			align-items: stretch;
+			background: var(--color-surface-paper) !important;
+		}
+
+		.section-carousel-media {
+			position: relative;
+			inset: auto;
+			aspect-ratio: var(--section-carousel-aspect-ratio, 4 / 3);
+		}
+
 		.section-carousel-media::before {
 			display: none;
+		}
+
+		.section-carousel-content {
+			background: var(--color-surface-paper);
+			gap: 0.2rem;
+			padding: 0 0.5rem;
+		}
+
+		.section-carousel-title,
+		.section-carousel-description {
+			color: var(--color-text-body) !important;
+			margin: 0.5rem 0;
+		}
+
+		.section-carousel-indicator {
+			background: var(--color-indicator-dark);
+		}
+
+		.section-carousel-indicator:hover,
+		.section-carousel-indicator:focus-visible {
+			background: var(--color-indicator-dark-hover);
+		}
+
+		.section-carousel-indicator[aria-current="true"] {
+			background: var(--color-indicator-dark-active);
 		}
 	}
 
