@@ -5,6 +5,7 @@ import DefaultLayout from "../layouts/DefaultLayout.astro";
 import ImperfectButton from "../components/home/ImperfectButton.astro";
 import HighlightText from "../components/ui/HighlightText.astro";
 import ToolBadges from "../components/ui/ToolBadges.astro";
+import ProjectCardFrame from "../components/projects/ProjectCardFrame.astro";
 import { getEntry } from "astro:content";
 
 type ProjectFrontmatter = {
@@ -60,7 +61,7 @@ const projects: Array<{
 			{
 				projects.map(({ slug, frontmatter }) => {
 					const cardContent = (
-						<div class="project-frame relative flex min-h-[35rem] w-full rotate-[var(--preview-tilt,0deg)] flex-col border-[0.18rem] border-[rgb(31_30_25/0.14)] bg-[rgb(255_253_246)] p-[0.9rem] shadow-[var(--shadow-paper-rest)] transition-[box-shadow,transform] duration-200 group-hover:-translate-y-1 group-hover:rotate-[var(--preview-tilt,0deg)] group-hover:shadow-[var(--shadow-paper-hover)] before:pointer-events-none before:absolute before:top-0 before:left-1/2 before:z-1 before:h-[var(--size-project-tape-height)] before:w-[var(--size-project-tape-width)] before:-translate-x-1/2 before:-translate-y-1/2 before:rotate-[1.2deg] before:bg-[var(--color-tape)] before:content-[''] max-[900px]:min-h-auto max-[900px]:p-[0.95rem] max-sm:rotate-0 max-sm:group-hover:-translate-y-1 max-sm:group-hover:rotate-0 min-[1440px]:min-h-[39rem]">
+						<ProjectCardFrame layout="grid">
 							<div
 								class="preview flex aspect-video w-full items-center justify-center overflow-hidden bg-[rgb(249_245_236)] text-center"
 								aria-hidden="true">
@@ -102,7 +103,7 @@ const projects: Array<{
 									alignEnd
 								/>
 							</div>
-						</div>
+						</ProjectCardFrame>
 					);
 
 					return (
