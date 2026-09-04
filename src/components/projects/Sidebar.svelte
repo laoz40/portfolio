@@ -235,13 +235,13 @@
 				{#each items as item (item.id)}
 					<li>
 						<a
-							class="scrollspy-link font-hand text-hand-label inline-flex py-[0.2rem] leading-[1.25] font-normal no-underline transition-[color,transform] duration-150 hover:translate-x-[0.12rem] focus-visible:translate-x-[0.12rem] aria-[current=location]:font-bold"
+							class="scrollspy-link"
 							class:is-active={item.id === activeId}
 							href={`#${item.id}`}
 							aria-current={item.id === activeId ? "location" : undefined}>
 							<span
-								class="scrollspy-link-text highlight-text [--highlight-bottom:0.1em] [--highlight-top:0.1em]"
-								style="--highlight-color: var(--color-highlight-yellow-strong);">
+								class="scrollspy-link-text highlight-text"
+								style="--highlight-color: var(--color-highlight-yellow-strong); --highlight-top: 0.1em; --highlight-bottom: 0.1em;">
 								{item.label}
 							</span>
 						</a>
@@ -253,6 +253,28 @@
 {/if}
 
 <style>
+	.scrollspy-link {
+		display: inline-flex;
+		padding: 0.2rem 0;
+		font-family: var(--font-handwriting);
+		font-size: var(--type-hand-size-label);
+		font-weight: 400;
+		line-height: 1.25;
+		text-decoration: none;
+		transition:
+			color 180ms ease,
+			transform 180ms ease;
+	}
+
+	.scrollspy-link:hover,
+	.scrollspy-link:focus-visible {
+		transform: translateX(0.12rem);
+	}
+
+	.scrollspy-link.is-active {
+		font-weight: 700;
+	}
+
 	.scrollspy-link:hover .scrollspy-link-text::before,
 	.scrollspy-link:focus-visible .scrollspy-link-text::before,
 	.scrollspy-link.is-active .scrollspy-link-text::before {
