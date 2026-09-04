@@ -8,12 +8,11 @@ const embedUrl = `https://www.youtube.com/embed/${videoId}`;
 ---
 
 <div
-	class="section-media-frame taped-frame max-case-study:min-h-56 w-full min-w-0 self-center pt-[calc(var(--size-project-tape-height)*0.5)] [--paper-frame-border-color:var(--color-surface-paper)] [--paper-frame-shadow:0_0_0_0.18rem_rgb(31_30_25/0.08),var(--shadow-paper-medium)] max-sm:min-h-36"
+	class="section-media-frame taped-frame max-case-study:min-h-56 w-full min-w-0 self-center pt-[calc(var(--size-project-tape-height)*0.5)] max-sm:min-h-36"
 	style="--tape-angle: calc(var(--section-media-tilt, 0deg) + 1.2deg);">
-	<div
-		class="section-media paper-frame section-media--embed relative min-h-64 min-w-0 rotate-[var(--section-media-tilt,0deg)] max-sm:rotate-0">
+	<div class="section-media paper-frame section-media--embed">
 		<iframe
-			class="section-media-embed block h-full w-full border-0"
+			class="section-media-embed"
 			src={embedUrl}
 			title={title}
 			loading="lazy"
@@ -25,10 +24,30 @@ const embedUrl = `https://www.youtube.com/embed/${videoId}`;
 </div>
 
 <style>
+	.section-media-frame {
+		--paper-frame-border-color: var(--color-surface-paper);
+		--paper-frame-shadow: 0 0 0 0.18rem rgb(31 30 25 / 0.08), var(--shadow-paper-medium);
+		width: 100%;
+	}
+
+	.section-media {
+		position: relative;
+		min-height: 16rem;
+		transform: rotate(var(--section-media-tilt, 0deg));
+		min-width: 0;
+	}
+
 	.section-media--embed {
 		aspect-ratio: 16 / 9;
 		min-height: 0;
 		overflow: hidden;
 		transform: none;
+	}
+
+	.section-media-embed {
+		display: block;
+		width: 100%;
+		height: 100%;
+		border: 0;
 	}
 </style>
