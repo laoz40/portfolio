@@ -1,6 +1,6 @@
 ---
 name: verify-portfolio
-description: Verify the portfolio site UI for broken layout after changing pages, nav, home hero, project case studies, carousels, or responsive CSS. Verify Motion animations after changing src/animation, reveal classes, hero sequence, project cards, contact links, footer, or about actions. Playwright at mobile, laptop, and 1080p desktop.
+description: Verify site UI or Motion animation changes. Use after making large adjustments to the site UI or advanced animations using Motion.
 ---
 
 # Verify portfolio
