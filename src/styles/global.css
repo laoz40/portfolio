@@ -14,6 +14,7 @@
 	--color-border-soft-token: var(--color-border-soft);
 	--color-border-medium-token: var(--color-border-medium);
 	--text-hand-body: var(--type-hand-size-body);
+	--text-hand-label: var(--type-hand-size-label);
 	--text-hand-label-sm: var(--type-hand-size-label-sm);
 	--text-hand-title-sm: var(--type-hand-size-title-sm);
 	--text-hand-title-md: var(--type-hand-size-title-md);
