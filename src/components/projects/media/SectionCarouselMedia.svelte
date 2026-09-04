@@ -221,7 +221,7 @@
 			class="section-carousel-controls pointer-events-none absolute inset-x-0 top-[calc(var(--size-project-tape-height)*0.5)] bottom-0 z-[3] max-sm:pointer-events-auto max-sm:static max-sm:mt-[0.4rem] max-sm:flex max-sm:justify-between max-sm:gap-3">
 			<button
 				type="button"
-				class="section-carousel-button font-hand text-hand-title-md bg-paper pointer-events-auto absolute top-1/2 left-3 -translate-y-1/2 -rotate-[1.5deg] cursor-pointer border border-[var(--color-border-soft)] px-[0.6rem] py-[0.3rem] font-bold uppercase shadow-[3px_4px_3px_var(--color-shadow-paper-button)] transition-[box-shadow,transform,opacity] duration-200 hover:-translate-y-[calc(50%+4px)] hover:-rotate-[1.5deg] hover:shadow-[4px_5px_4px_var(--color-shadow-paper-button-hover)] focus-visible:-translate-y-[calc(50%+4px)] focus-visible:-rotate-[1.5deg] focus-visible:shadow-[4px_5px_4px_var(--color-shadow-paper-button-hover)] disabled:cursor-not-allowed disabled:opacity-40 max-sm:static max-sm:translate-y-0 max-sm:rotate-0 max-sm:px-[0.45rem] max-sm:py-[0.2rem] max-sm:text-2xl max-sm:hover:-translate-y-0.5 max-sm:hover:rotate-0 max-sm:focus-visible:-translate-y-0.5 max-sm:focus-visible:rotate-0"
+				class="section-carousel-button section-carousel-button--prev"
 				on:click={goPrev}
 				aria-label="Previous slide"
 				disabled={!hasMultipleSlides || currentIndex === 0}>
@@ -229,7 +229,7 @@
 			</button>
 			<button
 				type="button"
-				class="section-carousel-button font-hand text-hand-title-md bg-paper pointer-events-auto absolute top-1/2 right-3 -translate-y-1/2 rotate-[1.5deg] cursor-pointer border border-[var(--color-border-soft)] px-[0.6rem] py-[0.3rem] font-bold uppercase shadow-[3px_4px_3px_var(--color-shadow-paper-button)] transition-[box-shadow,transform,opacity] duration-200 hover:-translate-y-[calc(50%+4px)] hover:rotate-[1.5deg] hover:shadow-[4px_5px_4px_var(--color-shadow-paper-button-hover)] focus-visible:-translate-y-[calc(50%+4px)] focus-visible:rotate-[1.5deg] focus-visible:shadow-[4px_5px_4px_var(--color-shadow-paper-button-hover)] disabled:cursor-not-allowed disabled:opacity-40 max-sm:static max-sm:translate-y-0 max-sm:rotate-0 max-sm:px-[0.45rem] max-sm:py-[0.2rem] max-sm:text-2xl max-sm:hover:-translate-y-0.5 max-sm:hover:rotate-0 max-sm:focus-visible:-translate-y-0.5 max-sm:focus-visible:rotate-0"
+				class="section-carousel-button section-carousel-button--next"
 				on:click={goNext}
 				aria-label="Next slide"
 				disabled={!hasMultipleSlides || currentIndex === maxIndex}>
@@ -269,6 +269,69 @@
 	@media (prefers-reduced-motion: reduce) {
 		.section-carousel-track {
 			transition: none;
+		}
+	}
+
+	.section-carousel-button {
+		font-family: var(--font-handwriting);
+		font-size: var(--type-hand-size-title-md);
+		background-color: var(--color-paper);
+		pointer-events: auto;
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		cursor: pointer;
+		border: 1px solid var(--color-border-soft);
+		padding: 0.3rem 0.6rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		box-shadow: 3px 4px 3px var(--color-shadow-paper-button);
+		transition:
+			box-shadow 200ms ease,
+			transform 200ms ease,
+			opacity 200ms ease;
+	}
+
+	.section-carousel-button--prev {
+		left: 0.75rem;
+		transform: translateY(-50%) rotate(-1.5deg);
+	}
+
+	.section-carousel-button--next {
+		right: 0.75rem;
+		transform: translateY(-50%) rotate(1.5deg);
+	}
+
+	.section-carousel-button--prev:hover,
+	.section-carousel-button--prev:focus-visible {
+		transform: translateY(calc(-50% - 4px)) rotate(-1.5deg);
+		box-shadow: 4px 5px 4px var(--color-shadow-paper-button-hover);
+	}
+
+	.section-carousel-button--next:hover,
+	.section-carousel-button--next:focus-visible {
+		transform: translateY(calc(-50% - 4px)) rotate(1.5deg);
+		box-shadow: 4px 5px 4px var(--color-shadow-paper-button-hover);
+	}
+
+	.section-carousel-button:disabled {
+		cursor: not-allowed;
+		opacity: 0.4;
+	}
+
+	@media (max-width: 640px) {
+		.section-carousel-button {
+			position: static;
+			transform: none;
+			padding: 0.2rem 0.45rem;
+			font-size: var(--type-hand-size-title-md);
+		}
+
+		.section-carousel-button--prev:hover,
+		.section-carousel-button--prev:focus-visible,
+		.section-carousel-button--next:hover,
+		.section-carousel-button--next:focus-visible {
+			transform: translateY(-0.125rem);
 		}
 	}
 </style>
