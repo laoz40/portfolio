@@ -4,7 +4,7 @@
 		aria-hidden="true">
 	</div>
 	<div class="pointer-events-none absolute inset-0 z-0 opacity-30 mix-blend-multiply">
-		<svg class="block h-full w-full">
+		<svg class="grain-svg">
 			<filter id="grain">
 				<feTurbulence
 					type="fractalNoise"
@@ -24,6 +24,12 @@
 </div>
 
 <style>
+	.grain-svg {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
 	.bg-light-grid {
 		background-image:
 			linear-gradient(var(--color-grid-line) 1px, transparent 1px),

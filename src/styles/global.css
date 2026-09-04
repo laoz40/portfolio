@@ -256,11 +256,14 @@ h6 {
 
 img,
 video,
-iframe,
-svg,
 canvas {
 	max-width: 100%;
 	height: auto;
+}
+
+svg,
+iframe {
+	max-width: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
