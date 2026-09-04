@@ -29,7 +29,7 @@
 
 <button
 	type="button"
-	class="scroll-up border-border-medium-token font-hand text-hand-body text-handwriting fixed right-4 bottom-12 z-30 cursor-pointer overflow-hidden border px-3.5 py-1.5 tracking-wide"
+	class="scroll-up"
 	class:is-visible={isVisible}
 	on:click={scrollToTop}
 	aria-label="Scroll back to top">
@@ -40,14 +40,26 @@
 	.scroll-up {
 		--scroll-up-shadow-rest: 3px 4px 3px var(--color-shadow-paper-button);
 		--scroll-up-shadow-hover: 4px 5px 4px var(--color-shadow-paper-button-hover);
-		line-height: 1;
+		position: fixed;
+		right: 1rem;
+		bottom: 3rem;
+		z-index: 30;
+		padding: 0.4rem 0.85rem;
+		border: 1px solid var(--color-border-medium);
 		background: linear-gradient(
 			162deg,
 			var(--color-surface-paper) 0%,
 			var(--color-surface-paper-tint) 52%,
 			var(--color-surface-paper) 100%
 		);
+		color: var(--color-text-handwriting);
+		font-family: var(--font-handwriting);
+		font-size: var(--type-hand-size-body);
+		letter-spacing: 0.02em;
+		line-height: 1;
+		overflow: hidden;
 		box-shadow: var(--scroll-up-shadow-rest);
+		cursor: pointer;
 		opacity: 0;
 		visibility: hidden;
 		transform: translateY(0.75rem) rotate(-0.6deg);
