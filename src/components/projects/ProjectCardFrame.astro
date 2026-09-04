@@ -12,7 +12,6 @@ const { class: className } = Astro.props as { class?: string };
 		display: flex;
 		flex-direction: column;
 		width: 100%;
-		min-height: 35rem;
 		padding: 0.9rem;
 		border: 0.18rem solid rgb(31 30 25 / 0.14);
 		background: rgb(255 253 246);
@@ -67,7 +66,6 @@ const { class: className } = Astro.props as { class?: string };
 
 	@media (max-width: 640px) {
 		.project-frame--featured {
-			min-height: auto;
 			transform: none;
 		}
 
@@ -89,14 +87,7 @@ const { class: className } = Astro.props as { class?: string };
 
 	@media (max-width: 900px) {
 		.project-frame--grid {
-			min-height: auto;
 			padding: 0.95rem;
-		}
-	}
-
-	@media (min-width: 1440px) {
-		.project-frame--grid {
-			min-height: 39rem;
 		}
 	}
 </style>
