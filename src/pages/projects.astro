@@ -61,7 +61,7 @@ const projects: Array<{
 			{
 				projects.map(({ slug, frontmatter }) => {
 					const cardContent = (
-						<ProjectCardFrame layout="grid">
+						<ProjectCardFrame class="project-frame--grid">
 							<div
 								class="preview flex aspect-video w-full items-center justify-center overflow-hidden bg-[rgb(249_245_236)] text-center"
 								aria-hidden="true">
@@ -99,8 +99,6 @@ const projects: Array<{
 								<ToolBadges
 									tools={frontmatter.tools ?? []}
 									projectTitle={frontmatter.title}
-									variant="project-card"
-									alignEnd
 								/>
 							</div>
 						</ProjectCardFrame>

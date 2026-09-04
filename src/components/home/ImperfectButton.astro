@@ -10,14 +10,11 @@ const buttonPath = `M14,11
 	C-1,60 7,60 5,38
 	L6,23
 	C7,17 5,13 14,11 Z`;
-type ButtonSize = "default" | "full" | "compact" | "link-grid";
-
 const {
 	fill,
 	href,
 	target,
 	rel,
-	size = "default",
 	class: className,
 	...attributes
 } = Astro.props as {
@@ -25,26 +22,8 @@ const {
 	href?: string;
 	target?: string;
 	rel?: string;
-	size?: ButtonSize;
 	class?: string;
 	[key: string]: unknown;
-};
-
-const buttonClasses = {
-	default:
-		"imperfect-button font-hand text-hand-title-md relative inline-grid cursor-pointer place-items-center border-0 px-6 py-3.5 font-bold select-none",
-	full: "imperfect-button font-hand text-hand-title-md relative inline-grid w-full cursor-pointer place-items-center border-0 px-6 py-3.5 font-bold select-none",
-	compact:
-		"imperfect-button font-hand text-hand-title-md relative inline-grid cursor-pointer place-items-center border-0 px-6 py-3.5 font-bold select-none max-sm:min-h-12 max-sm:w-full max-sm:p-4 max-sm:text-2xl",
-	"link-grid":
-		"imperfect-button font-hand relative inline-grid min-h-12 w-full cursor-pointer place-items-center border-0 p-4 text-center text-2xl leading-[1.05] font-bold select-none max-[520px]:min-h-[4.25rem] max-[520px]:px-4 max-[520px]:py-[0.85rem] max-[520px]:text-[1.8rem]",
-};
-
-const labelClasses: Record<ButtonSize, string> = {
-	default: "relative z-10 select-none",
-	full: "relative z-10 select-none",
-	compact: "relative z-10 select-none max-sm:leading-[1.05]",
-	"link-grid": "relative z-10 inline-block max-w-[10ch] text-balance select-none",
 };
 ---
 
@@ -55,9 +34,13 @@ const labelClasses: Record<ButtonSize, string> = {
 			target={target}
 			rel={rel}
 			{...attributes}
-			class:list={[buttonClasses[size], className, "no-underline"]}
+			class:list={[
+				"imperfect-button font-hand text-hand-title-md relative inline-grid cursor-pointer place-items-center border-0 px-6 py-3.5 font-bold select-none",
+				className,
+				"no-underline",
+			]}
 			style={`--fill: ${fill};`}>
-			<span class={labelClasses[size]}>
+			<span class="imperfect-button-label relative z-10 select-none">
 				<slot />
 			</span>
 
@@ -80,9 +63,12 @@ const labelClasses: Record<ButtonSize, string> = {
 		<button
 			type="button"
 			{...attributes}
-			class:list={[buttonClasses[size], className]}
+			class:list={[
+				"imperfect-button font-hand text-hand-title-md relative inline-grid cursor-pointer place-items-center border-0 px-6 py-3.5 font-bold select-none",
+				className,
+			]}
 			style={`--fill: ${fill};`}>
-			<span class={labelClasses[size]}>
+			<span class="imperfect-button-label relative z-10 select-none">
 				<slot />
 			</span>
 
@@ -116,6 +102,48 @@ const labelClasses: Record<ButtonSize, string> = {
 		--button-motion-active-easing: cubic-bezier(0.3, 0, 0.4, 1);
 		letter-spacing: 0.2px;
 		transition: transform var(--button-motion-duration) var(--button-motion-easing);
+	}
+
+	.imperfect-button--full {
+		width: 100%;
+	}
+
+	.imperfect-button--compact {
+		@media (max-width: 640px) {
+			min-height: 3rem;
+			width: 100%;
+			padding: 1rem;
+			font-size: 1.5rem;
+		}
+	}
+
+	.imperfect-button--compact .imperfect-button-label {
+		@media (max-width: 640px) {
+			line-height: 1.05;
+		}
+	}
+
+	.imperfect-button--link-grid {
+		min-height: 3rem;
+		width: 100%;
+		padding: 1rem;
+		text-align: center;
+		font-size: 1.5rem;
+		line-height: 1.05;
+	}
+
+	.imperfect-button--link-grid .imperfect-button-label {
+		display: inline-block;
+		max-width: 10ch;
+		text-wrap: balance;
+	}
+
+	@media (max-width: 520px) {
+		.imperfect-button--link-grid {
+			min-height: 4.25rem;
+			padding: 0.85rem 1rem;
+			font-size: 1.8rem;
+		}
 	}
 
 	.imperfect-button-shape {

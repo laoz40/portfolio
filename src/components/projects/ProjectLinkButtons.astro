@@ -33,7 +33,7 @@ function isExternalHref(href: string): boolean {
 				]}>
 				<ImperfectButton
 					href={link.href}
-					size="link-grid"
+					class="imperfect-button--link-grid"
 					target={link.target ?? (isExternalHref(link.href) ? "_blank" : undefined)}
 					rel={link.rel ?? (isExternalHref(link.href) ? "noopener noreferrer" : undefined)}
 					fill={link.fill}>
