@@ -34,18 +34,13 @@ const {
 			target={target}
 			rel={rel}
 			{...attributes}
-			class:list={[
-				"imperfect-button font-hand text-hand-title-md relative inline-grid cursor-pointer place-items-center border-0 px-6 py-3.5 font-bold select-none",
-				className,
-				"no-underline",
-			]}
+			class:list={["imperfect-button", className]}
 			style={`--fill: ${fill};`}>
-			<span class="imperfect-button-label relative z-10 select-none">
+			<span>
 				<slot />
 			</span>
 
 			<svg
-				class="imperfect-button-shape pointer-events-none absolute inset-0 z-0 h-full w-full"
 				viewBox="0 0 220 70"
 				preserveAspectRatio="none"
 				aria-hidden="true">
@@ -63,17 +58,13 @@ const {
 		<button
 			type="button"
 			{...attributes}
-			class:list={[
-				"imperfect-button font-hand text-hand-title-md relative inline-grid cursor-pointer place-items-center border-0 px-6 py-3.5 font-bold select-none",
-				className,
-			]}
+			class:list={["imperfect-button", className]}
 			style={`--fill: ${fill};`}>
-			<span class="imperfect-button-label relative z-10 select-none">
+			<span>
 				<slot />
 			</span>
 
 			<svg
-				class="imperfect-button-shape pointer-events-none absolute inset-0 z-0 h-full w-full"
 				viewBox="0 0 220 70"
 				preserveAspectRatio="none"
 				aria-hidden="true">
@@ -92,6 +83,9 @@ const {
 
 <style>
 	.imperfect-button {
+		position: relative;
+		display: inline-grid;
+		place-items: center;
 		--fill-solid: rgb(from var(--fill) r g b);
 		--paper-fill: var(--fill-solid);
 		--button-shadow-rest: 3px 4px 2px var(--color-shadow-button-rest);
@@ -100,8 +94,41 @@ const {
 		--button-motion-easing: cubic-bezier(0.22, 1, 0.36, 1);
 		--button-motion-active-duration: 0.08s;
 		--button-motion-active-easing: cubic-bezier(0.3, 0, 0.4, 1);
-		letter-spacing: 0.2px;
+		padding: 0.9rem 1.6rem;
+		border: 0;
+		cursor: pointer;
+		user-select: none;
+		font-family: var(--font-handwriting);
+		font-size: var(--type-hand-size-title-md);
+		font-weight: 700;
+		text-decoration: none;
 		transition: transform var(--button-motion-duration) var(--button-motion-easing);
+	}
+
+	.imperfect-button span {
+		position: relative;
+		z-index: 1;
+		letter-spacing: 0.2px;
+		user-select: none;
+	}
+
+	.imperfect-button svg {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 0;
+		pointer-events: none;
+		transition:
+			transform var(--button-motion-duration) var(--button-motion-easing),
+			filter var(--button-motion-duration) var(--button-motion-easing),
+			fill var(--button-motion-duration) var(--button-motion-easing);
+		filter: drop-shadow(var(--button-shadow-rest));
+		fill: var(--paper-fill);
+	}
+
+	.imperfect-button path {
+		stroke-width: 3.2;
 	}
 
 	.imperfect-button--full {
@@ -117,7 +144,7 @@ const {
 		}
 	}
 
-	.imperfect-button--compact .imperfect-button-label {
+	.imperfect-button--compact span {
 		@media (max-width: 640px) {
 			line-height: 1.05;
 		}
@@ -132,7 +159,7 @@ const {
 		line-height: 1.05;
 	}
 
-	.imperfect-button--link-grid .imperfect-button-label {
+	.imperfect-button--link-grid span {
 		display: inline-block;
 		max-width: 10ch;
 		text-wrap: balance;
@@ -146,24 +173,11 @@ const {
 		}
 	}
 
-	.imperfect-button-shape {
-		transition:
-			transform var(--button-motion-duration) var(--button-motion-easing),
-			filter var(--button-motion-duration) var(--button-motion-easing),
-			fill var(--button-motion-duration) var(--button-motion-easing);
-		filter: drop-shadow(var(--button-shadow-rest));
-		fill: var(--paper-fill);
-	}
-
-	.imperfect-button-shape path {
-		stroke-width: 3.2;
-	}
-
 	.imperfect-button:hover {
 		transform: translate(-2px, -3px) rotate(-0.9deg);
 	}
 
-	.imperfect-button:hover .imperfect-button-shape {
+	.imperfect-button:hover svg {
 		filter: drop-shadow(var(--button-shadow-hover));
 	}
 
@@ -173,7 +187,7 @@ const {
 		transform: translate(1px, 1px) rotate(-0.15deg);
 	}
 
-	.imperfect-button:active .imperfect-button-shape {
+	.imperfect-button:active svg {
 		transition-duration: var(--button-motion-active-duration);
 		transition-timing-function: var(--button-motion-active-easing);
 		filter: drop-shadow(2px 3px 2px var(--color-shadow-button-active));
@@ -181,7 +195,7 @@ const {
 
 	@media (prefers-reduced-motion: reduce) {
 		.imperfect-button,
-		.imperfect-button-shape {
+		.imperfect-button svg {
 			transition: none;
 		}
 
