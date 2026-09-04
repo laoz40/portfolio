@@ -2,12 +2,6 @@
 title: Check It
 project: Mobile app design
 description: I led a team to design an app that aims to improve productivity. I conducted many rounds of user testing, then iterated the design and UI to create a better experience for users.
-tools:
-  - Figma
-  - User Research
-  - Prototyping
-  - User Testing
-  - UI Design
 coverImage: ../../assets/checkit/cover.png
 altText: Check It Cover Image
 section:

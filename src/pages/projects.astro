@@ -4,7 +4,6 @@ import { Image } from "astro:assets";
 import DefaultLayout from "../layouts/DefaultLayout.astro";
 import ImperfectButton from "../components/home/ImperfectButton.astro";
 import HighlightText from "../components/ui/HighlightText.astro";
-import ToolBadges from "../components/ui/ToolBadges.astro";
 import ProjectCardFrame from "../components/projects/ProjectCardFrame.astro";
 import { getEntry } from "astro:content";
 
@@ -12,7 +11,6 @@ type ProjectFrontmatter = {
 	title: string;
 	project: string;
 	description: string;
-	tools?: string[];
 	coverImage?: ImageMetadata;
 	altText?: string;
 };
@@ -96,10 +94,6 @@ const projects: Array<{
 										{frontmatter.description}
 									</p>
 								</div>
-								<ToolBadges
-									tools={frontmatter.tools ?? []}
-									projectTitle={frontmatter.title}
-								/>
 							</div>
 						</ProjectCardFrame>
 					);

@@ -6,7 +6,6 @@ import HeroSketchCluster from "../components/home/HeroSketchCluster.astro";
 import HeroLogoCluster from "../components/home/HeroLogoCluster.astro";
 import ImperfectButton from "../components/home/ImperfectButton.astro";
 import HighlightText from "../components/ui/HighlightText.astro";
-import ToolBadges from "../components/ui/ToolBadges.astro";
 import ProjectCardFrame from "../components/projects/ProjectCardFrame.astro";
 import { getEntry } from "astro:content";
 
@@ -14,7 +13,6 @@ type ProjectFrontmatter = {
 	title: string;
 	project: string;
 	description: string;
-	tools?: string[];
 	coverImage?: ImageMetadata;
 };
 
@@ -137,10 +135,6 @@ const heroTitleLines = ["Welcome to", "Leo's Website!"];
 							{vvstudios.description}
 						</p>
 					</div>
-					<ToolBadges
-						tools={vvstudios.tools ?? []}
-						projectTitle={vvstudios.title}
-					/>
 				</div>
 			</ProjectCardFrame>
 		</a>

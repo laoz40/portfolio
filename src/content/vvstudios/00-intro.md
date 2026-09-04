@@ -2,15 +2,6 @@
 title: VV Studios
 project: Custom Booking System
 description: I rebuilt the company website from scratch. Created a custom booking system, and an internal dashboard to allow admins to track bookings, manage deliverables and easily communicate with clients.
-tools:
-  - Tanstack Start
-  - React
-  - TypeScript
-  - Convex
-  - Stripe
-  - Resend
-  - Google Calendar API
-  - Framer Motion
 coverImage: ../../assets/vvstudios/cover.png
 altText: VV Studios website cover image
 section:

@@ -13,15 +13,15 @@ section:
   <li>12 weeks</li>
 </ul>
 
-#### Responsibilities
+#### My Responsibilities
 
 <ul class="project-badges" role="list">
-  <li>Research</li>
-  <li>Prototyping</li>
-  <li>Iterating</li>
+  <li>User Research</li>
   <li>Ideation</li>
+  <li>Prototyping</li>
+  <li>Figma</li>
   <li>User Testing</li>
-  <li>Visual Design</li>
+  <li>UI Design</li>
 </ul>
 
 #### Design Brief
