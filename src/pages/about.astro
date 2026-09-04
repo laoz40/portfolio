@@ -55,7 +55,7 @@ const aboutSections = await Promise.all(
 								: undefined,
 						]}
 						data-about-section={id}>
-						<div class="about-section-copy [&_h2]:text-hand-title-lg [&_li]:font-body [&_li]:text-body [&_p]:font-body [&_p]:text-body min-w-0 md:[grid-area:copy] [&_h2]:mb-4 [&_h2]:max-w-[24ch] [&_h2]:leading-none [&_h2]:font-bold [&_h2]:tracking-[0.01em] [&_li]:mb-4 [&_li]:max-w-[var(--text-measure)] [&_li]:leading-[var(--type-sans-leading-compact)] [&_li]:font-light [&_li]:text-pretty [&_p]:mb-4 [&_p]:max-w-[var(--text-measure)] [&_p]:leading-[var(--type-sans-leading-reading)] [&_p]:font-light [&_p]:text-pretty [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:pl-5">
+						<div class="about-section-copy min-w-0 md:[grid-area:copy]">
 							<h2>{title}</h2>
 							<Content />
 						</div>
@@ -84,6 +84,44 @@ const aboutSections = await Promise.all(
 		</div>
 	</section>
 </DefaultLayout>
+
+<style>
+	.about-section-copy h2 {
+		font-family: var(--font-handwriting);
+		font-size: var(--type-hand-size-title-lg);
+		font-weight: 700;
+		line-height: 1;
+		letter-spacing: 0.01em;
+		margin: 0 0 1rem 0;
+		max-width: 24ch;
+	}
+
+	.about-section-copy p,
+	.about-section-copy li {
+		font-family: var(--font-sans);
+		font-size: var(--type-sans-size-body);
+		font-weight: var(--type-sans-weight-regular);
+		margin: 0 0 1rem 0;
+		max-width: var(--text-measure);
+		text-wrap: pretty;
+	}
+
+	.about-section-copy p {
+		line-height: var(--type-sans-leading-reading);
+		font-weight: 300;
+	}
+
+	.about-section-copy li {
+		line-height: var(--type-sans-leading-compact);
+		font-weight: 300;
+	}
+
+	.about-section-copy ul {
+		margin: 0 0 1rem 0;
+		padding-left: 1.25rem;
+		list-style-type: disc;
+	}
+</style>
 
 <script>
 	import "../animation/aboutAnimations.ts";
