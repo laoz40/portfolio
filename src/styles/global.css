@@ -113,6 +113,13 @@
 	--color-border-soft: rgb(15 23 42 / 0.2);
 	--color-border-medium: rgb(15 23 42 / 0.3);
 	--color-border-paper: rgb(31 30 25 / 0.08);
+	--border-media-color: rgb(31 30 25 / 0.2);
+	--border-media-width: 0.1rem;
+	--border-media: var(--border-media-width) solid var(--border-media-color);
+	--paper-frame-border-width: 8px;
+	--paper-frame-border-color: var(--color-surface-paper);
+	--shadow-media-outer-ring: 0 0 0 var(--border-media-width) var(--border-media-color);
+	--shadow-media-frame: var(--shadow-media-outer-ring), var(--shadow-paper-medium);
 	--color-shadow-soft: rgb(15 23 42 / 0.12);
 	--color-shadow-medium: rgb(15 23 42 / 0.15);
 	--color-shadow-strong: rgb(15 23 42 / 0.3);
@@ -201,9 +208,8 @@ h6 {
 
 @utility paper-frame {
 	background: var(--paper-frame-background, var(--color-media-fallback));
-	border: var(--paper-frame-border-width, 8px) solid
-		var(--paper-frame-border-color, var(--color-surface-page));
-	box-shadow: var(--paper-frame-shadow, var(--shadow-paper-medium));
+	border: var(--paper-frame-border-width) solid var(--paper-frame-border-color);
+	box-shadow: var(--paper-frame-shadow, var(--shadow-media-frame));
 	overflow: hidden;
 }
 
