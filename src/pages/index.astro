@@ -70,14 +70,16 @@ const heroTitleLines = ["Welcome to", "Leo's Website!"];
 		</div>
 
 		<div
-			class="hero-actions max-nav:mt-1 relative z-2 mt-4 flex flex-wrap items-center justify-center gap-6 max-[1100px]:mt-2 max-[420px]:max-w-60 max-[420px]:grid-cols-1 max-sm:mt-2 max-sm:mb-15 max-sm:grid max-sm:w-full max-sm:max-w-84 max-sm:grid-cols-2 max-sm:gap-0 max-sm:[&_.imperfect-button]:min-h-12 max-sm:[&_.imperfect-button]:w-full max-sm:[&_.imperfect-button]:p-4 max-sm:[&_.imperfect-button]:text-2xl max-sm:[&_.imperfect-button>span]:leading-[1.05]">
+			class="hero-actions max-nav:mt-1 relative z-2 mt-4 flex flex-wrap items-center justify-center gap-6 max-[1100px]:mt-2 max-[420px]:max-w-60 max-[420px]:grid-cols-1 max-sm:mt-2 max-sm:mb-15 max-sm:grid max-sm:w-full max-sm:max-w-84 max-sm:grid-cols-2 max-sm:gap-0">
 			<ImperfectButton
 				href="/projects"
+				size="compact"
 				fill="var(--color-home-button-yellow)">
 				Projects
 			</ImperfectButton>
 			<ImperfectButton
 				href="/about"
+				size="compact"
 				fill="var(--color-home-button-sky)">
 				About
 			</ImperfectButton>
@@ -117,8 +119,7 @@ const heroTitleLines = ["Welcome to", "Leo's Website!"];
 						) : null
 					}
 				</div>
-				<div
-					class="project-meta [&_.tool-badge-shape]:bg-paper flex flex-1 flex-col justify-between px-0 pt-4 pb-[0.1rem] [&_.tool-badge-shape]:shadow-[var(--shadow-badge-rest)] max-sm:[&_.tool-badge-shape]:px-[0.45rem] max-sm:[&_.tool-badge-shape]:text-[0.95rem] [&_.tool-badges]:gap-[0.45rem] [&_.tool-badges]:pt-[0.8rem] max-sm:[&_.tool-badges]:gap-[0.3rem] max-sm:[&_.tool-badges]:pt-[0.8rem]">
+				<div class="project-meta flex flex-1 flex-col justify-between px-0 pt-4 pb-[0.1rem]">
 					<div class="flex flex-col gap-[0.7rem]">
 						<div class="project-title flex flex-col items-start gap-[0.35rem]">
 							<HighlightText
@@ -140,6 +141,7 @@ const heroTitleLines = ["Welcome to", "Leo's Website!"];
 					<ToolBadges
 						tools={vvstudios.tools ?? []}
 						projectTitle={vvstudios.title}
+						variant="project-card"
 					/>
 				</div>
 			</div>

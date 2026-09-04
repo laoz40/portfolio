@@ -26,13 +26,14 @@ function isExternalHref(href: string): boolean {
 		links.map((link, index) => (
 			<div
 				class:list={[
-					"min-w-0 [&_.imperfect-button]:min-h-12 [&_.imperfect-button]:w-full [&_.imperfect-button]:p-4 [&_.imperfect-button]:text-center [&_.imperfect-button]:text-2xl [&_.imperfect-button]:leading-[1.05] [&_.imperfect-button]:font-bold max-[520px]:[&_.imperfect-button]:min-h-[4.25rem] max-[520px]:[&_.imperfect-button]:px-4 max-[520px]:[&_.imperfect-button]:py-[0.85rem] max-[520px]:[&_.imperfect-button]:text-[1.8rem] [&_.imperfect-button_span]:inline-block [&_.imperfect-button_span]:max-w-[10ch] [&_.imperfect-button_span]:text-balance",
+					"min-w-0",
 					index === 0
 						? "project-link-buttons__item--1 -rotate-[0.65deg] motion-reduce:rotate-0 max-[520px]:rotate-0"
 						: "project-link-buttons__item--2 translate-y-[0.15rem] rotate-[0.7deg] motion-reduce:translate-y-0 motion-reduce:rotate-0 max-[520px]:translate-y-0 max-[520px]:rotate-0",
 				]}>
 				<ImperfectButton
 					href={link.href}
+					size="link-grid"
 					target={link.target ?? (isExternalHref(link.href) ? "_blank" : undefined)}
 					rel={link.rel ?? (isExternalHref(link.href) ? "noopener noreferrer" : undefined)}
 					fill={link.fill}>

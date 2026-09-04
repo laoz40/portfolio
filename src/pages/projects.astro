@@ -78,7 +78,7 @@ const projects: Array<{
 									</span>
 								)}
 							</div>
-							<div class="project-meta [&_.tool-badge-shape]:bg-paper flex flex-1 flex-col justify-between px-0 pt-4 pb-[0.1rem] min-[1440px]:gap-4 [&_.tool-badge-shape]:shadow-[var(--shadow-badge-rest)] max-sm:[&_.tool-badge-shape]:px-[0.45rem] max-sm:[&_.tool-badge-shape]:text-[0.95rem] [&_.tool-badges]:gap-[0.45rem] [&_.tool-badges]:pt-5 max-sm:[&_.tool-badges]:gap-[0.3rem] max-sm:[&_.tool-badges]:pt-[0.8rem] min-[1440px]:[&_.tool-badges]:mt-auto min-[1440px]:[&_.tool-badges]:pt-5">
+							<div class="project-meta flex flex-1 flex-col justify-between px-0 pt-4 pb-[0.1rem] min-[1440px]:gap-4">
 								<div class="flex flex-col gap-[0.7rem]">
 									<div class="project-title flex flex-col items-start gap-[0.35rem]">
 										<HighlightText
@@ -98,6 +98,8 @@ const projects: Array<{
 								<ToolBadges
 									tools={frontmatter.tools ?? []}
 									projectTitle={frontmatter.title}
+									variant="project-card"
+									alignEnd
 								/>
 							</div>
 						</div>

@@ -2,19 +2,29 @@
 type Props = {
 	tools: string[];
 	projectTitle: string;
+	variant?: "default" | "project-card";
+	alignEnd?: boolean;
 };
 
-const { tools, projectTitle } = Astro.props as Props;
+const { tools, projectTitle, variant = "default", alignEnd = false } = Astro.props as Props;
 ---
 
 <div class="tool-badges-shell m-0 p-0">
 	<ul
-		class="tool-badges m-0 flex list-none flex-wrap gap-2 p-0"
+		class:list={[
+			"tool-badges m-0 flex list-none flex-wrap gap-2 p-0",
+			variant === "project-card" && "tool-badges--project-card",
+			alignEnd && "tool-badges--align-end",
+		]}
 		aria-label={`${projectTitle} tools used`}>
 		{
 			tools.map((tool) => (
 				<li class="tool-badge p-0">
-					<span class="tool-badge-shape border-border-soft-token bg-paper font-hand text-hand-label-sm text-handwriting inline-block border px-3 py-px font-bold tracking-wide">
+					<span
+						class:list={[
+							"tool-badge-shape border-border-soft-token bg-paper font-hand text-hand-label-sm text-handwriting inline-block border px-3 py-px font-bold tracking-wide",
+							variant === "project-card" && "tool-badge-shape--project-card",
+						]}>
 						{tool}
 					</span>
 				</li>
@@ -28,6 +38,19 @@ const { tools, projectTitle } = Astro.props as Props;
 		box-shadow: 1px 2px 3px var(--color-shadow-soft);
 	}
 
+	.tool-badge-shape--project-card {
+		box-shadow: var(--shadow-badge-rest);
+	}
+
+	.tool-badges--project-card {
+		gap: 0.45rem;
+		padding-top: 0.8rem;
+	}
+
+	.tool-badges--align-end {
+		padding-top: 1.25rem;
+	}
+
 	.tool-badge:nth-child(3n + 1) {
 		transform: rotate(-0.9deg) translateY(-0.5px);
 	}
@@ -38,5 +61,25 @@ const { tools, projectTitle } = Astro.props as Props;
 
 	.tool-badge:nth-child(3n + 3) {
 		transform: rotate(-0.45deg) translateY(0.2px);
+	}
+
+	@media (max-width: 640px) {
+		.tool-badge-shape--project-card {
+			padding-inline: 0.45rem;
+			font-size: 0.95rem;
+		}
+
+		.tool-badges--project-card,
+		.tool-badges--align-end {
+			gap: 0.3rem;
+			padding-top: 0.8rem;
+		}
+	}
+
+	@media (min-width: 1440px) {
+		.tool-badges--align-end {
+			margin-top: auto;
+			padding-top: 1.25rem;
+		}
 	}
 </style>

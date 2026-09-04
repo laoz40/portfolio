@@ -10,12 +10,41 @@ const buttonPath = `M14,11
 	C-1,60 7,60 5,38
 	L6,23
 	C7,17 5,13 14,11 Z`;
-const { fill, href, target, rel, ...attributes } = Astro.props as {
+type ButtonSize = "default" | "full" | "compact" | "link-grid";
+
+const {
+	fill,
+	href,
+	target,
+	rel,
+	size = "default",
+	class: className,
+	...attributes
+} = Astro.props as {
 	fill: string;
 	href?: string;
 	target?: string;
 	rel?: string;
+	size?: ButtonSize;
+	class?: string;
 	[key: string]: unknown;
+};
+
+const buttonClasses = {
+	default:
+		"imperfect-button font-hand text-hand-title-md relative inline-grid cursor-pointer place-items-center border-0 px-6 py-3.5 font-bold select-none",
+	full: "imperfect-button font-hand text-hand-title-md relative inline-grid w-full cursor-pointer place-items-center border-0 px-6 py-3.5 font-bold select-none",
+	compact:
+		"imperfect-button font-hand text-hand-title-md relative inline-grid cursor-pointer place-items-center border-0 px-6 py-3.5 font-bold select-none max-sm:min-h-12 max-sm:w-full max-sm:p-4 max-sm:text-2xl",
+	"link-grid":
+		"imperfect-button font-hand relative inline-grid min-h-12 w-full cursor-pointer place-items-center border-0 p-4 text-center text-2xl leading-[1.05] font-bold select-none max-[520px]:min-h-[4.25rem] max-[520px]:px-4 max-[520px]:py-[0.85rem] max-[520px]:text-[1.8rem]",
+};
+
+const labelClasses: Record<ButtonSize, string> = {
+	default: "relative z-10 select-none",
+	full: "relative z-10 select-none",
+	compact: "relative z-10 select-none max-sm:leading-[1.05]",
+	"link-grid": "relative z-10 inline-block max-w-[10ch] text-balance select-none",
 };
 ---
 
@@ -26,9 +55,9 @@ const { fill, href, target, rel, ...attributes } = Astro.props as {
 			target={target}
 			rel={rel}
 			{...attributes}
-			class="imperfect-button font-hand text-hand-title-md relative inline-grid cursor-pointer place-items-center border-0 px-6 py-3.5 font-bold no-underline select-none"
+			class:list={[buttonClasses[size], className, "no-underline"]}
 			style={`--fill: ${fill};`}>
-			<span class="relative z-10 select-none">
+			<span class={labelClasses[size]}>
 				<slot />
 			</span>
 
@@ -51,9 +80,9 @@ const { fill, href, target, rel, ...attributes } = Astro.props as {
 		<button
 			type="button"
 			{...attributes}
-			class="imperfect-button font-hand text-hand-title-md relative inline-grid cursor-pointer place-items-center border-0 px-6 py-3.5 font-bold select-none"
+			class:list={[buttonClasses[size], className]}
 			style={`--fill: ${fill};`}>
-			<span class="relative z-10 select-none">
+			<span class={labelClasses[size]}>
 				<slot />
 			</span>
 

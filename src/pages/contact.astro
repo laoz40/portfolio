@@ -58,13 +58,13 @@ const contactLinks: ContactLink[] = [
 	<ObfuscatedEmailRuntime />
 	<section class="contact-page">
 		<h1 class="text-hand-display-md m-0 mb-3 text-center font-bold">Get in touch</h1>
-		<div
-			class="contact-actions mx-auto mt-10 flex w-full max-w-80 flex-col items-center gap-4 [&_.imperfect-button]:w-full">
+		<div class="contact-actions mx-auto mt-10 flex w-full max-w-80 flex-col items-center gap-4">
 			{
 				contactEmail ? (
 					<div class="contact-link-reveal w-full max-w-80">
 						<ImperfectButton
 							href="#"
+							size="full"
 							fill="var(--color-home-button-yellow)"
 							data-email-link="true"
 							data-email-entities={encodedEmailHref}>
@@ -78,6 +78,7 @@ const contactLinks: ContactLink[] = [
 					<div class="contact-link-reveal w-full max-w-80">
 						<ImperfectButton
 							href={link.href}
+							size="full"
 							fill={link.fill}
 							target={link.target}
 							rel={link.rel}>
