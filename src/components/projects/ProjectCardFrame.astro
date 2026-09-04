@@ -2,15 +2,39 @@
 const { class: className } = Astro.props as { class?: string };
 ---
 
-<div
-	class:list={[
-		"project-frame relative flex min-h-[35rem] w-full flex-col border-[0.18rem] border-[rgb(31_30_25/0.14)] bg-[rgb(255_253_246)] p-[0.9rem] shadow-[var(--shadow-paper-rest)] transition-[box-shadow,transform] duration-200 group-hover:shadow-[var(--shadow-paper-hover)] before:pointer-events-none before:absolute before:top-0 before:left-1/2 before:z-1 before:h-[var(--size-project-tape-height)] before:w-[var(--size-project-tape-width)] before:-translate-x-1/2 before:-translate-y-1/2 before:rotate-[1.2deg] before:bg-[var(--color-tape)] before:content-['']",
-		className,
-	]}>
+<div class:list={["project-frame", className]}>
 	<slot />
 </div>
 
 <style>
+	.project-frame {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		min-height: 35rem;
+		padding: 0.9rem;
+		border: 0.18rem solid rgb(31 30 25 / 0.14);
+		background: rgb(255 253 246);
+		box-shadow: var(--shadow-paper-rest);
+		transition:
+			box-shadow 200ms ease,
+			transform 200ms ease;
+	}
+
+	.project-frame::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 50%;
+		width: var(--size-project-tape-width);
+		height: var(--size-project-tape-height);
+		transform: translate(-50%, -50%) rotate(1.2deg);
+		background: var(--color-tape);
+		pointer-events: none;
+		z-index: 1;
+	}
+
 	.project-frame--featured {
 		transform: rotate(-0.35deg);
 	}
@@ -19,16 +43,26 @@ const { class: className } = Astro.props as { class?: string };
 		transform: rotate(var(--preview-tilt, 0deg));
 	}
 
-	.group:hover .project-frame {
-		transform: translateY(-0.25rem);
+	:global(.project-card:hover) .project-frame,
+	:global(.project-card:focus-within) .project-frame,
+	:global(.group:hover) .project-frame,
+	:global(.group:focus-within) .project-frame {
+		box-shadow: var(--shadow-paper-hover);
+		transform: translateY(-4px);
 	}
 
-	.group:hover .project-frame--featured {
-		transform: translateY(-0.25rem) rotate(-0.35deg);
+	:global(.project-card:hover) .project-frame--featured,
+	:global(.project-card:focus-within) .project-frame--featured,
+	:global(.group:hover) .project-frame--featured,
+	:global(.group:focus-within) .project-frame--featured {
+		transform: translateY(-4px) rotate(-0.35deg);
 	}
 
-	.group:hover .project-frame--grid {
-		transform: translateY(-0.25rem) rotate(var(--preview-tilt, 0deg));
+	:global(.project-card:hover) .project-frame--grid,
+	:global(.project-card:focus-within) .project-frame--grid,
+	:global(.group:hover) .project-frame--grid,
+	:global(.group:focus-within) .project-frame--grid {
+		transform: translateY(-4px) rotate(var(--preview-tilt, 0deg));
 	}
 
 	@media (max-width: 640px) {
@@ -41,9 +75,15 @@ const { class: className } = Astro.props as { class?: string };
 			transform: none;
 		}
 
-		.group:hover .project-frame--featured,
-		.group:hover .project-frame--grid {
-			transform: translateY(-0.25rem);
+		:global(.project-card:hover) .project-frame--featured,
+		:global(.project-card:focus-within) .project-frame--featured,
+		:global(.group:hover) .project-frame--featured,
+		:global(.group:focus-within) .project-frame--featured,
+		:global(.project-card:hover) .project-frame--grid,
+		:global(.project-card:focus-within) .project-frame--grid,
+		:global(.group:hover) .project-frame--grid,
+		:global(.group:focus-within) .project-frame--grid {
+			transform: translateY(-4px);
 		}
 	}
 
