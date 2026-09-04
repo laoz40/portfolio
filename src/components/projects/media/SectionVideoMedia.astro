@@ -8,7 +8,7 @@ const embedUrl = `https://www.youtube.com/embed/${videoId}`;
 ---
 
 <div
-	class="section-media-frame taped-frame w-full min-w-0 self-center pt-[calc(var(--size-project-tape-height)*0.5)] max-[1450px]:min-h-56 max-sm:min-h-36"
+	class="section-media-frame taped-frame max-case-study:min-h-56 w-full min-w-0 self-center pt-[calc(var(--size-project-tape-height)*0.5)] max-sm:min-h-36"
 	style="--tape-angle: calc(var(--section-media-tilt, 0deg) + 1.2deg);">
 	<div class="section-media paper-frame section-media--embed">
 		<iframe
@@ -49,17 +49,5 @@ const embedUrl = `https://www.youtube.com/embed/${videoId}`;
 		width: 100%;
 		height: 100%;
 		border: 0;
-	}
-
-	@media (max-width: 1450px) {
-		.section-media--embed {
-			min-height: 0;
-		}
-	}
-
-	@media (max-width: 640px) {
-		.section-media--embed {
-			min-height: 0;
-		}
 	}
 </style>

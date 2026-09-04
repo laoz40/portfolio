@@ -10,11 +10,19 @@ const buttonPath = `M14,11
 	C-1,60 7,60 5,38
 	L6,23
 	C7,17 5,13 14,11 Z`;
-const { fill, href, target, rel, ...attributes } = Astro.props as {
+const {
+	fill,
+	href,
+	target,
+	rel,
+	class: className,
+	...attributes
+} = Astro.props as {
 	fill: string;
 	href?: string;
 	target?: string;
 	rel?: string;
+	class?: string;
 	[key: string]: unknown;
 };
 ---
@@ -26,7 +34,7 @@ const { fill, href, target, rel, ...attributes } = Astro.props as {
 			target={target}
 			rel={rel}
 			{...attributes}
-			class="imperfect-button"
+			class:list={["imperfect-button", className]}
 			style={`--fill: ${fill};`}>
 			<span>
 				<slot />
@@ -50,7 +58,7 @@ const { fill, href, target, rel, ...attributes } = Astro.props as {
 		<button
 			type="button"
 			{...attributes}
-			class="imperfect-button"
+			class:list={["imperfect-button", className]}
 			style={`--fill: ${fill};`}>
 			<span>
 				<slot />
@@ -97,14 +105,14 @@ const { fill, href, target, rel, ...attributes } = Astro.props as {
 		transition: transform var(--button-motion-duration) var(--button-motion-easing);
 	}
 
-	span {
+	.imperfect-button span {
 		position: relative;
-		z-index: 1000;
+		z-index: 1;
 		letter-spacing: 0.2px;
 		user-select: none;
 	}
 
-	svg {
+	.imperfect-button svg {
 		position: absolute;
 		inset: 0;
 		width: 100%;
@@ -119,8 +127,50 @@ const { fill, href, target, rel, ...attributes } = Astro.props as {
 		fill: var(--paper-fill);
 	}
 
-	path {
+	.imperfect-button path {
 		stroke-width: 3.2;
+	}
+
+	.imperfect-button--full {
+		width: 100%;
+	}
+
+	.imperfect-button--compact {
+		@media (max-width: 640px) {
+			min-height: 3rem;
+			width: 100%;
+			padding: 1rem;
+			font-size: 1.5rem;
+		}
+	}
+
+	.imperfect-button--compact span {
+		@media (max-width: 640px) {
+			line-height: 1.05;
+		}
+	}
+
+	.imperfect-button--link-grid {
+		min-height: 3rem;
+		width: 100%;
+		padding: 1rem;
+		text-align: center;
+		font-size: 1.5rem;
+		line-height: 1.05;
+	}
+
+	.imperfect-button--link-grid span {
+		display: inline-block;
+		max-width: 10ch;
+		text-wrap: balance;
+	}
+
+	@media (max-width: 520px) {
+		.imperfect-button--link-grid {
+			min-height: 4.25rem;
+			padding: 0.85rem 1rem;
+			font-size: 1.8rem;
+		}
 	}
 
 	.imperfect-button:hover {
@@ -145,7 +195,7 @@ const { fill, href, target, rel, ...attributes } = Astro.props as {
 
 	@media (prefers-reduced-motion: reduce) {
 		.imperfect-button,
-		svg {
+		.imperfect-button svg {
 			transition: none;
 		}
 

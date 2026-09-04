@@ -1,17 +1,8 @@
-<div
-	class="relative flex min-h-svh w-full flex-col"
-	style="background-color: var(--color-surface-page); color: var(--color-text-default);">
+<div class="bg-page text-foreground relative flex min-h-svh w-full flex-col">
 	<div
-		class="pointer-events-none absolute inset-0 z-0"
-		style={`background-image:
-			linear-gradient(var(--color-grid-line) 1px, transparent 1px),
-			linear-gradient(90deg, var(--color-grid-line) 1px, transparent 1px),
-			linear-gradient(var(--color-grid-line-alt) 1px, transparent 1px),
-			linear-gradient(90deg, var(--color-grid-line-alt) 1px, transparent 1px);
-			background-size: 15px 15px, 15px 15px, 30px 30px, 30px 30px;
-			background-position: 0 0, 0 0, 0 0, 0 0;`}>
+		class="bg-light-grid pointer-events-none absolute inset-0 z-0"
+		aria-hidden="true">
 	</div>
-	<!-- Paper grain texture overlay -->
 	<div class="pointer-events-none absolute inset-0 z-0 opacity-30 mix-blend-multiply">
 		<svg class="grain-svg">
 			<filter id="grain">
@@ -34,7 +25,26 @@
 
 <style>
 	.grain-svg {
+		display: block;
 		width: 100%;
 		height: 100%;
+	}
+
+	.bg-light-grid {
+		background-image:
+			linear-gradient(var(--color-grid-line) 1px, transparent 1px),
+			linear-gradient(90deg, var(--color-grid-line) 1px, transparent 1px),
+			linear-gradient(var(--color-grid-line-alt) 1px, transparent 1px),
+			linear-gradient(90deg, var(--color-grid-line-alt) 1px, transparent 1px);
+		background-size:
+			15px 15px,
+			15px 15px,
+			30px 30px,
+			30px 30px;
+		background-position:
+			0 0,
+			0 0,
+			0 0,
+			0 0;
 	}
 </style>

@@ -1,0 +1,102 @@
+---
+const { class: className } = Astro.props as { class?: string };
+---
+
+<div class:list={["project-frame", className]}>
+	<slot />
+</div>
+
+<style>
+	.project-frame {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		min-height: 35rem;
+		padding: 0.9rem;
+		border: 0.18rem solid rgb(31 30 25 / 0.14);
+		background: rgb(255 253 246);
+		box-shadow: var(--shadow-paper-rest);
+		transition:
+			box-shadow 200ms ease,
+			transform 200ms ease;
+	}
+
+	.project-frame::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 50%;
+		width: var(--size-project-tape-width);
+		height: var(--size-project-tape-height);
+		transform: translate(-50%, -50%) rotate(1.2deg);
+		background: var(--color-tape);
+		pointer-events: none;
+		z-index: 1;
+	}
+
+	.project-frame--featured {
+		transform: rotate(-0.35deg);
+	}
+
+	.project-frame--grid {
+		transform: rotate(var(--preview-tilt, 0deg));
+	}
+
+	:global(.project-card:hover) .project-frame,
+	:global(.project-card:focus-within) .project-frame,
+	:global(.group:hover) .project-frame,
+	:global(.group:focus-within) .project-frame {
+		box-shadow: var(--shadow-paper-hover);
+		transform: translateY(-4px);
+	}
+
+	:global(.project-card:hover) .project-frame--featured,
+	:global(.project-card:focus-within) .project-frame--featured,
+	:global(.group:hover) .project-frame--featured,
+	:global(.group:focus-within) .project-frame--featured {
+		transform: translateY(-4px) rotate(-0.35deg);
+	}
+
+	:global(.project-card:hover) .project-frame--grid,
+	:global(.project-card:focus-within) .project-frame--grid,
+	:global(.group:hover) .project-frame--grid,
+	:global(.group:focus-within) .project-frame--grid {
+		transform: translateY(-4px) rotate(var(--preview-tilt, 0deg));
+	}
+
+	@media (max-width: 640px) {
+		.project-frame--featured {
+			min-height: auto;
+			transform: none;
+		}
+
+		.project-frame--grid {
+			transform: none;
+		}
+
+		:global(.project-card:hover) .project-frame--featured,
+		:global(.project-card:focus-within) .project-frame--featured,
+		:global(.group:hover) .project-frame--featured,
+		:global(.group:focus-within) .project-frame--featured,
+		:global(.project-card:hover) .project-frame--grid,
+		:global(.project-card:focus-within) .project-frame--grid,
+		:global(.group:hover) .project-frame--grid,
+		:global(.group:focus-within) .project-frame--grid {
+			transform: translateY(-4px);
+		}
+	}
+
+	@media (max-width: 900px) {
+		.project-frame--grid {
+			min-height: auto;
+			padding: 0.95rem;
+		}
+	}
+
+	@media (min-width: 1440px) {
+		.project-frame--grid {
+			min-height: 39rem;
+		}
+	}
+</style>

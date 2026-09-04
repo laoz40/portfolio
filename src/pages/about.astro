@@ -37,10 +37,11 @@ const aboutSections = await Promise.all(
 	description="Learn about Leo Zhou's background in frontend development, UX design, and the process behind his work across web and interface design."
 	pathname="/about">
 	<section class="about-page">
-		<h1>A little bit about me</h1>
+		<h1 class="text-hand-display-md m-0 mx-auto mb-6 w-full max-w-312 text-center font-bold">
+			A little bit about me
+		</h1>
 		<article
-			class="mx-auto mt-6 grid w-full max-w-312 gap-14 max-md:gap-10"
-			style="--text-measure: 65ch; --about-media-column-width: 22rem;">
+			class="mx-auto mt-6 grid w-full max-w-312 gap-14 [--about-media-column-width:22rem] [--text-measure:65ch] max-md:gap-10">
 			{
 				aboutSections.map(({ id, title, Content, media }, index) => (
 					<section
@@ -69,7 +70,8 @@ const aboutSections = await Promise.all(
 		</article>
 		<div
 			class="about-actions-reveal mx-auto mt-10 flex w-full max-w-312 flex-col items-center gap-4 text-center">
-			<p class="about-actions-note about-actions-note-reveal">
+			<p
+				class="about-actions-note about-actions-note-reveal font-hand text-hand-title-md text-handwriting m-0 font-normal text-balance">
 				Thanks for reading all of this! (if you did)
 			</p>
 			<div class="about-actions-cta-reveal">
@@ -83,62 +85,44 @@ const aboutSections = await Promise.all(
 	</section>
 </DefaultLayout>
 
-<script>
-	import "../animation/aboutAnimations.ts";
-</script>
-
 <style>
-	h1 {
-		margin: 0 auto 1.5rem;
-		font-size: var(--type-hand-size-display-md);
-		font-weight: 700;
-		text-align: center;
-		width: min(100%, 78rem);
-	}
-
-	h2 {
+	.about-section-copy h2 {
 		font-family: var(--font-handwriting);
 		font-size: var(--type-hand-size-title-lg);
 		font-weight: 700;
-		letter-spacing: 0.01em;
 		line-height: 1;
+		letter-spacing: 0.01em;
 		margin: 0 0 1rem 0;
 		max-width: 24ch;
 	}
 
-	.about-section-copy :global(p) {
+	.about-section-copy p,
+	.about-section-copy li {
 		font-family: var(--font-sans);
 		font-size: var(--type-sans-size-body);
 		font-weight: var(--type-sans-weight-regular);
-		color: var(--color-text-body);
 		margin: 0 0 1rem 0;
-		line-height: var(--type-sans-leading-reading);
 		max-width: var(--text-measure);
 		text-wrap: pretty;
 	}
 
-	.about-section-copy :global(ul) {
-		padding-left: 1.25rem;
+	.about-section-copy p {
+		line-height: var(--type-sans-leading-reading);
+		font-weight: 300;
+	}
+
+	.about-section-copy li {
+		line-height: var(--type-sans-leading-compact);
+		font-weight: 300;
+	}
+
+	.about-section-copy ul {
 		margin: 0 0 1rem 0;
+		padding-left: 1.25rem;
 		list-style-type: disc;
 	}
-
-	.about-section-copy :global(li) {
-		font-family: var(--font-sans);
-		font-size: var(--type-sans-size-body);
-		font-weight: var(--type-sans-weight-regular);
-		color: var(--color-text-body);
-		line-height: var(--type-sans-leading-compact);
-		max-width: var(--text-measure);
-		text-wrap: pretty;
-	}
-
-	.about-actions-note {
-		margin: 0;
-		font-family: var(--font-handwriting);
-		font-size: var(--type-hand-size-title-md);
-		color: var(--color-text-handwriting);
-		font-weight: 400;
-		text-wrap: balance;
-	}
 </style>
+
+<script>
+	import "../animation/aboutAnimations.ts";
+</script>

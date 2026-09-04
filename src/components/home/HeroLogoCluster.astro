@@ -8,11 +8,14 @@ import figmaImage from "../../assets/home/figma.webp";
 ---
 
 <div
-	class="hero-logo-cluster hero-image-reveal"
+	class="hero-logo-cluster hero-image-reveal pointer-events-none absolute inset-0 z-1 select-none"
 	aria-hidden="true">
-	<p class="hero-logo-label">Stuff I use</p>
+	<p
+		class="hero-logo-label font-hand text-muted max-nav:hidden absolute top-34 right-7 m-0 -rotate-1 text-[length:var(--type-hand-size-note)] tracking-[0.01em] opacity-78 max-[980px]:top-23 max-[980px]:right-4 max-[980px]:text-[length:var(--type-hand-size-label-sm)]">
+		Stuff I use
+	</p>
 	<Image
-		class="hero-logo hero-logo-ts"
+		class="hero-logo hero-logo-ts max-nav:hidden absolute top-44 right-28 h-auto w-26 rotate-6 object-contain opacity-80 contrast-110 saturate-50 max-[980px]:top-37 max-[980px]:right-20 max-[980px]:w-20"
 		src={tsImage}
 		alt=""
 		loading="eager"
@@ -20,7 +23,7 @@ import figmaImage from "../../assets/home/figma.webp";
 		decoding="async"
 	/>
 	<Image
-		class="hero-logo hero-logo-react"
+		class="hero-logo hero-logo-react max-nav:top-48 max-nav:right-[4.25rem] max-nav:w-[4.1rem] max-nav:opacity-75 absolute top-100 right-32 h-auto w-26 -rotate-8 object-contain opacity-80 contrast-110 saturate-50 max-[980px]:top-71 max-[980px]:right-25 max-[980px]:w-20 max-sm:top-35 max-sm:right-12 max-sm:w-[3.35rem]"
 		src={reactImage}
 		alt=""
 		loading="eager"
@@ -28,7 +31,7 @@ import figmaImage from "../../assets/home/figma.webp";
 		decoding="async"
 	/>
 	<Image
-		class="hero-logo hero-logo-nextjs"
+		class="hero-logo hero-logo-nextjs max-nav:top-32 max-nav:right-2 max-nav:w-[4.4rem] max-nav:opacity-75 absolute top-[19.5rem] right-0 h-auto w-28 rotate-5 object-contain opacity-80 contrast-110 saturate-50 max-[980px]:top-62 max-[980px]:right-3 max-[980px]:w-22 max-sm:top-18 max-sm:right-3.5 max-sm:w-14"
 		src={nextjsImage}
 		alt=""
 		loading="eager"
@@ -36,7 +39,7 @@ import figmaImage from "../../assets/home/figma.webp";
 		decoding="async"
 	/>
 	<Image
-		class="hero-logo hero-logo-css"
+		class="hero-logo hero-logo-css max-nav:hidden absolute top-124 right-6 h-auto w-26 -rotate-6 object-contain opacity-80 contrast-110 saturate-50 max-[980px]:top-99 max-[980px]:right-5 max-[980px]:w-20"
 		src={cssImage}
 		alt=""
 		loading="eager"
@@ -44,7 +47,7 @@ import figmaImage from "../../assets/home/figma.webp";
 		decoding="async"
 	/>
 	<Image
-		class="hero-logo hero-logo-figma"
+		class="hero-logo hero-logo-figma max-nav:top-80 max-nav:right-3.5 max-nav:w-[3.8rem] max-nav:opacity-75 absolute top-[min(39.5rem,calc(100%-8rem))] right-4 h-auto w-[5.75rem] rotate-8 object-contain opacity-80 contrast-110 saturate-50 max-[980px]:top-128 max-[980px]:w-[4.75rem] max-sm:top-55 max-sm:right-4.5 max-sm:w-12"
 		src={figmaImage}
 		alt=""
 		loading="eager"
@@ -52,174 +55,3 @@ import figmaImage from "../../assets/home/figma.webp";
 		decoding="async"
 	/>
 </div>
-
-<style>
-	.hero-logo-cluster {
-		position: absolute;
-		inset: 0;
-		z-index: 1;
-		pointer-events: none;
-		user-select: none;
-	}
-
-	.hero-logo {
-		position: absolute;
-		right: 2rem;
-		width: 6.5rem;
-		height: auto;
-		object-fit: contain;
-		opacity: 0.8;
-		filter: saturate(0.5) contrast(1.1);
-	}
-
-	.hero-logo-label {
-		position: absolute;
-		right: 1.75rem;
-		top: 8.5rem;
-		margin: 0;
-		font-family: var(--font-handwriting);
-		font-size: var(--type-hand-size-note);
-		letter-spacing: 0.01em;
-		color: var(--color-text-muted);
-		transform: rotate(-1deg);
-		opacity: 0.78;
-	}
-
-	.hero-logo-ts {
-		top: 11rem;
-		right: 7rem;
-		transform: rotate(6deg);
-	}
-
-	.hero-logo-react {
-		top: 25rem;
-		right: 8rem;
-		transform: rotate(-8deg);
-	}
-
-	.hero-logo-nextjs {
-		top: 19.5rem;
-		right: 0;
-		width: 7rem;
-		transform: rotate(5deg);
-	}
-
-	.hero-logo-css {
-		top: 31rem;
-		right: 1.5rem;
-		transform: rotate(-6deg);
-	}
-
-	.hero-logo-figma {
-		top: min(39.5rem, calc(100% - 8rem));
-		right: 1rem;
-		width: 5.75rem;
-		transform: rotate(8deg);
-	}
-
-	@media (max-width: 980px) {
-		.hero-logo {
-			right: 1rem;
-			width: 5rem;
-		}
-
-		.hero-logo-ts {
-			top: 9.25rem;
-			right: 5rem;
-		}
-
-		.hero-logo-react {
-			top: 17.75rem;
-			right: 6.25rem;
-		}
-
-		.hero-logo-nextjs {
-			top: 15.5rem;
-			right: 0.75rem;
-			width: 5.5rem;
-		}
-
-		.hero-logo-css {
-			top: 24.75rem;
-			right: 1.25rem;
-		}
-
-		.hero-logo-figma {
-			top: 32rem;
-			right: 1rem;
-			width: 4.75rem;
-		}
-		.hero-logo-label {
-			top: 5.75rem;
-			right: 1rem;
-			font-size: var(--type-hand-size-label-sm);
-		}
-	}
-
-	@media (max-width: 820px) {
-		.hero-logo-label,
-		.hero-logo-ts,
-		.hero-logo-css {
-			display: none;
-		}
-
-		.hero-logo {
-			width: 4rem;
-			right: 0.75rem;
-			opacity: 0.75;
-		}
-
-		.hero-logo-react {
-			top: 12rem;
-			right: 4.25rem;
-			width: 4.1rem;
-		}
-
-		.hero-logo-nextjs {
-			top: 8rem;
-			right: 0.5rem;
-			width: 4.4rem;
-		}
-
-		.hero-logo-figma {
-			top: 20rem;
-			right: 0.85rem;
-			width: 3.8rem;
-		}
-	}
-
-	@media (max-width: 640px) {
-		.hero-logo-cluster {
-			display: block;
-		}
-
-		.hero-logo-label,
-		.hero-logo-ts,
-		.hero-logo-css {
-			display: none;
-		}
-
-		.hero-logo {
-			width: 3.2rem;
-			opacity: 0.75;
-		}
-
-		.hero-logo-react {
-			top: 8.75rem;
-			right: 3rem;
-			width: 3.35rem;
-		}
-
-		.hero-logo-nextjs {
-			top: 4.5rem;
-			right: 0.85rem;
-			width: 3.5rem;
-		}
-
-		.hero-logo-figma {
-			top: 13.75rem;
-			right: 1.1rem;
-			width: 3rem;
-		}
-	}
-</style>

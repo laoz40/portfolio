@@ -157,13 +157,13 @@
 </script>
 
 <div
-	class="section-carousel grid w-[min(100%,57.4vw,var(--section-carousel-max-width))] min-w-0 gap-3 self-center max-[1450px]:w-full max-sm:w-full"
+	class="section-carousel max-case-study:w-full grid w-[min(100%,57.4vw,var(--section-carousel-max-width))] min-w-0 gap-3 self-center max-sm:w-full"
 	style={`--section-carousel-max-width: ${carouselMaxWidth}px; --carousel-index: ${currentIndex}; --section-carousel-image-fit: ${imageFit}; --section-carousel-aspect-ratio: ${aspectRatio.replace(":", " / ")}; --section-carousel-background: ${background === "black" ? "#000" : "var(--color-media-fallback)"};`}>
 	<div
-		class="section-carousel-frame taped-frame relative min-w-0 pt-[calc(var(--size-project-tape-height)*0.5)]"
+		class="section-carousel-frame taped-frame relative min-w-0 pt-[calc(var(--size-project-tape-height)*0.5)] [--paper-frame-border-color:var(--color-surface-paper)] [--paper-frame-shadow:0_0_0_0.18rem_rgb(31_30_25/0.08),var(--shadow-paper-medium)]"
 		style="--tape-angle: calc(var(--section-media-tilt, 0deg) + 1.2deg);">
 		<div
-			class="section-carousel-viewport paper-frame max-sm:bg-paper relative max-w-full min-w-0 [touch-action:pan-y]"
+			class="section-carousel-viewport paper-frame max-sm:bg-paper relative max-w-full min-w-0 rotate-[var(--section-media-tilt,0deg)] [touch-action:pan-y] max-sm:rotate-0"
 			role="group"
 			aria-label="Project media carousel"
 			on:pointerdown={handlePointerDown}
@@ -173,11 +173,10 @@
 			<div class="section-carousel-track flex w-full min-w-0">
 				{#each items as item, index (item.image.src)}
 					<div
-						class="section-carousel-slide max-sm:bg-paper relative flex min-w-full items-end overflow-hidden bg-[var(--color-media-fallback)] max-sm:grid max-sm:items-stretch"
+						class="section-carousel-slide"
 						role="group"
 						aria-label={`Slide ${index + 1} of ${slideCount}`}>
-						<div
-							class="section-carousel-media absolute inset-0 z-0 max-sm:relative max-sm:inset-auto max-sm:aspect-[4/3]">
+						<div class="section-carousel-media">
 							<img
 								class="section-carousel-image"
 								src={item.image.src}
@@ -187,8 +186,7 @@
 								loading="lazy"
 								decoding="async" />
 						</div>
-						<div
-							class="section-carousel-content max-sm:bg-paper relative z-[2] flex w-full flex-col items-start gap-2 px-8 pt-4 pb-[2.8rem] max-sm:gap-[0.2rem] max-sm:px-2 max-sm:pt-0 max-sm:pb-0">
+						<div class="section-carousel-content">
 							<h4 class="section-carousel-title">
 								{item.title ?? `Slide ${index + 1}`}
 							</h4>
@@ -217,7 +215,7 @@
 			class="section-carousel-controls pointer-events-none absolute inset-x-0 top-[calc(var(--size-project-tape-height)*0.5)] bottom-0 z-[3] max-sm:pointer-events-auto max-sm:static max-sm:mt-[0.4rem] max-sm:flex max-sm:justify-between max-sm:gap-3">
 			<button
 				type="button"
-				class="section-carousel-button"
+				class="section-carousel-button section-carousel-button--prev"
 				on:click={goPrev}
 				aria-label="Previous slide"
 				disabled={!hasMultipleSlides || currentIndex === 0}>
@@ -225,7 +223,7 @@
 			</button>
 			<button
 				type="button"
-				class="section-carousel-button"
+				class="section-carousel-button section-carousel-button--next"
 				on:click={goNext}
 				aria-label="Next slide"
 				disabled={!hasMultipleSlides || currentIndex === maxIndex}>
@@ -251,8 +249,19 @@
 	}
 
 	.section-carousel-slide {
+		position: relative;
+		display: flex;
+		min-width: 100%;
+		align-items: flex-end;
+		overflow: hidden;
 		aspect-ratio: var(--section-carousel-aspect-ratio, 4 / 3);
 		background: var(--section-carousel-background, var(--color-media-fallback)) !important;
+	}
+
+	.section-carousel-media {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
 	}
 
 	.section-carousel-image {
@@ -260,6 +269,17 @@
 		width: 100%;
 		height: 100%;
 		object-fit: var(--section-carousel-image-fit, cover);
+	}
+
+	.section-carousel-content {
+		position: relative;
+		z-index: 2;
+		display: flex;
+		width: 100%;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.5rem;
+		padding: 1rem 2rem 2.8rem;
 	}
 
 	.section-carousel-media::before {
@@ -327,65 +347,21 @@
 		outline-offset: 3px;
 	}
 
-	.section-carousel-button {
-		--carousel-button-shadow-rest: 3px 4px 3px var(--color-shadow-paper-button);
-		--carousel-button-shadow-hover: 4px 5px 4px var(--color-shadow-paper-button-hover);
-		position: absolute;
-		top: 50%;
-		font-family: var(--font-handwriting);
-		font-size: var(--type-hand-size-title-md);
-		font-weight: 700;
-		text-transform: uppercase;
-		padding: 0.3rem 0.6rem;
-		border: 1px solid var(--color-border-soft);
-		background: var(--color-surface-paper);
-		pointer-events: auto;
-		cursor: pointer;
-		box-shadow: var(--carousel-button-shadow-rest);
-		transition:
-			box-shadow 200ms ease,
-			transform 200ms ease,
-			opacity 200ms ease;
-	}
-
-	.section-carousel-button:first-child {
-		left: 0.75rem;
-		transform: translateY(-50%) rotate(-1.5deg);
-	}
-
-	.section-carousel-button:last-child {
-		right: 0.75rem;
-		transform: translateY(-50%) rotate(1.5deg);
-	}
-
-	.section-carousel-button:first-child:hover,
-	.section-carousel-button:first-child:focus-visible {
-		box-shadow: var(--carousel-button-shadow-hover);
-		transform: translateY(calc(-50% - 4px)) rotate(-1.5deg);
-	}
-
-	.section-carousel-button:last-child:hover,
-	.section-carousel-button:last-child:focus-visible {
-		box-shadow: var(--carousel-button-shadow-hover);
-		transform: translateY(calc(-50% - 4px)) rotate(1.5deg);
-	}
-
-	.section-carousel-button:disabled,
-	.section-carousel-indicator:disabled {
-		opacity: 0.4;
-		cursor: not-allowed;
-	}
-
 	@media (max-width: 640px) {
 		.section-carousel-viewport {
 			transform: none;
 		}
 
 		.section-carousel-slide {
+			display: grid;
 			aspect-ratio: auto;
+			align-items: stretch;
+			background: var(--color-surface-paper) !important;
 		}
 
 		.section-carousel-media {
+			position: relative;
+			inset: auto;
 			aspect-ratio: var(--section-carousel-aspect-ratio, 4 / 3);
 		}
 
@@ -393,10 +369,16 @@
 			display: none;
 		}
 
+		.section-carousel-content {
+			background: var(--color-surface-paper);
+			gap: 0.2rem;
+			padding: 0 0.5rem;
+		}
+
 		.section-carousel-title,
 		.section-carousel-description {
 			color: var(--color-text-body) !important;
-			margin: 0.5rem 0 0.5rem 0 !important;
+			margin: 0.5rem 0;
 		}
 
 		.section-carousel-indicator {
@@ -411,32 +393,74 @@
 		.section-carousel-indicator[aria-current="true"] {
 			background: var(--color-indicator-dark-active);
 		}
-
-		.section-carousel-button {
-			position: static;
-			font-size: 1.5rem;
-			padding: 0.2rem 0.45rem;
-			transform: none;
-		}
-
-		.section-carousel-button:first-child,
-		.section-carousel-button:last-child {
-			left: auto;
-			right: auto;
-			transform: none;
-		}
-
-		.section-carousel-button:first-child:hover,
-		.section-carousel-button:first-child:focus-visible,
-		.section-carousel-button:last-child:hover,
-		.section-carousel-button:last-child:focus-visible {
-			transform: translateY(-2px);
-		}
 	}
 
 	@media (prefers-reduced-motion: reduce) {
 		.section-carousel-track {
 			transition: none;
+		}
+	}
+
+	.section-carousel-button {
+		font-family: var(--font-handwriting);
+		font-size: var(--type-hand-size-title-md);
+		background-color: var(--color-paper);
+		pointer-events: auto;
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		cursor: pointer;
+		border: 1px solid var(--color-border-soft);
+		padding: 0.3rem 0.6rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		box-shadow: 3px 4px 3px var(--color-shadow-paper-button);
+		transition:
+			box-shadow 200ms ease,
+			transform 200ms ease,
+			opacity 200ms ease;
+	}
+
+	.section-carousel-button--prev {
+		left: 0.75rem;
+		transform: translateY(-50%) rotate(-1.5deg);
+	}
+
+	.section-carousel-button--next {
+		right: 0.75rem;
+		transform: translateY(-50%) rotate(1.5deg);
+	}
+
+	.section-carousel-button--prev:hover,
+	.section-carousel-button--prev:focus-visible {
+		transform: translateY(calc(-50% - 4px)) rotate(-1.5deg);
+		box-shadow: 4px 5px 4px var(--color-shadow-paper-button-hover);
+	}
+
+	.section-carousel-button--next:hover,
+	.section-carousel-button--next:focus-visible {
+		transform: translateY(calc(-50% - 4px)) rotate(1.5deg);
+		box-shadow: 4px 5px 4px var(--color-shadow-paper-button-hover);
+	}
+
+	.section-carousel-button:disabled {
+		cursor: not-allowed;
+		opacity: 0.4;
+	}
+
+	@media (max-width: 640px) {
+		.section-carousel-button {
+			position: static;
+			transform: none;
+			padding: 0.2rem 0.45rem;
+			font-size: var(--type-hand-size-title-md);
+		}
+
+		.section-carousel-button--prev:hover,
+		.section-carousel-button--prev:focus-visible,
+		.section-carousel-button--next:hover,
+		.section-carousel-button--next:focus-visible {
+			transform: translateY(-0.125rem);
 		}
 	}
 </style>

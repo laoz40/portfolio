@@ -229,19 +229,19 @@
 </script>
 
 {#if items.length > 0}
-	<aside class="scrollspy">
+	<aside class="sticky top-[calc(var(--nav-offset)+1rem)] self-start pt-2 pl-3 max-[1142px]:hidden">
 		<nav aria-label="On this page">
-			<ul class="scrollspy-list">
+			<ul class="m-0 grid list-none gap-[0.22rem] p-0">
 				{#each items as item (item.id)}
 					<li>
 						<a
-							class:is-active={item.id === activeId}
 							class="scrollspy-link"
+							class:is-active={item.id === activeId}
 							href={`#${item.id}`}
 							aria-current={item.id === activeId ? "location" : undefined}>
 							<span
 								class="scrollspy-link-text highlight-text"
-								style="--highlight-color: var(--color-highlight-yellow-strong);">
+								style="--highlight-color: var(--color-highlight-yellow-strong); --highlight-top: 0.1em; --highlight-bottom: 0.1em;">
 								{item.label}
 							</span>
 						</a>
@@ -253,22 +253,6 @@
 {/if}
 
 <style>
-	.scrollspy {
-		position: sticky;
-		top: calc(var(--nav-offset) + 1rem);
-		align-self: start;
-		padding-top: 0.5rem;
-		padding-left: 0.75rem;
-	}
-
-	.scrollspy-list {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-		display: grid;
-		gap: 0.22rem;
-	}
-
 	.scrollspy-link {
 		display: inline-flex;
 		padding: 0.2rem 0;
@@ -291,27 +275,10 @@
 		font-weight: 700;
 	}
 
-	.scrollspy-link-text {
-		--highlight-top: 0.1em;
-		--highlight-bottom: 0.1em;
-	}
-
 	.scrollspy-link:hover .scrollspy-link-text::before,
 	.scrollspy-link:focus-visible .scrollspy-link-text::before,
 	.scrollspy-link.is-active .scrollspy-link-text::before {
 		transform: var(--highlight-transform-active, scaleX(1) skewX(-4deg) rotate(-1.2deg));
 		opacity: 1;
-	}
-
-	@media (max-width: 1142px) {
-		.scrollspy {
-			display: none;
-		}
-	}
-
-	@media (max-width: 980px) {
-		.scrollspy {
-			display: none;
-		}
 	}
 </style>
