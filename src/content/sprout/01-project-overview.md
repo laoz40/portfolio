@@ -13,15 +13,16 @@ section:
   <li>12 weeks</li>
 </ul>
 
-#### Responsibilities
+#### My Responsibilities
 
 <ul class="project-badges" role="list">
-  <li>Research</li>
-  <li>Testing</li>
-  <li>Visual Design</li>
+  <li>User Research</li>
+  <li>Usability Testing</li>
+  <li>UI Design</li>
   <li>Prototyping</li>
-  <li>Iterating</li>
-  <li>Promotional Video</li>
+  <li>Figma</li>
+  <li>Iterations</li>
+  <li>Editing Promotional Video</li>
 </ul>
 
 #### Achievements

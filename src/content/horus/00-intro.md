@@ -2,14 +2,6 @@
 title: Horus
 project: Full Stack Web App
 description: I made an app to track my gym workouts. I use it almost every day to monitor my progress and apply progressive overload (so I can get massive).
-tools:
-  - Next.js
-  - React
-  - TypeScript
-  - Convex
-  - Better Auth
-  - Zod
-  - Tailwind
 coverImage: ../../assets/horus/cover.png
 altText: Horus Cover Image
 section:

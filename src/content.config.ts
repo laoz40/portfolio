@@ -53,7 +53,6 @@ const sharedSchema = ({ image }: SchemaContext) =>
 			title: z.string().optional(),
 			project: z.string().optional(),
 			description: z.string().optional(),
-			tools: z.array(z.string()).optional(),
 			coverImage: image().optional(),
 			section: z
 				.object({

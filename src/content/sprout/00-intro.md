@@ -2,13 +2,6 @@
 title: Sprout
 project: AR app design
 description: I directed a team to design an AR app that inspires people to plant trees. I presented this as one of five projects shortlisted for the ADP Open Jury Industry Crit.
-tools:
-  - Figma
-  - User Research
-  - Prototyping
-  - User Testing
-  - UI Design
-  - Video Editing
 coverImage: ../../assets/sprout/cover.png
 altText: Sprout Cover Image (Photography Credit @josephgvideo)
 section:

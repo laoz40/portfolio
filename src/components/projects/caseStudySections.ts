@@ -83,7 +83,6 @@ export type ContentFrontmatter = SectionFrontmatter & {
 	title?: string;
 	project?: string;
 	description?: string;
-	tools?: string[];
 	coverImage?: ImageMetadata;
 	altText?: string;
 };
