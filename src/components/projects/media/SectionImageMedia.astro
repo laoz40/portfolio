@@ -10,7 +10,7 @@ const { image, alt, caption } = Astro.props as {
 ---
 
 <figure
-	class="section-media-frame taped-frame max-case-study:w-full min-case-study:w-[min(var(--section-media-visual-max-width,var(--section-media-max-width)),max(100%,var(--section-media-visual-max-width,var(--section-media-max-width))))] min-case-study:justify-self-start w-[min(100%,var(--section-media-max-width))] min-w-0 self-center pt-[calc(var(--size-project-tape-height)*0.5)] [--paper-frame-border-color:var(--color-surface-paper)] [--paper-frame-shadow:0_0_0_0.18rem_rgb(31_30_25/0.08),var(--shadow-paper-medium)] max-sm:[&::before]:rotate-[1.2deg]"
+	class="section-media-frame taped-frame max-case-study:w-full min-case-study:w-[min(var(--section-media-visual-max-width,var(--section-media-max-width)),max(100%,var(--section-media-visual-max-width,var(--section-media-max-width))))] min-case-study:justify-self-start w-[min(100%,var(--section-media-max-width))] min-w-0 self-center pt-[calc(var(--size-project-tape-height)*0.5)] max-sm:[&::before]:rotate-[1.2deg]"
 	style={`--section-media-max-width: ${image.width}px; --section-media-aspect-ratio: ${image.width} / ${image.height}; --tape-angle: calc(var(--section-media-tilt, 0deg) + 1.2deg);`}>
 	<div
 		class="section-media paper-frame relative [aspect-ratio:var(--section-media-aspect-ratio)] min-w-0 rotate-[var(--section-media-tilt,0deg)] overflow-hidden max-sm:rotate-0">

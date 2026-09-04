@@ -334,12 +334,6 @@ const { sections, headingSelector = "h2" } = Astro.props as {
 		margin: 0 0 1.5rem 0;
 	}
 
-	.project-content :global(.inline-gallery__frame),
-	.project-content :global(.inline-image-frame) {
-		--paper-frame-border-color: var(--color-surface-paper);
-		--paper-frame-shadow: 0 0 0 0.18rem rgb(31 30 25 / 0.08), var(--shadow-paper-medium);
-	}
-
 	.project-content :global(.inline-gallery__tile) {
 		display: flex;
 		flex-direction: column;

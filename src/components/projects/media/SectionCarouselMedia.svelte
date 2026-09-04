@@ -160,7 +160,7 @@
 	class="section-carousel max-case-study:w-full grid w-[min(100%,57.4vw,var(--section-carousel-max-width))] min-w-0 gap-3 self-center max-sm:w-full"
 	style={`--section-carousel-max-width: ${carouselMaxWidth}px; --carousel-index: ${currentIndex}; --section-carousel-image-fit: ${imageFit}; --section-carousel-aspect-ratio: ${aspectRatio.replace(":", " / ")}; --section-carousel-background: ${background === "black" ? "#000" : "var(--color-media-fallback)"};`}>
 	<div
-		class="section-carousel-frame taped-frame relative min-w-0 pt-[calc(var(--size-project-tape-height)*0.5)] [--paper-frame-border-color:var(--color-surface-paper)] [--paper-frame-shadow:0_0_0_0.18rem_rgb(31_30_25/0.08),var(--shadow-paper-medium)]"
+		class="section-carousel-frame taped-frame relative min-w-0 pt-[calc(var(--size-project-tape-height)*0.5)]"
 		style="--tape-angle: calc(var(--section-media-tilt, 0deg) + 1.2deg);">
 		<div
 			class="section-carousel-viewport paper-frame max-sm:bg-paper relative max-w-full min-w-0 rotate-[var(--section-media-tilt,0deg)] [touch-action:pan-y] max-sm:rotate-0"
@@ -234,11 +234,6 @@
 </div>
 
 <style>
-	.section-carousel-frame {
-		--paper-frame-border-color: var(--color-surface-paper);
-		--paper-frame-shadow: 0 0 0 0.18rem rgb(31 30 25 / 0.08), var(--shadow-paper-medium);
-	}
-
 	.section-carousel-track {
 		transform: translateX(calc(var(--carousel-index, 0) * -100%));
 		transition: transform 260ms ease;
