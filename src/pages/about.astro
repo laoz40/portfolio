@@ -96,8 +96,8 @@ const aboutSections = await Promise.all(
 		max-width: 24ch;
 	}
 
-	.about-section-copy p,
-	.about-section-copy li {
+	.about-section-copy :global(p),
+	.about-section-copy :global(li) {
 		font-family: var(--font-sans);
 		font-size: var(--type-sans-size-body);
 		font-weight: var(--type-sans-weight-regular);
@@ -106,17 +106,17 @@ const aboutSections = await Promise.all(
 		text-wrap: pretty;
 	}
 
-	.about-section-copy p {
+	.about-section-copy :global(p) {
 		line-height: var(--type-sans-leading-reading);
 		font-weight: 300;
 	}
 
-	.about-section-copy li {
+	.about-section-copy :global(li) {
 		line-height: var(--type-sans-leading-compact);
 		font-weight: 300;
 	}
 
-	.about-section-copy ul {
+	.about-section-copy :global(ul) {
 		margin: 0 0 1rem 0;
 		padding-left: 1.25rem;
 		list-style-type: disc;
