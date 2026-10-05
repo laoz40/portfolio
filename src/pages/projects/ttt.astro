@@ -1,0 +1,36 @@
+---
+import {
+	createContentSection,
+	getImageMediaAlt,
+} from "../../components/projects/caseStudySections";
+import DefaultLayout from "../../layouts/DefaultLayout.astro";
+import ProjectCaseStudy from "../../components/projects/ProjectCaseStudy.astro";
+import Intro from "../../content/ttt/00-intro.md";
+import ProjectOverview from "../../content/ttt/01-project-overview.md";
+
+const [introResult, projectOverviewResult] = await Promise.all([
+	createContentSection({
+		collection: "ttt",
+		entryId: "00-intro",
+		Component: Intro,
+	}),
+	createContentSection({
+		collection: "ttt",
+		entryId: "01-project-overview",
+		Component: ProjectOverview,
+	}),
+]);
+
+const { frontmatter: introFrontmatter, section: introSection } = introResult;
+const sections = [introSection, projectOverviewResult.section];
+---
+
+<DefaultLayout
+	title="TTT Table Tennis Tracker | Leo Zhou"
+	description="Leo Zhou built TTT to keep score during table tennis games with friends. It tracks turns to serve and saves match results in the browser."
+	pathname="/projects/ttt"
+	ogType="article"
+	ogImage={introFrontmatter.coverImage}
+	ogImageAlt={introFrontmatter.altText ?? getImageMediaAlt(introFrontmatter.section?.media)}>
+	<ProjectCaseStudy sections={sections} />
+</DefaultLayout>

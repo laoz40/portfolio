@@ -111,6 +111,7 @@ const checkit = createMarkdownCollection("./src/content/checkit");
 const horus = createMarkdownCollection("./src/content/horus");
 const sprout = createMarkdownCollection("./src/content/sprout");
 const vvstudios = createMarkdownCollection("./src/content/vvstudios");
+const ttt = createMarkdownCollection("./src/content/ttt");
 
 export const collections = {
 	about,
@@ -118,4 +119,5 @@ export const collections = {
 	horus,
 	sprout,
 	vvstudios,
+	ttt,
 };
