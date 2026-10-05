@@ -15,14 +15,15 @@ type ProjectFrontmatter = {
 	altText?: string;
 };
 
-const projectSlugs = ["horus", "vvstudios", "sprout", "checkit"] as const;
-type ProjectCollection = "horus" | "vvstudios" | "sprout" | "checkit";
+const projectSlugs = ["horus", "vvstudios", "sprout", "checkit", "ttt"] as const;
+type ProjectCollection = "horus" | "vvstudios" | "sprout" | "checkit" | "ttt";
 
 const projectCollections = {
 	horus: "horus",
 	vvstudios: "vvstudios",
 	sprout: "sprout",
 	checkit: "checkit",
+	ttt: "ttt",
 } as const satisfies Record<(typeof projectSlugs)[number], ProjectCollection>;
 const projectEntries = await Promise.all(
 	projectSlugs.map(async (slug) => ({
