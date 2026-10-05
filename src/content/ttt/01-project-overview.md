@@ -12,7 +12,9 @@ inlineGalleries:
         caption: Each saved match has the final score and a record of who won each point.
 ---
 
-## Table tennis with friends
+## Project Overview
+
+### Table Tennis Tracker
 
 I built TTT to keep score when my friends and I play table tennis. It shows
 whose turn it is to serve and saves match results in the browser. We can check
