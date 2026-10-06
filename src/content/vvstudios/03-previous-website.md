@@ -3,7 +3,7 @@ section:
   variant: media
   media:
     type: image
-    image: ../../assets/vvstudios/old.png
+    image: ../../assets/vvstudios/old.webp
     alt: Old VV Studios website
     caption: The previous web builder site
 ---

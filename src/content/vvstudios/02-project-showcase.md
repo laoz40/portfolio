@@ -8,7 +8,7 @@ section:
     aspectRatio: "16:9"
     background: black
     items:
-      - image: ../../assets/vvstudios/booking.png
+      - image: ../../assets/vvstudios/booking.webp
         alt: VV Studios booking form with session duration and recording space options
         title: New Booking Form
         description: Customers choose their session length, recording space, and add-ons.

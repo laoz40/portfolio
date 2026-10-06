@@ -2,13 +2,13 @@
 title: Check It
 project: Mobile app design
 description: I led a team to design an app that aims to improve productivity. I conducted many rounds of user testing, then iterated the design and UI to create a better experience for users.
-coverImage: ../../assets/checkit/cover.png
+coverImage: ../../assets/checkit/cover.webp
 altText: Check It Cover Image
 section:
   variant: featured
   media:
     type: image
-    image: ../../assets/checkit/featured.png
+    image: ../../assets/checkit/featured.webp
     alt: Check It mobile app interface preview
 ---
 

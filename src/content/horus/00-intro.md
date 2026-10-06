@@ -2,7 +2,7 @@
 title: Horus
 project: Full Stack Web App
 description: I made an app to track my gym workouts. I use it almost every day to monitor my progress and apply progressive overload (so I can get massive).
-coverImage: ../../assets/horus/cover.png
+coverImage: ../../assets/horus/cover.webp
 altText: Horus Cover Image
 section:
   variant: featured
@@ -16,7 +16,7 @@ section:
   ariaLabel: Horus project links
   media:
     type: image
-    image: ../../assets/horus/cover.png
+    image: ../../assets/horus/cover.webp
     alt: Horus workout tracker interface preview
 ---
 

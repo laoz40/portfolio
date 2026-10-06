@@ -3,7 +3,7 @@ section:
   variant: media
   media:
     type: image
-    image: ../../assets/vvstudios/gallery.png
+    image: ../../assets/vvstudios/gallery.webp
     alt: VV Studios gallery page featuring studio photography and video work
 ---
 

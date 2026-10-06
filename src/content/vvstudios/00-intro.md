@@ -2,7 +2,7 @@
 title: VV Studios
 project: Custom Booking System
 description: I completely rebuilt the company website. Also created a custom booking system, and an internal dashboard to allow admins and editors to track bookings and manage deliverables.
-coverImage: ../../assets/vvstudios/cover.png
+coverImage: ../../assets/vvstudios/cover.webp
 altText: VV Studios website cover image
 section:
   variant: featured
@@ -16,7 +16,7 @@ section:
   ariaLabel: VV Studios website project links
   media:
     type: image
-    image: ../../assets/vvstudios/cover.png
+    image: ../../assets/vvstudios/cover.webp
     alt: VV Studios website preview
 ---
 

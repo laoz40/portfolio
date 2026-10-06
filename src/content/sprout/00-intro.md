@@ -2,13 +2,13 @@
 title: Sprout
 project: AR app design
 description: I directed a team to design an AR app that inspires people to plant trees. I presented this as one of five projects shortlisted for the ADP Open Jury Industry Crit.
-coverImage: ../../assets/sprout/cover.png
+coverImage: ../../assets/sprout/cover.webp
 altText: Sprout Cover Image (Photography Credit @josephgvideo)
 section:
   variant: featured
   media:
     type: image
-    image: ../../assets/sprout/featured.png
+    image: ../../assets/sprout/featured.webp
     alt: Sprout project showcase photography
 notes:
   - One of five projects shortlisted for the ADP Open Jury Industry Crit
