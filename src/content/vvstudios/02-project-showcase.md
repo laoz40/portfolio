@@ -9,31 +9,31 @@ section:
     background: black
     items:
       - image: ../../assets/vvstudios/booking.png
-        alt: VV Studios studio hire booking form
+        alt: VV Studios booking form with session duration and recording space options
         title: New Booking Form
-        description: Custom booking form designed to fit the business's unique requirements.
+        description: Customers choose their session length, recording space, and add-ons.
       - image: ../../assets/vvstudios/carousel/2-google-calendar-sync.png
-        alt: VV Studios booking form with calendar and time selection
+        alt: VV Studios booking calendar with a selected date and available session times
         title: Calendar Availability Sync
-        description: Create bookings synced with Google Calendar.
+        description: Available times reflect the studio's Google Calendar.
       - image: ../../assets/vvstudios/carousel/3-stripe.png
         alt: Stripe checkout for a VV Studios booking deposit
         title: Stripe Checkout for Booking Deposits
-        description: Stripe checkout integration enabling deposit payments for bookings.
+        description: Customers pay through Stripe without leaving the booking flow.
       - image: ../../assets/vvstudios/carousel/4-dashboard.png
         alt: VV Studios internal admin dashboard showing bookings
         title: Internal Admin Dashboard
-        description: Internal Admin dashboard to manage bookings, client communication, and deliverables.
+        description: Staff manage bookings, contact clients, and send edited footage.
       - image: ../../assets/vvstudios/carousel/5-invoice-email.png
-        alt: VV Studios booking confirmation and invoice email
+        alt: VV Studios customer receipt email with booking details and a rescheduling link
         title: Automated Email and Invoice Creation
-        description: Automated branded emails, invoices, and booking reminders.
+        description: Customers receive a branded email with their receipt and a private rescheduling link.
       - image: ../../assets/vvstudios/carousel/6-package-schedule.png
-        alt: VV Studios page for scheduling package sessions
+        alt: VV Studios package scheduling page showing one booked session and three sessions to schedule
         title: Package Bookings and Multi-Session Scheduling
-        description: Added package bookings and multi-session scheduling to meet a key business need.
+        description: Customers book a package, then choose dates for each session.
       - image: ../../assets/vvstudios/carousel/7-reschedule.png
-        alt: VV Studios page for rescheduling a booking
+        alt: VV Studios rescheduling page with existing booking details and a new date and time selected
         title: Convenient Rescheduling System
-        description: Implemented self-service rescheduling for customers to reduce admin work.
+        description: Customers change their session time through a private email link.
 ---

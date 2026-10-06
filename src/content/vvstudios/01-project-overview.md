@@ -3,16 +3,15 @@
 
 ## Project Overview
 
-### Why was the VV Studios website rebuilt?
+### Why was the website rebuilt?
 
-I rebuilt the company website from scratch, whilst creating a custom booking
-system designed specifically for the business. The previous website used a web
-builder, which made it difficult to maintain and customise.
+The old site was a web builder that relied on a Google Form and a separate payment page. It was so horrible.
+So I built a new website and custom booking system so customers can choose a session and pay in one place.
 
 #### Tech Stack
 
 <ul class="project-badges" role="list">
-    <li>Tanstack Start</li>
+    <li>TanStack Start</li>
     <li>React</li>
     <li>TypeScript</li>
     <li>Convex</li>
@@ -22,5 +21,5 @@ builder, which made it difficult to maintain and customise.
     <li>Google Calendar API</li>
     <li>Google Drive API</li>
     <li>Tailwind</li>
-    <li>Framer Motion</li>
+    <li>Motion</li>
 </ul>

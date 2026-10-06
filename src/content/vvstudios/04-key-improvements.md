@@ -9,30 +9,28 @@ section:
 
 ## Key Improvements
 
-### What improvements were made to the website?
+### What improvements did I make?
 
-#### Automation & Efficiency
+#### Automated a bunch of stuff
 
-- Developed custom booking form that accepts payments through Stripe
-- Automated calendar event creation using Google Calendar API
-- Automated email notifications through Resend
-- Automated invoice generation and session reminder emails created using react-email and react-pdf
-- Implemented a centralized admin dashboard backed by Convex for managing bookings and operations
-  - Allows admins to quickly view upcoming and past bookings
-  - Added lead tracking to streamline follow-up calls and conversions
-  - Enabled direct customer communication from the dashboard
-  - Integrated a fast workflow for sending edited footage and other deliverables
-  - Developed support for creating both standard and custom invoices
+- Custom booking form that accepts payments
+- Automated invoice generation and emailing
+- Automated calendar event creation in Google Calendar
+- Automated Google Drive folder setup for customers and editors upon booking
+- Implemented internal admin dashboard for managing bookings
+  - Allows admins to easily manage all bookings
+  - Track payments and create invoices
+  - Fast workflow for sending edited footage and other deliverables
 
-#### User Experience & Interface Design
+#### Made it look pretty and easy to use
 
-- Redesigned interface with a modern, cohesive visual system that better matches the company’s brand identity.
-- Continuously tested and iterated on the design to ensure it was successful and easy to navigate.
-- Created a dedicated landing page with a clear CTA to guide users toward the booking process. This made the conversion flow more direct, supporting business growth.
+- Redesigned UI with a modern look that matches the company’s brand identity.
+- Added a dedicated landing page with a clear CTA to guide users toward the booking process.
+- Tested and iterated on the UX to ensure it was easy to navigate.
 
-#### Performance Optimisation & Accessibility
+#### Made it accessible and fast
 
-- Added SEO optimisations to improve website visibility and search engine rankings.
-- Implemented responsive layouts so the website works well across all devices.
-- Improved website performance to deliver faster load times and a responsive experience. These changes made the site more satisfying to use and improved overall user satisfaction.
-- Provided support for full keyboard navigation so its easier for users to navigate the site using the keyboard.
+- SEO optimisations to improve website visibility and search engine rankings.
+- Responsive layouts so the website works well across all devices.
+- Improved website performance to deliver faster load times and a responsive experience.
+- Implemented accessibility features to ensure the website is accessible to all users.
